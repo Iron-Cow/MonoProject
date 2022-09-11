@@ -1,0 +1,40 @@
+version: "3"
+services:
+  api:
+    env_file:
+      - ".env"
+    platform: linux/amd64
+    depends_on:
+      - database
+    build:
+      context: api
+    ports:
+      - $PORT_API_HOST:$PORT_API_CONTAINER
+
+  chatbot:
+    env_file:
+      - ".env"
+    platform: linux/amd64
+    depends_on:
+      - database
+      - api
+    links:
+      - "api:api"
+      - "database:database"
+    build:
+      context: chatbot
+
+  database:
+    image: postgres:14-alpine
+    platform: linux/amd64
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:

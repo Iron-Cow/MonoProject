@@ -1,15 +1,34 @@
 version: "3"
 services:
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - 6379:6379
+
   api:
     env_file:
       - ".env"
     platform: linux/amd64
     depends_on:
       - database
+      - redis
     build:
       context: api
     ports:
       - $PORT_API_HOST:$PORT_API_CONTAINER
+
+  worker:
+    build:
+        context: api
+        dockerfile: Dockerfile2
+    command: celery worker --app=worker.celery --loglevel=info
+    volumes:
+      - ./api/src:/api
+    env_file:
+      - ".env"
+    depends_on:
+      - redis
 
   chatbot:
     env_file:

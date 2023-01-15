@@ -1200,11 +1200,16 @@ CATEGORIES_MSO = [
 ]
 
 CURRENCIES = [
-    {'id': 1, 'code': 978, 'name': 'EUR', 'flag': '🇪🇺', 'symbol': '€'},
-    {'id': 2, 'code': 840, 'name': 'USD', 'flag': '🇺🇸', 'symbol': '$'},
-    {'id': 3, 'code': 704, 'name': 'VND', 'flag': '🇻🇳', 'symbol': '₫'},
-    {'id': 4, 'code': 764, 'name': 'THB', 'flag': '🇹🇭', 'symbol': '฿'},
-    {'id': 5, 'code': 980, 'name': 'UAH', 'flag': '🇺🇦', 'symbol': '₴'},
+    # {'id': 1, 'code': 978, 'name': 'EUR', 'flag': '🇪🇺', 'symbol': '€'},
+    # {'id': 2, 'code': 840, 'name': 'USD', 'flag': '🇺🇸', 'symbol': '$'},
+    # {'id': 3, 'code': 704, 'name': 'VND', 'flag': '🇻🇳', 'symbol': '₫'},
+    # {'id': 4, 'code': 764, 'name': 'THB', 'flag': '🇹🇭', 'symbol': '฿'},
+    # {'id': 5, 'code': 980, 'name': 'UAH', 'flag': '🇺🇦', 'symbol': '₴'},
+    {'code': 978, 'name': 'EUR', 'flag': '🇪🇺', 'symbol': '€'},
+    {'code': 840, 'name': 'USD', 'flag': '🇺🇸', 'symbol': '$'},
+    {'code': 704, 'name': 'VND', 'flag': '🇻🇳', 'symbol': '₫'},
+    {'code': 764, 'name': 'THB', 'flag': '🇹🇭', 'symbol': '฿'},
+    {'code': 980, 'name': 'UAH', 'flag': '🇺🇦', 'symbol': '₴'},
 ]
 
 JOINED_MSO = [

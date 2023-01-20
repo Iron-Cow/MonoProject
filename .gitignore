@@ -3,3 +3,4 @@
 venv*
 *pycache*
 /flask_executor/
+migrations/

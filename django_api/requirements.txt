@@ -1,0 +1,10 @@
+django
+django-rest-framework
+djangorestframework-simplejwt
+pytest
+django-pytest
+pytest-django
+psycopg2
+psycopg2-binary
+pytest-django
+python-dotenv

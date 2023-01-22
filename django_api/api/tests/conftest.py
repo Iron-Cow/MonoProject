@@ -9,12 +9,29 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.urls import reverse
+from typing import Callable
 
 from rest_framework.test import APIRequestFactory, force_authenticate
 from rest_framework.utils.serializer_helpers import OrderedDict, ReturnDict, ReturnList
 from rest_framework.views import APIView
 
 User = get_user_model()
+
+
+class Variant(NamedTuple):
+    view: Callable
+    name: str
+    expected: dict | List[dict] = None
+    request_data: dict | List[dict] = None
+    method_name: str = "get"
+    format: str = "json"
+    status_code: int = 200
+    is_admin: bool = True
+    tg_id: str = "username"
+    password = "PassW0rd",
+    url_args: tuple = tuple()
+    url_kwargs: dict = dict()
+
 
 @pytest.fixture
 def api_request():
@@ -30,7 +47,7 @@ def api_request():
         is_staff=False,
         is_admin=False,
     ):
-        user = User.objects.create_user(tg_id, password, is_staff=is_staff, is_admin=is_admin)
+        user = User.objects.create_user(tg_id, password, is_staff=is_admin, is_admin=is_admin)
         factory = APIRequestFactory()
         url = reverse(view_name, args=url_args, kwargs=url_kwargs)
         factory_method = getattr(factory, method_name)

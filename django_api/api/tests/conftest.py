@@ -1,19 +1,14 @@
-import tempfile
-from copy import deepcopy
-from typing import Dict, List, NamedTuple, Optional, Type, Union
-from unittest.mock import patch
+
+from typing import NamedTuple, List
+
 
 import pytest
 from django.contrib.auth import get_user_model
-from django.core.files.storage import FileSystemStorage
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.core.management import call_command
 from django.urls import reverse
 from typing import Callable
 
 from rest_framework.test import APIRequestFactory, force_authenticate
-from rest_framework.utils.serializer_helpers import OrderedDict, ReturnDict, ReturnList
-from rest_framework.views import APIView
+from monobank.models import Category
 
 User = get_user_model()
 
@@ -65,3 +60,17 @@ def pre_created_user(db) -> User:
         password="precreated_user_password",
     )
     return precreated_user
+
+@pytest.fixture
+def pre_created_categories(db):
+    Category.objects.create(
+        name="precreated_category_name1",
+        symbol="smbl",
+        user_defined=False,
+    )
+    Category.objects.create(
+        name="precreated_category_name2",
+        symbol="smbl",
+        user_defined=False,
+    )
+

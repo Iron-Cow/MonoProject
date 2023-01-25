@@ -2,11 +2,8 @@ import pytest
 from account.views import UserViewSet
 from rest_framework.exceptions import ErrorDetail
 
-import django
 
 from conftest import Variant
-
-django.setup()
 
 users_list_variants = [
     ("admin list", Variant(

@@ -1,0 +1,9282 @@
+[
+  {
+    "model": "monobank.categorymso",
+    "pk": 1,
+    "fields": {
+      "category": 2,
+      "mso": 4011
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 2,
+    "fields": {
+      "category": 2,
+      "mso": 4111
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 3,
+    "fields": {
+      "category": 2,
+      "mso": 4112
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 4,
+    "fields": {
+      "category": 2,
+      "mso": 4131
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 5,
+    "fields": {
+      "category": 2,
+      "mso": 4304
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "mso": 4411
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 7,
+    "fields": {
+      "category": 2,
+      "mso": 4415
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 8,
+    "fields": {
+      "category": 2,
+      "mso": 4418
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 9,
+    "fields": {
+      "category": 2,
+      "mso": 4457
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 10,
+    "fields": {
+      "category": 2,
+      "mso": 4468
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 11,
+    "fields": {
+      "category": 2,
+      "mso": 4511
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 12,
+    "fields": {
+      "category": 2,
+      "mso": 4582
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 13,
+    "fields": {
+      "category": 2,
+      "mso": 4722
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 14,
+    "fields": {
+      "category": 2,
+      "mso": 4784
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 15,
+    "fields": {
+      "category": 2,
+      "mso": 4789
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 16,
+    "fields": {
+      "category": 2,
+      "mso": 5962
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 17,
+    "fields": {
+      "category": 2,
+      "mso": 6513
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 18,
+    "fields": {
+      "category": 2,
+      "mso": 7011
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 19,
+    "fields": {
+      "category": 2,
+      "mso": 7032
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 20,
+    "fields": {
+      "category": 2,
+      "mso": 7033
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 21,
+    "fields": {
+      "category": 2,
+      "mso": 7512
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 22,
+    "fields": {
+      "category": 2,
+      "mso": 7513
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 23,
+    "fields": {
+      "category": 2,
+      "mso": 7519
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 24,
+    "fields": {
+      "category": 2,
+      "mso": 3000
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 25,
+    "fields": {
+      "category": 2,
+      "mso": 3001
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 26,
+    "fields": {
+      "category": 2,
+      "mso": 3002
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 27,
+    "fields": {
+      "category": 2,
+      "mso": 3003
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 28,
+    "fields": {
+      "category": 2,
+      "mso": 3004
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 29,
+    "fields": {
+      "category": 2,
+      "mso": 3005
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 30,
+    "fields": {
+      "category": 2,
+      "mso": 3006
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 31,
+    "fields": {
+      "category": 2,
+      "mso": 3007
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 32,
+    "fields": {
+      "category": 2,
+      "mso": 3008
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 33,
+    "fields": {
+      "category": 2,
+      "mso": 3009
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 34,
+    "fields": {
+      "category": 2,
+      "mso": 3010
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 35,
+    "fields": {
+      "category": 2,
+      "mso": 3011
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 36,
+    "fields": {
+      "category": 2,
+      "mso": 3012
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 37,
+    "fields": {
+      "category": 2,
+      "mso": 3013
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 38,
+    "fields": {
+      "category": 2,
+      "mso": 3014
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 39,
+    "fields": {
+      "category": 2,
+      "mso": 3015
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 40,
+    "fields": {
+      "category": 2,
+      "mso": 3016
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 41,
+    "fields": {
+      "category": 2,
+      "mso": 3017
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 42,
+    "fields": {
+      "category": 2,
+      "mso": 3018
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 43,
+    "fields": {
+      "category": 2,
+      "mso": 3019
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 44,
+    "fields": {
+      "category": 2,
+      "mso": 3020
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 45,
+    "fields": {
+      "category": 2,
+      "mso": 3021
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 46,
+    "fields": {
+      "category": 2,
+      "mso": 3022
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 47,
+    "fields": {
+      "category": 2,
+      "mso": 3023
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 48,
+    "fields": {
+      "category": 2,
+      "mso": 3024
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 49,
+    "fields": {
+      "category": 2,
+      "mso": 3025
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 50,
+    "fields": {
+      "category": 2,
+      "mso": 3026
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 51,
+    "fields": {
+      "category": 2,
+      "mso": 3027
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 52,
+    "fields": {
+      "category": 2,
+      "mso": 3028
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 53,
+    "fields": {
+      "category": 2,
+      "mso": 3029
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 54,
+    "fields": {
+      "category": 2,
+      "mso": 3030
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 55,
+    "fields": {
+      "category": 2,
+      "mso": 3031
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 56,
+    "fields": {
+      "category": 2,
+      "mso": 3032
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 57,
+    "fields": {
+      "category": 2,
+      "mso": 3033
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 58,
+    "fields": {
+      "category": 2,
+      "mso": 3034
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 59,
+    "fields": {
+      "category": 2,
+      "mso": 3035
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 60,
+    "fields": {
+      "category": 2,
+      "mso": 3036
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 61,
+    "fields": {
+      "category": 2,
+      "mso": 3037
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 62,
+    "fields": {
+      "category": 2,
+      "mso": 3038
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 63,
+    "fields": {
+      "category": 2,
+      "mso": 3039
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 64,
+    "fields": {
+      "category": 2,
+      "mso": 3040
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 65,
+    "fields": {
+      "category": 2,
+      "mso": 3041
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 66,
+    "fields": {
+      "category": 2,
+      "mso": 3042
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 67,
+    "fields": {
+      "category": 2,
+      "mso": 3043
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 68,
+    "fields": {
+      "category": 2,
+      "mso": 3044
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 69,
+    "fields": {
+      "category": 2,
+      "mso": 3045
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 70,
+    "fields": {
+      "category": 2,
+      "mso": 3046
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 71,
+    "fields": {
+      "category": 2,
+      "mso": 3047
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 72,
+    "fields": {
+      "category": 2,
+      "mso": 3048
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 73,
+    "fields": {
+      "category": 2,
+      "mso": 3049
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 74,
+    "fields": {
+      "category": 2,
+      "mso": 3050
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 75,
+    "fields": {
+      "category": 2,
+      "mso": 3051
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 76,
+    "fields": {
+      "category": 2,
+      "mso": 3052
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 77,
+    "fields": {
+      "category": 2,
+      "mso": 3053
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 78,
+    "fields": {
+      "category": 2,
+      "mso": 3054
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 79,
+    "fields": {
+      "category": 2,
+      "mso": 3055
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 80,
+    "fields": {
+      "category": 2,
+      "mso": 3056
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 81,
+    "fields": {
+      "category": 2,
+      "mso": 3057
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 82,
+    "fields": {
+      "category": 2,
+      "mso": 3058
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 83,
+    "fields": {
+      "category": 2,
+      "mso": 3059
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 84,
+    "fields": {
+      "category": 2,
+      "mso": 3060
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 85,
+    "fields": {
+      "category": 2,
+      "mso": 3061
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 86,
+    "fields": {
+      "category": 2,
+      "mso": 3062
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 87,
+    "fields": {
+      "category": 2,
+      "mso": 3063
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 88,
+    "fields": {
+      "category": 2,
+      "mso": 3064
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 89,
+    "fields": {
+      "category": 2,
+      "mso": 3065
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 90,
+    "fields": {
+      "category": 2,
+      "mso": 3066
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 91,
+    "fields": {
+      "category": 2,
+      "mso": 3067
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 92,
+    "fields": {
+      "category": 2,
+      "mso": 3068
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 93,
+    "fields": {
+      "category": 2,
+      "mso": 3069
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 94,
+    "fields": {
+      "category": 2,
+      "mso": 3070
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 95,
+    "fields": {
+      "category": 2,
+      "mso": 3071
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 96,
+    "fields": {
+      "category": 2,
+      "mso": 3072
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 97,
+    "fields": {
+      "category": 2,
+      "mso": 3073
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 98,
+    "fields": {
+      "category": 2,
+      "mso": 3074
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 99,
+    "fields": {
+      "category": 2,
+      "mso": 3075
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 100,
+    "fields": {
+      "category": 2,
+      "mso": 3076
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 101,
+    "fields": {
+      "category": 2,
+      "mso": 3077
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 102,
+    "fields": {
+      "category": 2,
+      "mso": 3078
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 103,
+    "fields": {
+      "category": 2,
+      "mso": 3079
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 104,
+    "fields": {
+      "category": 2,
+      "mso": 3080
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 105,
+    "fields": {
+      "category": 2,
+      "mso": 3081
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 106,
+    "fields": {
+      "category": 2,
+      "mso": 3082
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 107,
+    "fields": {
+      "category": 2,
+      "mso": 3083
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 108,
+    "fields": {
+      "category": 2,
+      "mso": 3084
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 109,
+    "fields": {
+      "category": 2,
+      "mso": 3085
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 110,
+    "fields": {
+      "category": 2,
+      "mso": 3086
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 111,
+    "fields": {
+      "category": 2,
+      "mso": 3087
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 112,
+    "fields": {
+      "category": 2,
+      "mso": 3088
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 113,
+    "fields": {
+      "category": 2,
+      "mso": 3089
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 114,
+    "fields": {
+      "category": 2,
+      "mso": 3090
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 115,
+    "fields": {
+      "category": 2,
+      "mso": 3091
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 116,
+    "fields": {
+      "category": 2,
+      "mso": 3092
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 117,
+    "fields": {
+      "category": 2,
+      "mso": 3093
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 118,
+    "fields": {
+      "category": 2,
+      "mso": 3094
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 119,
+    "fields": {
+      "category": 2,
+      "mso": 3095
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 120,
+    "fields": {
+      "category": 2,
+      "mso": 3096
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 121,
+    "fields": {
+      "category": 2,
+      "mso": 3097
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 122,
+    "fields": {
+      "category": 2,
+      "mso": 3098
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 123,
+    "fields": {
+      "category": 2,
+      "mso": 3099
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 124,
+    "fields": {
+      "category": 2,
+      "mso": 3100
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 125,
+    "fields": {
+      "category": 2,
+      "mso": 3101
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 126,
+    "fields": {
+      "category": 2,
+      "mso": 3102
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 127,
+    "fields": {
+      "category": 2,
+      "mso": 3103
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 128,
+    "fields": {
+      "category": 2,
+      "mso": 3104
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 129,
+    "fields": {
+      "category": 2,
+      "mso": 3105
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 130,
+    "fields": {
+      "category": 2,
+      "mso": 3106
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 131,
+    "fields": {
+      "category": 2,
+      "mso": 3107
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 132,
+    "fields": {
+      "category": 2,
+      "mso": 3108
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 133,
+    "fields": {
+      "category": 2,
+      "mso": 3109
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 134,
+    "fields": {
+      "category": 2,
+      "mso": 3110
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 135,
+    "fields": {
+      "category": 2,
+      "mso": 3111
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 136,
+    "fields": {
+      "category": 2,
+      "mso": 3112
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 137,
+    "fields": {
+      "category": 2,
+      "mso": 3113
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 138,
+    "fields": {
+      "category": 2,
+      "mso": 3114
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 139,
+    "fields": {
+      "category": 2,
+      "mso": 3115
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 140,
+    "fields": {
+      "category": 2,
+      "mso": 3116
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 141,
+    "fields": {
+      "category": 2,
+      "mso": 3117
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 142,
+    "fields": {
+      "category": 2,
+      "mso": 3118
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 143,
+    "fields": {
+      "category": 2,
+      "mso": 3119
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 144,
+    "fields": {
+      "category": 2,
+      "mso": 3120
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 145,
+    "fields": {
+      "category": 2,
+      "mso": 3121
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 146,
+    "fields": {
+      "category": 2,
+      "mso": 3122
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 147,
+    "fields": {
+      "category": 2,
+      "mso": 3123
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 148,
+    "fields": {
+      "category": 2,
+      "mso": 3124
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 149,
+    "fields": {
+      "category": 2,
+      "mso": 3125
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 150,
+    "fields": {
+      "category": 2,
+      "mso": 3126
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 151,
+    "fields": {
+      "category": 2,
+      "mso": 3127
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 152,
+    "fields": {
+      "category": 2,
+      "mso": 3128
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 153,
+    "fields": {
+      "category": 2,
+      "mso": 3129
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 154,
+    "fields": {
+      "category": 2,
+      "mso": 3130
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 155,
+    "fields": {
+      "category": 2,
+      "mso": 3131
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 156,
+    "fields": {
+      "category": 2,
+      "mso": 3132
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 157,
+    "fields": {
+      "category": 2,
+      "mso": 3133
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 158,
+    "fields": {
+      "category": 2,
+      "mso": 3134
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 159,
+    "fields": {
+      "category": 2,
+      "mso": 3135
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 160,
+    "fields": {
+      "category": 2,
+      "mso": 3136
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 161,
+    "fields": {
+      "category": 2,
+      "mso": 3137
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 162,
+    "fields": {
+      "category": 2,
+      "mso": 3138
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 163,
+    "fields": {
+      "category": 2,
+      "mso": 3139
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 164,
+    "fields": {
+      "category": 2,
+      "mso": 3140
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 165,
+    "fields": {
+      "category": 2,
+      "mso": 3141
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 166,
+    "fields": {
+      "category": 2,
+      "mso": 3142
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 167,
+    "fields": {
+      "category": 2,
+      "mso": 3143
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 168,
+    "fields": {
+      "category": 2,
+      "mso": 3144
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 169,
+    "fields": {
+      "category": 2,
+      "mso": 3145
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 170,
+    "fields": {
+      "category": 2,
+      "mso": 3146
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 171,
+    "fields": {
+      "category": 2,
+      "mso": 3147
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 172,
+    "fields": {
+      "category": 2,
+      "mso": 3148
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 173,
+    "fields": {
+      "category": 2,
+      "mso": 3149
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 174,
+    "fields": {
+      "category": 2,
+      "mso": 3150
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 175,
+    "fields": {
+      "category": 2,
+      "mso": 3151
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 176,
+    "fields": {
+      "category": 2,
+      "mso": 3152
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 177,
+    "fields": {
+      "category": 2,
+      "mso": 3153
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 178,
+    "fields": {
+      "category": 2,
+      "mso": 3154
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 179,
+    "fields": {
+      "category": 2,
+      "mso": 3155
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 180,
+    "fields": {
+      "category": 2,
+      "mso": 3156
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 181,
+    "fields": {
+      "category": 2,
+      "mso": 3157
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 182,
+    "fields": {
+      "category": 2,
+      "mso": 3158
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 183,
+    "fields": {
+      "category": 2,
+      "mso": 3159
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 184,
+    "fields": {
+      "category": 2,
+      "mso": 3160
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 185,
+    "fields": {
+      "category": 2,
+      "mso": 3161
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 186,
+    "fields": {
+      "category": 2,
+      "mso": 3162
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 187,
+    "fields": {
+      "category": 2,
+      "mso": 3163
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 188,
+    "fields": {
+      "category": 2,
+      "mso": 3164
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 189,
+    "fields": {
+      "category": 2,
+      "mso": 3165
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 190,
+    "fields": {
+      "category": 2,
+      "mso": 3166
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 191,
+    "fields": {
+      "category": 2,
+      "mso": 3167
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 192,
+    "fields": {
+      "category": 2,
+      "mso": 3168
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 193,
+    "fields": {
+      "category": 2,
+      "mso": 3169
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 194,
+    "fields": {
+      "category": 2,
+      "mso": 3170
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 195,
+    "fields": {
+      "category": 2,
+      "mso": 3171
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 196,
+    "fields": {
+      "category": 2,
+      "mso": 3172
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 197,
+    "fields": {
+      "category": 2,
+      "mso": 3173
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 198,
+    "fields": {
+      "category": 2,
+      "mso": 3174
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 199,
+    "fields": {
+      "category": 2,
+      "mso": 3175
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 200,
+    "fields": {
+      "category": 2,
+      "mso": 3176
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 201,
+    "fields": {
+      "category": 2,
+      "mso": 3177
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 202,
+    "fields": {
+      "category": 2,
+      "mso": 3178
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 203,
+    "fields": {
+      "category": 2,
+      "mso": 3179
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 204,
+    "fields": {
+      "category": 2,
+      "mso": 3180
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 205,
+    "fields": {
+      "category": 2,
+      "mso": 3181
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 206,
+    "fields": {
+      "category": 2,
+      "mso": 3182
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 207,
+    "fields": {
+      "category": 2,
+      "mso": 3183
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 208,
+    "fields": {
+      "category": 2,
+      "mso": 3184
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 209,
+    "fields": {
+      "category": 2,
+      "mso": 3185
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 210,
+    "fields": {
+      "category": 2,
+      "mso": 3186
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 211,
+    "fields": {
+      "category": 2,
+      "mso": 3187
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 212,
+    "fields": {
+      "category": 2,
+      "mso": 3188
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 213,
+    "fields": {
+      "category": 2,
+      "mso": 3189
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 214,
+    "fields": {
+      "category": 2,
+      "mso": 3190
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 215,
+    "fields": {
+      "category": 2,
+      "mso": 3191
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 216,
+    "fields": {
+      "category": 2,
+      "mso": 3192
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 217,
+    "fields": {
+      "category": 2,
+      "mso": 3193
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 218,
+    "fields": {
+      "category": 2,
+      "mso": 3194
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 219,
+    "fields": {
+      "category": 2,
+      "mso": 3195
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 220,
+    "fields": {
+      "category": 2,
+      "mso": 3196
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 221,
+    "fields": {
+      "category": 2,
+      "mso": 3197
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 222,
+    "fields": {
+      "category": 2,
+      "mso": 3198
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 223,
+    "fields": {
+      "category": 2,
+      "mso": 3199
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 224,
+    "fields": {
+      "category": 2,
+      "mso": 3200
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 225,
+    "fields": {
+      "category": 2,
+      "mso": 3201
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 226,
+    "fields": {
+      "category": 2,
+      "mso": 3202
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 227,
+    "fields": {
+      "category": 2,
+      "mso": 3203
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 228,
+    "fields": {
+      "category": 2,
+      "mso": 3204
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 229,
+    "fields": {
+      "category": 2,
+      "mso": 3205
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 230,
+    "fields": {
+      "category": 2,
+      "mso": 3206
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 231,
+    "fields": {
+      "category": 2,
+      "mso": 3207
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 232,
+    "fields": {
+      "category": 2,
+      "mso": 3208
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 233,
+    "fields": {
+      "category": 2,
+      "mso": 3209
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 234,
+    "fields": {
+      "category": 2,
+      "mso": 3210
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 235,
+    "fields": {
+      "category": 2,
+      "mso": 3211
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 236,
+    "fields": {
+      "category": 2,
+      "mso": 3212
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 237,
+    "fields": {
+      "category": 2,
+      "mso": 3213
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 238,
+    "fields": {
+      "category": 2,
+      "mso": 3214
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 239,
+    "fields": {
+      "category": 2,
+      "mso": 3215
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 240,
+    "fields": {
+      "category": 2,
+      "mso": 3216
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 241,
+    "fields": {
+      "category": 2,
+      "mso": 3217
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 242,
+    "fields": {
+      "category": 2,
+      "mso": 3218
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 243,
+    "fields": {
+      "category": 2,
+      "mso": 3219
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 244,
+    "fields": {
+      "category": 2,
+      "mso": 3220
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 245,
+    "fields": {
+      "category": 2,
+      "mso": 3221
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 246,
+    "fields": {
+      "category": 2,
+      "mso": 3222
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 247,
+    "fields": {
+      "category": 2,
+      "mso": 3223
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 248,
+    "fields": {
+      "category": 2,
+      "mso": 3224
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 249,
+    "fields": {
+      "category": 2,
+      "mso": 3225
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 250,
+    "fields": {
+      "category": 2,
+      "mso": 3226
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 251,
+    "fields": {
+      "category": 2,
+      "mso": 3227
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 252,
+    "fields": {
+      "category": 2,
+      "mso": 3228
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 253,
+    "fields": {
+      "category": 2,
+      "mso": 3229
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 254,
+    "fields": {
+      "category": 2,
+      "mso": 3230
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 255,
+    "fields": {
+      "category": 2,
+      "mso": 3231
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 256,
+    "fields": {
+      "category": 2,
+      "mso": 3232
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 257,
+    "fields": {
+      "category": 2,
+      "mso": 3233
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 258,
+    "fields": {
+      "category": 2,
+      "mso": 3234
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 259,
+    "fields": {
+      "category": 2,
+      "mso": 3235
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 260,
+    "fields": {
+      "category": 2,
+      "mso": 3236
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 261,
+    "fields": {
+      "category": 2,
+      "mso": 3237
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 262,
+    "fields": {
+      "category": 2,
+      "mso": 3238
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 263,
+    "fields": {
+      "category": 2,
+      "mso": 3239
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 264,
+    "fields": {
+      "category": 2,
+      "mso": 3240
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 265,
+    "fields": {
+      "category": 2,
+      "mso": 3241
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 266,
+    "fields": {
+      "category": 2,
+      "mso": 3242
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 267,
+    "fields": {
+      "category": 2,
+      "mso": 3243
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 268,
+    "fields": {
+      "category": 2,
+      "mso": 3244
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 269,
+    "fields": {
+      "category": 2,
+      "mso": 3245
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 270,
+    "fields": {
+      "category": 2,
+      "mso": 3246
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 271,
+    "fields": {
+      "category": 2,
+      "mso": 3247
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 272,
+    "fields": {
+      "category": 2,
+      "mso": 3248
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 273,
+    "fields": {
+      "category": 2,
+      "mso": 3249
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 274,
+    "fields": {
+      "category": 2,
+      "mso": 3250
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 275,
+    "fields": {
+      "category": 2,
+      "mso": 3251
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 276,
+    "fields": {
+      "category": 2,
+      "mso": 3252
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 277,
+    "fields": {
+      "category": 2,
+      "mso": 3253
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 278,
+    "fields": {
+      "category": 2,
+      "mso": 3254
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 279,
+    "fields": {
+      "category": 2,
+      "mso": 3255
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 280,
+    "fields": {
+      "category": 2,
+      "mso": 3256
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 281,
+    "fields": {
+      "category": 2,
+      "mso": 3257
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 282,
+    "fields": {
+      "category": 2,
+      "mso": 3258
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 283,
+    "fields": {
+      "category": 2,
+      "mso": 3259
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 284,
+    "fields": {
+      "category": 2,
+      "mso": 3260
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 285,
+    "fields": {
+      "category": 2,
+      "mso": 3261
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 286,
+    "fields": {
+      "category": 2,
+      "mso": 3262
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 287,
+    "fields": {
+      "category": 2,
+      "mso": 3263
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 288,
+    "fields": {
+      "category": 2,
+      "mso": 3264
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 289,
+    "fields": {
+      "category": 2,
+      "mso": 3265
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 290,
+    "fields": {
+      "category": 2,
+      "mso": 3266
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 291,
+    "fields": {
+      "category": 2,
+      "mso": 3267
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 292,
+    "fields": {
+      "category": 2,
+      "mso": 3268
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 293,
+    "fields": {
+      "category": 2,
+      "mso": 3269
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 294,
+    "fields": {
+      "category": 2,
+      "mso": 3270
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 295,
+    "fields": {
+      "category": 2,
+      "mso": 3271
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 296,
+    "fields": {
+      "category": 2,
+      "mso": 3272
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 297,
+    "fields": {
+      "category": 2,
+      "mso": 3273
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 298,
+    "fields": {
+      "category": 2,
+      "mso": 3274
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 299,
+    "fields": {
+      "category": 2,
+      "mso": 3275
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 300,
+    "fields": {
+      "category": 2,
+      "mso": 3276
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 301,
+    "fields": {
+      "category": 2,
+      "mso": 3277
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 302,
+    "fields": {
+      "category": 2,
+      "mso": 3278
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 303,
+    "fields": {
+      "category": 2,
+      "mso": 3279
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 304,
+    "fields": {
+      "category": 2,
+      "mso": 3280
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 305,
+    "fields": {
+      "category": 2,
+      "mso": 3281
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 306,
+    "fields": {
+      "category": 2,
+      "mso": 3282
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 307,
+    "fields": {
+      "category": 2,
+      "mso": 3283
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 308,
+    "fields": {
+      "category": 2,
+      "mso": 3284
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 309,
+    "fields": {
+      "category": 2,
+      "mso": 3285
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 310,
+    "fields": {
+      "category": 2,
+      "mso": 3286
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 311,
+    "fields": {
+      "category": 2,
+      "mso": 3287
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 312,
+    "fields": {
+      "category": 2,
+      "mso": 3288
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 313,
+    "fields": {
+      "category": 2,
+      "mso": 3289
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 314,
+    "fields": {
+      "category": 2,
+      "mso": 3290
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 315,
+    "fields": {
+      "category": 2,
+      "mso": 3291
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 316,
+    "fields": {
+      "category": 2,
+      "mso": 3292
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 317,
+    "fields": {
+      "category": 2,
+      "mso": 3293
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 318,
+    "fields": {
+      "category": 2,
+      "mso": 3294
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 319,
+    "fields": {
+      "category": 2,
+      "mso": 3295
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 320,
+    "fields": {
+      "category": 2,
+      "mso": 3296
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 321,
+    "fields": {
+      "category": 2,
+      "mso": 3297
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 322,
+    "fields": {
+      "category": 2,
+      "mso": 3298
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 323,
+    "fields": {
+      "category": 2,
+      "mso": 3299
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 324,
+    "fields": {
+      "category": 2,
+      "mso": 3300
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 325,
+    "fields": {
+      "category": 2,
+      "mso": 3301
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 326,
+    "fields": {
+      "category": 2,
+      "mso": 3302
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 327,
+    "fields": {
+      "category": 2,
+      "mso": 3303
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 328,
+    "fields": {
+      "category": 2,
+      "mso": 3304
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 329,
+    "fields": {
+      "category": 2,
+      "mso": 3305
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 330,
+    "fields": {
+      "category": 2,
+      "mso": 3306
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 331,
+    "fields": {
+      "category": 2,
+      "mso": 3307
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 332,
+    "fields": {
+      "category": 2,
+      "mso": 3308
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 333,
+    "fields": {
+      "category": 2,
+      "mso": 3309
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 334,
+    "fields": {
+      "category": 2,
+      "mso": 3310
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 335,
+    "fields": {
+      "category": 2,
+      "mso": 3311
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 336,
+    "fields": {
+      "category": 2,
+      "mso": 3312
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 337,
+    "fields": {
+      "category": 2,
+      "mso": 3313
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 338,
+    "fields": {
+      "category": 2,
+      "mso": 3314
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 339,
+    "fields": {
+      "category": 2,
+      "mso": 3315
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 340,
+    "fields": {
+      "category": 2,
+      "mso": 3316
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 341,
+    "fields": {
+      "category": 2,
+      "mso": 3317
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 342,
+    "fields": {
+      "category": 2,
+      "mso": 3318
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 343,
+    "fields": {
+      "category": 2,
+      "mso": 3319
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 344,
+    "fields": {
+      "category": 2,
+      "mso": 3320
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 345,
+    "fields": {
+      "category": 2,
+      "mso": 3321
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 346,
+    "fields": {
+      "category": 2,
+      "mso": 3322
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 347,
+    "fields": {
+      "category": 2,
+      "mso": 3323
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 348,
+    "fields": {
+      "category": 2,
+      "mso": 3324
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 349,
+    "fields": {
+      "category": 2,
+      "mso": 3325
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 350,
+    "fields": {
+      "category": 2,
+      "mso": 3326
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 351,
+    "fields": {
+      "category": 2,
+      "mso": 3327
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 352,
+    "fields": {
+      "category": 2,
+      "mso": 3328
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 353,
+    "fields": {
+      "category": 2,
+      "mso": 3329
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 354,
+    "fields": {
+      "category": 2,
+      "mso": 3330
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 355,
+    "fields": {
+      "category": 2,
+      "mso": 3331
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 356,
+    "fields": {
+      "category": 2,
+      "mso": 3332
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 357,
+    "fields": {
+      "category": 2,
+      "mso": 3333
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 358,
+    "fields": {
+      "category": 2,
+      "mso": 3334
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 359,
+    "fields": {
+      "category": 2,
+      "mso": 3335
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 360,
+    "fields": {
+      "category": 2,
+      "mso": 3336
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 361,
+    "fields": {
+      "category": 2,
+      "mso": 3337
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 362,
+    "fields": {
+      "category": 2,
+      "mso": 3338
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 363,
+    "fields": {
+      "category": 2,
+      "mso": 3339
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 364,
+    "fields": {
+      "category": 2,
+      "mso": 3340
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 365,
+    "fields": {
+      "category": 2,
+      "mso": 3341
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 366,
+    "fields": {
+      "category": 2,
+      "mso": 3342
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 367,
+    "fields": {
+      "category": 2,
+      "mso": 3343
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 368,
+    "fields": {
+      "category": 2,
+      "mso": 3344
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 369,
+    "fields": {
+      "category": 2,
+      "mso": 3345
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 370,
+    "fields": {
+      "category": 2,
+      "mso": 3346
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 371,
+    "fields": {
+      "category": 2,
+      "mso": 3347
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 372,
+    "fields": {
+      "category": 2,
+      "mso": 3348
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 373,
+    "fields": {
+      "category": 2,
+      "mso": 3349
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 374,
+    "fields": {
+      "category": 2,
+      "mso": 3350
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 375,
+    "fields": {
+      "category": 2,
+      "mso": 3351
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 376,
+    "fields": {
+      "category": 2,
+      "mso": 3352
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 377,
+    "fields": {
+      "category": 2,
+      "mso": 3353
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 378,
+    "fields": {
+      "category": 2,
+      "mso": 3354
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 379,
+    "fields": {
+      "category": 2,
+      "mso": 3355
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 380,
+    "fields": {
+      "category": 2,
+      "mso": 3356
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 381,
+    "fields": {
+      "category": 2,
+      "mso": 3357
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 382,
+    "fields": {
+      "category": 2,
+      "mso": 3358
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 383,
+    "fields": {
+      "category": 2,
+      "mso": 3359
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 384,
+    "fields": {
+      "category": 2,
+      "mso": 3360
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 385,
+    "fields": {
+      "category": 2,
+      "mso": 3361
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 386,
+    "fields": {
+      "category": 2,
+      "mso": 3362
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 387,
+    "fields": {
+      "category": 2,
+      "mso": 3363
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 388,
+    "fields": {
+      "category": 2,
+      "mso": 3364
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 389,
+    "fields": {
+      "category": 2,
+      "mso": 3365
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 390,
+    "fields": {
+      "category": 2,
+      "mso": 3366
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 391,
+    "fields": {
+      "category": 2,
+      "mso": 3367
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 392,
+    "fields": {
+      "category": 2,
+      "mso": 3368
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 393,
+    "fields": {
+      "category": 2,
+      "mso": 3369
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 394,
+    "fields": {
+      "category": 2,
+      "mso": 3370
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 395,
+    "fields": {
+      "category": 2,
+      "mso": 3371
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 396,
+    "fields": {
+      "category": 2,
+      "mso": 3372
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 397,
+    "fields": {
+      "category": 2,
+      "mso": 3373
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 398,
+    "fields": {
+      "category": 2,
+      "mso": 3374
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 399,
+    "fields": {
+      "category": 2,
+      "mso": 3375
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 400,
+    "fields": {
+      "category": 2,
+      "mso": 3376
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 401,
+    "fields": {
+      "category": 2,
+      "mso": 3377
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 402,
+    "fields": {
+      "category": 2,
+      "mso": 3378
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 403,
+    "fields": {
+      "category": 2,
+      "mso": 3379
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 404,
+    "fields": {
+      "category": 2,
+      "mso": 3380
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 405,
+    "fields": {
+      "category": 2,
+      "mso": 3381
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 406,
+    "fields": {
+      "category": 2,
+      "mso": 3382
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 407,
+    "fields": {
+      "category": 2,
+      "mso": 3383
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 408,
+    "fields": {
+      "category": 2,
+      "mso": 3384
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 409,
+    "fields": {
+      "category": 2,
+      "mso": 3385
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 410,
+    "fields": {
+      "category": 2,
+      "mso": 3386
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 411,
+    "fields": {
+      "category": 2,
+      "mso": 3387
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 412,
+    "fields": {
+      "category": 2,
+      "mso": 3388
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 413,
+    "fields": {
+      "category": 2,
+      "mso": 3389
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 414,
+    "fields": {
+      "category": 2,
+      "mso": 3390
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 415,
+    "fields": {
+      "category": 2,
+      "mso": 3391
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 416,
+    "fields": {
+      "category": 2,
+      "mso": 3392
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 417,
+    "fields": {
+      "category": 2,
+      "mso": 3393
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 418,
+    "fields": {
+      "category": 2,
+      "mso": 3394
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 419,
+    "fields": {
+      "category": 2,
+      "mso": 3395
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 420,
+    "fields": {
+      "category": 2,
+      "mso": 3396
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 421,
+    "fields": {
+      "category": 2,
+      "mso": 3397
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 422,
+    "fields": {
+      "category": 2,
+      "mso": 3398
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 423,
+    "fields": {
+      "category": 2,
+      "mso": 3399
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 424,
+    "fields": {
+      "category": 2,
+      "mso": 3400
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 425,
+    "fields": {
+      "category": 2,
+      "mso": 3401
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 426,
+    "fields": {
+      "category": 2,
+      "mso": 3402
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 427,
+    "fields": {
+      "category": 2,
+      "mso": 3403
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 428,
+    "fields": {
+      "category": 2,
+      "mso": 3404
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 429,
+    "fields": {
+      "category": 2,
+      "mso": 3405
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 430,
+    "fields": {
+      "category": 2,
+      "mso": 3406
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 431,
+    "fields": {
+      "category": 2,
+      "mso": 3407
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 432,
+    "fields": {
+      "category": 2,
+      "mso": 3408
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 433,
+    "fields": {
+      "category": 2,
+      "mso": 3409
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 434,
+    "fields": {
+      "category": 2,
+      "mso": 3410
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 435,
+    "fields": {
+      "category": 2,
+      "mso": 3411
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 436,
+    "fields": {
+      "category": 2,
+      "mso": 3412
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 437,
+    "fields": {
+      "category": 2,
+      "mso": 3413
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 438,
+    "fields": {
+      "category": 2,
+      "mso": 3414
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 439,
+    "fields": {
+      "category": 2,
+      "mso": 3415
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 440,
+    "fields": {
+      "category": 2,
+      "mso": 3416
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 441,
+    "fields": {
+      "category": 2,
+      "mso": 3417
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 442,
+    "fields": {
+      "category": 2,
+      "mso": 3418
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 443,
+    "fields": {
+      "category": 2,
+      "mso": 3419
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 444,
+    "fields": {
+      "category": 2,
+      "mso": 3420
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 445,
+    "fields": {
+      "category": 2,
+      "mso": 3421
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 446,
+    "fields": {
+      "category": 2,
+      "mso": 3422
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 447,
+    "fields": {
+      "category": 2,
+      "mso": 3423
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 448,
+    "fields": {
+      "category": 2,
+      "mso": 3424
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 449,
+    "fields": {
+      "category": 2,
+      "mso": 3425
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 450,
+    "fields": {
+      "category": 2,
+      "mso": 3426
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 451,
+    "fields": {
+      "category": 2,
+      "mso": 3427
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 452,
+    "fields": {
+      "category": 2,
+      "mso": 3428
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 453,
+    "fields": {
+      "category": 2,
+      "mso": 3429
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 454,
+    "fields": {
+      "category": 2,
+      "mso": 3430
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 455,
+    "fields": {
+      "category": 2,
+      "mso": 3431
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 456,
+    "fields": {
+      "category": 2,
+      "mso": 3432
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 457,
+    "fields": {
+      "category": 2,
+      "mso": 3433
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 458,
+    "fields": {
+      "category": 2,
+      "mso": 3434
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 459,
+    "fields": {
+      "category": 2,
+      "mso": 3435
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 460,
+    "fields": {
+      "category": 2,
+      "mso": 3436
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 461,
+    "fields": {
+      "category": 2,
+      "mso": 3437
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 462,
+    "fields": {
+      "category": 2,
+      "mso": 3438
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 463,
+    "fields": {
+      "category": 2,
+      "mso": 3439
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 464,
+    "fields": {
+      "category": 2,
+      "mso": 3440
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 465,
+    "fields": {
+      "category": 2,
+      "mso": 3441
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 466,
+    "fields": {
+      "category": 2,
+      "mso": 3442
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 467,
+    "fields": {
+      "category": 2,
+      "mso": 3443
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 468,
+    "fields": {
+      "category": 2,
+      "mso": 3444
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 469,
+    "fields": {
+      "category": 2,
+      "mso": 3445
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 470,
+    "fields": {
+      "category": 2,
+      "mso": 3446
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 471,
+    "fields": {
+      "category": 2,
+      "mso": 3447
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 472,
+    "fields": {
+      "category": 2,
+      "mso": 3448
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 473,
+    "fields": {
+      "category": 2,
+      "mso": 3449
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 474,
+    "fields": {
+      "category": 2,
+      "mso": 3450
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 475,
+    "fields": {
+      "category": 2,
+      "mso": 3451
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 476,
+    "fields": {
+      "category": 2,
+      "mso": 3452
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 477,
+    "fields": {
+      "category": 2,
+      "mso": 3453
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 478,
+    "fields": {
+      "category": 2,
+      "mso": 3454
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 479,
+    "fields": {
+      "category": 2,
+      "mso": 3455
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 480,
+    "fields": {
+      "category": 2,
+      "mso": 3456
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 481,
+    "fields": {
+      "category": 2,
+      "mso": 3457
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 482,
+    "fields": {
+      "category": 2,
+      "mso": 3458
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 483,
+    "fields": {
+      "category": 2,
+      "mso": 3459
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 484,
+    "fields": {
+      "category": 2,
+      "mso": 3460
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 485,
+    "fields": {
+      "category": 2,
+      "mso": 3461
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 486,
+    "fields": {
+      "category": 2,
+      "mso": 3462
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 487,
+    "fields": {
+      "category": 2,
+      "mso": 3463
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 488,
+    "fields": {
+      "category": 2,
+      "mso": 3464
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 489,
+    "fields": {
+      "category": 2,
+      "mso": 3465
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 490,
+    "fields": {
+      "category": 2,
+      "mso": 3466
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 491,
+    "fields": {
+      "category": 2,
+      "mso": 3467
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 492,
+    "fields": {
+      "category": 2,
+      "mso": 3468
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 493,
+    "fields": {
+      "category": 2,
+      "mso": 3469
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 494,
+    "fields": {
+      "category": 2,
+      "mso": 3470
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 495,
+    "fields": {
+      "category": 2,
+      "mso": 3471
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 496,
+    "fields": {
+      "category": 2,
+      "mso": 3472
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 497,
+    "fields": {
+      "category": 2,
+      "mso": 3473
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 498,
+    "fields": {
+      "category": 2,
+      "mso": 3474
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 499,
+    "fields": {
+      "category": 2,
+      "mso": 3475
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 500,
+    "fields": {
+      "category": 2,
+      "mso": 3476
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 501,
+    "fields": {
+      "category": 2,
+      "mso": 3477
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 502,
+    "fields": {
+      "category": 2,
+      "mso": 3478
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 503,
+    "fields": {
+      "category": 2,
+      "mso": 3479
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 504,
+    "fields": {
+      "category": 2,
+      "mso": 3480
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 505,
+    "fields": {
+      "category": 2,
+      "mso": 3481
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 506,
+    "fields": {
+      "category": 2,
+      "mso": 3482
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 507,
+    "fields": {
+      "category": 2,
+      "mso": 3483
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 508,
+    "fields": {
+      "category": 2,
+      "mso": 3484
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 509,
+    "fields": {
+      "category": 2,
+      "mso": 3485
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 510,
+    "fields": {
+      "category": 2,
+      "mso": 3486
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 511,
+    "fields": {
+      "category": 2,
+      "mso": 3487
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 512,
+    "fields": {
+      "category": 2,
+      "mso": 3488
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 513,
+    "fields": {
+      "category": 2,
+      "mso": 3489
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 514,
+    "fields": {
+      "category": 2,
+      "mso": 3490
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 515,
+    "fields": {
+      "category": 2,
+      "mso": 3491
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 516,
+    "fields": {
+      "category": 2,
+      "mso": 3492
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 517,
+    "fields": {
+      "category": 2,
+      "mso": 3493
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 518,
+    "fields": {
+      "category": 2,
+      "mso": 3494
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 519,
+    "fields": {
+      "category": 2,
+      "mso": 3495
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 520,
+    "fields": {
+      "category": 2,
+      "mso": 3496
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 521,
+    "fields": {
+      "category": 2,
+      "mso": 3497
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 522,
+    "fields": {
+      "category": 2,
+      "mso": 3498
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 523,
+    "fields": {
+      "category": 2,
+      "mso": 3499
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 524,
+    "fields": {
+      "category": 2,
+      "mso": 3500
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 525,
+    "fields": {
+      "category": 2,
+      "mso": 3501
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 526,
+    "fields": {
+      "category": 2,
+      "mso": 3502
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 527,
+    "fields": {
+      "category": 2,
+      "mso": 3503
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 528,
+    "fields": {
+      "category": 2,
+      "mso": 3504
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 529,
+    "fields": {
+      "category": 2,
+      "mso": 3505
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 530,
+    "fields": {
+      "category": 2,
+      "mso": 3506
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 531,
+    "fields": {
+      "category": 2,
+      "mso": 3507
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 532,
+    "fields": {
+      "category": 2,
+      "mso": 3508
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 533,
+    "fields": {
+      "category": 2,
+      "mso": 3509
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 534,
+    "fields": {
+      "category": 2,
+      "mso": 3510
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 535,
+    "fields": {
+      "category": 2,
+      "mso": 3511
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 536,
+    "fields": {
+      "category": 2,
+      "mso": 3512
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 537,
+    "fields": {
+      "category": 2,
+      "mso": 3513
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 538,
+    "fields": {
+      "category": 2,
+      "mso": 3514
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 539,
+    "fields": {
+      "category": 2,
+      "mso": 3515
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 540,
+    "fields": {
+      "category": 2,
+      "mso": 3516
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 541,
+    "fields": {
+      "category": 2,
+      "mso": 3517
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 542,
+    "fields": {
+      "category": 2,
+      "mso": 3518
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 543,
+    "fields": {
+      "category": 2,
+      "mso": 3519
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 544,
+    "fields": {
+      "category": 2,
+      "mso": 3520
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 545,
+    "fields": {
+      "category": 2,
+      "mso": 3521
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 546,
+    "fields": {
+      "category": 2,
+      "mso": 3522
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 547,
+    "fields": {
+      "category": 2,
+      "mso": 3523
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 548,
+    "fields": {
+      "category": 2,
+      "mso": 3524
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 549,
+    "fields": {
+      "category": 2,
+      "mso": 3525
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 550,
+    "fields": {
+      "category": 2,
+      "mso": 3526
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 551,
+    "fields": {
+      "category": 2,
+      "mso": 3527
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 552,
+    "fields": {
+      "category": 2,
+      "mso": 3528
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 553,
+    "fields": {
+      "category": 2,
+      "mso": 3529
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 554,
+    "fields": {
+      "category": 2,
+      "mso": 3530
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 555,
+    "fields": {
+      "category": 2,
+      "mso": 3531
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 556,
+    "fields": {
+      "category": 2,
+      "mso": 3532
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 557,
+    "fields": {
+      "category": 2,
+      "mso": 3533
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 558,
+    "fields": {
+      "category": 2,
+      "mso": 3534
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 559,
+    "fields": {
+      "category": 2,
+      "mso": 3535
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 560,
+    "fields": {
+      "category": 2,
+      "mso": 3536
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 561,
+    "fields": {
+      "category": 2,
+      "mso": 3537
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 562,
+    "fields": {
+      "category": 2,
+      "mso": 3538
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 563,
+    "fields": {
+      "category": 2,
+      "mso": 3539
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 564,
+    "fields": {
+      "category": 2,
+      "mso": 3540
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 565,
+    "fields": {
+      "category": 2,
+      "mso": 3541
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 566,
+    "fields": {
+      "category": 2,
+      "mso": 3542
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 567,
+    "fields": {
+      "category": 2,
+      "mso": 3543
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 568,
+    "fields": {
+      "category": 2,
+      "mso": 3544
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 569,
+    "fields": {
+      "category": 2,
+      "mso": 3545
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 570,
+    "fields": {
+      "category": 2,
+      "mso": 3546
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 571,
+    "fields": {
+      "category": 2,
+      "mso": 3547
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 572,
+    "fields": {
+      "category": 2,
+      "mso": 3548
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 573,
+    "fields": {
+      "category": 2,
+      "mso": 3549
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 574,
+    "fields": {
+      "category": 2,
+      "mso": 3550
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 575,
+    "fields": {
+      "category": 2,
+      "mso": 3551
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 576,
+    "fields": {
+      "category": 2,
+      "mso": 3552
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 577,
+    "fields": {
+      "category": 2,
+      "mso": 3553
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 578,
+    "fields": {
+      "category": 2,
+      "mso": 3554
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 579,
+    "fields": {
+      "category": 2,
+      "mso": 3555
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 580,
+    "fields": {
+      "category": 2,
+      "mso": 3556
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 581,
+    "fields": {
+      "category": 2,
+      "mso": 3557
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 582,
+    "fields": {
+      "category": 2,
+      "mso": 3558
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 583,
+    "fields": {
+      "category": 2,
+      "mso": 3559
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 584,
+    "fields": {
+      "category": 2,
+      "mso": 3560
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 585,
+    "fields": {
+      "category": 2,
+      "mso": 3561
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 586,
+    "fields": {
+      "category": 2,
+      "mso": 3562
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 587,
+    "fields": {
+      "category": 2,
+      "mso": 3563
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 588,
+    "fields": {
+      "category": 2,
+      "mso": 3564
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 589,
+    "fields": {
+      "category": 2,
+      "mso": 3565
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 590,
+    "fields": {
+      "category": 2,
+      "mso": 3566
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 591,
+    "fields": {
+      "category": 2,
+      "mso": 3567
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 592,
+    "fields": {
+      "category": 2,
+      "mso": 3568
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 593,
+    "fields": {
+      "category": 2,
+      "mso": 3569
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 594,
+    "fields": {
+      "category": 2,
+      "mso": 3570
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 595,
+    "fields": {
+      "category": 2,
+      "mso": 3571
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 596,
+    "fields": {
+      "category": 2,
+      "mso": 3572
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 597,
+    "fields": {
+      "category": 2,
+      "mso": 3573
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 598,
+    "fields": {
+      "category": 2,
+      "mso": 3574
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 599,
+    "fields": {
+      "category": 2,
+      "mso": 3575
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 600,
+    "fields": {
+      "category": 2,
+      "mso": 3576
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 601,
+    "fields": {
+      "category": 2,
+      "mso": 3577
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 602,
+    "fields": {
+      "category": 2,
+      "mso": 3578
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 603,
+    "fields": {
+      "category": 2,
+      "mso": 3579
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 604,
+    "fields": {
+      "category": 2,
+      "mso": 3580
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 605,
+    "fields": {
+      "category": 2,
+      "mso": 3581
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 606,
+    "fields": {
+      "category": 2,
+      "mso": 3582
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 607,
+    "fields": {
+      "category": 2,
+      "mso": 3583
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 608,
+    "fields": {
+      "category": 2,
+      "mso": 3584
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 609,
+    "fields": {
+      "category": 2,
+      "mso": 3585
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 610,
+    "fields": {
+      "category": 2,
+      "mso": 3586
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 611,
+    "fields": {
+      "category": 2,
+      "mso": 3587
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 612,
+    "fields": {
+      "category": 2,
+      "mso": 3588
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 613,
+    "fields": {
+      "category": 2,
+      "mso": 3589
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 614,
+    "fields": {
+      "category": 2,
+      "mso": 3590
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 615,
+    "fields": {
+      "category": 2,
+      "mso": 3591
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 616,
+    "fields": {
+      "category": 2,
+      "mso": 3592
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 617,
+    "fields": {
+      "category": 2,
+      "mso": 3593
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 618,
+    "fields": {
+      "category": 2,
+      "mso": 3594
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 619,
+    "fields": {
+      "category": 2,
+      "mso": 3595
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 620,
+    "fields": {
+      "category": 2,
+      "mso": 3596
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 621,
+    "fields": {
+      "category": 2,
+      "mso": 3597
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 622,
+    "fields": {
+      "category": 2,
+      "mso": 3598
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 623,
+    "fields": {
+      "category": 2,
+      "mso": 3599
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 624,
+    "fields": {
+      "category": 2,
+      "mso": 3600
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 625,
+    "fields": {
+      "category": 2,
+      "mso": 3601
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 626,
+    "fields": {
+      "category": 2,
+      "mso": 3602
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 627,
+    "fields": {
+      "category": 2,
+      "mso": 3603
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 628,
+    "fields": {
+      "category": 2,
+      "mso": 3604
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 629,
+    "fields": {
+      "category": 2,
+      "mso": 3605
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 630,
+    "fields": {
+      "category": 2,
+      "mso": 3606
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 631,
+    "fields": {
+      "category": 2,
+      "mso": 3607
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 632,
+    "fields": {
+      "category": 2,
+      "mso": 3608
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 633,
+    "fields": {
+      "category": 2,
+      "mso": 3609
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 634,
+    "fields": {
+      "category": 2,
+      "mso": 3610
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 635,
+    "fields": {
+      "category": 2,
+      "mso": 3611
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 636,
+    "fields": {
+      "category": 2,
+      "mso": 3612
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 637,
+    "fields": {
+      "category": 2,
+      "mso": 3613
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 638,
+    "fields": {
+      "category": 2,
+      "mso": 3614
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 639,
+    "fields": {
+      "category": 2,
+      "mso": 3615
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 640,
+    "fields": {
+      "category": 2,
+      "mso": 3616
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 641,
+    "fields": {
+      "category": 2,
+      "mso": 3617
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 642,
+    "fields": {
+      "category": 2,
+      "mso": 3618
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 643,
+    "fields": {
+      "category": 2,
+      "mso": 3619
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 644,
+    "fields": {
+      "category": 2,
+      "mso": 3620
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 645,
+    "fields": {
+      "category": 2,
+      "mso": 3621
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 646,
+    "fields": {
+      "category": 2,
+      "mso": 3622
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 647,
+    "fields": {
+      "category": 2,
+      "mso": 3623
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 648,
+    "fields": {
+      "category": 2,
+      "mso": 3624
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 649,
+    "fields": {
+      "category": 2,
+      "mso": 3625
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 650,
+    "fields": {
+      "category": 2,
+      "mso": 3626
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 651,
+    "fields": {
+      "category": 2,
+      "mso": 3627
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 652,
+    "fields": {
+      "category": 2,
+      "mso": 3628
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 653,
+    "fields": {
+      "category": 2,
+      "mso": 3629
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 654,
+    "fields": {
+      "category": 2,
+      "mso": 3630
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 655,
+    "fields": {
+      "category": 2,
+      "mso": 3631
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 656,
+    "fields": {
+      "category": 2,
+      "mso": 3632
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 657,
+    "fields": {
+      "category": 2,
+      "mso": 3633
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 658,
+    "fields": {
+      "category": 2,
+      "mso": 3634
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 659,
+    "fields": {
+      "category": 2,
+      "mso": 3635
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 660,
+    "fields": {
+      "category": 2,
+      "mso": 3636
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 661,
+    "fields": {
+      "category": 2,
+      "mso": 3637
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 662,
+    "fields": {
+      "category": 2,
+      "mso": 3638
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 663,
+    "fields": {
+      "category": 2,
+      "mso": 3639
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 664,
+    "fields": {
+      "category": 2,
+      "mso": 3640
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 665,
+    "fields": {
+      "category": 2,
+      "mso": 3641
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 666,
+    "fields": {
+      "category": 2,
+      "mso": 3642
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 667,
+    "fields": {
+      "category": 2,
+      "mso": 3643
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 668,
+    "fields": {
+      "category": 2,
+      "mso": 3644
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 669,
+    "fields": {
+      "category": 2,
+      "mso": 3645
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 670,
+    "fields": {
+      "category": 2,
+      "mso": 3646
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 671,
+    "fields": {
+      "category": 2,
+      "mso": 3647
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 672,
+    "fields": {
+      "category": 2,
+      "mso": 3648
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 673,
+    "fields": {
+      "category": 2,
+      "mso": 3649
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 674,
+    "fields": {
+      "category": 2,
+      "mso": 3650
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 675,
+    "fields": {
+      "category": 2,
+      "mso": 3651
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 676,
+    "fields": {
+      "category": 2,
+      "mso": 3652
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 677,
+    "fields": {
+      "category": 2,
+      "mso": 3653
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 678,
+    "fields": {
+      "category": 2,
+      "mso": 3654
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 679,
+    "fields": {
+      "category": 2,
+      "mso": 3655
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 680,
+    "fields": {
+      "category": 2,
+      "mso": 3656
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 681,
+    "fields": {
+      "category": 2,
+      "mso": 3657
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 682,
+    "fields": {
+      "category": 2,
+      "mso": 3658
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 683,
+    "fields": {
+      "category": 2,
+      "mso": 3659
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 684,
+    "fields": {
+      "category": 2,
+      "mso": 3660
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 685,
+    "fields": {
+      "category": 2,
+      "mso": 3661
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 686,
+    "fields": {
+      "category": 2,
+      "mso": 3662
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 687,
+    "fields": {
+      "category": 2,
+      "mso": 3663
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 688,
+    "fields": {
+      "category": 2,
+      "mso": 3664
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 689,
+    "fields": {
+      "category": 2,
+      "mso": 3665
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 690,
+    "fields": {
+      "category": 2,
+      "mso": 3666
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 691,
+    "fields": {
+      "category": 2,
+      "mso": 3667
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 692,
+    "fields": {
+      "category": 2,
+      "mso": 3668
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 693,
+    "fields": {
+      "category": 2,
+      "mso": 3669
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 694,
+    "fields": {
+      "category": 2,
+      "mso": 3670
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 695,
+    "fields": {
+      "category": 2,
+      "mso": 3671
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 696,
+    "fields": {
+      "category": 2,
+      "mso": 3672
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 697,
+    "fields": {
+      "category": 2,
+      "mso": 3673
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 698,
+    "fields": {
+      "category": 2,
+      "mso": 3674
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 699,
+    "fields": {
+      "category": 2,
+      "mso": 3675
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 700,
+    "fields": {
+      "category": 2,
+      "mso": 3676
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 701,
+    "fields": {
+      "category": 2,
+      "mso": 3677
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 702,
+    "fields": {
+      "category": 2,
+      "mso": 3678
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 703,
+    "fields": {
+      "category": 2,
+      "mso": 3679
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 704,
+    "fields": {
+      "category": 2,
+      "mso": 3680
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 705,
+    "fields": {
+      "category": 2,
+      "mso": 3681
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 706,
+    "fields": {
+      "category": 2,
+      "mso": 3682
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 707,
+    "fields": {
+      "category": 2,
+      "mso": 3683
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 708,
+    "fields": {
+      "category": 2,
+      "mso": 3684
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 709,
+    "fields": {
+      "category": 2,
+      "mso": 3685
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 710,
+    "fields": {
+      "category": 2,
+      "mso": 3686
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 711,
+    "fields": {
+      "category": 2,
+      "mso": 3687
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 712,
+    "fields": {
+      "category": 2,
+      "mso": 3688
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 713,
+    "fields": {
+      "category": 2,
+      "mso": 3689
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 714,
+    "fields": {
+      "category": 2,
+      "mso": 3690
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 715,
+    "fields": {
+      "category": 2,
+      "mso": 3691
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 716,
+    "fields": {
+      "category": 2,
+      "mso": 3692
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 717,
+    "fields": {
+      "category": 2,
+      "mso": 3693
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 718,
+    "fields": {
+      "category": 2,
+      "mso": 3694
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 719,
+    "fields": {
+      "category": 2,
+      "mso": 3695
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 720,
+    "fields": {
+      "category": 2,
+      "mso": 3696
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 721,
+    "fields": {
+      "category": 2,
+      "mso": 3697
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 722,
+    "fields": {
+      "category": 2,
+      "mso": 3698
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 723,
+    "fields": {
+      "category": 2,
+      "mso": 3699
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 724,
+    "fields": {
+      "category": 2,
+      "mso": 3700
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 725,
+    "fields": {
+      "category": 2,
+      "mso": 3701
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 726,
+    "fields": {
+      "category": 2,
+      "mso": 3702
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 727,
+    "fields": {
+      "category": 2,
+      "mso": 3703
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 728,
+    "fields": {
+      "category": 2,
+      "mso": 3704
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 729,
+    "fields": {
+      "category": 2,
+      "mso": 3705
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 730,
+    "fields": {
+      "category": 2,
+      "mso": 3706
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 731,
+    "fields": {
+      "category": 2,
+      "mso": 3707
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 732,
+    "fields": {
+      "category": 2,
+      "mso": 3708
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 733,
+    "fields": {
+      "category": 2,
+      "mso": 3709
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 734,
+    "fields": {
+      "category": 2,
+      "mso": 3710
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 735,
+    "fields": {
+      "category": 2,
+      "mso": 3711
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 736,
+    "fields": {
+      "category": 2,
+      "mso": 3712
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 737,
+    "fields": {
+      "category": 2,
+      "mso": 3713
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 738,
+    "fields": {
+      "category": 2,
+      "mso": 3714
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 739,
+    "fields": {
+      "category": 2,
+      "mso": 3715
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 740,
+    "fields": {
+      "category": 2,
+      "mso": 3716
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 741,
+    "fields": {
+      "category": 2,
+      "mso": 3717
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 742,
+    "fields": {
+      "category": 2,
+      "mso": 3718
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 743,
+    "fields": {
+      "category": 2,
+      "mso": 3719
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 744,
+    "fields": {
+      "category": 2,
+      "mso": 3720
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 745,
+    "fields": {
+      "category": 2,
+      "mso": 3721
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 746,
+    "fields": {
+      "category": 2,
+      "mso": 3722
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 747,
+    "fields": {
+      "category": 2,
+      "mso": 3723
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 748,
+    "fields": {
+      "category": 2,
+      "mso": 3724
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 749,
+    "fields": {
+      "category": 2,
+      "mso": 3725
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 750,
+    "fields": {
+      "category": 2,
+      "mso": 3726
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 751,
+    "fields": {
+      "category": 2,
+      "mso": 3727
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 752,
+    "fields": {
+      "category": 2,
+      "mso": 3728
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 753,
+    "fields": {
+      "category": 2,
+      "mso": 3729
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 754,
+    "fields": {
+      "category": 2,
+      "mso": 3730
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 755,
+    "fields": {
+      "category": 2,
+      "mso": 3731
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 756,
+    "fields": {
+      "category": 2,
+      "mso": 3732
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 757,
+    "fields": {
+      "category": 2,
+      "mso": 3733
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 758,
+    "fields": {
+      "category": 2,
+      "mso": 3734
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 759,
+    "fields": {
+      "category": 2,
+      "mso": 3735
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 760,
+    "fields": {
+      "category": 2,
+      "mso": 3736
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 761,
+    "fields": {
+      "category": 2,
+      "mso": 3737
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 762,
+    "fields": {
+      "category": 2,
+      "mso": 3738
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 763,
+    "fields": {
+      "category": 2,
+      "mso": 3739
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 764,
+    "fields": {
+      "category": 2,
+      "mso": 3740
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 765,
+    "fields": {
+      "category": 2,
+      "mso": 3741
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 766,
+    "fields": {
+      "category": 2,
+      "mso": 3742
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 767,
+    "fields": {
+      "category": 2,
+      "mso": 3743
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 768,
+    "fields": {
+      "category": 2,
+      "mso": 3744
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 769,
+    "fields": {
+      "category": 2,
+      "mso": 3745
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 770,
+    "fields": {
+      "category": 2,
+      "mso": 3746
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 771,
+    "fields": {
+      "category": 2,
+      "mso": 3747
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 772,
+    "fields": {
+      "category": 2,
+      "mso": 3748
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 773,
+    "fields": {
+      "category": 2,
+      "mso": 3749
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 774,
+    "fields": {
+      "category": 2,
+      "mso": 3750
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 775,
+    "fields": {
+      "category": 2,
+      "mso": 3751
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 776,
+    "fields": {
+      "category": 2,
+      "mso": 3752
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 777,
+    "fields": {
+      "category": 2,
+      "mso": 3753
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 778,
+    "fields": {
+      "category": 2,
+      "mso": 3754
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 779,
+    "fields": {
+      "category": 2,
+      "mso": 3755
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 780,
+    "fields": {
+      "category": 2,
+      "mso": 3756
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 781,
+    "fields": {
+      "category": 2,
+      "mso": 3757
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 782,
+    "fields": {
+      "category": 2,
+      "mso": 3758
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 783,
+    "fields": {
+      "category": 2,
+      "mso": 3759
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 784,
+    "fields": {
+      "category": 2,
+      "mso": 3760
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 785,
+    "fields": {
+      "category": 2,
+      "mso": 3761
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 786,
+    "fields": {
+      "category": 2,
+      "mso": 3762
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 787,
+    "fields": {
+      "category": 2,
+      "mso": 3763
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 788,
+    "fields": {
+      "category": 2,
+      "mso": 3764
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 789,
+    "fields": {
+      "category": 2,
+      "mso": 3765
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 790,
+    "fields": {
+      "category": 2,
+      "mso": 3766
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 791,
+    "fields": {
+      "category": 2,
+      "mso": 3767
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 792,
+    "fields": {
+      "category": 2,
+      "mso": 3768
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 793,
+    "fields": {
+      "category": 2,
+      "mso": 3769
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 794,
+    "fields": {
+      "category": 2,
+      "mso": 3770
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 795,
+    "fields": {
+      "category": 2,
+      "mso": 3771
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 796,
+    "fields": {
+      "category": 2,
+      "mso": 3772
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 797,
+    "fields": {
+      "category": 2,
+      "mso": 3773
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 798,
+    "fields": {
+      "category": 2,
+      "mso": 3774
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 799,
+    "fields": {
+      "category": 2,
+      "mso": 3775
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 800,
+    "fields": {
+      "category": 2,
+      "mso": 3776
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 801,
+    "fields": {
+      "category": 2,
+      "mso": 3777
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 802,
+    "fields": {
+      "category": 2,
+      "mso": 3778
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 803,
+    "fields": {
+      "category": 2,
+      "mso": 3779
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 804,
+    "fields": {
+      "category": 2,
+      "mso": 3780
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 805,
+    "fields": {
+      "category": 2,
+      "mso": 3781
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 806,
+    "fields": {
+      "category": 2,
+      "mso": 3782
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 807,
+    "fields": {
+      "category": 2,
+      "mso": 3783
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 808,
+    "fields": {
+      "category": 2,
+      "mso": 3784
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 809,
+    "fields": {
+      "category": 2,
+      "mso": 3785
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 810,
+    "fields": {
+      "category": 2,
+      "mso": 3786
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 811,
+    "fields": {
+      "category": 2,
+      "mso": 3787
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 812,
+    "fields": {
+      "category": 2,
+      "mso": 3788
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 813,
+    "fields": {
+      "category": 2,
+      "mso": 3789
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 814,
+    "fields": {
+      "category": 2,
+      "mso": 3790
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 815,
+    "fields": {
+      "category": 2,
+      "mso": 3791
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 816,
+    "fields": {
+      "category": 2,
+      "mso": 3792
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 817,
+    "fields": {
+      "category": 2,
+      "mso": 3793
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 818,
+    "fields": {
+      "category": 2,
+      "mso": 3794
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 819,
+    "fields": {
+      "category": 2,
+      "mso": 3795
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 820,
+    "fields": {
+      "category": 2,
+      "mso": 3796
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 821,
+    "fields": {
+      "category": 2,
+      "mso": 3797
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 822,
+    "fields": {
+      "category": 2,
+      "mso": 3798
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 823,
+    "fields": {
+      "category": 2,
+      "mso": 3799
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 824,
+    "fields": {
+      "category": 2,
+      "mso": 3800
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 825,
+    "fields": {
+      "category": 2,
+      "mso": 3801
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 826,
+    "fields": {
+      "category": 2,
+      "mso": 3802
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 827,
+    "fields": {
+      "category": 2,
+      "mso": 3803
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 828,
+    "fields": {
+      "category": 2,
+      "mso": 3804
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 829,
+    "fields": {
+      "category": 2,
+      "mso": 3805
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 830,
+    "fields": {
+      "category": 2,
+      "mso": 3806
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 831,
+    "fields": {
+      "category": 2,
+      "mso": 3807
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 832,
+    "fields": {
+      "category": 2,
+      "mso": 3808
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 833,
+    "fields": {
+      "category": 2,
+      "mso": 3809
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 834,
+    "fields": {
+      "category": 2,
+      "mso": 3810
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 835,
+    "fields": {
+      "category": 2,
+      "mso": 3811
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 836,
+    "fields": {
+      "category": 2,
+      "mso": 3812
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 837,
+    "fields": {
+      "category": 2,
+      "mso": 3813
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 838,
+    "fields": {
+      "category": 2,
+      "mso": 3814
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 839,
+    "fields": {
+      "category": 2,
+      "mso": 3815
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 840,
+    "fields": {
+      "category": 2,
+      "mso": 3816
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 841,
+    "fields": {
+      "category": 2,
+      "mso": 3817
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 842,
+    "fields": {
+      "category": 2,
+      "mso": 3818
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 843,
+    "fields": {
+      "category": 2,
+      "mso": 3819
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 844,
+    "fields": {
+      "category": 2,
+      "mso": 3820
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 845,
+    "fields": {
+      "category": 2,
+      "mso": 3821
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 846,
+    "fields": {
+      "category": 2,
+      "mso": 3822
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 847,
+    "fields": {
+      "category": 2,
+      "mso": 3823
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 848,
+    "fields": {
+      "category": 2,
+      "mso": 3824
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 849,
+    "fields": {
+      "category": 2,
+      "mso": 3825
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 850,
+    "fields": {
+      "category": 2,
+      "mso": 3826
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 851,
+    "fields": {
+      "category": 2,
+      "mso": 3827
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 852,
+    "fields": {
+      "category": 2,
+      "mso": 3828
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 853,
+    "fields": {
+      "category": 2,
+      "mso": 3829
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 854,
+    "fields": {
+      "category": 2,
+      "mso": 3830
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 855,
+    "fields": {
+      "category": 2,
+      "mso": 3831
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 856,
+    "fields": {
+      "category": 2,
+      "mso": 3832
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 857,
+    "fields": {
+      "category": 2,
+      "mso": 3833
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 858,
+    "fields": {
+      "category": 2,
+      "mso": 3834
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 859,
+    "fields": {
+      "category": 2,
+      "mso": 3835
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 860,
+    "fields": {
+      "category": 2,
+      "mso": 3836
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 861,
+    "fields": {
+      "category": 2,
+      "mso": 3837
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 862,
+    "fields": {
+      "category": 2,
+      "mso": 3838
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 863,
+    "fields": {
+      "category": 2,
+      "mso": 3839
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 864,
+    "fields": {
+      "category": 2,
+      "mso": 3840
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 865,
+    "fields": {
+      "category": 2,
+      "mso": 3841
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 866,
+    "fields": {
+      "category": 2,
+      "mso": 3842
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 867,
+    "fields": {
+      "category": 2,
+      "mso": 3843
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 868,
+    "fields": {
+      "category": 2,
+      "mso": 3844
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 869,
+    "fields": {
+      "category": 2,
+      "mso": 3845
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 870,
+    "fields": {
+      "category": 2,
+      "mso": 3846
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 871,
+    "fields": {
+      "category": 2,
+      "mso": 3847
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 872,
+    "fields": {
+      "category": 2,
+      "mso": 3848
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 873,
+    "fields": {
+      "category": 2,
+      "mso": 3849
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 874,
+    "fields": {
+      "category": 2,
+      "mso": 3850
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 875,
+    "fields": {
+      "category": 2,
+      "mso": 3851
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 876,
+    "fields": {
+      "category": 2,
+      "mso": 3852
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 877,
+    "fields": {
+      "category": 2,
+      "mso": 3853
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 878,
+    "fields": {
+      "category": 2,
+      "mso": 3854
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 879,
+    "fields": {
+      "category": 2,
+      "mso": 3855
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 880,
+    "fields": {
+      "category": 2,
+      "mso": 3856
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 881,
+    "fields": {
+      "category": 2,
+      "mso": 3857
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 882,
+    "fields": {
+      "category": 2,
+      "mso": 3858
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 883,
+    "fields": {
+      "category": 2,
+      "mso": 3859
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 884,
+    "fields": {
+      "category": 2,
+      "mso": 3860
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 885,
+    "fields": {
+      "category": 2,
+      "mso": 3861
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 886,
+    "fields": {
+      "category": 2,
+      "mso": 3862
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 887,
+    "fields": {
+      "category": 2,
+      "mso": 3863
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 888,
+    "fields": {
+      "category": 2,
+      "mso": 3864
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 889,
+    "fields": {
+      "category": 2,
+      "mso": 3865
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 890,
+    "fields": {
+      "category": 2,
+      "mso": 3866
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 891,
+    "fields": {
+      "category": 2,
+      "mso": 3867
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 892,
+    "fields": {
+      "category": 2,
+      "mso": 3868
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 893,
+    "fields": {
+      "category": 2,
+      "mso": 3869
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 894,
+    "fields": {
+      "category": 2,
+      "mso": 3870
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 895,
+    "fields": {
+      "category": 2,
+      "mso": 3871
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 896,
+    "fields": {
+      "category": 2,
+      "mso": 3872
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 897,
+    "fields": {
+      "category": 2,
+      "mso": 3873
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 898,
+    "fields": {
+      "category": 2,
+      "mso": 3874
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 899,
+    "fields": {
+      "category": 2,
+      "mso": 3875
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 900,
+    "fields": {
+      "category": 2,
+      "mso": 3876
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 901,
+    "fields": {
+      "category": 2,
+      "mso": 3877
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 902,
+    "fields": {
+      "category": 2,
+      "mso": 3878
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 903,
+    "fields": {
+      "category": 2,
+      "mso": 3879
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 904,
+    "fields": {
+      "category": 2,
+      "mso": 3880
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 905,
+    "fields": {
+      "category": 2,
+      "mso": 3881
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 906,
+    "fields": {
+      "category": 2,
+      "mso": 3882
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 907,
+    "fields": {
+      "category": 2,
+      "mso": 3883
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 908,
+    "fields": {
+      "category": 2,
+      "mso": 3884
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 909,
+    "fields": {
+      "category": 2,
+      "mso": 3885
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 910,
+    "fields": {
+      "category": 2,
+      "mso": 3886
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 911,
+    "fields": {
+      "category": 2,
+      "mso": 3887
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 912,
+    "fields": {
+      "category": 2,
+      "mso": 3888
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 913,
+    "fields": {
+      "category": 2,
+      "mso": 3889
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 914,
+    "fields": {
+      "category": 2,
+      "mso": 3890
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 915,
+    "fields": {
+      "category": 2,
+      "mso": 3891
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 916,
+    "fields": {
+      "category": 2,
+      "mso": 3892
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 917,
+    "fields": {
+      "category": 2,
+      "mso": 3893
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 918,
+    "fields": {
+      "category": 2,
+      "mso": 3894
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 919,
+    "fields": {
+      "category": 2,
+      "mso": 3895
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 920,
+    "fields": {
+      "category": 2,
+      "mso": 3896
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 921,
+    "fields": {
+      "category": 2,
+      "mso": 3897
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 922,
+    "fields": {
+      "category": 2,
+      "mso": 3898
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 923,
+    "fields": {
+      "category": 2,
+      "mso": 3899
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 924,
+    "fields": {
+      "category": 2,
+      "mso": 3900
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 925,
+    "fields": {
+      "category": 2,
+      "mso": 3901
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 926,
+    "fields": {
+      "category": 2,
+      "mso": 3902
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 927,
+    "fields": {
+      "category": 2,
+      "mso": 3903
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 928,
+    "fields": {
+      "category": 2,
+      "mso": 3904
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 929,
+    "fields": {
+      "category": 2,
+      "mso": 3905
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 930,
+    "fields": {
+      "category": 2,
+      "mso": 3906
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 931,
+    "fields": {
+      "category": 2,
+      "mso": 3907
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 932,
+    "fields": {
+      "category": 2,
+      "mso": 3908
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 933,
+    "fields": {
+      "category": 2,
+      "mso": 3909
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 934,
+    "fields": {
+      "category": 2,
+      "mso": 3910
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 935,
+    "fields": {
+      "category": 2,
+      "mso": 3911
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 936,
+    "fields": {
+      "category": 2,
+      "mso": 3912
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 937,
+    "fields": {
+      "category": 2,
+      "mso": 3913
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 938,
+    "fields": {
+      "category": 2,
+      "mso": 3914
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 939,
+    "fields": {
+      "category": 2,
+      "mso": 3915
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 940,
+    "fields": {
+      "category": 2,
+      "mso": 3916
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 941,
+    "fields": {
+      "category": 2,
+      "mso": 3917
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 942,
+    "fields": {
+      "category": 2,
+      "mso": 3918
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 943,
+    "fields": {
+      "category": 2,
+      "mso": 3919
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 944,
+    "fields": {
+      "category": 2,
+      "mso": 3920
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 945,
+    "fields": {
+      "category": 2,
+      "mso": 3921
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 946,
+    "fields": {
+      "category": 2,
+      "mso": 3922
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 947,
+    "fields": {
+      "category": 2,
+      "mso": 3923
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 948,
+    "fields": {
+      "category": 2,
+      "mso": 3924
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 949,
+    "fields": {
+      "category": 2,
+      "mso": 3925
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 950,
+    "fields": {
+      "category": 2,
+      "mso": 3926
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 951,
+    "fields": {
+      "category": 2,
+      "mso": 3927
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 952,
+    "fields": {
+      "category": 2,
+      "mso": 3928
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 953,
+    "fields": {
+      "category": 2,
+      "mso": 3929
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 954,
+    "fields": {
+      "category": 2,
+      "mso": 3930
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 955,
+    "fields": {
+      "category": 2,
+      "mso": 3931
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 956,
+    "fields": {
+      "category": 2,
+      "mso": 3932
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 957,
+    "fields": {
+      "category": 2,
+      "mso": 3933
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 958,
+    "fields": {
+      "category": 2,
+      "mso": 3934
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 959,
+    "fields": {
+      "category": 2,
+      "mso": 3935
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 960,
+    "fields": {
+      "category": 2,
+      "mso": 3936
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 961,
+    "fields": {
+      "category": 2,
+      "mso": 3937
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 962,
+    "fields": {
+      "category": 2,
+      "mso": 3938
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 963,
+    "fields": {
+      "category": 2,
+      "mso": 3939
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 964,
+    "fields": {
+      "category": 2,
+      "mso": 3940
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 965,
+    "fields": {
+      "category": 2,
+      "mso": 3941
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 966,
+    "fields": {
+      "category": 2,
+      "mso": 3942
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 967,
+    "fields": {
+      "category": 2,
+      "mso": 3943
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 968,
+    "fields": {
+      "category": 2,
+      "mso": 3944
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 969,
+    "fields": {
+      "category": 2,
+      "mso": 3945
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 970,
+    "fields": {
+      "category": 2,
+      "mso": 3946
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 971,
+    "fields": {
+      "category": 2,
+      "mso": 3947
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 972,
+    "fields": {
+      "category": 2,
+      "mso": 3948
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 973,
+    "fields": {
+      "category": 2,
+      "mso": 3949
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 974,
+    "fields": {
+      "category": 2,
+      "mso": 3950
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 975,
+    "fields": {
+      "category": 2,
+      "mso": 3951
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 976,
+    "fields": {
+      "category": 2,
+      "mso": 3952
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 977,
+    "fields": {
+      "category": 2,
+      "mso": 3953
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 978,
+    "fields": {
+      "category": 2,
+      "mso": 3954
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 979,
+    "fields": {
+      "category": 2,
+      "mso": 3955
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 980,
+    "fields": {
+      "category": 2,
+      "mso": 3956
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 981,
+    "fields": {
+      "category": 2,
+      "mso": 3957
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 982,
+    "fields": {
+      "category": 2,
+      "mso": 3958
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 983,
+    "fields": {
+      "category": 2,
+      "mso": 3959
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 984,
+    "fields": {
+      "category": 2,
+      "mso": 3960
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 985,
+    "fields": {
+      "category": 2,
+      "mso": 3961
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 986,
+    "fields": {
+      "category": 2,
+      "mso": 3962
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 987,
+    "fields": {
+      "category": 2,
+      "mso": 3963
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 988,
+    "fields": {
+      "category": 2,
+      "mso": 3964
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 989,
+    "fields": {
+      "category": 2,
+      "mso": 3965
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 990,
+    "fields": {
+      "category": 2,
+      "mso": 3966
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 991,
+    "fields": {
+      "category": 2,
+      "mso": 3967
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 992,
+    "fields": {
+      "category": 2,
+      "mso": 3968
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 993,
+    "fields": {
+      "category": 2,
+      "mso": 3969
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 994,
+    "fields": {
+      "category": 2,
+      "mso": 3970
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 995,
+    "fields": {
+      "category": 2,
+      "mso": 3971
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 996,
+    "fields": {
+      "category": 2,
+      "mso": 3972
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 997,
+    "fields": {
+      "category": 2,
+      "mso": 3973
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 998,
+    "fields": {
+      "category": 2,
+      "mso": 3974
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 999,
+    "fields": {
+      "category": 2,
+      "mso": 3975
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1000,
+    "fields": {
+      "category": 2,
+      "mso": 3976
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1001,
+    "fields": {
+      "category": 2,
+      "mso": 3977
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1002,
+    "fields": {
+      "category": 2,
+      "mso": 3978
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1003,
+    "fields": {
+      "category": 2,
+      "mso": 3979
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1004,
+    "fields": {
+      "category": 2,
+      "mso": 3980
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1005,
+    "fields": {
+      "category": 2,
+      "mso": 3981
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1006,
+    "fields": {
+      "category": 2,
+      "mso": 3982
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1007,
+    "fields": {
+      "category": 2,
+      "mso": 3983
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1008,
+    "fields": {
+      "category": 2,
+      "mso": 3984
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1009,
+    "fields": {
+      "category": 2,
+      "mso": 3985
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1010,
+    "fields": {
+      "category": 2,
+      "mso": 3986
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1011,
+    "fields": {
+      "category": 2,
+      "mso": 3987
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1012,
+    "fields": {
+      "category": 2,
+      "mso": 3988
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1013,
+    "fields": {
+      "category": 2,
+      "mso": 3989
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1014,
+    "fields": {
+      "category": 2,
+      "mso": 3990
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1015,
+    "fields": {
+      "category": 2,
+      "mso": 3991
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1016,
+    "fields": {
+      "category": 2,
+      "mso": 3992
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1017,
+    "fields": {
+      "category": 2,
+      "mso": 3993
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1018,
+    "fields": {
+      "category": 2,
+      "mso": 3994
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1019,
+    "fields": {
+      "category": 2,
+      "mso": 3995
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1020,
+    "fields": {
+      "category": 2,
+      "mso": 3996
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1021,
+    "fields": {
+      "category": 2,
+      "mso": 3997
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1022,
+    "fields": {
+      "category": 2,
+      "mso": 3998
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1023,
+    "fields": {
+      "category": 2,
+      "mso": 3999
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1024,
+    "fields": {
+      "category": 3,
+      "mso": 4119
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1025,
+    "fields": {
+      "category": 3,
+      "mso": 5047
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1026,
+    "fields": {
+      "category": 3,
+      "mso": 5122
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1027,
+    "fields": {
+      "category": 3,
+      "mso": 5292
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1028,
+    "fields": {
+      "category": 3,
+      "mso": 5295
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1029,
+    "fields": {
+      "category": 3,
+      "mso": 5912
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1030,
+    "fields": {
+      "category": 3,
+      "mso": 5975
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1031,
+    "fields": {
+      "category": 3,
+      "mso": 5976
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1032,
+    "fields": {
+      "category": 3,
+      "mso": 5977
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1033,
+    "fields": {
+      "category": 3,
+      "mso": 7230
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1034,
+    "fields": {
+      "category": 3,
+      "mso": 7297
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1035,
+    "fields": {
+      "category": 3,
+      "mso": 7298
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1036,
+    "fields": {
+      "category": 3,
+      "mso": 8011
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1037,
+    "fields": {
+      "category": 3,
+      "mso": 8021
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1038,
+    "fields": {
+      "category": 3,
+      "mso": 8031
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1039,
+    "fields": {
+      "category": 3,
+      "mso": 8049
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1040,
+    "fields": {
+      "category": 3,
+      "mso": 8050
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1041,
+    "fields": {
+      "category": 3,
+      "mso": 8062
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1042,
+    "fields": {
+      "category": 3,
+      "mso": 8071
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1043,
+    "fields": {
+      "category": 3,
+      "mso": 8099
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1044,
+    "fields": {
+      "category": 3,
+      "mso": 8041
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1045,
+    "fields": {
+      "category": 3,
+      "mso": 8042
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1046,
+    "fields": {
+      "category": 3,
+      "mso": 8043
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1047,
+    "fields": {
+      "category": 4,
+      "mso": 5733
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1048,
+    "fields": {
+      "category": 4,
+      "mso": 5735
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1049,
+    "fields": {
+      "category": 4,
+      "mso": 5941
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1050,
+    "fields": {
+      "category": 4,
+      "mso": 7221
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1051,
+    "fields": {
+      "category": 4,
+      "mso": 7333
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1052,
+    "fields": {
+      "category": 4,
+      "mso": 7395
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1053,
+    "fields": {
+      "category": 4,
+      "mso": 7929
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1054,
+    "fields": {
+      "category": 4,
+      "mso": 7932
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1055,
+    "fields": {
+      "category": 4,
+      "mso": 7933
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1056,
+    "fields": {
+      "category": 4,
+      "mso": 7941
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1057,
+    "fields": {
+      "category": 4,
+      "mso": 8664
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1058,
+    "fields": {
+      "category": 4,
+      "mso": 5970
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1059,
+    "fields": {
+      "category": 4,
+      "mso": 5971
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1060,
+    "fields": {
+      "category": 4,
+      "mso": 5972
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1061,
+    "fields": {
+      "category": 4,
+      "mso": 5973
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1062,
+    "fields": {
+      "category": 4,
+      "mso": 5945
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1063,
+    "fields": {
+      "category": 4,
+      "mso": 5946
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1064,
+    "fields": {
+      "category": 4,
+      "mso": 5947
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1065,
+    "fields": {
+      "category": 4,
+      "mso": 5815
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1066,
+    "fields": {
+      "category": 4,
+      "mso": 5816
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1067,
+    "fields": {
+      "category": 4,
+      "mso": 5817
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1068,
+    "fields": {
+      "category": 4,
+      "mso": 5818
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1069,
+    "fields": {
+      "category": 4,
+      "mso": 7911
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1070,
+    "fields": {
+      "category": 4,
+      "mso": 7912
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1071,
+    "fields": {
+      "category": 4,
+      "mso": 7913
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1072,
+    "fields": {
+      "category": 4,
+      "mso": 7914
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1073,
+    "fields": {
+      "category": 4,
+      "mso": 7915
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1074,
+    "fields": {
+      "category": 4,
+      "mso": 7916
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1075,
+    "fields": {
+      "category": 4,
+      "mso": 7917
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1076,
+    "fields": {
+      "category": 4,
+      "mso": 7918
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1077,
+    "fields": {
+      "category": 4,
+      "mso": 7919
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1078,
+    "fields": {
+      "category": 4,
+      "mso": 7920
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1079,
+    "fields": {
+      "category": 4,
+      "mso": 7921
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1080,
+    "fields": {
+      "category": 4,
+      "mso": 7922
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1081,
+    "fields": {
+      "category": 4,
+      "mso": 7991
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1082,
+    "fields": {
+      "category": 4,
+      "mso": 7992
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1083,
+    "fields": {
+      "category": 4,
+      "mso": 7993
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1084,
+    "fields": {
+      "category": 4,
+      "mso": 7994
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1085,
+    "fields": {
+      "category": 4,
+      "mso": 7995
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1086,
+    "fields": {
+      "category": 4,
+      "mso": 7996
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1087,
+    "fields": {
+      "category": 4,
+      "mso": 7997
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1088,
+    "fields": {
+      "category": 4,
+      "mso": 7998
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1089,
+    "fields": {
+      "category": 4,
+      "mso": 7999
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1090,
+    "fields": {
+      "category": 5,
+      "mso": 5811
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1091,
+    "fields": {
+      "category": 5,
+      "mso": 5812
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1092,
+    "fields": {
+      "category": 5,
+      "mso": 5813
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1093,
+    "fields": {
+      "category": 5,
+      "mso": 5814
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1094,
+    "fields": {
+      "category": 6,
+      "mso": 297
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1095,
+    "fields": {
+      "category": 6,
+      "mso": 5298
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1096,
+    "fields": {
+      "category": 6,
+      "mso": 5300
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1097,
+    "fields": {
+      "category": 6,
+      "mso": 5311
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1098,
+    "fields": {
+      "category": 6,
+      "mso": 5331
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1099,
+    "fields": {
+      "category": 6,
+      "mso": 5399
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1100,
+    "fields": {
+      "category": 6,
+      "mso": 5411
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1101,
+    "fields": {
+      "category": 6,
+      "mso": 5412
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1102,
+    "fields": {
+      "category": 6,
+      "mso": 5422
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1103,
+    "fields": {
+      "category": 6,
+      "mso": 5441
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1104,
+    "fields": {
+      "category": 6,
+      "mso": 5451
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1105,
+    "fields": {
+      "category": 6,
+      "mso": 5462
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1106,
+    "fields": {
+      "category": 6,
+      "mso": 5499
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1107,
+    "fields": {
+      "category": 6,
+      "mso": 5715
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1108,
+    "fields": {
+      "category": 6,
+      "mso": 5921
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1109,
+    "fields": {
+      "category": 7,
+      "mso": 7829
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1110,
+    "fields": {
+      "category": 7,
+      "mso": 7832
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1111,
+    "fields": {
+      "category": 7,
+      "mso": 7841
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1112,
+    "fields": {
+      "category": 8,
+      "mso": 5172
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1113,
+    "fields": {
+      "category": 8,
+      "mso": 5511
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1114,
+    "fields": {
+      "category": 8,
+      "mso": 5541
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1115,
+    "fields": {
+      "category": 8,
+      "mso": 5542
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1116,
+    "fields": {
+      "category": 8,
+      "mso": 5983
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1117,
+    "fields": {
+      "category": 8,
+      "mso": 7511
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1118,
+    "fields": {
+      "category": 8,
+      "mso": 7523
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1119,
+    "fields": {
+      "category": 8,
+      "mso": 7531
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1120,
+    "fields": {
+      "category": 8,
+      "mso": 7534
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1121,
+    "fields": {
+      "category": 8,
+      "mso": 7535
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1122,
+    "fields": {
+      "category": 8,
+      "mso": 7538
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1123,
+    "fields": {
+      "category": 8,
+      "mso": 7542
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1124,
+    "fields": {
+      "category": 8,
+      "mso": 7549
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1125,
+    "fields": {
+      "category": 8,
+      "mso": 5531
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1126,
+    "fields": {
+      "category": 8,
+      "mso": 5532
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1127,
+    "fields": {
+      "category": 8,
+      "mso": 5533
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1128,
+    "fields": {
+      "category": 9,
+      "mso": 5131
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1129,
+    "fields": {
+      "category": 9,
+      "mso": 5137
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1130,
+    "fields": {
+      "category": 9,
+      "mso": 5139
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1131,
+    "fields": {
+      "category": 9,
+      "mso": 5611
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1132,
+    "fields": {
+      "category": 9,
+      "mso": 5621
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1133,
+    "fields": {
+      "category": 9,
+      "mso": 5631
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1134,
+    "fields": {
+      "category": 9,
+      "mso": 5641
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1135,
+    "fields": {
+      "category": 9,
+      "mso": 5651
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1136,
+    "fields": {
+      "category": 9,
+      "mso": 5655
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1137,
+    "fields": {
+      "category": 9,
+      "mso": 5661
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1138,
+    "fields": {
+      "category": 9,
+      "mso": 5681
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1139,
+    "fields": {
+      "category": 9,
+      "mso": 5691
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1140,
+    "fields": {
+      "category": 9,
+      "mso": 5697
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1141,
+    "fields": {
+      "category": 9,
+      "mso": 5698
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1142,
+    "fields": {
+      "category": 9,
+      "mso": 5699
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1143,
+    "fields": {
+      "category": 9,
+      "mso": 5931
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1144,
+    "fields": {
+      "category": 9,
+      "mso": 5948
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1145,
+    "fields": {
+      "category": 9,
+      "mso": 5949
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1146,
+    "fields": {
+      "category": 9,
+      "mso": 7251
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1147,
+    "fields": {
+      "category": 9,
+      "mso": 7296
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1148,
+    "fields": {
+      "category": 10,
+      "mso": 4121
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1149,
+    "fields": {
+      "category": 11,
+      "mso": 742
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1150,
+    "fields": {
+      "category": 11,
+      "mso": 5995
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1151,
+    "fields": {
+      "category": 12,
+      "mso": 2741
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1152,
+    "fields": {
+      "category": 12,
+      "mso": 5111
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1153,
+    "fields": {
+      "category": 12,
+      "mso": 5192
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1154,
+    "fields": {
+      "category": 12,
+      "mso": 5942
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1155,
+    "fields": {
+      "category": 12,
+      "mso": 5994
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1156,
+    "fields": {
+      "category": 13,
+      "mso": 5992
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1157,
+    "fields": {
+      "category": 13,
+      "mso": 5193
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1158,
+    "fields": {
+      "category": 14,
+      "mso": 4814
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1159,
+    "fields": {
+      "category": 15,
+      "mso": 4829
+    }
+  },
+  {
+    "model": "monobank.categorymso",
+    "pk": 1160,
+    "fields": {
+      "category": 16,
+      "mso": 4900
+    }
+  }
+]

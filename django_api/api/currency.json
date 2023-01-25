@@ -1,0 +1,52 @@
+[
+  {
+    "model": "monobank.currency",
+    "pk": 1,
+    "fields": {
+      "code": 978,
+      "name": "EUR",
+      "flag": "\ud83c\uddea\ud83c\uddfa",
+      "symbol": "\u20ac"
+    }
+  },
+  {
+    "model": "monobank.currency",
+    "pk": 2,
+    "fields": {
+      "code": 840,
+      "name": "USD",
+      "flag": "\ud83c\uddfa\ud83c\uddf8",
+      "symbol": "$"
+    }
+  },
+  {
+    "model": "monobank.currency",
+    "pk": 3,
+    "fields": {
+      "code": 704,
+      "name": "VND",
+      "flag": "\ud83c\uddfb\ud83c\uddf3",
+      "symbol": "\u20ab"
+    }
+  },
+  {
+    "model": "monobank.currency",
+    "pk": 4,
+    "fields": {
+      "code": 764,
+      "name": "THB",
+      "flag": "\ud83c\uddf9\ud83c\udded",
+      "symbol": "\u0e3f"
+    }
+  },
+  {
+    "model": "monobank.currency",
+    "pk": 5,
+    "fields": {
+      "code": 980,
+      "name": "UAH",
+      "flag": "\ud83c\uddfa\ud83c\udde6",
+      "symbol": "\u20b4"
+    }
+  }
+]

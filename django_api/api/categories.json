@@ -1,0 +1,130 @@
+[
+  {
+    "model": "monobank.category",
+    "pk": 1,
+    "fields": {
+      "name": "\u0406\u043d\u0448\u0435",
+      "symbol": "\u2753"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 2,
+    "fields": {
+      "name": "\u041f\u043e\u0434\u043e\u0440\u043e\u0436\u0456",
+      "symbol": "\u2708\ufe0f"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 3,
+    "fields": {
+      "name": "\u041a\u0440\u0430\u0441\u0430 \u0442\u0430 \u043c\u0435\u0434\u0438\u0446\u0438\u043d\u0430",
+      "symbol": "\ud83d\udc8a"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 4,
+    "fields": {
+      "name": "\u0420\u043e\u0437\u0432\u0430\u0433\u0438 \u0442\u0430 \u0441\u043f\u043e\u0440\u0442",
+      "symbol": "\ud83c\udfd3"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 5,
+    "fields": {
+      "name": "\u041a\u0430\u0444\u0435 \u0442\u0430 \u0440\u0435\u0441\u0442\u043e\u0440\u0430\u043d\u0438",
+      "symbol": "\ud83c\udf74"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 6,
+    "fields": {
+      "name": "\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u0438 \u0439 \u0441\u0443\u043f\u0435\u0440\u043c\u0430\u0440\u043a\u0435\u0442\u0438",
+      "symbol": "\ud83d\uded2"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 7,
+    "fields": {
+      "name": "\u041a\u0456\u043d\u043e",
+      "symbol": "\ud83c\udf7f"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 8,
+    "fields": {
+      "name": "\u0410\u0432\u0442\u043e \u0442\u0430 \u0410\u0417\u0421",
+      "symbol": "\u26fd"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 9,
+    "fields": {
+      "name": "\u041e\u0434\u044f\u0433 \u0456 \u0432\u0437\u0443\u0442\u0442\u044f",
+      "symbol": "\ud83d\udc56"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 10,
+    "fields": {
+      "name": "\u0422\u0430\u043a\u0441\u0456",
+      "symbol": "\ud83d\ude95"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 11,
+    "fields": {
+      "name": "\u0422\u0432\u0430\u0440\u0438\u043d\u0438",
+      "symbol": "\ud83d\udc08"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 12,
+    "fields": {
+      "name": "\u041a\u043d\u0438\u0433\u0438",
+      "symbol": "\ud83d\udcda"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 13,
+    "fields": {
+      "name": "\u041a\u0432\u0456\u0442\u0438",
+      "symbol": "\ud83d\udc90"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 14,
+    "fields": {
+      "name": "\u041f\u043e\u043f\u043e\u0432\u043d\u0435\u043d\u043d\u044f \u043c\u043e\u0431\u0456\u043b\u044c\u043d\u043e\u0433\u043e",
+      "symbol": "\ud83d\udcde"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 15,
+    "fields": {
+      "name": "\u0413\u0440\u043e\u0448\u043e\u0432\u0456 \u043f\u0435\u0440\u0435\u043a\u0430\u0437\u0438",
+      "symbol": "\ud83d\udcb0"
+    }
+  },
+  {
+    "model": "monobank.category",
+    "pk": 16,
+    "fields": {
+      "name": "\u041a\u043e\u043c\u0443\u043d\u0430\u043b\u044c\u043d\u0456 \u043f\u043e\u0441\u043b\u0443\u0433\u0438",
+      "symbol": "\ud83d\udeb0"
+    }
+  }
+]

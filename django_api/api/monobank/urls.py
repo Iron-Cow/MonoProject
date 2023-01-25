@@ -1,8 +1,12 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from .views import MonoUser
+from .views import CategoryViewSet
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register("categories", CategoryViewSet, basename="categories")
 
 urlpatterns = [
-    path("user", MonoUser.as_view())
+    path('', include(router.urls)),
 ]

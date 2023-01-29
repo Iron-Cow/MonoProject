@@ -20,17 +20,21 @@ class IsOwnerOrAdminUser(BasePermission):
         """
         Return `True` if permission is granted, `False` otherwise.
         """
-        return bool(request.user and obj.tg_id == request.user.tg_id or request.user.is_superuser)
+        return bool(
+            request.user
+            and obj.tg_id == request.user.tg_id
+            or request.user.is_superuser
+        )
 
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    lookup_field = 'tg_id'
+    lookup_field = "tg_id"
 
     def get_permissions(self):
         permission = IsAdminUser()
-        if self.action in ('partial_update', 'update', 'retrieve'):
+        if self.action in ("partial_update", "update", "retrieve"):
             permission = IsOwnerOrAdminUser()
 
         return [permission]
@@ -38,8 +42,10 @@ class UserViewSet(ModelViewSet):
     def update(self, request, *args, **kwargs):
         if self.action == "partial_update":
             return super().update(request, *args, **kwargs)
-            return Response({'details': 'No PUT updates allowed.'},
-                        status=status.HTTP_405_METHOD_NOT_ALLOWED)
+            return Response(
+                {"details": "No PUT updates allowed."},
+                status=status.HTTP_405_METHOD_NOT_ALLOWED,
+            )
 
     # def list(self, request, *args, **kwargs):
     #     queryset = self.filter_queryset(self.get_queryset())
@@ -73,15 +79,18 @@ class UserView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"status": "ok", "data": serializer.data}, status=status.HTTP_201_CREATED
+                {"status": "ok", "data": serializer.data},
+                status=status.HTTP_201_CREATED,
             )
-        elif User.objects.get(tg_id=request.data['tg_id']):
+        elif User.objects.get(tg_id=request.data["tg_id"]):
             return Response(
-                {"status": "fail", "data": "user exists"}, status=status.HTTP_400_BAD_REQUEST
+                {"status": "fail", "data": "user exists"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
         else:
             return Response(
-                {"status": "fail", "data": "not valid"}, status=status.HTTP_400_BAD_REQUEST
+                {"status": "fail", "data": "not valid"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
     def post(self, request):

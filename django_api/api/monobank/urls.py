@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.urls import path, include
 from .views import CategoryViewSet, MonoAccountViewSet
@@ -9,5 +8,5 @@ router.register("categories", CategoryViewSet, basename="categories")
 router.register("monoaccounts", MonoAccountViewSet, basename="monoaccounts")
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path("", include(router.urls)),
 ]

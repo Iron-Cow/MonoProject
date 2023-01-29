@@ -4,11 +4,10 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 
-
 class CategoryViewSet(ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-    http_method_names = ['get']
+    http_method_names = ["get"]
 
     def get_permissions(self):
         permission = IsAuthenticated()
@@ -18,7 +17,7 @@ class CategoryViewSet(ModelViewSet):
 class MonoAccountViewSet(ModelViewSet):
     serializer_class = MonoAccountSerializer
     queryset = MonoAccount.objects.all()
-    http_method_names = ['get']
+    http_method_names = ["get"]
 
     def get_permissions(self):
         permission = IsAdminUser()

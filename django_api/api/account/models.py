@@ -9,40 +9,37 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, tg_id: int or str, password=None, is_staff=False, is_admin=False, ):
+    def create_user(
+        self,
+        tg_id: int or str,
+        password=None,
+        is_staff=False,
+        is_admin=False,
+    ):
         if not tg_id:
             raise ValueError("User must have a telegram account")
         if not password:
             raise ValueError("User must have a password")
 
-        user_obj = self.model(
-            tg_id=tg_id
-        )
+        user_obj = self.model(tg_id=tg_id)
         user_obj.set_password(password)
         user_obj.staff = is_staff
         user_obj.admin = is_admin
-        user_obj.name = f'User-{tg_id}'
+        user_obj.name = f"User-{tg_id}"
         user_obj.save(using=self._db)
         return user_obj
 
     def create_staffuser(self, tg_id, password=None):
-        user = self.create_user(
-            tg_id,
-            password=password,
-            is_staff=True
-        )
+        user = self.create_user(tg_id, password=password, is_staff=True)
         return user
 
     def create_superuser(self, tg_id, password=None):
-        user = self.create_user(
-            tg_id,
-            password=password,
-            is_staff=True,
-            is_admin=True
-        )
+        user = self.create_user(tg_id, password=password, is_staff=True, is_admin=True)
         return user
 
-    def get_or_create_user(self, tg_id: int or str, password=None, is_staff=False, is_admin=False):
+    def get_or_create_user(
+        self, tg_id: int or str, password=None, is_staff=False, is_admin=False
+    ):
         try:
             return self.create_user(tg_id, password, is_staff, is_admin)
         except:
@@ -59,7 +56,7 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'tg_id'
+    USERNAME_FIELD = "tg_id"
     # REQUIRED_FIELDS = ['telegram_id']
     REQUIRED_FIELDS = []
     objects = UserManager()
@@ -79,7 +76,7 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-    def has_perm(self, perm,  obj=None):
+    def has_perm(self, perm, obj=None):
         return True
 
     def get_name(self):

@@ -12,10 +12,11 @@ from monobank.models import Category, MonoAccount
 User = get_user_model()
 
 NO_PERMISSION_ERROR = {
-                          'detail': ErrorDetail(
-                              string='You do not have permission to perform this action.',
-                              code='permission_denied')
-                      }
+    "detail": ErrorDetail(
+        string="You do not have permission to perform this action.",
+        code="permission_denied",
+    )
+}
 
 
 class Variant(NamedTuple):
@@ -28,7 +29,7 @@ class Variant(NamedTuple):
     status_code: int = 200
     is_admin: bool = True
     tg_id: str = "username"
-    password = "PassW0rd",
+    password = ("PassW0rd",)
     url_args: tuple = tuple()
     url_kwargs: dict = dict()
 
@@ -36,18 +37,20 @@ class Variant(NamedTuple):
 @pytest.fixture
 def api_request():
     def get_view_by_name(
-            view_name,
-            method_name="get",
-            url_args=None,
-            url_kwargs=None,
-            data=None,
-            format=None,
-            tg_id="username",
-            password="PassW0rd",
-            is_staff=False,
-            is_admin=False,
+        view_name,
+        method_name="get",
+        url_args=None,
+        url_kwargs=None,
+        data=None,
+        format=None,
+        tg_id="username",
+        password="PassW0rd",
+        is_staff=False,
+        is_admin=False,
     ):
-        user = User.objects.create_user(tg_id, password, is_staff=is_admin, is_admin=is_admin)
+        user = User.objects.create_user(
+            tg_id, password, is_staff=is_admin, is_admin=is_admin
+        )
         factory = APIRequestFactory()
         url = reverse(view_name, args=url_args, kwargs=url_kwargs)
         factory_method = getattr(factory, method_name)

@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Currency(models.Model):
     code = models.IntegerField(unique=True)
     name = models.CharField(max_length=16)
@@ -10,7 +11,7 @@ class Currency(models.Model):
     symbol = models.CharField(max_length=4, default=None, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.name} {self.flag}'
+        return f"{self.name} {self.flag}"
 
 
 class Category(models.Model):
@@ -52,4 +53,6 @@ class MonoAccount(models.Model):
         return f"{self.user.name or self.user.tg_id}"
 
     class Meta:
-        ordering = ["-id", ]
+        ordering = [
+            "-id",
+        ]

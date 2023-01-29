@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class Currency(models.Model):
     code = models.IntegerField(unique=True)
@@ -37,3 +39,17 @@ class CategoryMSO(models.Model):
     def __str__(self):
         return f"{self.mso} ({self.category.name})"
 
+
+class MonoAccount(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    mono_token = models.CharField(max_length=255, unique=True)
+    active = models.BooleanField(default=True)
+
+    # TODO: add for multi-account access
+    # family_members = models.ManyToManyField("self", blank=True)
+
+    def __str__(self):
+        return f"{self.user.name or self.user.tg_id}"
+
+    class Meta:
+        ordering = ["-id", ]

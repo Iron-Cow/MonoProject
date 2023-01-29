@@ -1,9 +1,7 @@
 import pytest
 from account.views import UserViewSet
-from rest_framework.exceptions import ErrorDetail
 
-
-from conftest import Variant
+from conftest import Variant, NO_PERMISSION_ERROR
 
 users_list_variants = [
     ("admin list", Variant(
@@ -22,10 +20,7 @@ users_list_variants = [
         is_admin=False,
         tg_id="custom_name",
         status_code=403,
-        expected={
-            'detail': ErrorDetail(string='You do not have permission to perform this action.',
-                                  code='permission_denied')
-        },
+        expected=NO_PERMISSION_ERROR,
     )),
     ("not owner/admin retrieve", Variant(
         view=UserViewSet.as_view({"get": "retrieve"}),
@@ -41,10 +36,7 @@ users_list_variants = [
         is_admin=False,
         tg_id="custom_name",
         status_code=403,
-        expected={
-            'detail': ErrorDetail(string='You do not have permission to perform this action.',
-                                  code='permission_denied')
-        },
+        expected=NO_PERMISSION_ERROR,
         url_kwargs={"tg_id": "precreated_user_tg_id"}
     )),
     ("owner/not admin retrieve", Variant(
@@ -75,10 +67,7 @@ users_list_variants = [
         tg_id="non-admin-name",
         format="json",
         request_data={'tg_id': 'custom_name', 'password': "aaaaaa1234", "name": "custom_name"},
-        expected={
-            'detail': ErrorDetail(string='You do not have permission to perform this action.',
-                                  code='permission_denied')
-        },
+        expected=NO_PERMISSION_ERROR,
         status_code=403,
     )),
     ("not owner/admin partial update", Variant(
@@ -119,10 +108,7 @@ users_list_variants = [
         request_data={"name": "User-precreated_user_tg_id-new"},
         url_kwargs={"tg_id": "precreated_user_tg_id"},
 
-        expected={
-            'detail': ErrorDetail(string='You do not have permission to perform this action.',
-                                  code='permission_denied')
-        },
+        expected=NO_PERMISSION_ERROR,
         status_code=403,
     )),
 

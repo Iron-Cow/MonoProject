@@ -1,6 +1,5 @@
-
 from typing import NamedTuple, List
-
+from rest_framework.exceptions import ErrorDetail
 
 import pytest
 from django.contrib.auth import get_user_model
@@ -8,9 +7,15 @@ from django.urls import reverse
 from typing import Callable
 
 from rest_framework.test import APIRequestFactory, force_authenticate
-from monobank.models import Category
+from monobank.models import Category, MonoAccount
 
 User = get_user_model()
+
+NO_PERMISSION_ERROR = {
+                          'detail': ErrorDetail(
+                              string='You do not have permission to perform this action.',
+                              code='permission_denied')
+                      }
 
 
 class Variant(NamedTuple):
@@ -31,16 +36,16 @@ class Variant(NamedTuple):
 @pytest.fixture
 def api_request():
     def get_view_by_name(
-        view_name,
-        method_name="get",
-        url_args=None,
-        url_kwargs=None,
-        data=None,
-        format=None,
-        tg_id="username",
-        password="PassW0rd",
-        is_staff=False,
-        is_admin=False,
+            view_name,
+            method_name="get",
+            url_args=None,
+            url_kwargs=None,
+            data=None,
+            format=None,
+            tg_id="username",
+            password="PassW0rd",
+            is_staff=False,
+            is_admin=False,
     ):
         user = User.objects.create_user(tg_id, password, is_staff=is_admin, is_admin=is_admin)
         factory = APIRequestFactory()
@@ -53,6 +58,7 @@ def api_request():
 
     return get_view_by_name
 
+
 @pytest.fixture
 def pre_created_user(db) -> User:
     precreated_user = User.objects.create_user(
@@ -60,6 +66,7 @@ def pre_created_user(db) -> User:
         password="precreated_user_password",
     )
     return precreated_user
+
 
 @pytest.fixture
 def pre_created_categories(db):
@@ -74,3 +81,12 @@ def pre_created_categories(db):
         user_defined=False,
     )
 
+
+@pytest.fixture
+@pytest.mark.usefixtures("pre_created_user")
+def pre_created_mono_accounts(db, pre_created_user):
+    MonoAccount.objects.create(
+        user=pre_created_user,
+        mono_token="abc",
+        active=True,
+    )

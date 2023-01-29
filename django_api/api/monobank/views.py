@@ -1,8 +1,8 @@
-
-from .serializers import CategorySerializer
-from .models import Category
+from .serializers import CategorySerializer, MonoAccountSerializer
+from .models import Category, MonoAccount
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+
 
 
 class CategoryViewSet(ModelViewSet):
@@ -11,8 +11,15 @@ class CategoryViewSet(ModelViewSet):
     http_method_names = ['get']
 
     def get_permissions(self):
-        permission = IsAdminUser()
-        if self.action in ('retrieve', 'list'):
-            permission = IsAuthenticated()
+        permission = IsAuthenticated()
+        return [permission]
 
+
+class MonoAccountViewSet(ModelViewSet):
+    serializer_class = MonoAccountSerializer
+    queryset = MonoAccount.objects.all()
+    http_method_names = ['get']
+
+    def get_permissions(self):
+        permission = IsAdminUser()
         return [permission]

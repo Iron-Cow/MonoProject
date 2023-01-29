@@ -76,7 +76,7 @@ categories_list_variants = [
 @pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", categories_list_variants)
 @pytest.mark.usefixtures("pre_created_categories")
-def test_users(api_request, test_name, variant, pre_created_categories):
+def test_categories(api_request, test_name, variant, pre_created_categories):
     view = variant.view
 
     response = view(

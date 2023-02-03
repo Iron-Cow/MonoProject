@@ -7,7 +7,7 @@ from django.urls import reverse
 from typing import Callable
 
 from rest_framework.test import APIRequestFactory, force_authenticate
-from monobank.models import Category, MonoAccount
+from monobank.models import Category, MonoAccount, MonoCard
 
 User = get_user_model()
 
@@ -29,9 +29,10 @@ class Variant(NamedTuple):
     status_code: int = 200
     is_admin: bool = True
     tg_id: str = "username"
-    password = ("PassW0rd",)
+    password = "PassW0rd"
     url_args: tuple = tuple()
     url_kwargs: dict = dict()
+    create_new_user: bool = True
 
 
 @pytest.fixture
@@ -47,10 +48,14 @@ def api_request():
         password="PassW0rd",
         is_staff=False,
         is_admin=False,
+        create_new_user=True,
     ):
-        user = User.objects.create_user(
-            tg_id, password, is_staff=is_admin, is_admin=is_admin
-        )
+        if create_new_user:
+            user = User.objects.create_user(
+                tg_id, password, is_staff=is_admin, is_admin=is_admin
+            )
+        else:
+            user = User.objects.get(tg_id=tg_id)
         factory = APIRequestFactory()
         url = reverse(view_name, args=url_args, kwargs=url_kwargs)
         factory_method = getattr(factory, method_name)
@@ -86,10 +91,39 @@ def pre_created_categories(db):
 
 
 @pytest.fixture
-@pytest.mark.usefixtures("pre_created_user")
-def pre_created_mono_accounts(db, pre_created_user):
-    MonoAccount.objects.create(
+def pre_created_mono_account(db, pre_created_user):
+    account = MonoAccount.objects.create(
         user=pre_created_user,
         mono_token="abc",
         active=True,
     )
+    return account
+
+
+@pytest.fixture
+def pre_created_mono_card(db, pre_created_mono_account):
+    monocard = MonoCard.objects.create(
+        monoaccount=pre_created_mono_account,
+        id="pre_created_id",
+        send_id="pre_created_id",
+        currency_code=980,
+        cashback_type="pre_created_cashback_type",
+        balance=100,
+        credit_limit=0,
+        masked_pan=["pre_created_masked_pan"],
+        type="white",
+        iban="pre_created_iban",
+    )
+    monocard2 = MonoCard.objects.create(
+        monoaccount=pre_created_mono_account,
+        id="pre_created_id2",
+        send_id="pre_created_id2",
+        currency_code=980,
+        cashback_type="pre_created_cashback_type",
+        balance=100,
+        credit_limit=0,
+        masked_pan=["pre_created_masked_pan"],
+        type="white",
+        iban="pre_created_iban",
+    )
+    return monocard, monocard2

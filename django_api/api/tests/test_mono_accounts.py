@@ -138,8 +138,8 @@ monoaccounts_list_variants = [
 @pytest.mark.django_db
 @pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", monoaccounts_list_variants)
-@pytest.mark.usefixtures("pre_created_mono_accounts")
-def test_monousers(api_request, test_name, variant, pre_created_mono_accounts):
+@pytest.mark.usefixtures("pre_created_mono_account")
+def test_monousers(api_request, test_name, variant, pre_created_mono_account):
     view = variant.view
 
     response = view(

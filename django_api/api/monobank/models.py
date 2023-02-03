@@ -56,3 +56,31 @@ class MonoAccount(models.Model):
         ordering = [
             "-id",
         ]
+
+
+class MonoCard(models.Model):
+    monoaccount = models.ForeignKey(MonoAccount, on_delete=models.CASCADE)
+    id = models.CharField(max_length=255, primary_key=True)
+    send_id = models.CharField(max_length=255)
+    currency_code = models.IntegerField()
+    cashback_type = models.CharField(max_length=255)
+    balance = models.IntegerField()
+    credit_limit = models.IntegerField()
+    masked_pan = models.JSONField(null=True, blank=True)
+    type = models.CharField(
+        max_length=255, choices=[("black", "black"), ("white", "white")]
+    )
+    iban = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.monoaccount.user.name or self.monoaccount.user.tg_id}-card-{self.type}"
+
+
+class MonoJar(models.Model):
+    monoaccount = models.ForeignKey(MonoAccount, on_delete=models.CASCADE)
+    id = models.CharField(max_length=255, primary_key=True)
+    send_id = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    currencyCode = models.IntegerField()
+    balance = models.IntegerField()
+    goal = models.IntegerField()

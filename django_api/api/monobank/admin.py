@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from .models import Category, Currency, CategoryMSO, MonoAccount
+from .models import Category, Currency, CategoryMSO, MonoAccount, MonoCard, MonoJar
 
 User = get_user_model()
 
@@ -9,3 +9,5 @@ admin.site.register(Category)
 admin.site.register(Currency)
 admin.site.register(CategoryMSO)
 admin.site.register(MonoAccount)
+admin.site.register(MonoCard)
+admin.site.register(MonoJar)

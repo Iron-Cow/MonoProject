@@ -1,4 +1,4 @@
-from .models import Category, MonoAccount, MonoCard
+from .models import Category, MonoAccount, MonoCard, MonoJar
 from rest_framework import serializers
 from account.serializers import UserSerializer
 
@@ -31,4 +31,17 @@ class MonoCardSerializer(serializers.HyperlinkedModelSerializer):
             "masked_pan",
             "type",
             "iban",
+        ]
+
+
+class MonoJarSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = MonoJar
+        fields = [
+            "id",
+            "send_id",
+            "title",
+            "currency_code",
+            "balance",
+            "goal",
         ]

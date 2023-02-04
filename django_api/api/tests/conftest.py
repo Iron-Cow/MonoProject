@@ -7,7 +7,7 @@ from django.urls import reverse
 from typing import Callable
 
 from rest_framework.test import APIRequestFactory, force_authenticate
-from monobank.models import Category, MonoAccount, MonoCard
+from monobank.models import Category, MonoAccount, MonoCard, MonoJar
 
 User = get_user_model()
 
@@ -127,3 +127,26 @@ def pre_created_mono_card(db, pre_created_mono_account):
         iban="pre_created_iban",
     )
     return monocard, monocard2
+
+
+@pytest.fixture
+def pre_created_mono_jar(db, pre_created_mono_account):
+    monojar = MonoJar.objects.create(
+        monoaccount=pre_created_mono_account,
+        id="pre_created_id",
+        send_id="pre_created_id",
+        title="pre_created_title",
+        currency_code=980,
+        balance=1000,
+        goal=1001,
+    )
+    monojar2 = MonoJar.objects.create(
+        monoaccount=pre_created_mono_account,
+        id="pre_created_id2",
+        send_id="pre_created_id2",
+        title="pre_created_title2",
+        currency_code=980,
+        balance=2000,
+        goal=2001,
+    )
+    return monojar, monojar2

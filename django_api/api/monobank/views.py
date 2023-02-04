@@ -1,5 +1,10 @@
-from .serializers import CategorySerializer, MonoAccountSerializer, MonoCardSerializer
-from .models import Category, MonoAccount, MonoCard
+from .serializers import (
+    CategorySerializer,
+    MonoAccountSerializer,
+    MonoCardSerializer,
+    MonoJarSerializer,
+)
+from .models import Category, MonoAccount, MonoCard, MonoJar
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, BasePermission
@@ -66,3 +71,24 @@ class MonoCardViewSet(ModelViewSet):
                 )
             return MonoCard.objects.all()
         return MonoCard.objects.filter(monoaccount__user__tg_id=self.request.user.tg_id)
+
+
+class MonoJarViewSet(ModelViewSet):
+    serializer_class = MonoJarSerializer
+    http_method_names = ["get"]
+
+    def get_permissions(self):
+        permission = IsAdminUser()
+        if self.action in ("list", "retrieve"):
+            permission = MonoCardJarIsOwnerOrAdminPermission()
+        return [permission]
+
+    def get_queryset(self):
+        users = self.request.query_params.get("users")
+        if self.request.user.is_superuser:
+            if users and self.action == "list":
+                return MonoJar.objects.filter(
+                    monoaccount__user__tg_id__in=users.split(",")
+                )
+            return MonoJar.objects.all()
+        return MonoJar.objects.filter(monoaccount__user__tg_id=self.request.user.tg_id)

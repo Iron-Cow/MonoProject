@@ -81,6 +81,6 @@ class MonoJar(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     send_id = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    currencyCode = models.IntegerField()
+    currency_code = models.IntegerField()
     balance = models.IntegerField()
     goal = models.IntegerField()

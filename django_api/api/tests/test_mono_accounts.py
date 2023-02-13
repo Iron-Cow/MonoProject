@@ -1,4 +1,8 @@
+from unittest.mock import patch
+
 import pytest
+
+from monobank.models import MonoAccount, MonoCard
 from monobank.views import MonoAccountViewSet
 from rest_framework.exceptions import ErrorDetail
 
@@ -14,10 +18,7 @@ monoaccounts_list_variants = [
             tg_id="admin_name",
             url_kwargs={"pk": 1},
             expected={
-                "user": {
-                    "tg_id": "precreated_user_tg_id",
-                    "name": "User-precreated_user_tg_id",
-                },
+                "user": "precreated_user_tg_id",
                 "mono_token": "abc",
                 "active": True,
             },
@@ -44,10 +45,7 @@ monoaccounts_list_variants = [
             tg_id="admin_name",
             expected=[
                 {
-                    "user": {
-                        "tg_id": "precreated_user_tg_id",
-                        "name": "User-precreated_user_tg_id",
-                    },
+                    "user": "precreated_user_tg_id",
                     "mono_token": "abc",
                     "active": True,
                 },
@@ -73,12 +71,11 @@ monoaccounts_list_variants = [
             method_name="post",
             is_admin=True,
             tg_id="admin_name",
-            status_code=405,
-            expected={
-                "detail": ErrorDetail(
-                    string='Method "POST" not allowed.', code="method_not_allowed"
-                )
-            },
+            request_data={"user": "admin_name", "mono_token": "unique_token"},
+            format="json",
+            status_code=201,
+            expected={"user": "admin_name", "mono_token": "unique_token"},
+            need_json_dumps=True,
         ),
     ),
     (
@@ -139,7 +136,10 @@ monoaccounts_list_variants = [
 @pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", monoaccounts_list_variants)
 @pytest.mark.usefixtures("pre_created_mono_account")
-def test_monousers(api_request, test_name, variant, pre_created_mono_account):
+def test_monousers(
+    api_request, test_name, variant, monkeypatch, pre_created_mono_account
+):
+    monkeypatch.setattr(MonoAccount, "get_cards_jars", lambda x: {})
     view = variant.view
 
     response = view(
@@ -150,6 +150,7 @@ def test_monousers(api_request, test_name, variant, pre_created_mono_account):
             is_admin=variant.is_admin,
             url_kwargs=variant.url_kwargs,
             data=variant.request_data,
+            need_json_dumps=variant.need_json_dumps,
         ),
         **variant.url_kwargs,
     )

@@ -8,3 +8,12 @@ psycopg2
 psycopg2-binary
 pytest-django
 python-dotenv
+requests
+
+Redis
+celery
+django-redis
+django_celery_results
+django_celery_beat
+djangorestframework-camel-case
+pyhumps

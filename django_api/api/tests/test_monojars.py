@@ -22,7 +22,7 @@ monojars_variants = [
                 "id": "pre_created_id",
                 "send_id": "pre_created_id",
                 "title": "pre_created_title",
-                "currency_code": 980,
+                "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "balance": 1000,
                 "goal": 1001,
             },
@@ -40,7 +40,7 @@ monojars_variants = [
                 "id": "pre_created_id",
                 "send_id": "pre_created_id",
                 "title": "pre_created_title",
-                "currency_code": 980,
+                "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "balance": 1000,
                 "goal": 1001,
             },
@@ -98,7 +98,12 @@ monojars_list_variants = [
                     "id": "pre_created_id",
                     "send_id": "pre_created_id",
                     "title": "pre_created_title",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "balance": 1000,
                     "goal": 1001,
                 },
@@ -106,7 +111,12 @@ monojars_list_variants = [
                     "id": "pre_created_id2",
                     "send_id": "pre_created_id2",
                     "title": "pre_created_title2",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "balance": 2000,
                     "goal": 2001,
                 },
@@ -114,7 +124,12 @@ monojars_list_variants = [
                     "id": "some_id",
                     "send_id": "some_id",
                     "title": "some_title",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "balance": 3000,
                     "goal": 3001,
                 },
@@ -135,7 +150,12 @@ monojars_list_variants = [
                     "id": "pre_created_id",
                     "send_id": "pre_created_id",
                     "title": "pre_created_title",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "balance": 1000,
                     "goal": 1001,
                 },
@@ -143,7 +163,12 @@ monojars_list_variants = [
                     "id": "pre_created_id2",
                     "send_id": "pre_created_id2",
                     "title": "pre_created_title2",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "balance": 2000,
                     "goal": 2001,
                 },
@@ -163,7 +188,12 @@ monojars_list_variants = [
                     "id": "some_id",
                     "send_id": "some_id",
                     "title": "some_title",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "balance": 3000,
                     "goal": 3001,
                 },
@@ -178,7 +208,10 @@ monojars_list_variants = [
 @pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", monojars_list_variants)
 @pytest.mark.usefixtures("pre_created_mono_jar")
-def test_monojars_list(api_request, test_name, variant, pre_created_mono_card):
+@pytest.mark.usefixtures("pre_created_currency")
+def test_monojars_list(
+    api_request, test_name, variant, pre_created_mono_card, pre_created_currency
+):
     view = variant.view
 
     user = User.objects.create_user(
@@ -199,7 +232,7 @@ def test_monojars_list(api_request, test_name, variant, pre_created_mono_card):
         id="some_id",
         send_id="some_id",
         title="some_title",
-        currency_code=980,
+        currency=pre_created_currency,
         balance=3000,
         goal=3001,
     )

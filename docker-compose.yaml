@@ -30,6 +30,19 @@ services:
     depends_on:
       - redis
 
+
+  celery_beat:
+    build:
+      context: api
+      dockerfile: Dockerfile2
+    command:  celery --app=api beat -l INFO
+    volumes:
+      - ./api/src:/api
+    env_file:
+      - ".env"
+    depends_on:
+      - redis
+
   chatbot:
     env_file:
       - ".env"

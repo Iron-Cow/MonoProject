@@ -8,6 +8,10 @@ from .models import Category, MonoAccount, MonoCard, MonoJar
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser, BasePermission
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class CategoryViewSet(ModelViewSet):
@@ -23,7 +27,7 @@ class CategoryViewSet(ModelViewSet):
 class MonoAccountViewSet(ModelViewSet):
     serializer_class = MonoAccountSerializer
     queryset = MonoAccount.objects.all()
-    http_method_names = ["get"]
+    http_method_names = ["get", "post"]
 
     def get_permissions(self):
         permission = IsAdminUser()

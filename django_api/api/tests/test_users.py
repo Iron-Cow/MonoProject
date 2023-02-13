@@ -81,6 +81,7 @@ users_list_variants = [
             },
             expected={"tg_id": "custom_name", "name": "custom_name"},
             status_code=201,
+            need_json_dumps=True,
         ),
     ),
     (
@@ -117,6 +118,7 @@ users_list_variants = [
                 "name": "User-precreated_user_tg_id-new",
             },
             status_code=200,
+            need_json_dumps=True,
         ),
     ),
     (
@@ -132,6 +134,7 @@ users_list_variants = [
             url_kwargs={"tg_id": "custom-user"},
             expected={"tg_id": "custom-user", "name": "custom-user-name-new"},
             status_code=200,
+            need_json_dumps=True,
         ),
     ),
     (
@@ -167,6 +170,7 @@ def test_users(api_request, test_name, variant, pre_created_user):
             is_admin=variant.is_admin,
             url_kwargs=variant.url_kwargs,
             data=variant.request_data,
+            need_json_dumps=variant.need_json_dumps,
         ),
         **variant.url_kwargs,
     )

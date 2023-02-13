@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "account",
     "monobank",
+    "django_celery_results",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -128,6 +130,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "account.User"
 UPDATE_LAST_LOGIN = True
 REST_FRAMEWORK = {
+    "USER_ID_FIELD": "tg_id",
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
@@ -136,4 +139,27 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
         # 'rest_framework.permissions.IsAdminUser',
     ],
+    # "DEFAULT_RENDERER_CLASSES": ('djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+    #                              'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',),
+    "DEFAULT_PARSER_CLASSES": (
+        "djangorestframework_camel_case.parser.CamelCaseJSONParser",
+    ),
 }
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_TIMEZONE = "Europe/Kiev"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_RESULT_BACKEND = "django-db"
+# CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+
+# django setting.
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+    }
+}
+CELERY_CACHE_BACKEND = "default"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"

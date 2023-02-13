@@ -42,10 +42,10 @@ class UserViewSet(ModelViewSet):
     def update(self, request, *args, **kwargs):
         if self.action == "partial_update":
             return super().update(request, *args, **kwargs)
-            return Response(
-                {"details": "No PUT updates allowed."},
-                status=status.HTTP_405_METHOD_NOT_ALLOWED,
-            )
+        return Response(
+            {"details": "No PUT updates allowed."},
+            status=status.HTTP_405_METHOD_NOT_ALLOWED,
+        )
 
     # def list(self, request, *args, **kwargs):
     #     queryset = self.filter_queryset(self.get_queryset())

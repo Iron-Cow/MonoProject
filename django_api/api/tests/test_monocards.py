@@ -21,7 +21,7 @@ monocards_variants = [
             expected={
                 "id": "pre_created_id",
                 "send_id": "pre_created_id",
-                "currency_code": 980,
+                "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "cashback_type": "pre_created_cashback_type",
                 "balance": 100,
                 "credit_limit": 0,
@@ -42,7 +42,7 @@ monocards_variants = [
             expected={
                 "id": "pre_created_id",
                 "send_id": "pre_created_id",
-                "currency_code": 980,
+                "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "cashback_type": "pre_created_cashback_type",
                 "balance": 100,
                 "credit_limit": 0,
@@ -103,7 +103,12 @@ monocards_list_variants = [
                 {
                     "id": "pre_created_id",
                     "send_id": "pre_created_id",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "cashback_type": "pre_created_cashback_type",
                     "balance": 100,
                     "credit_limit": 0,
@@ -114,7 +119,12 @@ monocards_list_variants = [
                 {
                     "id": "pre_created_id2",
                     "send_id": "pre_created_id2",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "cashback_type": "pre_created_cashback_type",
                     "balance": 100,
                     "credit_limit": 0,
@@ -125,7 +135,12 @@ monocards_list_variants = [
                 {
                     "id": "some_id",
                     "send_id": "some_id",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "cashback_type": "some_cashback_type",
                     "balance": 100,
                     "credit_limit": 0,
@@ -149,7 +164,12 @@ monocards_list_variants = [
                 {
                     "id": "pre_created_id",
                     "send_id": "pre_created_id",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "cashback_type": "pre_created_cashback_type",
                     "balance": 100,
                     "credit_limit": 0,
@@ -160,7 +180,12 @@ monocards_list_variants = [
                 {
                     "id": "pre_created_id2",
                     "send_id": "pre_created_id2",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "cashback_type": "pre_created_cashback_type",
                     "balance": 100,
                     "credit_limit": 0,
@@ -183,7 +208,12 @@ monocards_list_variants = [
                 {
                     "id": "some_id",
                     "send_id": "some_id",
-                    "currency_code": 980,
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
                     "cashback_type": "some_cashback_type",
                     "balance": 100,
                     "credit_limit": 0,
@@ -202,7 +232,10 @@ monocards_list_variants = [
 @pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", monocards_list_variants)
 @pytest.mark.usefixtures("pre_created_mono_card")
-def test_monocards_list(api_request, test_name, variant, pre_created_mono_card):
+@pytest.mark.usefixtures("pre_created_currency")
+def test_monocards_list(
+    api_request, test_name, variant, pre_created_mono_card, pre_created_currency
+):
     view = variant.view
 
     user = User.objects.create_user(
@@ -222,7 +255,7 @@ def test_monocards_list(api_request, test_name, variant, pre_created_mono_card):
         monoaccount=account,
         id="some_id",
         send_id="some_id",
-        currency_code=980,
+        currency=pre_created_currency,
         cashback_type="some_cashback_type",
         balance=100,
         credit_limit=0,
@@ -239,6 +272,7 @@ def test_monocards_list(api_request, test_name, variant, pre_created_mono_card):
             is_admin=variant.is_admin,
             data=variant.request_data,
             create_new_user=variant.create_new_user,
+            need_json_dumps=variant.need_json_dumps,
         ),
     )
     assert response.status_code == variant.status_code

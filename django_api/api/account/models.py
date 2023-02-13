@@ -50,7 +50,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
 
-    tg_id = models.CharField(max_length=255, unique=True)
+    tg_id = models.CharField(max_length=255, unique=True, primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)

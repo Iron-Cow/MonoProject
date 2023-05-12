@@ -30,4 +30,7 @@ Run docker compose:
 
     celery --app=django_celery_example beat -l INFO
     celery --app=django_celery_example worker --loglevel=info
+
+    export CELERY_BROKER_URL=redis://localhost:6379/0 && CELERY_RESULT_BACKEND=redis://localhost:6379  && celery --app=api worker -l INFO
+    export CELERY_BROKER_URL=redis://localhost:6379/0 && CELERY_RESULT_BACKEND=redis://localhost:6379  && celery --app=api beat -l INFO
     python manage.py runserver

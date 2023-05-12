@@ -22,7 +22,8 @@ services:
     build:
         context: api
         dockerfile: Dockerfile2
-    command: celery worker --app=worker.celery --loglevel=info
+    command: celery worker -A worker.celery --loglevel=info
+    #celery --app=api worker -l INFO
     volumes:
       - ./api/src:/api
     env_file:

@@ -1,5 +1,5 @@
 from utils.errors import MonoBankError
-from .models import Category, MonoAccount, MonoCard, MonoJar, Currency
+from .models import Category, MonoAccount, MonoCard, MonoJar, Currency, MonoTransaction
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
@@ -73,6 +73,19 @@ class MonoJarSerializer(serializers.ModelSerializer):
             "currency",
             "balance",
             "goal",
+        ]
+
+    currency = CurrencySerializer()
+
+class MonoTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MonoTransaction
+        fields = [
+            "id",
+            "amount",
+            "account_id",
+            "account_type",
+            "currency",
         ]
 
     currency = CurrencySerializer()

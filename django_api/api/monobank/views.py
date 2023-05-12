@@ -3,12 +3,16 @@ from .serializers import (
     MonoAccountSerializer,
     MonoCardSerializer,
     MonoJarSerializer,
+    MonoTransactionSerializer
 )
-from .models import Category, MonoAccount, MonoCard, MonoJar
-from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
+from .models import Category, MonoAccount, MonoCard, MonoJar, MonoTransaction
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAdminUser, BasePermission
 from django.contrib.auth import get_user_model
+from tests import mocks
 
 
 User = get_user_model()
@@ -96,3 +100,44 @@ class MonoJarViewSet(ModelViewSet):
                 )
             return MonoJar.objects.all()
         return MonoJar.objects.filter(monoaccount__user__tg_id=self.request.user.tg_id)
+
+class MonoTransactionViewSet(ModelViewSet):
+    serializer_class = MonoTransactionSerializer
+    http_method_names = ["get"]
+
+    def get_permissions(self):
+        permission = IsAuthenticated()
+        # permission = AllowAny()
+        # if self.action in ("list", "retrieve"): # TODO: fix it
+        #     permission = MonoCardJarIsOwnerOrAdminPermission()
+        return [permission]
+
+    def get_queryset(self):
+        # return MonoTransaction.objects.select_related('currency', 'account').all()
+        users = self.request.query_params.get("users")
+        if self.request.user.is_superuser:
+            if users and self.action == "list":
+                return MonoTransaction.objects.filter(
+                    Q(monocardtransaction__account__monoaccount__user__tg_id=self.request.user.tg_id) |
+                    Q(monojartransaction__account__monoaccount__user__tg_id=self.request.user.tg_id)
+                )
+            return MonoTransaction.objects.all()
+        return MonoTransaction.objects.filter(
+            Q(monocardtransaction__account__monoaccount__user__tg_id=self.request.user.tg_id) |
+            Q(monojartransaction__account__monoaccount__user__tg_id=self.request.user.tg_id)
+        )
+
+class TestEndpoint(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        card = MonoCard.objects.get(id='g1cvdYvrSXbD7Z2Zqpl06w')
+        print(card)
+        card.get_transactions()
+        query = MonoTransaction.objects.all()
+        query = MonoTransaction.objects.filter(
+            Q(account__id="uaITWuKphk9qXdbFY9LpLg")
+            # |
+            # Q(monojartransaction__account__monoaccount__user__tg_id=12345)
+        )
+        return Response(query.values())

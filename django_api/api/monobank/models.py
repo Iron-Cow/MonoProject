@@ -3,8 +3,16 @@ from django.contrib.auth import get_user_model
 from requests import get
 from api.celery import app
 from humps import decamelize
-
+# from polymorphic.models import PolymorphicModel
 from utils.errors import MonoBankError
+from django.core.exceptions import ObjectDoesNotExist
+
+
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
+
+import time
 
 DEFAULT_RETRY_POLICY = {
     # 'max_retries': 3,
@@ -96,7 +104,7 @@ class MonoAccount(models.Model):
         cards = data.get("accounts", [])
         for card in cards:
             MonoCard.create_card_from_webhook.apply_async(
-                args=(self.user.tg_id, card),
+                args=(self.user.tg_id, card, True),
                 retry=True,
                 retry_policy=DEFAULT_RETRY_POLICY,
             )
@@ -123,6 +131,31 @@ class MonoCard(models.Model):
     )
     iban = models.CharField(max_length=255)
 
+    def get_transactions(self, from_unix: int = None, to_unix=None) -> list:
+        # 30 days
+        requested_period = 2592000
+        if not to_unix:
+            to_unix = int(time.time())
+        if not from_unix:
+            from_unix = to_unix - requested_period
+
+        url = f"{MONO_API_URL}{TRANSACTIONS_PATH}/{self.id}/{from_unix}/{to_unix}"
+        headers = {"X-Token": self.monoaccount.mono_token}
+        user_data = get(url, headers=headers)
+
+        data = user_data.json()
+        if not isinstance(data, list) and data.get("errorDescription"):
+            # TODO: add logs / notifying
+            raise MonoBankError(data.get("errorDescription"))
+        for transaction in data:
+            MonoTransaction.create_transaction_from_webhook.apply_async(
+                args=(self.id, transaction, "card"),
+                retry=True,
+                retry_policy=DEFAULT_RETRY_POLICY,
+            )
+
+        return data
+
     def __str__(self):
         return f"{self.monoaccount.user.name or self.monoaccount.user.tg_id}-card-{self.type}"
 
@@ -141,9 +174,11 @@ class MonoCard(models.Model):
             currency = Currency.objects.get(code=int(currency_code))
         except Currency.DoesNotExist:
             currency = Currency.create_unknown_currency(currency_code)
-        mono_card = MonoCard.objects.create(
+        mono_card, created = MonoCard.objects.get_or_create(
             monoaccount=mono_account, currency=currency, **card_data
         )
+        if update_transactions:
+            mono_card.get_transactions()
 
 
 class MonoJar(models.Model):
@@ -175,3 +210,87 @@ class MonoJar(models.Model):
             currency = Currency.create_unknown_currency(currency_code)
         mono_jar = MonoJar(monoaccount=mono_account, currency=currency, **jar_data)
         mono_jar.save()
+
+
+
+
+class MonoTransaction(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    time = models.IntegerField()
+    description = models.TextField(max_length=2048, blank=True, null=True)
+    mcc = models.ForeignKey(CategoryMSO, on_delete=models.CASCADE)  # connect with category
+    original_mcc = models.IntegerField(blank=True, null=True)
+    amount = models.IntegerField()
+    operation_amount = models.IntegerField(blank=True, null=True)
+    currency = models.ForeignKey(Currency, on_delete=models.SET_NULL, null=True)
+    commission_rate = models.IntegerField(blank=True, null=True)
+    balance = models.IntegerField()
+    hold = models.BooleanField()
+    receipt_id = models.CharField(max_length=255)
+    account = models.ForeignKey(MonoCard, on_delete=models.CASCADE)
+    cashback_amount = models.IntegerField()
+    comment = models.TextField(max_length=2048, blank=True, null=True)
+
+    # account_type = models.CharField(max_length=255, choices=[
+    #     ("card", "card"),
+    #     ("jar", "jar")
+    # ])
+
+    # @property
+    # def account(self):
+    #     if self.account_type == "cart":
+    #         model = MonoCard
+    #     elif self.account_type == "jar":
+    #         model = MonoJar
+    #     else:
+    #         return None
+    #
+    #     return model.objects.get(id=self.account_id)
+
+    @app.task(
+        bind=True,
+        autoretry_for=(Exception,),
+        retry_kwargs={"max_retries": 5, "countdown": 60},
+    )
+    def create_transaction_from_webhook(
+            self, account_id, transaction_data: dict, account_type: str
+    ):
+
+        account = MonoCard.objects.get(id=account_id)
+        try:
+            mso = transaction_data.pop("mcc")
+        except KeyError:
+            mso_number = len(CategoryMSO.objects.all())
+            mso = mso_number
+        try:
+            mcc = CategoryMSO.objects.get(mso=mso)
+        except (ObjectDoesNotExist):
+            category = Category.objects.get(name="Інше")
+            mcc = CategoryMSO.objects.create(category=category, mso=mso)
+        transaction_data = decamelize(transaction_data)
+        currency_code = transaction_data.pop("currency_code")
+        try:
+            currency = Currency.objects.get(code=int(currency_code))
+        except Currency.DoesNotExist:
+            currency = Currency.create_unknown_currency(currency_code)
+        mono_transaction = MonoTransaction.objects.get_or_create(
+            account=account, mcc=mcc, currency=currency, **transaction_data,
+        )
+        print(mono_transaction)
+
+
+@receiver(pre_save)
+def pre_save_handler(sender, instance: MonoTransaction, *args, **kwargs):
+    if type(instance) is not MonoTransaction:
+        return
+    # if instance.account_type == "jar":
+    #     return
+    #     # try:
+    #     #     MonoJar.objects.get(id=instance.account_id)
+    #     # except MonoJar.DoesNotExist:
+    #     #     raise Exception("Jar id is invalid/not found.")
+    # elif instance.account_type == "card":
+    #     try:
+    #         MonoCard.objects.get(id=instance.account_id)
+    #     except MonoCard.DoesNotExist:
+    #         raise Exception("Card id is invalid/not found.")

@@ -231,22 +231,6 @@ class MonoTransaction(models.Model):
     cashback_amount = models.IntegerField()
     comment = models.TextField(max_length=2048, blank=True, null=True)
 
-    # account_type = models.CharField(max_length=255, choices=[
-    #     ("card", "card"),
-    #     ("jar", "jar")
-    # ])
-
-    # @property
-    # def account(self):
-    #     if self.account_type == "cart":
-    #         model = MonoCard
-    #     elif self.account_type == "jar":
-    #         model = MonoJar
-    #     else:
-    #         return None
-    #
-    #     return model.objects.get(id=self.account_id)
-
     @app.task(
         bind=True,
         autoretry_for=(Exception,),

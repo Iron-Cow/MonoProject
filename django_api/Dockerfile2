@@ -7,7 +7,7 @@ RUN pip install --upgrade pip
 RUN pip install redis
 RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
 
-COPY src ./
+COPY api ./
 RUN useradd nonroot && chown nonroot: /api
 
 USER nonroot

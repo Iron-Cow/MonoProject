@@ -14,18 +14,19 @@ services:
       - database
       - redis
     build:
-      context: api
+      context: django_api
+      dockerfile: Dockerfile
     ports:
       - $PORT_API_HOST:$PORT_API_CONTAINER
 
   worker:
     build:
-        context: api
+        context: django_api
         dockerfile: Dockerfile2
-    command: celery worker -A worker.celery --loglevel=info
+    command: celery --app=api worker -l INFO
     #celery --app=api worker -l INFO
     volumes:
-      - ./api/src:/api
+      - ./django_api/api:/api
     env_file:
       - ".env"
     depends_on:
@@ -34,11 +35,11 @@ services:
 
   celery_beat:
     build:
-      context: api
+      context: django_api
       dockerfile: Dockerfile2
     command:  celery --app=api beat -l INFO
     volumes:
-      - ./api/src:/api
+      - ./django_api/api:/api
     env_file:
       - ".env"
     depends_on:
@@ -56,6 +57,7 @@ services:
       - "database:database"
     build:
       context: chatbot
+
 
   database:
     image: postgres:14-alpine

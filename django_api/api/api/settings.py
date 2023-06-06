@@ -27,7 +27,11 @@ SECRET_KEY = "django-insecure-xi8za@kq+q)#tek@7d$j*hq!_e)a+r5(4w94&e9x5gh0yfibrm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "0.0.0.0",
+    "127.0.0.1",
+    "localhost"
+]
 
 # Application definition
 
@@ -149,7 +153,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_BROKER_URL = "redis://0.0.0.0:6379/0"
 CELERY_TIMEZONE = "Europe/Kiev"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
@@ -169,6 +173,7 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
+    "0.0.0.0"
     # ...
 ]
 

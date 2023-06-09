@@ -17,3 +17,4 @@ djangorestframework-camel-case
 pyhumps
 django-polymorphic
 django-debug-toolbar
+django-environ

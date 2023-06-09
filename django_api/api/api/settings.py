@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
+#
 from dotenv import load_dotenv
 
 load_dotenv()
+# Read .env file
+# env = environ.Env()
+# environ.Env.read_env(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -93,8 +98,12 @@ DATABASES = {
         "HOST": os.getenv("DB_HOST") if not os.getenv("DEBUG") else "localhost",
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
+    } if os.getenv("DB_MODE") == "prod" else {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': "db",
     }
 }
+print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

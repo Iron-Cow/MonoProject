@@ -2,7 +2,7 @@ import pytest
 from monobank.views import CategoryViewSet
 from rest_framework.exceptions import ErrorDetail
 
-from conftest import Variant
+from .conftest import Variant
 
 categories_list_variants = [
     (
@@ -99,7 +99,7 @@ categories_list_variants = [
 ]
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db #(databases=['tests_db'])
 @pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", categories_list_variants)
 @pytest.mark.usefixtures("pre_created_categories")

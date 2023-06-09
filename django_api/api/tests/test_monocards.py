@@ -4,7 +4,7 @@ from monobank.models import MonoAccount, MonoCard
 from monobank.views import MonoCardViewSet
 from rest_framework.exceptions import ErrorDetail
 
-from conftest import Variant, NO_PERMISSION_ERROR
+from .conftest import Variant, NO_PERMISSION_ERROR
 from django.contrib.auth import get_user_model
 
 User = get_user_model()

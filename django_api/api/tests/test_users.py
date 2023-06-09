@@ -1,7 +1,7 @@
 import pytest
 from account.views import UserViewSet
 
-from conftest import Variant, NO_PERMISSION_ERROR
+from .conftest import Variant, NO_PERMISSION_ERROR
 
 users_list_variants = [
     (

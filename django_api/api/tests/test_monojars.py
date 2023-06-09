@@ -4,7 +4,7 @@ from monobank.models import MonoAccount, MonoJar
 from monobank.views import MonoJarViewSet
 from rest_framework.exceptions import ErrorDetail
 
-from conftest import Variant
+from .conftest import Variant
 from django.contrib.auth import get_user_model
 
 User = get_user_model()

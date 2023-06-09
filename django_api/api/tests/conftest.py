@@ -1,12 +1,15 @@
 from typing import NamedTuple, List
 from rest_framework.exceptions import ErrorDetail
 import json
+import os
+from django.db import connections
 
 import pytest
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from typing import Callable
 
+from django.conf import settings
 from rest_framework.test import APIRequestFactory, force_authenticate
 from monobank.models import Category, MonoAccount, MonoCard, MonoJar, Currency
 
@@ -18,6 +21,7 @@ NO_PERMISSION_ERROR = {
         code="permission_denied",
     )
 }
+
 
 
 class Variant(NamedTuple):

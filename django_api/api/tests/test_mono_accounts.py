@@ -6,7 +6,7 @@ from monobank.models import MonoAccount, MonoCard
 from monobank.views import MonoAccountViewSet
 from rest_framework.exceptions import ErrorDetail
 
-from conftest import Variant, NO_PERMISSION_ERROR
+from .conftest import Variant, NO_PERMISSION_ERROR
 
 monoaccounts_list_variants = [
     (

@@ -99,7 +99,7 @@ categories_list_variants = [
 ]
 
 
-@pytest.mark.django_db #(databases=['tests_db'])
+@pytest.mark.django_db  # (databases=['tests_db'])
 @pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", categories_list_variants)
 @pytest.mark.usefixtures("pre_created_categories")

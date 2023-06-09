@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+
 import environ
+
 #
 from dotenv import load_dotenv
 
@@ -32,11 +34,7 @@ SECRET_KEY = "django-insecure-xi8za@kq+q)#tek@7d$j*hq!_e)a+r5(4w94&e9x5gh0yfibrm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "0.0.0.0",
-    "127.0.0.1",
-    "localhost"
-]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost"]
 
 # Application definition
 
@@ -64,7 +62,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-
     # 'middleware.TestUserMiddleware',
 ]
 
@@ -98,9 +95,11 @@ DATABASES = {
         "HOST": os.getenv("DB_HOST") if not os.getenv("DEBUG") else "localhost",
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
-    } if os.getenv("DB_MODE") == "prod" else {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': "db",
+    }
+    if os.getenv("DB_MODE") == "prod"
+    else {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db",
     }
 }
 print(DATABASES)
@@ -191,17 +190,17 @@ INTERNAL_IPS = [
 #     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 #     INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
 DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.history.HistoryPanel',
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-    'debug_toolbar.panels.profiling.ProfilingPanel',
+    "debug_toolbar.panels.history.HistoryPanel",
+    "debug_toolbar.panels.versions.VersionsPanel",
+    "debug_toolbar.panels.timer.TimerPanel",
+    "debug_toolbar.panels.settings.SettingsPanel",
+    "debug_toolbar.panels.headers.HeadersPanel",
+    "debug_toolbar.panels.request.RequestPanel",
+    "debug_toolbar.panels.sql.SQLPanel",
+    "debug_toolbar.panels.staticfiles.StaticFilesPanel",
+    "debug_toolbar.panels.templates.TemplatesPanel",
+    "debug_toolbar.panels.cache.CachePanel",
+    "debug_toolbar.panels.signals.SignalsPanel",
+    "debug_toolbar.panels.redirects.RedirectsPanel",
+    "debug_toolbar.panels.profiling.ProfilingPanel",
 ]

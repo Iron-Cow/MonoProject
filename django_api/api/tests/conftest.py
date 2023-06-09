@@ -1,17 +1,15 @@
-from typing import NamedTuple, List
-from rest_framework.exceptions import ErrorDetail
 import json
 import os
-from django.db import connections
+from typing import Callable, List, NamedTuple
 
 import pytest
-from django.contrib.auth import get_user_model
-from django.urls import reverse
-from typing import Callable
-
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.db import connections
+from django.urls import reverse
+from monobank.models import Category, Currency, MonoAccount, MonoCard, MonoJar
+from rest_framework.exceptions import ErrorDetail
 from rest_framework.test import APIRequestFactory, force_authenticate
-from monobank.models import Category, MonoAccount, MonoCard, MonoJar, Currency
 
 User = get_user_model()
 
@@ -23,12 +21,11 @@ NO_PERMISSION_ERROR = {
 }
 
 
-
 class Variant(NamedTuple):
     view: Callable
     name: str
-    expected: dict | List[dict] = None
-    request_data: dict | List[dict] = None
+    expected: dict | List[dict] | None = None
+    request_data: dict | List[dict] | None = None
     method_name: str = "get"
     format: str = "json"
     status_code: int = 200
@@ -100,7 +97,6 @@ def pre_created_categories(db):
         symbol="smbl",
         user_defined=False,
     )
-
 
 
 @pytest.fixture

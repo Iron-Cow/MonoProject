@@ -1,18 +1,16 @@
-from django.db import models
-from django.contrib.auth import get_user_model
-from requests import get
+import time
+
 from api.celery import app
-from humps import decamelize
-# from polymorphic.models import PolymorphicModel
-from utils.errors import MonoBankError
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
-
-
+from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from humps import decamelize
+from requests import get
 
-
-import time
+# from polymorphic.models import PolymorphicModel
+from utils.errors import MonoBankError
 
 DEFAULT_RETRY_POLICY = {
     # 'max_retries': 3,
@@ -88,17 +86,17 @@ class MonoAccount(models.Model):
             "-id",
         ]
 
-    def get_cards_jars(self) -> list:
+    def get_cards_jars(self) -> dict:
         url = MONO_API_URL + PERSONAL_INFO_PATH
         headers = {"X-Token": self.mono_token}
         user_data = get(url, headers=headers)
         data = user_data.json()
         if data.get("errorDescription"):
             # TODO: add logs / notifying
-            raise MonoBankError(data.get("errorDescription"))
+            raise MonoBankError(data["errorDescription"])
         return data
 
-    def create_cards_jars(self, data=None):
+    def create_cards_jars(self, data: dict | None = None):
         if not data:
             data = self.get_cards_jars()
         cards = data.get("accounts", [])
@@ -131,7 +129,9 @@ class MonoCard(models.Model):
     )
     iban = models.CharField(max_length=255)
 
-    def get_transactions(self, from_unix: int = None, to_unix=None) -> list:
+    def get_transactions(
+        self, from_unix: int | None = None, to_unix: int | None = None
+    ) -> list:
         # 30 days
         requested_period = 2592000
         if not to_unix:
@@ -212,13 +212,13 @@ class MonoJar(models.Model):
         mono_jar.save()
 
 
-
-
 class MonoTransaction(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     time = models.IntegerField()
     description = models.TextField(max_length=2048, blank=True, null=True)
-    mcc = models.ForeignKey(CategoryMSO, on_delete=models.CASCADE)  # connect with category
+    mcc = models.ForeignKey(
+        CategoryMSO, on_delete=models.CASCADE
+    )  # connect with category
     original_mcc = models.IntegerField(blank=True, null=True)
     amount = models.IntegerField()
     operation_amount = models.IntegerField(blank=True, null=True)
@@ -236,9 +236,7 @@ class MonoTransaction(models.Model):
         autoretry_for=(Exception,),
         retry_kwargs={"max_retries": 5, "countdown": 60},
     )
-    def create_transaction_from_webhook(
-            self, card_id, transaction_data: dict, account_type: str
-    ):
+    def create_transaction_from_webhook(self, card_id, transaction_data: dict):
 
         account = MonoCard.objects.get(id=card_id)
         try:
@@ -258,7 +256,10 @@ class MonoTransaction(models.Model):
         except Currency.DoesNotExist:
             currency = Currency.create_unknown_currency(currency_code)
         mono_transaction = MonoTransaction.objects.get_or_create(
-            account=account, mcc=mcc, currency=currency, **transaction_data,
+            account=account,
+            mcc=mcc,
+            currency=currency,
+            **transaction_data,
         )
         print(mono_transaction)
 

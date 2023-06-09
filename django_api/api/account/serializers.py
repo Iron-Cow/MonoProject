@@ -1,13 +1,14 @@
 from datetime import timedelta
 
-from .models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import (
     TokenObtainPairSerializer,
     TokenObtainSerializer,
 )
-from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 from rest_framework_simplejwt.utils import datetime_to_epoch
+
+from .models import User
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -39,7 +40,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     #
     #     return data
 
-    def get_token(cls, user):
-        token = super(CustomTokenObtainPairSerializer, cls).get_token(user)
+    def get_token(self, user):
+        token = super(CustomTokenObtainPairSerializer, self).get_token(user)
         token.payload["test_field"] = "test_value"
         return token

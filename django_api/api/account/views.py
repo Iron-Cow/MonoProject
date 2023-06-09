@@ -1,12 +1,13 @@
 # Create your views here.
+from django.contrib.auth import get_user_model
 from rest_framework import status
+from rest_framework.permissions import BasePermission, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, CustomTokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.permissions import IsAdminUser, BasePermission
 from rest_framework.viewsets import ModelViewSet
-from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from .serializers import CustomTokenObtainPairSerializer, UserSerializer
 
 User = get_user_model()
 
@@ -92,9 +93,6 @@ class UserView(APIView):
                 {"status": "fail", "data": "not valid"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
-    def post(self, request):
-        return Response({"data": "Not Implemented"}, status=status.HTTP_200_OK)
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

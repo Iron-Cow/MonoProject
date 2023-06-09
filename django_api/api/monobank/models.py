@@ -237,10 +237,10 @@ class MonoTransaction(models.Model):
         retry_kwargs={"max_retries": 5, "countdown": 60},
     )
     def create_transaction_from_webhook(
-            self, account_id, transaction_data: dict, account_type: str
+            self, card_id, transaction_data: dict, account_type: str
     ):
 
-        account = MonoCard.objects.get(id=account_id)
+        account = MonoCard.objects.get(id=card_id)
         try:
             mso = transaction_data.pop("mcc")
         except KeyError:
@@ -248,8 +248,8 @@ class MonoTransaction(models.Model):
             mso = mso_number
         try:
             mcc = CategoryMSO.objects.get(mso=mso)
-        except (ObjectDoesNotExist):
-            category = Category.objects.get(name="Інше")
+        except ObjectDoesNotExist:
+            category, _ = Category.objects.get_or_create(name="Інше")
             mcc = CategoryMSO.objects.create(category=category, mso=mso)
         transaction_data = decamelize(transaction_data)
         currency_code = transaction_data.pop("currency_code")

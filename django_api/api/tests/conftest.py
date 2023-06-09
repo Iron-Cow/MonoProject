@@ -102,6 +102,7 @@ def pre_created_categories(db):
     )
 
 
+
 @pytest.fixture
 def pre_created_mono_account(db, pre_created_user):
     account = MonoAccount.objects.create(

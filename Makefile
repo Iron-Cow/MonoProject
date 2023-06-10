@@ -4,8 +4,8 @@ build-api:
 
 .PHONY: test-api
 test-api: build-api
-	docker run -t api-dev pytest -vv
-	
+	docker run -t api-dev pytest --cov -vv
+
 # Typecheck api
 .PHONY: typecheck-api
 typecheck-api: build-api
@@ -16,4 +16,3 @@ typecheck-api: build-api
 .PHONY: lint-api
 lint-api: build-api
 	docker run -t api-dev black --check . --extend-exclude "snapshots|schema"
-	

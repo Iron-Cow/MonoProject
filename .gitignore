@@ -5,3 +5,4 @@ venv*
 /flask_executor/
 migrations/
 *.db
+*/.coverage

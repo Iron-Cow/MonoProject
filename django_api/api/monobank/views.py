@@ -106,15 +106,36 @@ class MonoJarViewSet(ModelViewSet):
         return MonoJar.objects.filter(monoaccount__user__tg_id=self.request.user.tg_id)
 
 
+class MonoTransactionIsOwnerOrAdminPermission(BasePermission):
+    """
+    Allows access only to admin users.
+    """
+
+    def has_permission(self, request, view):
+        """
+        Return `True` if permission is granted, `False` otherwise.
+        """
+        return bool(request.user)
+
+    def has_object_permission(self, request, view, obj: MonoTransaction):
+        """
+        Return `True` if permission is granted, `False` otherwise.
+        """
+        return bool(
+            request.user
+            and obj.account.monoaccount.user.tg_id == request.user.tg_id
+            or request.user.is_superuser
+        )
+
+
 class MonoTransactionViewSet(ModelViewSet):
     serializer_class = MonoTransactionSerializer
     http_method_names = ["get"]
 
     def get_permissions(self):
-        permission = IsAuthenticated()
-        # permission = AllowAny()
-        # if self.action in ("list", "retrieve"): # TODO: fix it
-        #     permission = MonoCardJarIsOwnerOrAdminPermission()
+        permission = IsAdminUser()
+        if self.action in ("list", "retrieve"):  # TODO: fix it
+            permission = MonoTransactionIsOwnerOrAdminPermission()
         return [permission]
 
     def get_queryset(self):
@@ -122,22 +143,12 @@ class MonoTransactionViewSet(ModelViewSet):
         users = self.request.query_params.get("users")
         if self.request.user.is_superuser:
             if users and self.action == "list":
-                return MonoTransaction.objects.filter(
-                    Q(
-                        monocardtransaction__account__monoaccount__user__tg_id=self.request.user.tg_id
-                    )
-                    | Q(
-                        monojartransaction__account__monoaccount__user__tg_id=self.request.user.tg_id
-                    )
+                return MonoTransaction.objects.select_related("mcc", "account").filter(
+                    Q(account__monoaccount__user__tg_id__in=users.split(","))
                 )
-            return MonoTransaction.objects.all()
-        return MonoTransaction.objects.filter(
-            Q(
-                monocardtransaction__account__monoaccount__user__tg_id=self.request.user.tg_id
-            )
-            | Q(
-                monojartransaction__account__monoaccount__user__tg_id=self.request.user.tg_id
-            )
+            return MonoTransaction.objects.select_related("mcc", "account").all()
+        return MonoTransaction.objects.select_related("mcc", "account").filter(
+            Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
         )
 
 

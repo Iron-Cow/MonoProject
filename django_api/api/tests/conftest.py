@@ -7,7 +7,15 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import connections
 from django.urls import reverse
-from monobank.models import Category, Currency, MonoAccount, MonoCard, MonoJar
+from monobank.models import (
+    Category,
+    CategoryMSO,
+    Currency,
+    MonoAccount,
+    MonoCard,
+    MonoJar,
+    MonoTransaction,
+)
 from rest_framework.exceptions import ErrorDetail
 from rest_framework.test import APIRequestFactory, force_authenticate
 
@@ -87,15 +95,28 @@ def pre_created_user(db) -> User:
 
 @pytest.fixture
 def pre_created_categories(db):
-    Category.objects.create(
-        name="precreated_category_name1",
-        symbol="smbl",
-        user_defined=False,
+    return (
+        Category.objects.create(
+            name="precreated_category_name1",
+            symbol="smbl",
+            user_defined=False,
+        ),
+        Category.objects.create(
+            name="precreated_category_name2",
+            symbol="smbl",
+            user_defined=False,
+        ),
     )
-    Category.objects.create(
-        name="precreated_category_name2",
-        symbol="smbl",
-        user_defined=False,
+
+
+@pytest.fixture
+def pre_created_categories_mso(db, pre_created_categories):
+    return CategoryMSO.objects.create(
+        category=pre_created_categories[0],
+        mso=1234,
+    ), CategoryMSO.objects.create(
+        category=pre_created_categories[1],
+        mso=1235,
     )
 
 
@@ -164,3 +185,39 @@ def pre_created_mono_jar(db, pre_created_mono_account, pre_created_currency):
         goal=2001,
     )
     return monojar, monojar2
+
+
+@pytest.fixture
+def pre_created_mono_transaction(
+    db, pre_created_mono_card, pre_created_currency, pre_created_categories_mso
+):
+    MonoTransaction.objects.create(
+        id="pre_created_id",
+        time=12345,
+        description="pre_created_description",
+        mcc=pre_created_categories_mso[0],
+        amount=-5000,
+        commission_rate=0,
+        currency=pre_created_currency,
+        balance=10000,
+        hold=True,
+        receipt_id="pre_created_receipt_id",
+        account=pre_created_mono_card[0],
+        cashback_amount=0,
+        comment="pre_created_comment",
+    )
+    MonoTransaction.objects.create(
+        id="pre_created_id2",
+        time=12345,
+        description="pre_created_description2",
+        mcc=pre_created_categories_mso[1],
+        amount=-15000,
+        commission_rate=0,
+        currency=pre_created_currency,
+        balance=10000,
+        hold=True,
+        receipt_id="pre_created_receipt_id",
+        account=pre_created_mono_card[1],
+        cashback_amount=0,
+        comment="pre_created_comment2",
+    )

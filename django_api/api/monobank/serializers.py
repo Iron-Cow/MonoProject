@@ -85,8 +85,20 @@ class MonoTransactionSerializer(serializers.ModelSerializer):
             "id",
             "amount",
             "account_id",
-            "account_type",
             "currency",
+            "comment",
+            "balance",
+            "category",
+            "category_symbol",
+            "description",
         ]
 
     currency = CurrencySerializer()
+    category = serializers.SerializerMethodField()
+    category_symbol = serializers.SerializerMethodField()
+
+    def get_category(self, obj: MonoTransaction):
+        return obj.mcc.category.name
+
+    def get_category_symbol(self, obj: MonoTransaction):
+        return obj.mcc.category.symbol

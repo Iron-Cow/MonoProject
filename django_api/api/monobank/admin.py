@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+
 from .models import (
     Category,
-    Currency,
     CategoryMSO,
+    Currency,
     MonoAccount,
     MonoCard,
     MonoJar,
@@ -19,6 +20,16 @@ admin.site.register(CategoryMSO)
 admin.site.register(MonoAccount)
 admin.site.register(MonoCard)
 admin.site.register(MonoJar)
-admin.site.register(MonoTransaction)
+
+
+class MonoTransactionModelAdmin(admin.ModelAdmin):
+    list_display = ["id", "time", "amount", "description", "balance"]
+
+    class Meta:
+        model = MonoTransaction
+
+
+admin.site.register(MonoTransaction, MonoTransactionModelAdmin)
+
 # admin.site.register(MonoCardTransaction)
 # admin.site.register(MonoJarTransaction)

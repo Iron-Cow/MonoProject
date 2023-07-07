@@ -114,6 +114,17 @@ class MonoAccount(models.Model):
                 retry_policy=DEFAULT_RETRY_POLICY,
             )
 
+    @app.task(
+        bind=True,
+        autoretry_for=(Exception,),
+        retry_kwargs={"max_retries": 5, "countdown": 60},
+    )
+    def update_users(self):
+        users = MonoAccount.objects.all()
+        for user in users:
+            print(f"updating {user}")
+            user.create_cards_jars()
+
 
 class MonoCard(models.Model):
     monoaccount = models.ForeignKey(MonoAccount, on_delete=models.CASCADE)
@@ -149,7 +160,7 @@ class MonoCard(models.Model):
             raise MonoBankError(data.get("errorDescription"))
         for transaction in data:
             MonoTransaction.create_transaction_from_webhook.apply_async(
-                args=(self.id, transaction, "card"),
+                args=(self.id, transaction),
                 retry=True,
                 retry_policy=DEFAULT_RETRY_POLICY,
             )
@@ -167,16 +178,19 @@ class MonoCard(models.Model):
     def create_card_from_webhook(
         self, tg_id: str, card_data: dict, update_transactions: bool = False
     ):
-        mono_account = MonoAccount.objects.get(user__tg_id=tg_id)
+        mono_account = MonoAccount.objects.select_related("user").get(user__tg_id=tg_id)
         card_data = decamelize(card_data)
         currency_code = card_data.pop("currency_code")
         try:
             currency = Currency.objects.get(code=int(currency_code))
         except Currency.DoesNotExist:
             currency = Currency.create_unknown_currency(currency_code)
-        mono_card, created = MonoCard.objects.get_or_create(
-            monoaccount=mono_account, currency=currency, **card_data
-        )
+        try:
+            mono_card = MonoCard.objects.get(id=card_data.get("id"))
+        except MonoCard.DoesNotExist:
+            mono_card, _ = MonoCard.objects.get_or_create(
+                monoaccount=mono_account, currency=currency, **card_data
+            )
         if update_transactions:
             mono_card.get_transactions()
 
@@ -261,7 +275,6 @@ class MonoTransaction(models.Model):
             currency=currency,
             **transaction_data,
         )
-        print(mono_transaction)
 
 
 @receiver(pre_save)

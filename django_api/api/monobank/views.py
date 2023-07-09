@@ -143,12 +143,20 @@ class MonoTransactionViewSet(ModelViewSet):
         users = self.request.query_params.get("users")
         if self.request.user.is_superuser:
             if users and self.action == "list":
-                return MonoTransaction.objects.select_related("mcc", "account").filter(
-                    Q(account__monoaccount__user__tg_id__in=users.split(","))
+                return (
+                    MonoTransaction.objects.select_related("mcc", "account")
+                    .order_by("time", "id")
+                    .filter(Q(account__monoaccount__user__tg_id__in=users.split(",")))
                 )
-            return MonoTransaction.objects.select_related("mcc", "account").all()
-        return MonoTransaction.objects.select_related("mcc", "account").filter(
-            Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
+            return (
+                MonoTransaction.objects.select_related("mcc", "account")
+                .all()
+                .order_by("time", "id")
+            )
+        return (
+            MonoTransaction.objects.select_related("mcc", "account")
+            .order_by("time", "id")
+            .filter(Q(account__monoaccount__user__tg_id=self.request.user.tg_id))
         )
 
 

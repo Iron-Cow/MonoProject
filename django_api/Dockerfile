@@ -9,7 +9,7 @@ RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
 
 COPY api ./
 RUN useradd nonroot && chown nonroot: /api
-
+EXPOSE 5432
 
 USER nonroot
 CMD ["python", "manage.py", "makemigrations"]

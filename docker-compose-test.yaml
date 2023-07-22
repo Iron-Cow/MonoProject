@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+  api-test:
+    platform: linux/amd64
+    depends_on:
+      - databasetest
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    links:
+      - "databasetest:databasetest"
+    environment:
+      DB_PASSWORD: password
+      DB_HOST: databasetest
+      DB_NAME: postgres
+      DB_USER: postgres
+    command: [ "pytest", "--cov", "-vv" ]
+    ports:
+      - 8000:8000
+
+
+  databasetest:
+    image: postgres:14-alpine
+    platform: linux/amd64
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:

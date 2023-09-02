@@ -3,4 +3,5 @@
 venv*
 *pycache*
 /flask_executor/
-migrations/
+*.db
+*/.coverage

@@ -1,0 +1,36 @@
+name: Preview Dev Deployment
+
+on:
+  pull_request:
+    branches:
+      - master
+
+env:
+  V: '1'
+
+concurrency:
+  group: tests
+  cancel-in-progress: false
+
+jobs:
+  lint-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint api
+        run: |
+          make lint-api
+  typecheck-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Typecheck api
+        run: |
+          make typecheck-api
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test api
+        run: |
+          make test-api

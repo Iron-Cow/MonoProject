@@ -17,7 +17,10 @@ class AuthBackend(BaseAuthentication):
             return None
 
         user, created = UserModel._default_manager.get_or_create(
-            **{UserModel.USERNAME_FIELD: user_data["username"], UserModel.EMAIL_FIELD: user_data["email"]}
+            **{
+                UserModel.USERNAME_FIELD: user_data["username"],
+                UserModel.EMAIL_FIELD: user_data["email"],
+            }
         )
 
         if created:

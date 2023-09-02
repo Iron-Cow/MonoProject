@@ -9,31 +9,46 @@ services:
   api:
     env_file:
       - ".env"
-    platform: linux/amd64
     depends_on:
       - database
       - redis
     build:
-      context: api
+      context: django_api
+      dockerfile: Dockerfile
     ports:
       - $PORT_API_HOST:$PORT_API_CONTAINER
 
   worker:
     build:
-        context: api
+        context: django_api
         dockerfile: Dockerfile2
-    command: celery worker --app=worker.celery --loglevel=info
+    command: celery --app=api worker -l INFO
+    #celery --app=api worker -l INFO
     volumes:
-      - ./api/src:/api
+      - ./django_api/api:/api
     env_file:
       - ".env"
     depends_on:
       - redis
+      - api
+
+
+  celery_beat:
+    build:
+      context: django_api
+      dockerfile: Dockerfile2
+    command:  celery --app=api beat -l INFO
+    volumes:
+      - ./django_api/api:/api
+    env_file:
+      - ".env"
+    depends_on:
+      - redis
+      - api
 
   chatbot:
     env_file:
       - ".env"
-    platform: linux/amd64
     depends_on:
       - database
       - api
@@ -43,13 +58,15 @@ services:
     build:
       context: chatbot
 
+
   database:
-    image: postgres:14-alpine
-    platform: linux/amd64
+    image: postgres
+    env_file:
+      - ".env"
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:

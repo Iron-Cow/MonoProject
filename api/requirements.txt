@@ -1,3 +1,4 @@
+
 amqp==2.6.1
 anyio==3.6.1
 billiard==3.6.4.0
@@ -21,7 +22,7 @@ pydantic==1.10.2
 pyhumps==3.7.3
 python-dotenv==0.21.0
 pytz==2022.5
-PyYAML==6.0
+PyYAML
 redis==3.5.3
 requests==2.28.1
 serpy==0.3.1

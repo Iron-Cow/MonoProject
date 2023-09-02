@@ -9,7 +9,6 @@ services:
   api:
     env_file:
       - ".env"
-    platform: linux/amd64
     depends_on:
       - database
       - redis
@@ -31,6 +30,7 @@ services:
       - ".env"
     depends_on:
       - redis
+      - api
 
 
   celery_beat:
@@ -44,11 +44,11 @@ services:
       - ".env"
     depends_on:
       - redis
+      - api
 
   chatbot:
     env_file:
       - ".env"
-    platform: linux/amd64
     depends_on:
       - database
       - api
@@ -60,12 +60,13 @@ services:
 
 
   database:
-    image: postgres:14-alpine
-    platform: linux/amd64
+    image: postgres
+    env_file:
+      - ".env"
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:

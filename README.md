@@ -10,6 +10,10 @@ DB_PASSWORD = ...
 DB_HOST = ...
 CHAT_BOT_API_KEY = ...
 BOT_TOKEN = ...
+
+CELERY_BROKER_URL=redis://redis:6379
+CELERY_RESULT_BACKEND=redis://redis:6379/0
+
 ```
 
 `pip install -r requirements.txt`
@@ -26,7 +30,7 @@ Run docker compose:
     python manage.py loaddata currency.json
 
 
-
+Local config: 
 
     celery --app=django_celery_example beat -l INFO
     celery --app=django_celery_example worker --loglevel=info

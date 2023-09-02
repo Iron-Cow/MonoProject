@@ -3,8 +3,6 @@ services:
 
   redis:
     image: redis:6-alpine
-    ports:
-      - 6379:6379
 
   api:
     env_file:
@@ -69,8 +67,6 @@ services:
       POSTGRES_PASSWORD: $DB_PASSWORD
     volumes:
       - pgdata:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
 volumes:
   pgdata:

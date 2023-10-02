@@ -203,7 +203,7 @@ class MonoJar(models.Model):
     # currency_code = models.IntegerField()
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     balance = models.IntegerField()
-    goal = models.IntegerField()
+    goal = models.IntegerField(null=True, blank=True)
 
     @app.task(
         bind=True,
@@ -224,6 +224,34 @@ class MonoJar(models.Model):
             currency = Currency.create_unknown_currency(currency_code)
         mono_jar = MonoJar(monoaccount=mono_account, currency=currency, **jar_data)
         mono_jar.save()
+
+    def get_transactions(
+        self, from_unix: int | None = None, to_unix: int | None = None
+    ) -> list:
+        # 30 days
+        requested_period = 2592000
+        if not to_unix:
+            to_unix = int(time.time())
+        if not from_unix:
+            from_unix = to_unix - requested_period
+
+        url = f"{MONO_API_URL}{TRANSACTIONS_PATH}/{self.id}/{from_unix}/{to_unix}"
+        headers = {"X-Token": self.monoaccount.mono_token}
+        user_data = get(url, headers=headers)
+
+        data = user_data.json()
+        if not isinstance(data, list) and data.get("errorDescription"):
+            # TODO: add logs / notifying
+            raise MonoBankError(data.get("errorDescription"))
+        for transaction in data:
+            JarTransaction.create_jar_transaction_from_webhook.apply_async(
+                args=(self.id, transaction),
+                retry=True,
+                retry_policy=DEFAULT_RETRY_POLICY,
+            )
+            # JarTransaction.create_jar_transaction_from_webhook(self.id, transaction)
+
+        return data
 
 
 class MonoTransaction(models.Model):
@@ -270,6 +298,53 @@ class MonoTransaction(models.Model):
         except Currency.DoesNotExist:
             currency = Currency.create_unknown_currency(currency_code)
         mono_transaction = MonoTransaction.objects.get_or_create(
+            account=account,
+            mcc=mcc,
+            currency=currency,
+            **transaction_data,
+        )
+
+
+class JarTransaction(models.Model):
+    account = models.ForeignKey(MonoJar, on_delete=models.CASCADE)
+    id = models.CharField(max_length=255, primary_key=True)
+    time = models.BigIntegerField()
+    description = models.TextField(max_length=2048, blank=True, null=True)
+    mcc = models.ForeignKey(CategoryMSO, on_delete=models.CASCADE)
+    original_mcc = models.IntegerField(blank=True, null=True)
+    amount = models.IntegerField()
+    operation_amount = models.IntegerField(blank=True, null=True)
+    currency = models.ForeignKey(Currency, on_delete=models.SET_NULL, null=True)
+    commission_rate = models.IntegerField(blank=True, null=True)
+    cashback_amount = models.IntegerField()
+    balance = models.IntegerField()
+    hold = models.BooleanField()
+
+    @app.task(
+        bind=True,
+        autoretry_for=(Exception,),
+        retry_kwargs={"max_retries": 5, "countdown": 60},
+    )
+    def create_jar_transaction_from_webhook(self, card_id, transaction_data: dict):
+
+        account = MonoJar.objects.get(id=card_id)
+        try:
+            mso = transaction_data.pop("mcc")
+        except KeyError:
+            mso_number = len(CategoryMSO.objects.all())
+            mso = mso_number
+        try:
+            mcc = CategoryMSO.objects.get(mso=mso)
+        except ObjectDoesNotExist:
+            category, _ = Category.objects.get_or_create(name="Інше")
+            mcc = CategoryMSO.objects.create(category=category, mso=mso)
+        transaction_data = decamelize(transaction_data)
+        currency_code = transaction_data.pop("currency_code")
+        try:
+            currency = Currency.objects.get(code=int(currency_code))
+        except Currency.DoesNotExist:
+            currency = Currency.create_unknown_currency(currency_code)
+        mono_transaction = JarTransaction.objects.get_or_create(
             account=account,
             mcc=mcc,
             currency=currency,

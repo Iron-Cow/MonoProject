@@ -1,16 +1,14 @@
 import json
-import os
 from typing import Callable, List, NamedTuple
 
 import pytest
-from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.db import connections
 from django.urls import reverse
 from monobank.models import (
     Category,
     CategoryMSO,
     Currency,
+    JarTransaction,
     MonoAccount,
     MonoCard,
     MonoJar,
@@ -220,4 +218,36 @@ def pre_created_mono_transaction(
         account=pre_created_mono_card[1],
         cashback_amount=0,
         comment="pre_created_comment2",
+    )
+
+
+@pytest.fixture
+def pre_created_mono_jar_transaction(
+    db, pre_created_mono_jar, pre_created_currency, pre_created_categories_mso
+):
+    JarTransaction.objects.create(
+        id="pre_created_id",
+        time=12345,
+        description="pre_created_description",
+        mcc=pre_created_categories_mso[0],
+        amount=-5000,
+        commission_rate=0,
+        currency=pre_created_currency,
+        balance=10000,
+        hold=True,
+        account=pre_created_mono_jar[0],
+        cashback_amount=0,
+    )
+    JarTransaction.objects.create(
+        id="pre_created_id2",
+        time=12345,
+        description="pre_created_description2",
+        mcc=pre_created_categories_mso[1],
+        amount=-15000,
+        commission_rate=0,
+        currency=pre_created_currency,
+        balance=10000,
+        hold=True,
+        account=pre_created_mono_jar[1],
+        cashback_amount=0,
     )

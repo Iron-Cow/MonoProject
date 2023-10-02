@@ -1,11 +1,6 @@
-from django.db import models
-
 # Create your models here.
-from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.db import models
 
 
 class UserManager(BaseUserManager):
@@ -49,7 +44,6 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-
     tg_id = models.CharField(max_length=255, unique=True, primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     active = models.BooleanField(default=True)

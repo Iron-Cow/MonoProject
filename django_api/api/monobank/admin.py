@@ -5,6 +5,7 @@ from .models import (
     Category,
     CategoryMSO,
     Currency,
+    JarTransaction,
     MonoAccount,
     MonoCard,
     MonoJar,
@@ -20,6 +21,7 @@ admin.site.register(CategoryMSO)
 admin.site.register(MonoAccount)
 admin.site.register(MonoCard)
 admin.site.register(MonoJar)
+admin.site.register(JarTransaction)
 
 
 class MonoTransactionModelAdmin(admin.ModelAdmin):

@@ -58,6 +58,7 @@ class MonoCardSerializer(serializers.ModelSerializer):
             "masked_pan",
             "type",
             "iban",
+            "owner_name",
         ]
 
     currency = CurrencySerializer()
@@ -73,6 +74,7 @@ class MonoJarSerializer(serializers.ModelSerializer):
             "currency",
             "balance",
             "goal",
+            "owner_name",
         ]
 
     currency = CurrencySerializer()
@@ -91,6 +93,7 @@ class MonoTransactionSerializer(serializers.ModelSerializer):
             "category",
             "category_symbol",
             "description",
+            "owner_name",
         ]
 
     currency = CurrencySerializer()
@@ -116,6 +119,7 @@ class MonoJarTransactionSerializer(serializers.ModelSerializer):
             "category",
             "category_symbol",
             "description",
+            "owner_name",
         ]
 
     currency = CurrencySerializer()

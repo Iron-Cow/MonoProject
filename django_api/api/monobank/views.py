@@ -89,7 +89,14 @@ class MonoCardViewSet(ModelViewSet):
                     monoaccount__user__tg_id__in=users.split(",")
                 )
             return MonoCard.objects.all()
-        return MonoCard.objects.filter(monoaccount__user__tg_id=self.request.user.tg_id)
+        return MonoCard.objects.filter(
+            Q(monoaccount__user__tg_id=self.request.user.tg_id)
+            | Q(
+                monoaccount__user__tg_id__in=[
+                    member.tg_id for member in self.request.user.family_members.all()
+                ]
+            )
+        )
 
 
 class MonoJarViewSet(ModelViewSet):
@@ -110,7 +117,14 @@ class MonoJarViewSet(ModelViewSet):
                     monoaccount__user__tg_id__in=users.split(",")
                 )
             return MonoJar.objects.all()
-        return MonoJar.objects.filter(monoaccount__user__tg_id=self.request.user.tg_id)
+        return MonoJar.objects.filter(
+            Q(monoaccount__user__tg_id=self.request.user.tg_id)
+            | Q(
+                monoaccount__user__tg_id__in=[
+                    member.tg_id for member in self.request.user.family_members.all()
+                ]
+            )
+        )
 
 
 class MonoTransactionIsOwnerOrAdminPermission(BasePermission):
@@ -163,7 +177,15 @@ class MonoJarTransactionViewSet(ModelViewSet):
         return (
             JarTransaction.objects.select_related("mcc", "account")
             .order_by("time", "id")
-            .filter(Q(account__monoaccount__user__tg_id=self.request.user.tg_id))
+            .filter(
+                Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
+                | Q(
+                    account__monoaccount__user__tg_id__in=[
+                        member.tg_id
+                        for member in self.request.user.family_members.all()
+                    ]
+                )
+            )
         )
 
 
@@ -195,7 +217,15 @@ class MonoTransactionViewSet(ModelViewSet):
         return (
             MonoTransaction.objects.select_related("mcc", "account")
             .order_by("time", "id")
-            .filter(Q(account__monoaccount__user__tg_id=self.request.user.tg_id))
+            .filter(
+                Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
+                | Q(
+                    account__monoaccount__user__tg_id__in=[
+                        member.tg_id
+                        for member in self.request.user.family_members.all()
+                    ]
+                )
+            )
         )
 
 
@@ -203,7 +233,7 @@ class TestEndpoint(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        account = MonoAccount.objects.first()
+        account = User.objects.get(tg_id=11111)
         print(account)
         account.create_cards_jars()
         jar = MonoJar.objects.get(id="py6VpkfAYUx7w48jEU0F4EFqpkLw0to")

@@ -140,6 +140,10 @@ class MonoCard(models.Model):
     )
     iban = models.CharField(max_length=255)
 
+    @property
+    def owner_name(self):
+        return self.monoaccount.user.name
+
     def get_transactions(
         self, from_unix: int | None = None, to_unix: int | None = None
     ) -> list:
@@ -204,6 +208,10 @@ class MonoJar(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     balance = models.IntegerField()
     goal = models.IntegerField(null=True, blank=True)
+
+    @property
+    def owner_name(self):
+        return self.monoaccount.user.name
 
     @app.task(
         bind=True,
@@ -273,6 +281,10 @@ class MonoTransaction(models.Model):
     cashback_amount = models.IntegerField()
     comment = models.TextField(max_length=2048, blank=True, null=True)
 
+    @property
+    def owner_name(self):
+        return self.account.monoaccount.user.name
+
     @app.task(
         bind=True,
         autoretry_for=(Exception,),
@@ -319,6 +331,10 @@ class JarTransaction(models.Model):
     cashback_amount = models.IntegerField()
     balance = models.IntegerField()
     hold = models.BooleanField()
+
+    @property
+    def owner_name(self):
+        return self.account.monoaccount.user.name
 
     @app.task(
         bind=True,

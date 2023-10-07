@@ -49,6 +49,9 @@ class User(AbstractBaseUser):
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
+    family_members = models.ManyToManyField(
+        "self", symmetrical=True, related_name="family_members"
+    )
 
     USERNAME_FIELD = "tg_id"
     # REQUIRED_FIELDS = ['telegram_id']

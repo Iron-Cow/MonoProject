@@ -68,6 +68,7 @@ monotransactions_variants = [
                 "category": "precreated_category_name1",
                 "category_symbol": "smbl",
                 "description": "pre_created_description",
+                "owner_name": "User-precreated_user_tg_id",
             },
         ),
     ),
@@ -89,6 +90,7 @@ monotransactions_variants = [
                 "category": "precreated_category_name1",
                 "category_symbol": "smbl",
                 "description": "pre_created_description",
+                "owner_name": "User-precreated_user_tg_id",
             },
         ),
     ),
@@ -127,6 +129,7 @@ monotransactions_variants = [
                     "category": "precreated_category_name1",
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "pre_created_id2",
@@ -143,6 +146,7 @@ monotransactions_variants = [
                     "category": "precreated_category_name2",
                     "category_symbol": "smbl",
                     "description": "pre_created_description2",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "some_tr_id",
@@ -159,6 +163,7 @@ monotransactions_variants = [
                     "category": "precreated_category_name2",
                     "category_symbol": "smbl",
                     "description": "",
+                    "owner_name": "User-any_id",
                 },
             ],
         ),
@@ -187,6 +192,7 @@ monotransactions_variants = [
                     "category": "precreated_category_name1",
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "pre_created_id2",
@@ -203,6 +209,7 @@ monotransactions_variants = [
                     "category": "precreated_category_name2",
                     "category_symbol": "smbl",
                     "description": "pre_created_description2",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
             ],
         ),
@@ -230,6 +237,7 @@ monotransactions_variants = [
                     "category": "precreated_category_name1",
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "pre_created_id2",
@@ -246,6 +254,7 @@ monotransactions_variants = [
                     "category": "precreated_category_name2",
                     "category_symbol": "smbl",
                     "description": "pre_created_description2",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
             ],
         ),
@@ -267,7 +276,6 @@ def test_monotransactions(
     pre_created_currency,
     pre_created_categories_mso,
 ):
-
     user = User.objects.create_user(
         "any_id",
         variant.password,

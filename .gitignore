@@ -5,3 +5,5 @@ venv*
 /flask_executor/
 *.db
 */.coverage
+
+*/logs.log

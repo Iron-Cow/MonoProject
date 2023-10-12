@@ -11,10 +11,13 @@ class Config:
     DB_HOST = os.getenv("DB_HOST", "NOT_SET")
     BOT_TOKEN = os.getenv("BOT_TOKEN", "NOT_SET")
     API_HOST = os.getenv("API_HOST", "NOT_SET")
-
+    API_ADMIN_USERNAME = os.getenv("API_ADMIN_USERNAME", "NOT_SET")
+    API_ADMIN_PASSWORD = os.getenv("API_ADMIN_PASSWORD", "NOT_SET")
 
     def __setattr__(self, key, value):
         raise Exception("new values should not be set manually")
 
 
-config = Config()
+def get_config() -> Config:
+    config = Config()
+    return config

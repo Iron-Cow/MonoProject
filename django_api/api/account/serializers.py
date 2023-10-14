@@ -1,21 +1,20 @@
 from datetime import timedelta
 
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import (
-    TokenObtainPairSerializer,
-    TokenObtainSerializer,
-)
-from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
-from rest_framework_simplejwt.utils import datetime_to_epoch
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from .models import User
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["tg_id", "password", "name"]
-        extra_kwargs = {"password": {"write_only": True, "min_length": 6}}
+        default = []
+        fields = ["tg_id", "password", "name", "family_members"]
+        extra_kwargs = {
+            "password": {"write_only": True, "min_length": 6},
+            "family_members": {"read_only": True},
+        }
 
     def create(self, validated_data):
         password = validated_data.pop("password")

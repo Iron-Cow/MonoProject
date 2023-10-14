@@ -26,6 +26,9 @@ class KeyboardManager:
         self.get_mono_token_button = InlineKeyboardButton(
             "Get MonoToken", url="https://api.monobank.ua/"
         )
+        self.get_mono_jars = InlineKeyboardButton(
+            "Get my jars", callback_data="get_user_jars"
+        )
 
     @staticmethod
     def get_inline_keyboard() -> InlineKeyboardMarkup:

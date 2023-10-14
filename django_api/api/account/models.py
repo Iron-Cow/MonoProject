@@ -50,7 +50,7 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
     family_members = models.ManyToManyField(
-        "self", symmetrical=True, related_name="family_members"
+        "self", symmetrical=True, related_name="family_members", blank=True, null=True
     )
 
     USERNAME_FIELD = "tg_id"

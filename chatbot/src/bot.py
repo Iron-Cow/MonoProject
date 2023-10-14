@@ -12,7 +12,7 @@ from keyboard_manager import KeyboardManager
 from loguru import logger
 from request_manager import RequestManager
 from states import MonotokenStates
-from utils import generate_password
+from utils import generate_password, get_jar_data
 
 PASSWORD_LENGTH = 16
 
@@ -45,8 +45,72 @@ async def start(message: types.Message):
 
 @dp.message_handler(state="*", commands=["help"])
 async def help(message: types.Message):
-    text = "help handler"
-    await bot.send_message(message.chat.id, text)
+    has_user = False
+    has_account = False
+    available_commands = """
+    /help - check available options
+    """
+    resp = rm.get(f"/monobank/monoaccounts/")
+    if resp.status_code != 200:
+        text = f"something went wrong try again or contast the support"
+        await bot.send_message(message.chat.id, text)
+
+    # [{
+    #     "user": "552901111",
+    #     "mono_token": "umedfPsJgqMZP5pHeFcy8Y6skmSJsadfasdfsadfasd",
+    #     "active": true
+    # }]
+    for user in resp.json():
+        if user.get("user") == str(message.from_user.id):
+            has_account = True
+            break
+    else:
+        available_commands += "\n /register - register your account"
+
+    if has_account:
+        available_commands += "\n /monojars - get you jars "
+
+    await bot.send_message(message.chat.id, available_commands)
+
+
+@dp.message_handler(state="*", commands=["monojars"])
+async def monojars(message: types.Message):
+    kb = kbm.get_inline_keyboard().row(kbm.get_mono_jars).row(kbm.cancel_button)
+    await bot.send_message(
+        message.chat.id,
+        "pick your option",
+        reply_markup=kb,
+        parse_mode=ParseMode.MARKDOWN_V2,
+    )
+
+
+@dp.callback_query_handler(lambda c: c.data == "get_user_jars")
+async def get_user_jars(callback_query: types.CallbackQuery):
+    await reply_on_button(callback_query, kbm.get_mono_jars, bot)
+    resp = rm.get(f"/monobank/monojars/?users={callback_query.from_user.id}")
+    if resp.status_code != 200:
+        txt = "Something went wrong. Try other commands or /help"
+        await bot.send_message(callback_query.message.chat.id, txt)
+        return
+
+    data = resp.json()
+    if len(data) == 0:
+        txt = "No jars to display"
+        await bot.send_message(callback_query.message.chat.id, txt)
+        return
+
+    for jar in data:
+        jar_obj = get_jar_data(jar)
+
+        title = f"**__{jar_obj.title}__**"
+        value = (
+            f"*{jar_obj.currency.flag} {jar_obj.balance / 100}{jar_obj.currency.name}*"
+        )
+        await bot.send_message(
+            callback_query.message.chat.id,
+            f"{title}\n{value}".replace(".", "\."),
+            parse_mode=ParseMode.MARKDOWN_V2,
+        )
 
 
 # INFO COMMANDS

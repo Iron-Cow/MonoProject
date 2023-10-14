@@ -109,7 +109,7 @@ class MonoAccount(models.Model):
         jars = data.get("jars", [])
         for jar in jars:
             MonoJar.create_jar_from_webhook.apply_async(
-                args=(self.user.tg_id, jar),
+                args=(self.user.tg_id, jar, True),
                 retry=True,
                 retry_policy=DEFAULT_RETRY_POLICY,
             )
@@ -232,6 +232,9 @@ class MonoJar(models.Model):
             currency = Currency.create_unknown_currency(currency_code)
         mono_jar = MonoJar(monoaccount=mono_account, currency=currency, **jar_data)
         mono_jar.save()
+        if update_transactions:
+            mono_jar.get_transactions()
+        return update_transactions
 
     def get_transactions(
         self, from_unix: int | None = None, to_unix: int | None = None

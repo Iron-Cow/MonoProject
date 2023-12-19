@@ -1,0 +1,10 @@
+FROM nginx:latest
+
+COPY ssl-sertificate.crt /etc/nginx/ssl/live/example.org/ssl-sertificate.crt
+COPY ssl-key.key /etc/nginx/ssl/live/example.org/ssl-key.key
+
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx_script.sh /nginx_script.sh
+RUN chmod +x /nginx_script.sh
+CMD ["/nginx_script.sh"]

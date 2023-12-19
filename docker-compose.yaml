@@ -18,8 +18,8 @@ services:
 
   worker:
     build:
-        context: django_api
-        dockerfile: Dockerfile2
+      context: django_api
+      dockerfile: Dockerfile2
     command: celery --app=api worker -l INFO
     #celery --app=api worker -l INFO
     volumes:
@@ -35,7 +35,7 @@ services:
     build:
       context: django_api
       dockerfile: Dockerfile2
-    command:  celery --app=api beat -l INFO
+    command: celery --app=api beat -l INFO
     volumes:
       - ./django_api/api:/api
     env_file:
@@ -67,6 +67,37 @@ services:
       POSTGRES_PASSWORD: $DB_PASSWORD
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  #  nginx:
+  #    build:
+  #      dockerfile: Dockerfile.nginx
+  #    env_file:
+  #      - ".env"
+  #    ports:
+  #      - "443:443"
+  #    depends_on:
+  #      - api
+  #      - web
+  #    links:
+  #      - "api:api"
+  #      - "web:web"
+  #    volumes:
+  #      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+  #    environment:
+  #      - API_PORT=$PORT_API_HOST
+  #      - SSL=ssl
+
+  web:
+    env_file:
+      - ".env"
+    build:
+      context: frontend/mono_frontend
+    ports:
+      - $PORT_FRONTEND:$PORT_FRONTEND
+    environment:
+      - PORT=$PORT_FRONTEND
+
+
 
 volumes:
   pgdata:

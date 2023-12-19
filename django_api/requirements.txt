@@ -18,3 +18,4 @@ pyhumps
 django-polymorphic
 django-debug-toolbar
 django-environ
+django-cors-headers

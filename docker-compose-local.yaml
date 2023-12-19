@@ -72,5 +72,34 @@ services:
     ports:
       - "5432:5432"
 
+  #  nginx:
+  #    build:
+  #      dockerfile: Dockerfile.nginx
+  #    env_file:
+  #      - ".env"
+  #    ports:
+  #      - "443:443"
+  #    depends_on:
+  #      - api
+  #      - web
+  #    links:
+  #      - "api:api"
+  #      - "web:web"
+  #    volumes:
+  #      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+  #    environment:
+  #      - API_PORT=$PORT_API_HOST
+  #      - SSL=ssl
+
+  web:
+    env_file:
+      - ".env"
+    build:
+      context: frontend/mono_frontend
+    ports:
+      - $PORT_FRONTEND:$PORT_FRONTEND
+    environment:
+      - PORT=$PORT_FRONTEND
+
 volumes:
   pgdata:

@@ -1,10 +1,12 @@
 #!/bin/sh
 
-echo "Starting Nginx with API_PORT=$API_PORT"
+echo "Starting Nginx with API_PORT=$PORT_API_HOST"
 
 # Replace the API_PORT placeholder
 sed -i "s/\${PORT_API_HOST}/$PORT_API_HOST/g" /etc/nginx/nginx.conf
 sed -i "s/\${PORT_FRONTEND}/$PORT_FRONTEND/g" /etc/nginx/nginx.conf
+sed -i "s/\${PORT_HOST_BACKEND}/$PORT_HOST_BACKEND/g" /etc/nginx/nginx.conf
+sed -i "s/\${PORT_HOST_FRONTEND}/$PORT_HOST_FRONTEND/g" /etc/nginx/nginx.conf
 sed -i "s/\${HOSTNAME_BACKEND}/$HOSTNAME_BACKEND/g" /etc/nginx/nginx.conf
 sed -i "s/\${SSL}/$SSL/g" /etc/nginx/nginx.conf
 

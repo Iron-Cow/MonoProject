@@ -1,11 +1,10 @@
 import pytest
-
+from django.contrib.auth import get_user_model
 from monobank.models import MonoAccount, MonoCard
 from monobank.views import MonoCardViewSet
 from rest_framework.exceptions import ErrorDetail
 
-from .conftest import Variant, NO_PERMISSION_ERROR
-from django.contrib.auth import get_user_model
+from .conftest import Variant
 
 User = get_user_model()
 
@@ -28,6 +27,7 @@ monocards_variants = [
                 "masked_pan": ["pre_created_masked_pan"],
                 "type": "white",
                 "iban": "pre_created_iban",
+                "owner_name": "User-precreated_user_tg_id",
             },
         ),
     ),
@@ -49,6 +49,7 @@ monocards_variants = [
                 "masked_pan": ["pre_created_masked_pan"],
                 "type": "white",
                 "iban": "pre_created_iban",
+                "owner_name": "User-precreated_user_tg_id",
             },
             create_new_user=False,
         ),
@@ -115,6 +116,7 @@ monocards_list_variants = [
                     "masked_pan": ["pre_created_masked_pan"],
                     "type": "white",
                     "iban": "pre_created_iban",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "pre_created_id2",
@@ -131,6 +133,7 @@ monocards_list_variants = [
                     "masked_pan": ["pre_created_masked_pan"],
                     "type": "white",
                     "iban": "pre_created_iban",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "some_id",
@@ -147,6 +150,7 @@ monocards_list_variants = [
                     "masked_pan": ["some_masked_pan"],
                     "type": "white",
                     "iban": "some_iban",
+                    "owner_name": "User-admin_name",
                 },
             ],
             create_new_user=False,
@@ -176,6 +180,7 @@ monocards_list_variants = [
                     "masked_pan": ["pre_created_masked_pan"],
                     "type": "white",
                     "iban": "pre_created_iban",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "pre_created_id2",
@@ -192,6 +197,7 @@ monocards_list_variants = [
                     "masked_pan": ["pre_created_masked_pan"],
                     "type": "white",
                     "iban": "pre_created_iban",
+                    "owner_name": "User-precreated_user_tg_id",
                 },
             ],
             create_new_user=False,
@@ -220,6 +226,7 @@ monocards_list_variants = [
                     "masked_pan": ["some_masked_pan"],
                     "type": "white",
                     "iban": "some_iban",
+                    "owner_name": "User-custom_name",
                 },
             ],
             create_new_user=False,

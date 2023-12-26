@@ -1,0 +1,105 @@
+version: "3"
+services:
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - 6379:6379
+
+  api:
+    env_file:
+      - ".env"
+    depends_on:
+      - database
+      - redis
+    build:
+      context: django_api
+      dockerfile: Dockerfile
+    ports:
+      - $PORT_API_HOST:$PORT_API_CONTAINER
+
+  worker:
+    build:
+      context: django_api
+      dockerfile: Dockerfile2
+    command: celery --app=api worker -l INFO
+    #celery --app=api worker -l INFO
+    volumes:
+      - ./django_api/api:/api
+    env_file:
+      - ".env"
+    depends_on:
+      - redis
+      - api
+
+
+  celery_beat:
+    build:
+      context: django_api
+      dockerfile: Dockerfile2
+    command: celery --app=api beat -l INFO
+    volumes:
+      - ./django_api/api:/api
+    env_file:
+      - ".env"
+    depends_on:
+      - redis
+      - api
+
+  chatbot:
+    env_file:
+      - ".env"
+    depends_on:
+      - database
+      - api
+    links:
+      - "api:api"
+      - "database:database"
+    build:
+      context: chatbot
+
+
+  database:
+    image: postgres
+    env_file:
+      - ".env"
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  #  nginx:
+  #    build:
+  #      dockerfile: Dockerfile.nginx
+  #    env_file:
+  #      - ".env"
+  #    ports:
+  #      - "443:443"
+  #    depends_on:
+  #      - api
+  #      - web
+  #    links:
+  #      - "api:api"
+  #      - "web:web"
+  #    volumes:
+  #      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+  #    environment:
+  #      - API_PORT=$PORT_API_HOST
+  #      - SSL=ssl
+
+  web:
+    env_file:
+      - ".env"
+    build:
+      context: frontend/mono_frontend
+    ports:
+      - $PORT_FRONTEND:$PORT_FRONTEND
+    environment:
+      - PORT=$PORT_FRONTEND
+
+volumes:
+  pgdata:

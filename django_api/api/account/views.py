@@ -1,5 +1,6 @@
 # Create your views here.
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import BasePermission, IsAdminUser
 from rest_framework.response import Response
@@ -48,25 +49,6 @@ class UserViewSet(ModelViewSet):
             status=status.HTTP_405_METHOD_NOT_ALLOWED,
         )
 
-    # def list(self, request, *args, **kwargs):
-    #     queryset = self.filter_queryset(self.get_queryset())
-    #     serializer = self.get_serializer(queryset, many=True)
-    #     return Response(serializer.data)
-
-    # def retrieve(self, request, tg_id=None, *args, **kwargs):
-    #     q = User.objects.filter(tg_id=tg_id)
-    #
-    #     if not q.exists():
-    #         return Response({'details': 'Invalid id'}, status.HTTP_404_NOT_FOUND)
-    #
-    #     # retrieve only to owner or admin
-    #     if q.first().tg_id != request.user.tg_id and not request.user.is_superuser:
-    #         return Response({'details': 'You do not have permission to perform this action.'}, status.HTTP_404_NOT_FOUND)
-    #
-    #     instance = self.get_object()
-    #     serializer = self.get_serializer(instance)
-    #     return Response(serializer.data)
-
 
 class UserView(APIView):
     def get(self, request):
@@ -93,6 +75,37 @@ class UserView(APIView):
                 {"status": "fail", "data": "not valid"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+
+# TODO: add unit tests
+class FamilyMemberApiView(APIView):
+    def delete(self, request, tg_id=None, member_tg_id=None):
+        user = get_object_or_404(User, tg_id=tg_id)
+        family_member = get_object_or_404(User, tg_id=member_tg_id)
+        user.family_members.remove(family_member)
+        return Response(status=status.HTTP_200_OK)
+
+    def post(self, request, tg_id=None, member_tg_id=None):
+        user = get_object_or_404(User, tg_id=tg_id)
+        family_member = get_object_or_404(User, tg_id=member_tg_id)
+        user.family_members.add(family_member)
+        return Response(status=status.HTTP_201_CREATED)
+
+    def get(self, request, tg_id=None):
+        user = get_object_or_404(User, tg_id=tg_id)
+        return Response(
+            {"members": [i.name for i in user.family_members.all()]},
+            status=status.HTTP_200_OK,
+        )
+
+
+class FamilyMemberListApiView(APIView):
+    def get(self, request, tg_id=None):
+        user = get_object_or_404(User, tg_id=tg_id)
+        return Response(
+            {"members": [i.name for i in user.family_members.all()]},
+            status=status.HTTP_200_OK,
+        )
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):

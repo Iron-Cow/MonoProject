@@ -5,6 +5,7 @@ from .views import (
     CategoryViewSet,
     MonoAccountViewSet,
     MonoCardViewSet,
+    MonoJarTransactionViewSet,
     MonoJarViewSet,
     MonoTransactionViewSet,
     TestEndpoint,
@@ -16,5 +17,8 @@ router.register("monoaccounts", MonoAccountViewSet, basename="monoaccounts")
 router.register("monocards", MonoCardViewSet, basename="monocards")
 router.register("monojars", MonoJarViewSet, basename="monojars")
 router.register("monotransactions", MonoTransactionViewSet, basename="monotransactions")
+router.register(
+    "monojartransactions", MonoJarTransactionViewSet, basename="monojartransactions"
+)
 
 urlpatterns = [path("", include(router.urls)), path("test/", TestEndpoint.as_view())]

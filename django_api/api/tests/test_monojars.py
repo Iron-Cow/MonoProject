@@ -1,11 +1,10 @@
 import pytest
-
+from django.contrib.auth import get_user_model
 from monobank.models import MonoAccount, MonoJar
 from monobank.views import MonoJarViewSet
 from rest_framework.exceptions import ErrorDetail
 
 from .conftest import Variant
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -25,6 +24,7 @@ monojars_variants = [
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "balance": 1000,
                 "goal": 1001,
+                "owner_name": "User-precreated_user_tg_id",
             },
         ),
     ),
@@ -43,6 +43,7 @@ monojars_variants = [
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "balance": 1000,
                 "goal": 1001,
+                "owner_name": "User-precreated_user_tg_id",
             },
             create_new_user=False,
         ),
@@ -106,6 +107,7 @@ monojars_list_variants = [
                     },
                     "balance": 1000,
                     "goal": 1001,
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "pre_created_id2",
@@ -119,6 +121,7 @@ monojars_list_variants = [
                     },
                     "balance": 2000,
                     "goal": 2001,
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "some_id",
@@ -132,6 +135,7 @@ monojars_list_variants = [
                     },
                     "balance": 3000,
                     "goal": 3001,
+                    "owner_name": "User-admin_name",
                 },
             ],
             create_new_user=False,
@@ -158,6 +162,7 @@ monojars_list_variants = [
                     },
                     "balance": 1000,
                     "goal": 1001,
+                    "owner_name": "User-precreated_user_tg_id",
                 },
                 {
                     "id": "pre_created_id2",
@@ -171,6 +176,7 @@ monojars_list_variants = [
                     },
                     "balance": 2000,
                     "goal": 2001,
+                    "owner_name": "User-precreated_user_tg_id",
                 },
             ],
             create_new_user=False,
@@ -196,6 +202,7 @@ monojars_list_variants = [
                     },
                     "balance": 3000,
                     "goal": 3001,
+                    "owner_name": "User-custom_name",
                 },
             ],
             create_new_user=False,

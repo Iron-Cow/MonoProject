@@ -5,3 +5,9 @@ venv*
 /flask_executor/
 *.db
 */.coverage
+
+*/logs.log
+*.crt
+*.key
+secrets.code-workspace
+.vscode

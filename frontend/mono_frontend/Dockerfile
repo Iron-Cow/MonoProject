@@ -6,7 +6,7 @@ WORKDIR .
 
 # Copy package.json and package-lock.json
 COPY package.json ./
-COPY package-lock.json ./
+# COPY package-lock.json ./
 
 ## Define environment variable
 #ARG API_HOST

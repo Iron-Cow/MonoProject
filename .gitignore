@@ -7,3 +7,7 @@ venv*
 */.coverage
 
 */logs.log
+*.crt
+*.key
+secrets.code-workspace
+.vscode

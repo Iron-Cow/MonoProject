@@ -1,7 +1,15 @@
 FROM nginx:latest
 
-COPY ssl-sertificate.crt /etc/nginx/ssl/live/example.org/ssl-sertificate.crt
-COPY ssl-key.key /etc/nginx/ssl/live/example.org/ssl-key.key
+ARG FRONTEND_SSL_CERTIFICATE_LOCATION
+
+
+# Make sure to copy it on CI side
+COPY frontend_ssl/certificate.crt /etc/nginx/ssl/live/frontend/ssl-sertificate.crt
+COPY frontend_ssl/private.key /etc/nginx/ssl/live/frontend/ssl-key.key
+
+COPY backend_ssl/certificate.crt /etc/nginx/ssl/live/backend/ssl-sertificate.crt
+COPY backend_ssl/private.key /etc/nginx/ssl/live/backend/ssl-key.key
+
 
 
 COPY nginx.conf /etc/nginx/nginx.conf

@@ -1,5 +1,6 @@
 import {redirect} from 'react-router-dom';
 import PopUpManager from "../components/PopUpManager";
+import {BACKEND_URL} from "../config/envs";
 
 
 export async function getAuthToken() {
@@ -16,7 +17,7 @@ export async function getAuthToken() {
 }
 
 async function refreshAuthToken(refresh) {
-    const endpoint = 'http://localhost:8000/account/token-refresh/';
+    const endpoint = `${BACKEND_URL}/account/token-refresh/`;
     const response = await fetch(endpoint, {
         method: 'POST',
         headers: {

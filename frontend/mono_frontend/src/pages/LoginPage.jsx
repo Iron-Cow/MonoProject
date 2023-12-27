@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Form, json, redirect} from "react-router-dom";
 import PopUpManager from "../components/PopUpManager";
+import {BACKEND_URL} from "../config/envs";
 
 export default function LoginPage() {
     const [loginData, setLoginData] = useState({tg_id: '', password: ''});
@@ -11,8 +12,7 @@ export default function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Dummy endpoint
-        const endpoint = 'http://localhost:8000/account/token/';
+        const endpoint = `${BACKEND_URL}/account/token/`;
         console.log(endpoint)
         const response = await fetch(endpoint, {
             method: 'POST',
@@ -59,7 +59,7 @@ export async function action({request}) {
         password: data.get('password'),
     };
 
-    const endpoint = 'http://localhost:8000/account/token/';
+    const endpoint = `${BACKEND_URL}/account/token/`;
     const response = await fetch(endpoint, {
         method: 'POST',
         headers: {

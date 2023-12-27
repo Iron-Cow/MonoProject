@@ -74,7 +74,7 @@ services:
     env_file:
       - ".env"
     ports:
-      - $PORT_ENTRY_NGINX:433
+      - $PORT_ENTRY_NGINX:$PORT_INTERNAL_NGINX
     depends_on:
       - api
       - web

@@ -10,6 +10,8 @@ const PopUpManager = () => {
         const id = Date.now() + POPUP_LIFE_TIME_SECONDS * 1000; // Unique ID for each pop-up
         setPopUps([...popUps, {id, message}]);
     };
+    PopUpManager.addPopUp = addPopUp;
+
     useEffect(() => {
         let i = setInterval(() => {
             let now = Date.now()
@@ -20,7 +22,6 @@ const PopUpManager = () => {
         return () => clearInterval(i)
     }, [popUps]);
 
-    PopUpManager.addPopUp = addPopUp;
     return (
         <div className="pop-up-manager">
             {popUps.map(popUp => (

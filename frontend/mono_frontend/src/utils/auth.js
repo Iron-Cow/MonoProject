@@ -1,12 +1,15 @@
-import {redirect} from 'react-router-dom';
-import PopUpManager from "../components/PopUpManager";
 import {BACKEND_URL} from "../config/envs";
+import {action as logoutAction} from "../pages/Logout";
 
 
 export async function getAuthToken() {
     const refresh = localStorage.getItem('refresh');
-
-    const token = await refreshAuthToken(refresh)
+    let token
+    try {
+        token = await refreshAuthToken(refresh)
+    } catch {
+        return null
+    }
     console.log("if token -> ", token, "aaa")
     if (!token) {
         return null;
@@ -28,7 +31,6 @@ async function refreshAuthToken(refresh) {
     const data = await response.json();
 
     if (!response.ok) {
-        PopUpManager.addPopUp(data.detail);
         return null
     }
     return data.access
@@ -37,9 +39,10 @@ async function refreshAuthToken(refresh) {
 
 export async function checkAuthLoader() {
     const token = await getAuthToken();
+
     console.log("checkAuthLoader", token)
     if (!token) {
-        return redirect('/login');
+        return logoutAction()
     }
     return token
 }

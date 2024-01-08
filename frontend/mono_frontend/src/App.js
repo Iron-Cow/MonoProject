@@ -13,7 +13,7 @@ const router = createBrowserRouter([
         element: <Root/>,
         children: [
             {
-                path: '/login',
+                path: 'login',
                 element: <LoginPage/>,
                 action: loginAction,
                 errorElement: <div>Login failed, and it is worse, that we all thought :( Please contact admin to get

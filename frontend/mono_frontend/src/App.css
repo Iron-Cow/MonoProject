@@ -82,6 +82,7 @@ nav ul li {
 
 .nav-link:hover, .nav-link:focus {
     color: var(--button-hover-color);
+    cursor: pointer;
 }
 
 .main-content {

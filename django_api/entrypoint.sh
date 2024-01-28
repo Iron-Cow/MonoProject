@@ -12,6 +12,8 @@ python manage.py migrate
 python manage.py loaddata categories.json
 python manage.py loaddata categories_mso.json
 python manage.py loaddata currency.json
+python manage.py create_api_superuser
+
 
 # Run the application
 exec "$@"

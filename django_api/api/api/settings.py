@@ -217,3 +217,6 @@ DEBUG_TOOLBAR_PANELS = [
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True  # For development only, restrict in production
 # CORS_ALLOWED_ORIGINS = ['http://localhost:3000']  # Example for production
+
+ADMIN_TG_ID = os.getenv("API_ADMIN_USERNAME")
+ADMIN_PASSWORD = os.getenv("API_ADMIN_PASSWORD")

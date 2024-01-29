@@ -1,55 +1,11 @@
-import React, {useState} from "react";
-import {Form, json, redirect} from "react-router-dom";
+import React from "react";
+import {json, redirect} from "react-router-dom";
 import PopUpManager from "../components/PopUpManager";
 import {BACKEND_URL} from "../config/envs";
+import LoginForm from "../components/LoginForm";
 
 export default function LoginPage() {
-    const [loginData, setLoginData] = useState({tg_id: '', password: ''});
-
-    const handleChange = (e) => {
-        setLoginData({...loginData, [e.target.name]: e.target.value});
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const endpoint = `${BACKEND_URL}/account/token/`;
-        console.log(endpoint)
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(loginData),
-        });
-
-        const data = await response.json();
-        console.log(data); // Handle the response data
-    };
-    return <div className="login-container">
-        <Form method="post" className="login-form">
-            <label htmlFor="tg_id">Login:</label>
-            <input
-                type="text"
-                id="tg_id"
-                name="tg_id"
-                value={loginData.login}
-                onChange={handleChange}
-                required
-            />
-
-            <label htmlFor="password">Password:</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                value={loginData.password}
-                onChange={handleChange}
-                required
-            />
-
-            <button type="submit">Submit</button>
-        </Form>
-    </div>
+    return <LoginForm/>
 }
 
 export async function action({request}) {

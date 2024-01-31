@@ -1,0 +1,34 @@
+version: "3"
+services:
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - 6379:6379
+  api:
+    env_file:
+      - ".env"
+    depends_on:
+      - database
+      - redis
+    build:
+      context: django_api
+      dockerfile: DockerfileWithoutEntrypoint
+    ports:
+      - $PORT_API_HOST:$PORT_API_CONTAINER
+
+  database:
+    image: postgres
+    env_file:
+      - ".env"
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:

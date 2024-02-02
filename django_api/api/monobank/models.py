@@ -3,7 +3,7 @@ import time
 from api.celery import app
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
-from django.db import models
+from django.db import IntegrityError, models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from humps import decamelize
@@ -90,6 +90,8 @@ class MonoAccount(models.Model):
         url = MONO_API_URL + PERSONAL_INFO_PATH
         headers = {"X-Token": self.mono_token}
         user_data = get(url, headers=headers)
+        if user_data.status_code == 403:
+            raise MonoBankError("too many requests")
         data = user_data.json()
         if data.get("errorDescription"):
             # TODO: add logs / notifying
@@ -157,8 +159,10 @@ class MonoCard(models.Model):
         url = f"{MONO_API_URL}{TRANSACTIONS_PATH}/{self.id}/{from_unix}/{to_unix}"
         headers = {"X-Token": self.monoaccount.mono_token}
         user_data = get(url, headers=headers)
-
+        if user_data.status_code == 403:
+            raise MonoBankError("too many requests")
         data = user_data.json()
+
         if not isinstance(data, list) and data.get("errorDescription"):
             # TODO: add logs / notifying
             raise MonoBankError(data.get("errorDescription"))
@@ -312,12 +316,15 @@ class MonoTransaction(models.Model):
             currency = Currency.objects.get(code=int(currency_code))
         except Currency.DoesNotExist:
             currency = Currency.create_unknown_currency(currency_code)
-        mono_transaction = MonoTransaction.objects.get_or_create(
-            account=account,
-            mcc=mcc,
-            currency=currency,
-            **transaction_data,
-        )
+        try:
+            mono_transaction = MonoTransaction.objects.get_or_create(
+                account=account,
+                mcc=mcc,
+                currency=currency,
+                **transaction_data,
+            )
+        except IntegrityError:
+            pass
 
 
 class JarTransaction(models.Model):

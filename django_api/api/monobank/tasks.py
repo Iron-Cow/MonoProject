@@ -1,15 +1,26 @@
-from celery import shared_task
-
-# from .tasks_data import MonoAccount
+from datetime import datetime
 from random import randint
 from time import sleep
-from datetime import datetime
+
 from api.celery import app
+from celery import shared_task
+
+from .models import MonoAccount
 
 
 @shared_task
 def bar():
     return "Hello"
+
+
+@shared_task
+def update_every_mono_account():
+    accounts = MonoAccount.objects.all()
+    print("accounts -> ", accounts)
+    for account in accounts:
+        print(account)
+        account.create_cards_jars()
+    print(f"REPORT -> loaded {len(accounts)} account(s)")
 
 
 #

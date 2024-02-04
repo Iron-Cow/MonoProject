@@ -1,36 +1,61 @@
+Application architecture:
+![Architecture](docs/architecture.png)
 
 Set environment variables in `.env` file:
 
-```
-PORT_API_HOST = ...
-PORT_API_CONTAINER = ...
-DB_NAME = ...
-DB_USER = ...
-DB_PASSWORD = ...
-DB_HOST = ...
-CHAT_BOT_API_KEY = ...
-BOT_TOKEN = ...
+## Configuration Keys
 
-CELERY_BROKER_URL=redis://redis:6379
-CELERY_RESULT_BACKEND=redis://redis:6379/0
+| Key                     | Description                                                                                          | Required | Example                                                            |
+|-------------------------|------------------------------------------------------------------------------------------------------|:--------:|--------------------------------------------------------------------|
+| `PORT_API_HOST`         | TEMPLATE                                                                                             |    ✅     | `8000`                                                             |
+| `PORT_API_CONTAINER`    | TEMPLATE                                                                                             |    ✅     | `8000`                                                             |
+| `DB_NAME`               | TEMPLATE                                                                                             |    ✅     | `someDBname`                                                       |
+| `DB_USER`               | TEMPLATE                                                                                             |    ✅     | `someDBuser`                                                       |
+| `DB_PASSWORD`           | TEMPLATE                                                                                             |    ✅     | `someDBpassword`                                                   |
+| `DB_HOST`               | for usage inside services. Corresponds with docker-compose names. Use localhost in case of local run |    ✅     | `database`                                                         |
+| `CHAT_BOT_API_KEY`      | TEMPLATE                                                                                             |    ✅     | `someAPIkeyForChatbot`                                             |
+| `BOT_TOKEN`             | TEMPLATE                                                                                             |    ✅     | `5421398104:1234123421341234123412342134` (put key from botfather) |
+| `DEBUG`                 | can be empty                                                                                         |    ✅     |                                                                    |
+| `API_HOST`              | for usage inside services. Corresponds with docker-compose names. Use localhost in case of local run |    ✅     | `http://api:8000`                                                  |
+| `DB_MODE`               | TEMPLATE                                                                                             |    ✅     | `prod`                                                             |
+| `CELERY_BROKER_URL`     | TEMPLATE                                                                                             |    ✅     | `redis://redis:6379/0` or `redis://localhost:6379/0` for local run |
+| `CELERY_RESULT_BACKEND` | TEMPLATE                                                                                             |    ✅     | `redis://redis:6379/0` or `redis://localhost:6379/0` for local run |
+| `REACT_APP_API_HOST`    | TEMPLATE                                                                                             |    ✅     | `http://localhost:8000`                                            |
+| `PORT_FRONTEND`         | TEMPLATE                                                                                             |    ✅     | `3001`                                                             |
+| `API_ADMIN_USERNAME`    | TEMPLATE                                                                                             |    ✅     | `admin`                                                            |
+| `API_ADMIN_PASSWORD`    | TEMPLATE                                                                                             |    ✅     | `someadminpassword`                                                |
+| `ALLOWED_HOSTS`         | comaseparated hosts                                                                                  |    ✅     | `localhost,api`                                                    |
+| `HOSTNAME_BACKEND`      | TEMPLATE                                                                                             |    ✅     | `your_domain_backend.com`                                          | |
+| `HOSTNAME_FRONTEND`     | TEMPLATE                                                                                             |    ✅     | `your_domain_frontend.com`                                         |
+| `PORT_ENTRY_NGINX`      | TEMPLATE                                                                                             |    ✅     | `8000`                                                             |
+| `PORT_INTERNAL_NGINX`   | TEMPLATE                                                                                             |    ✅     | `443`                                                              |
 
-```
+## Additional Information
 
 `pip install -r requirements.txt`
 
 Run docker compose:
 
-` docker-compose -f docker-compose.yaml up --build`
+* All in docker with nginx:
 
+`docker-compose -f docker-compose.yaml up --build`
+
+* Local run in docker:
+
+`docker-compose -f docker-compose-local.yaml up --build`
+
+* Backend development:
+
+`docker-compose -f docker-compose-local.yaml up redis worker celery_beat chatbot database web --build`
 
     python manage.py makemigrations
     python manage.py migrate
     python manage.py loaddata categories.json
     python manage.py loaddata categories_mso.json
     python manage.py loaddata currency.json
+    python manage.py create_api_superuser
 
-
-Local config: 
+Local backend config for CELERY:
 
     celery --app=django_celery_example beat -l INFO
     celery --app=django_celery_example worker --loglevel=info
@@ -38,3 +63,11 @@ Local config:
     export CELERY_BROKER_URL=redis://localhost:6379/0 && CELERY_RESULT_BACKEND=redis://localhost:6379  && celery --app=api worker -l INFO
     export CELERY_BROKER_URL=redis://localhost:6379/0 && CELERY_RESULT_BACKEND=redis://localhost:6379  && celery --app=api beat -l INFO
     python manage.py runserver
+
+* Frontend development
+
+  `docker-compose -f docker-compose-local.yaml up redis api worker celery_beat chatbot database --build`
+
+NOTE: if you have troubles with `entrypoint.sh` - you can use command below (with services you need):
+
+`docker-compose -f docker-compose-local.yaml -f docker-compose-local-alternative-api.yaml up --build`

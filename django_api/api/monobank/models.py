@@ -195,6 +195,9 @@ class MonoCard(models.Model):
             currency = Currency.create_unknown_currency(currency_code)
         try:
             mono_card = MonoCard.objects.get(id=card_data.get("id"))
+            for key, value in card_data.items():
+                setattr(mono_card, key, value)
+            mono_card.save()
         except MonoCard.DoesNotExist:
             mono_card, _ = MonoCard.objects.get_or_create(
                 monoaccount=mono_account, currency=currency, **card_data
@@ -234,11 +237,17 @@ class MonoJar(models.Model):
             currency = Currency.objects.get(code=int(currency_code))
         except Currency.DoesNotExist:
             currency = Currency.create_unknown_currency(currency_code)
-        mono_jar = MonoJar(monoaccount=mono_account, currency=currency, **jar_data)
-        mono_jar.save()
+        try:
+            mono_jar = MonoJar.objects.get(id=jar_data.get("id"))
+            for key, value in jar_data.items():
+                setattr(mono_jar, key, value)
+            mono_jar.save()
+        except MonoJar.DoesNotExist:
+            mono_jar, _ = MonoJar.objects.get_or_create(
+                monoaccount=mono_account, currency=currency, **jar_data
+            )
         if update_transactions:
             mono_jar.get_transactions()
-        return update_transactions
 
     def get_transactions(
         self, from_unix: int | None = None, to_unix: int | None = None

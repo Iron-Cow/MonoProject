@@ -2,9 +2,6 @@ import { Link, Outlet, useLoaderData } from 'react-router-dom'
 import '../AuthenticatedContent/AuthenticatedContent.css'
 
 export default function AuthenticatedContent() {
-	const token = useLoaderData()
-	console.log('AuthenticatedContent ->', token)
-
 	return (
 		<>
 			<header className='header'>

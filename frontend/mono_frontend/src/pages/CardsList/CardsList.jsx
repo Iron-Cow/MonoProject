@@ -1,4 +1,3 @@
-import { useRouteLoaderData } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { BACKEND_URL } from '../../config/envs'
 import './CardsList.css'
@@ -21,9 +20,22 @@ export const getCards = async function (token) {
 	return data
 }
 
-export const CardsList = () => {
-	const token = useRouteLoaderData('token')
+export const CardsList = ({ getToken }) => {
 	const [cardData, setCardData] = useState(null)
+	const [token, setToken] = useState(null)
+
+	useEffect(() => {
+		async function fetchData(token) {
+			try {
+				const response = await token
+				setToken(response)
+			} catch (error) {
+				console.error(error)
+			}
+		}
+
+		let ignore = fetchData(getToken)
+	})
 
 	useEffect(() => {
 		const fetchData = async function () {

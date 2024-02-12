@@ -38,7 +38,7 @@ const router = createBrowserRouter([
 				children: [
 					{
 						path: 'cards',
-						element: <CardsList getToken={checkAuthLoader()} />
+						element: <CardsList} />
 					}
 				]
 			}

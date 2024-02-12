@@ -1,12 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import { CardsList } from './CardsList'
 import '@testing-library/jest-dom/extend-expect'
-
-jest.useRealTimers()
+import { CardItem } from '../CardItem'
 
 test('renders card data correctly', async () => {
-	const mockTokenFunc = jest.fn().mockResolvedValue('mockToken')
-
 	const fakeCardData = [
 		{
 			id: 'rInaTLo6BrGM-n18NaizuQ',
@@ -44,12 +40,7 @@ test('renders card data correctly', async () => {
 		}
 	]
 
-	global.fetch = jest.fn().mockResolvedValue({
-		ok: true,
-		json: () => Promise.resolve(fakeCardData)
-	})
-
-	render(<CardsList func={mockTokenFunc} />)
+	render(<CardItem cardData={fakeCardData} />)
 
 	await screen.findByText('Type')
 

@@ -27,6 +27,10 @@
 	font-weight: bold;
 }
 
+.header__logout{
+	z-index: 1;
+}
+
 .nav-link:hover,
 .nav-link:focus {
 	color: var(--button-hover-color);

@@ -25,20 +25,6 @@ export const getCards = async function (token) {
 export const CardsList = () => {
 	const token = useRouteLoaderData('token')
 	const [cardData, setCardData] = useState(null)
-	// const [token, setToken] = useState(null)
-	//
-	// useEffect(() => {
-	// 	async function fetchData(token) {
-	// 		try {
-	// 			const response = await token
-	// 			setToken(response)
-	// 		} catch (error) {
-	// 			console.error(error)
-	// 		}
-	// 	}
-	//
-	// 	let ignore = fetchData(getToken)
-	// })
 
 	useEffect(() => {
 		const fetchData = async function () {

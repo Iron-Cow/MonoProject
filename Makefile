@@ -8,7 +8,7 @@ test-db-create:
 
 .PHONY: test-api
 test-api:test-db-create
-	docker-compose -f docker-compose-test.yaml up api-test
+	docker-compose -f docker-compose-test.yaml up --exit-code-from api-test
 
 # Typecheck api
 .PHONY: typecheck-api

@@ -1,7 +1,7 @@
 import pytest
 from account.views import UserViewSet
 
-from .conftest import Variant, NO_PERMISSION_ERROR
+from .conftest import NO_PERMISSION_ERROR, Variant
 
 users_list_variants = [
     (
@@ -15,8 +15,13 @@ users_list_variants = [
                 {
                     "tg_id": "precreated_user_tg_id",
                     "name": "User-precreated_user_tg_id",
+                    "family_members": [],
                 },
-                {"tg_id": "custom_name", "name": "User-custom_name"},
+                {
+                    "tg_id": "custom_name",
+                    "name": "User-custom_name",
+                    "family_members": [],
+                },
             ],
         ),
     ),
@@ -38,7 +43,11 @@ users_list_variants = [
             name="users-detail",
             is_admin=True,
             tg_id="custom_name",
-            expected={"tg_id": "custom_name", "name": "User-custom_name"},
+            expected={
+                "tg_id": "custom_name",
+                "name": "User-custom_name",
+                "family_members": [],
+            },
             url_kwargs={"tg_id": "custom_name"},
         ),
     ),
@@ -61,7 +70,11 @@ users_list_variants = [
             name="users-detail",
             is_admin=False,
             tg_id="custom_name",
-            expected={"tg_id": "custom_name", "name": "User-custom_name"},
+            expected={
+                "tg_id": "custom_name",
+                "name": "User-custom_name",
+                "family_members": [],
+            },
             url_kwargs={"tg_id": "custom_name"},
         ),
     ),
@@ -79,7 +92,11 @@ users_list_variants = [
                 "password": "aaaaaa1234",
                 "name": "custom_name",
             },
-            expected={"tg_id": "custom_name", "name": "custom_name"},
+            expected={
+                "tg_id": "custom_name",
+                "name": "custom_name",
+                "family_members": [],
+            },
             status_code=201,
             need_json_dumps=True,
         ),
@@ -116,6 +133,7 @@ users_list_variants = [
             expected={
                 "tg_id": "precreated_user_tg_id",
                 "name": "User-precreated_user_tg_id-new",
+                "family_members": [],
             },
             status_code=200,
             need_json_dumps=True,
@@ -132,7 +150,11 @@ users_list_variants = [
             format="json",
             request_data={"name": "custom-user-name-new"},
             url_kwargs={"tg_id": "custom-user"},
-            expected={"tg_id": "custom-user", "name": "custom-user-name-new"},
+            expected={
+                "tg_id": "custom-user",
+                "name": "custom-user-name-new",
+                "family_members": [],
+            },
             status_code=200,
             need_json_dumps=True,
         ),

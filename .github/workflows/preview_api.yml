@@ -45,6 +45,12 @@ jobs:
       - name: Use Node.js 20.1
         uses: actions/setup-node@v3
         with:
-          node-version: 20.1
-      - run: npm ci
-      - run: npm test
+          node-version: '20.1'
+      - name: Change to frontend directory
+        run: cd frontend/mono_frontend
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend/mono_frontend
+      - name: Run tests
+        run: npm test
+        working-directory: ./frontend/mono_frontend

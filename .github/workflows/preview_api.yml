@@ -37,8 +37,20 @@ jobs:
       - name: Test api
         run: |
           make test-api
-          exit_status=$?
-          if [ $exit_status -ne 0 ]; then
-            echo "Tests failed with status $exit_status"
-            exit $exit_status
-          fi
+
+  test_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 20.1
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.1'
+      - name: Change to frontend directory
+        run: cd frontend/mono_frontend
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend/mono_frontend
+      - name: Run tests
+        run: npm test
+        working-directory: ./frontend/mono_frontend

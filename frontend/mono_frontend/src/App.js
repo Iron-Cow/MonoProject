@@ -7,6 +7,8 @@ import AuthenticatedContent from './pages/AuthenticatedContent/AuthenticatedCont
 import Root from './pages/Root'
 import { checkAuthLoader } from './utils/auth'
 import { CardsList } from './pages/CardsList/CardsList'
+import { JarDetails } from './pages/JarDetails/JarDetails'
+import { JarsList } from './pages/JarsList/JarsList'
 
 const router = createBrowserRouter([
 	{
@@ -38,7 +40,11 @@ const router = createBrowserRouter([
 				children: [
 					{
 						path: 'cards',
-						element: <CardsList} />
+						element: <CardsList />
+					},
+					{
+						path: 'jars',
+						element: <JarsList />
 					}
 				]
 			}

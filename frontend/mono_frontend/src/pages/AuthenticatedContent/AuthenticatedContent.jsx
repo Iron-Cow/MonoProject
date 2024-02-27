@@ -14,7 +14,7 @@ export default function AuthenticatedContent() {
 								</Link>
 							</li>
 							<li className='header__item'>
-								<Link className='header__link' to='#'>
+								<Link className='header__link' to='jars'>
 									Jars
 								</Link>
 							</li>

@@ -22,8 +22,8 @@ export const JarsListView = ({ jarsData }) => {
 					Total balance in all your JARS: {totalSum} ₴
 				</p>
 				<ul className='jars__list'>
-					{jarsData.map(jar => (
-						<li className='jars__item'>
+					{jarsData.map((jar, index) => (
+						<li key={index} className='jars__item'>
 							<Link className='jars__link' to='#'>
 								<div className='jars__iconBox'>
 									<JarIcon />

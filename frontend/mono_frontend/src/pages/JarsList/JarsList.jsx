@@ -1,9 +1,7 @@
-import { Link, useRouteLoaderData } from 'react-router-dom'
+import { useRouteLoaderData } from 'react-router-dom'
 import './JarsList.css'
 import { useEffect, useState } from 'react'
 import { BACKEND_URL } from '../../config/envs'
-import { JarIcon } from '../../components/JarIcon'
-import { ProgressBar } from '../../components/ProgressBar'
 import { JarsListView } from '../../components/JarsListView'
 
 export const getJars = async function (token) {

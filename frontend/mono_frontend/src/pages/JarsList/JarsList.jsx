@@ -3,6 +3,7 @@ import './JarsList.css'
 import { useEffect, useState } from 'react'
 import { BACKEND_URL } from '../../config/envs'
 import { JarsListView } from '../../components/JarsListView'
+import PopUpManager from '../../components/PopUpManager'
 
 export const getJars = async function (token) {
 	const endpoint = `${BACKEND_URL}/monobank/monojars`
@@ -27,16 +28,26 @@ export const JarsList = () => {
 	const [jarsData, setJarsData] = useState(null)
 
 	useEffect(() => {
+		let ignoreErrors = false
 		const fetchData = async function () {
 			try {
-				const access = await getJars(token)
-				setJarsData(access)
+				const jarsResult = await getJars(token)
+				setJarsData(jarsResult)
 			} catch (error) {
-				console.error('Error fetching card data:', error)
+				if (!ignoreErrors) {
+					ignoreErrors = true
+					PopUpManager.addPopUp(
+						`Error fetching card data: ${error.message}`,
+						'error'
+					)
+				}
 			}
 		}
 
-		let ignore = fetchData()
+		const ignore = fetchData()
+		return () => {
+			ignoreErrors = true
+		}
 	}, [token])
 
 	return <>{jarsData && <JarsListView jarsData={jarsData} />}</>

@@ -1,5 +1,7 @@
 .jars__box {
 	padding: 50px;
+	overflow: hidden;
+	margin-bottom: 25px;
 }
 
 .jars__title {

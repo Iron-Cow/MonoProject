@@ -1,7 +1,7 @@
 .jars__box {
-	padding: 50px;
+	padding: 0 50px;
 	overflow: hidden;
-	margin-bottom: 25px;
+	margin-bottom: 50px;
 }
 
 .jars__title {
@@ -23,8 +23,9 @@
 
 .jars__list {
 	display: grid;
-	grid-template-columns: repeat(4, 400px);
+	grid-template-columns: repeat(4, calc((100% - 225px) / 4));
 	column-gap: 75px;
+	row-gap: 30px;
 	margin: 0;
 	padding: 0;
 	list-style: none;

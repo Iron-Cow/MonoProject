@@ -52,7 +52,7 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font: 400 16px/22px 'Inter', sans-serif;
     background-color: var(--background-color);
     color: var(--accent-color);
 }

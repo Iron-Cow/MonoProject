@@ -10,21 +10,6 @@ export default function LoginPage() {
 		setLoginData({ ...loginData, [e.target.name]: e.target.value })
 	}
 
-	const handleSubmit = async e => {
-		e.preventDefault()
-		const endpoint = `${BACKEND_URL}/account/token/`
-		console.log(endpoint)
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(loginData)
-		})
-
-		const data = await response.json()
-		console.log(data) // Handle the response data
-	}
 	return (
 		<div className='login-container'>
 			<Form method='post' className='login-form'>

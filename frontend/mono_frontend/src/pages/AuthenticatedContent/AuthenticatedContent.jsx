@@ -1,4 +1,4 @@
-import { Link, Outlet, useLoaderData } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import '../AuthenticatedContent/AuthenticatedContent.css'
 
 export default function AuthenticatedContent() {
@@ -14,7 +14,7 @@ export default function AuthenticatedContent() {
 								</Link>
 							</li>
 							<li className='header__item'>
-								<Link className='header__link' to='#'>
+								<Link className='header__link' to='jars'>
 									Jars
 								</Link>
 							</li>
@@ -33,7 +33,6 @@ export default function AuthenticatedContent() {
 				</div>
 			</header>
 			<main>
-				{/* {navigation.state === 'loading' && <p>Loading...</p>} */}
 				<Outlet />
 			</main>
 		</>

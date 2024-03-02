@@ -7,6 +7,7 @@ import AuthenticatedContent from './pages/AuthenticatedContent/AuthenticatedCont
 import Root from './pages/Root'
 import { checkAuthLoader } from './utils/auth'
 import { CardsList } from './pages/CardsList/CardsList'
+import { JarsList } from './pages/JarsList/JarsList'
 
 const router = createBrowserRouter([
 	{
@@ -23,7 +24,6 @@ const router = createBrowserRouter([
 						admin to get some help
 					</div>
 				)
-				// children: []
 			},
 			{
 				path: 'logout',
@@ -34,11 +34,14 @@ const router = createBrowserRouter([
 				element: <AuthenticatedContent />,
 				loader: checkAuthLoader,
 				id: 'token',
-				// errorElement: <ErrorPage />,
 				children: [
 					{
 						path: 'cards',
-						element: <CardsList} />
+						element: <CardsList />
+					},
+					{
+						path: 'jars',
+						element: <JarsList />
 					}
 				]
 			}

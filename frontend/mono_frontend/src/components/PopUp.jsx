@@ -1,11 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-const PopUp = ({message, id}) => {
-
-    return (
-        <div className="pop-up">
-            {message} - {id}
-        </div>
-    );
+const PopUp = ({ message, type }) => {
+	return <div className={`pop-up pop-up--${type}`}>{message}</div>
 }
-export default PopUp;
+export default PopUp

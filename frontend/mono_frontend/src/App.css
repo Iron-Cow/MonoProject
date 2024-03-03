@@ -52,37 +52,12 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font: 400 16px/22px 'Inter', sans-serif;
     background-color: var(--background-color);
     color: var(--accent-color);
 }
 
-header {
-    background-color: var(--secondary-color);
-    padding: 1rem;
-}
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin: 0 1rem;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-.nav-link:hover, .nav-link:focus {
-    color: var(--button-hover-color);
-}
 
 .main-content {
     padding: 2rem;

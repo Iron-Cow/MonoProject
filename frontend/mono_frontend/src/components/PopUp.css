@@ -1,5 +1,4 @@
 .pop-up {
-    background-color: white;
     border: 1px solid black;
     padding: 10px;
     margin-bottom: 10px;
@@ -7,9 +6,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.pop-up--error{
+    background-color: #990000;
+}
+
 .pop-up-manager {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 55px;
+    right: 0;
     z-index: 1000;
 }

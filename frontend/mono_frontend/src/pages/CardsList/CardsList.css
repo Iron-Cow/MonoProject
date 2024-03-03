@@ -1,0 +1,24 @@
+.table {
+	width: 100%;
+	margin: 50px auto;
+	text-align: center;
+	border-collapse: collapse;
+	font-size: 18px;
+	line-height: 23px;
+}
+
+.table__row {
+	background-color: #5e5b52;
+}
+
+.table__body_tr {
+	border-bottom: 1px solid grey;
+}
+
+.table__numberCard {
+	margin: 0;
+}
+
+.table__numberCard {
+	margin-top: 5px;
+}

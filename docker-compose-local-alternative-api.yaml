@@ -1,0 +1,14 @@
+version: "3"
+services:
+
+  api:
+    env_file:
+      - ".env"
+    depends_on:
+      - database
+      - redis
+    build:
+      context: django_api
+      dockerfile: DockerfileWithoutEntrypoint
+    ports:
+      - $PORT_API_HOST:$PORT_API_CONTAINER

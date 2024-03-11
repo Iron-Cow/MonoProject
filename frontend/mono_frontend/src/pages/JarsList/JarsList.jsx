@@ -37,7 +37,7 @@ export const JarsList = () => {
 				if (!ignoreErrors) {
 					ignoreErrors = true
 					PopUpManager.addPopUp(
-						`Error fetching card data: ${error.message}`,
+						`Error fetching jars data: ${error.message}`,
 						'error'
 					)
 				}

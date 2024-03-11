@@ -10,7 +10,6 @@ const PopUpManager = () => {
 		setPopUps([...popUps, { id, message, type }])
 	}
 	PopUpManager.addPopUp = addPopUp
-	console.log(popUps)
 
 	useEffect(() => {
 		let i = setInterval(() => {

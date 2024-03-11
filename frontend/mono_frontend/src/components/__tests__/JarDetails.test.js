@@ -28,10 +28,10 @@ describe('JarDetails component', () => {
 
 	beforeEach(() => {
 		useRouteLoaderData.mockReturnValue(jarData)
-		convertProgressInPercent.mockReturnValue('50%')
 	})
 
 	test('renders jar details correctly', () => {
+		convertProgressInPercent.mockReturnValue('29%')
 		render(<JarDetails />)
 
 		const correctBalance = (jarData?.balance / 100).toFixed(2)
@@ -42,14 +42,15 @@ describe('JarDetails component', () => {
 		expect(screen.getByText('Test Jar')).toBeInTheDocument()
 
 		expect(screen.getByTestId('indicate')).toHaveStyle(
-			'--dynamic-position: 50%'
+			'--dynamic-position: 29%'
 		)
-		expect(screen.getByTestId('indicate')).toHaveAttribute('data-number', '50%')
+		expect(screen.getByTestId('indicate')).toHaveAttribute('data-number', '29%')
 		expect(screen.getByText('100.00')).toBeInTheDocument()
 		expect(screen.getByText('0.00')).toBeInTheDocument()
 	})
 
 	test('render jar without a goal', () => {
+		convertProgressInPercent.mockReturnValue('50%')
 		const jarWithoutGoal = { ...jarData, goal: null }
 		const correctBalance = (jarData?.balance / 100).toFixed(2)
 		useRouteLoaderData.mockReturnValue(jarWithoutGoal)

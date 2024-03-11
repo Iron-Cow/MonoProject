@@ -33,7 +33,6 @@ export const getJarDetails = async function ({ request, params }) {
 
 export const JarDetails = function () {
 	const jar = useRouteLoaderData('jar')
-	console.log(1)
 	const progressInPercent = jar?.goal
 		? convertProgressInPercent(jar.balance, jar.goal)
 		: '50%'
@@ -51,21 +50,23 @@ export const JarDetails = function () {
 						</div>
 
 						{jar?.goal && (
-							<div className='jar__position'>
-								<div className='jar__position-top'>
-									{(jar?.goal / 100).toFixed(2)}
+							<>
+								<div className='jar__position'>
+									<div className='jar__position-top'>
+										{(jar?.goal / 100).toFixed(2)}
+									</div>
+									<div className='jar__position-bottom'>
+										{Number(0).toFixed(2)}
+									</div>
 								</div>
-								<div className='jar__position-bottom'>
-									{Number(0).toFixed(2)}
-								</div>
-							</div>
+								<div
+									className='jar__indicate'
+									style={{ '--dynamic-position': `${progressInPercent}` }}
+									data-number={progressInPercent}
+									data-testid='indicate'
+								></div>
+							</>
 						)}
-						<div
-							className='jar__indicate'
-							style={{ '--dynamic-position': `${progressInPercent}` }}
-							data-number={progressInPercent}
-							data-testid='indicate'
-						></div>
 					</div>
 				</div>
 			</div>

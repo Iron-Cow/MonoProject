@@ -54,10 +54,14 @@ describe('JarDetails component', () => {
 		const correctBalance = (jarData?.balance / 100).toFixed(2)
 		useRouteLoaderData.mockReturnValue(jarWithoutGoal)
 		render(<JarDetails />)
-		expect(screen.getByText(`${correctBalance}`)).toBeInTheDocument()
+		expect(
+			screen.getByText(content => content.includes(`${correctBalance}`))
+		).toBeInTheDocument()
 
 		expect(screen.getByText('Test Jar')).toBeInTheDocument()
-		expect(screen.getByTestId('indicate')).toHaveStyle('--dynamic-width: 50%')
+		expect(screen.getByTestId('indicate')).toHaveStyle(
+			'--dynamic-position: 50%'
+		)
 		expect(screen.queryByText('100.00')).not.toBeInTheDocument()
 		expect(screen.queryByText('0.00')).not.toBeInTheDocument()
 	})

@@ -1,3 +1,5 @@
+import { convertToMoneyFormat } from '../utils/convertToMoneyFormat'
+
 export const CardItem = function ({ cardData }) {
 	return (
 		<div>
@@ -18,11 +20,11 @@ export const CardItem = function ({ cardData }) {
 								<td className='table__description'>{index + 1}</td>
 								<td className='table__description'>{type}</td>
 								<td className='table__description'>
-									{(balance / 100).toFixed(2)}
+									{convertToMoneyFormat(balance)}
 								</td>
 								<td className='table__description'>{currency.name}</td>
 								<td className='table__description'>
-									{credit_limit.toFixed(2)}
+									{convertToMoneyFormat(credit_limit)}
 								</td>
 							</tr>
 						)

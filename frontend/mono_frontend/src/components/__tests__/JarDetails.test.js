@@ -1,10 +1,8 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { JarDetails } from '../../pages/JarDetails/JarDetails'
 import React from 'react'
-import userEvent from '@testing-library/user-event'
 import { useRouteLoaderData } from 'react-router-dom'
-import { checkAuthLoader } from '../../utils/auth'
 import { convertProgressInPercent } from '../../utils/convertProgressInPercent'
 
 jest.mock('react-router-dom', () => ({
@@ -30,14 +28,12 @@ describe('JarDetails component', () => {
 		useRouteLoaderData.mockReturnValue(jarData)
 	})
 
-	test('renders jar details correctly', () => {
+	test('renders jar details correctly', async () => {
 		convertProgressInPercent.mockReturnValue('29%')
 		render(<JarDetails />)
 
-		const correctBalance = (jarData?.balance / 100).toFixed(2)
-
 		expect(
-			screen.getByText(content => content.includes(`${correctBalance}`))
+			screen.getByText(`Balance - ${'50.00' + ' ' + jarData?.currency.symbol}`)
 		).toBeInTheDocument()
 		expect(screen.getByText('Test Jar')).toBeInTheDocument()
 
@@ -52,13 +48,12 @@ describe('JarDetails component', () => {
 	test('render jar without a goal', () => {
 		convertProgressInPercent.mockReturnValue('50%')
 		const jarWithoutGoal = { ...jarData, goal: null }
-		const correctBalance = (jarData?.balance / 100).toFixed(2)
 		useRouteLoaderData.mockReturnValue(jarWithoutGoal)
 		render(<JarDetails />)
-		expect(
-			screen.getByText(content => content.includes(`${correctBalance}`))
-		).toBeInTheDocument()
 
+		expect(
+			screen.getByText(`Balance - ${'50.00' + ' ' + jarData?.currency.symbol}`)
+		).toBeInTheDocument()
 		expect(screen.getByText('Test Jar')).toBeInTheDocument()
 		expect(screen.queryByText('100.00')).not.toBeInTheDocument()
 		expect(screen.queryByText('0.00')).not.toBeInTheDocument()

@@ -5,6 +5,7 @@ import { BACKEND_URL } from '../../config/envs'
 import { checkAuthLoader } from '../../utils/auth'
 import { convertProgressInPercent } from '../../utils/convertProgressInPercent'
 import PopUpManager from '../../components/PopUpManager'
+import { convertToMoneyFormat } from '../../utils/convertToMoneyFormat'
 
 export const getJarDetails = async function ({ request, params }) {
 	const { jarId } = params
@@ -41,7 +42,8 @@ export const JarDetails = function () {
 			<div className='jar'>
 				<div className='jar__box'>
 					<h2>
-						Balance - {(jar?.balance / 100).toFixed(2)} {jar?.currency.symbol}
+						Balance -{' '}
+						{convertToMoneyFormat(jar?.balance) + ' ' + jar?.currency.symbol}
 					</h2>
 					<div className='jar__iconBox'>
 						<Jar percent={progressInPercent} />
@@ -53,18 +55,17 @@ export const JarDetails = function () {
 							<>
 								<div className='jar__position'>
 									<div className='jar__position-top'>
-										{(jar?.goal / 100).toFixed(2)}
+										{convertToMoneyFormat(jar?.goal)}
 									</div>
 									<div className='jar__position-bottom'>
-										{Number(0).toFixed(2)}
+										{convertToMoneyFormat(0)}
 									</div>
 								</div>
 								<div
 									className='jar__indicate'
 									style={{ '--dynamic-position': `${progressInPercent}` }}
 									data-number={progressInPercent}
-									data-testid='indicate'
-								></div>
+									data-testid='indicate'></div>
 							</>
 						)}
 					</div>

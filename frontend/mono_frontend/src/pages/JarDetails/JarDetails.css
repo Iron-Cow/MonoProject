@@ -1,0 +1,98 @@
+.jar {
+	overflow: hidden;
+}
+
+.jar__box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	transform: translate(2%);
+}
+
+h2{
+	font-size: 26px;
+	line-height: 30px;
+	margin: 0 0 20px;
+	text-align: center;
+}
+
+.jar__iconBox {
+	width: 420px;
+	position: relative;
+}
+
+.jar__sticker{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -30%);
+	border-radius: 48%;
+	width: 280px;
+	height: 180px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: linear-gradient(135deg, #033d6e, #00466f, #075890);
+}
+
+.jar__title{
+	font-size: 24px;
+	line-height: 30px;
+	font-weight: 700;
+	font-style: italic;
+	color: var(--primary-color);
+	text-align: center;
+	z-index: 1;
+}
+
+.jar__indicate{
+	position: absolute;
+	width: 100%;
+	height: 77%;
+	top: 19%;
+	left: 0;
+	color: #ffffff;
+	--dynamic-position: initial;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 500;
+}
+
+.jar__indicate::before{
+	content: attr(data-number)' ->';
+	position: absolute;
+	bottom: var(--dynamic-position);
+	left: -8px;
+}
+
+.jar__position{
+	position: absolute;
+	width: 100%;
+	height: 75%;
+	top: 19%;
+	left: 0;
+	color: var(--secondary-color);
+	font-size: 15px;
+	line-height: 17px;
+	font-weight: bold;
+}
+
+.jar__position-top{
+	position: absolute;
+	top: 10px;
+	left: 100px;
+}
+
+.jar__position-middle{
+	position: absolute;
+	top: 50%;
+	left: 57px;
+	transform: translate(0, -50% );
+}
+
+.jar__position-bottom{
+	position: absolute;
+	bottom: -2px;
+	left: 85px;
+}

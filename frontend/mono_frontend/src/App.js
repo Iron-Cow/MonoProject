@@ -8,6 +8,7 @@ import Root from './pages/Root'
 import { checkAuthLoader } from './utils/auth'
 import { CardsList } from './pages/CardsList/CardsList'
 import { JarsList } from './pages/JarsList/JarsList'
+import { getJarDetails, JarDetails } from './pages/JarDetails/JarDetails'
 
 const router = createBrowserRouter([
 	{
@@ -42,6 +43,12 @@ const router = createBrowserRouter([
 					{
 						path: 'jars',
 						element: <JarsList />
+					},
+					{
+						path: '/jars/:jarId/',
+						element: <JarDetails />,
+						id: 'jar',
+						loader: getJarDetails
 					}
 				]
 			}

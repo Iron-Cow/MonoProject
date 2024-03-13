@@ -2,6 +2,7 @@ import { JarIcon } from './JarIcon'
 import { ProgressBar } from './ProgressBar'
 import { Link } from 'react-router-dom'
 import { convertProgressInPercent } from '../utils/convertProgressInPercent'
+import { convertToMoneyFormat } from '../utils/convertToMoneyFormat'
 
 export const JarsContent = ({ jar }) => {
 	return (
@@ -19,7 +20,7 @@ export const JarsContent = ({ jar }) => {
 				/>
 			)}
 			<p className='jars__text'>
-				Accumulated {(jar.balance / 100).toFixed(2)} {jar.currency.symbol}
+				Accumulated {convertToMoneyFormat(jar.balance)} {jar.currency.symbol}
 			</p>
 		</Link>
 	)

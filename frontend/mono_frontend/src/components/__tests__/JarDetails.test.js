@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { JarDetails } from '../../pages/JarDetails/JarDetails'
 import React from 'react'
-import { useRouteLoaderData } from 'react-router-dom'
+import { MemoryRouter, useRouteLoaderData } from 'react-router-dom'
 import { convertProgressInPercent } from '../../utils/convertProgressInPercent'
 
 jest.mock('react-router-dom', () => ({
@@ -14,7 +14,7 @@ jest.mock('../../utils/convertProgressInPercent', () => ({
 }))
 
 describe('JarDetails component', () => {
-	const jarData = {
+	const fakeJarData = {
 		id: 1,
 		title: 'Test Jar',
 		balance: 5000,
@@ -25,15 +25,21 @@ describe('JarDetails component', () => {
 	}
 
 	beforeEach(() => {
-		useRouteLoaderData.mockReturnValue(jarData)
+		useRouteLoaderData.mockReturnValue(fakeJarData)
 	})
 
-	test('renders jar details correctly', async () => {
+	test('renders jar details correctly', () => {
 		convertProgressInPercent.mockReturnValue('29%')
-		render(<JarDetails />)
+		render(
+			<MemoryRouter>
+				<JarDetails />
+			</MemoryRouter>
+		)
 
 		expect(
-			screen.getByText(`Balance - ${'50.00' + ' ' + jarData?.currency.symbol}`)
+			screen.getByText(
+				`Balance - ${'50.00' + ' ' + fakeJarData?.currency.symbol}`
+			)
 		).toBeInTheDocument()
 		expect(screen.getByText('Test Jar')).toBeInTheDocument()
 
@@ -47,12 +53,14 @@ describe('JarDetails component', () => {
 
 	test('render jar without a goal', () => {
 		convertProgressInPercent.mockReturnValue('50%')
-		const jarWithoutGoal = { ...jarData, goal: null }
+		const jarWithoutGoal = { ...fakeJarData, goal: null }
 		useRouteLoaderData.mockReturnValue(jarWithoutGoal)
 		render(<JarDetails />)
 
 		expect(
-			screen.getByText(`Balance - ${'50.00' + ' ' + jarData?.currency.symbol}`)
+			screen.getByText(
+				`Balance - ${'50.00' + ' ' + fakeJarData?.currency.symbol}`
+			)
 		).toBeInTheDocument()
 		expect(screen.getByText('Test Jar')).toBeInTheDocument()
 		expect(screen.queryByText('100.00')).not.toBeInTheDocument()

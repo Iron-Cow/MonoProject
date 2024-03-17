@@ -6,8 +6,8 @@ import { action as logoutAction } from './pages/Logout'
 import AuthenticatedContent from './pages/AuthenticatedContent/AuthenticatedContent'
 import Root from './pages/Root'
 import { checkAuthLoader } from './utils/auth'
-import { CardsList } from './pages/CardsList/CardsList'
-import { JarsList } from './pages/JarsList/JarsList'
+import { CardsList, getCards } from './pages/CardsList/CardsList'
+import { getJars, JarsList } from './pages/JarsList/JarsList'
 import { getJarDetails, JarDetails } from './pages/JarDetails/JarDetails'
 
 const router = createBrowserRouter([
@@ -38,11 +38,15 @@ const router = createBrowserRouter([
 				children: [
 					{
 						path: 'cards',
-						element: <CardsList />
+						element: <CardsList />,
+						id: 'cards',
+						loader: getCards
 					},
 					{
 						path: 'jars',
-						element: <JarsList />
+						element: <JarsList />,
+						id: 'jars',
+						loader: getJars
 					},
 					{
 						path: '/jars/:jarId/',

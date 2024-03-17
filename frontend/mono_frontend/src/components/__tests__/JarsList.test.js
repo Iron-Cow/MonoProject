@@ -1,9 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import { JarsListView } from '../JarsListView'
-import { MemoryRouter } from 'react-router-dom'
+import { JarsList } from '../../pages/JarsList/JarsList'
+import { MemoryRouter, useRouteLoaderData } from 'react-router-dom'
 
-describe('JarsListView with jars data', () => {
+jest.mock('react-router-dom', () => ({
+	...jest.requireActual('react-router-dom'),
+	useRouteLoaderData: jest.fn()
+}))
+describe('JarsList with jars data', () => {
 	test('renders correctly with jars data', () => {
 		const fakeJarsData = [
 			{
@@ -35,10 +39,11 @@ describe('JarsListView with jars data', () => {
 				owner_name: 'Фолюшняк Дмитрий'
 			}
 		]
+		useRouteLoaderData.mockReturnValue(fakeJarsData)
 
 		render(
 			<MemoryRouter>
-				<JarsListView jarsData={fakeJarsData} />
+				<JarsList />
 			</MemoryRouter>
 		)
 
@@ -53,7 +58,7 @@ describe('JarsListView with jars data', () => {
 	})
 
 	test('renders correctly with empty data', () => {
-		render(<JarsListView jarsData={[]} />)
+		render(<JarsList />)
 
 		expect(
 			screen.getByText('Total balance in all your JARS: 0.00 ₴')

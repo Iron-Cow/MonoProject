@@ -1,24 +1,157 @@
-.table {
-	width: 100%;
-	margin: 50px auto;
+.cards{
+	padding: 0 50px;
+	overflow: hidden;
+	margin-bottom: 50px;
+}
+
+.cards__title{
+	margin-bottom: 55px;
 	text-align: center;
-	border-collapse: collapse;
-	font-size: 18px;
-	line-height: 23px;
 }
 
-.table__row {
-	background-color: #5e5b52;
-}
-
-.table__body_tr {
-	border-bottom: 1px solid grey;
-}
-
-.table__numberCard {
+.cards__list{
+	display: grid;
+	grid-template-columns: repeat(4, calc((100% - 270px) / 4));
+	column-gap: 90px;
+	row-gap: 30px;
 	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-.table__numberCard {
-	margin-top: 5px;
+.cards__link{
+	padding: 25px;
+	border-radius: 12px;
+	background-color: var(--secondary-color);
+	text-decoration: none;
+	color: white;
+}
+
+.cards__infoByCard{
+	display: grid;
+	grid-template-columns: repeat(2, 50%);
+}
+
+.cards__iconBox{
+	display: flex;
+	justify-content: center;
+	margin: 0 0 30px;
+}
+
+.cardIcon{
+	fill: #186eb3;
+	width: 55px;
+	height: 40px;
+	border-radius: 12px;
+	padding: 10px 8px;
+	border: 1px solid #6f6d6d;
+	display: inline-block;
+}
+
+.cardIcon--black{
+	fill: black;
+}
+
+.cardIcon--platinum{
+	fill: #b9b9bb;
+}
+
+.cardIcon--white{
+	fill: var(--accent-color);
+}
+
+.cardIcon--e-dopomoga{
+	fill: green;
+}
+.cards__text{
+	margin: 0 0 20px;
+}
+
+.cards__text:nth-child(n+3){
+	margin: 0 0 15px;
+}
+
+.cards__details{
+	text-decoration: none;
+	padding: 6px 8px;
+	border: 1px solid #b9b9bb;
+	border-radius: 5px;
+	color: #E6B800;
+	float: right;
+	transition: ease 0.5s;
+}
+
+.cards__details:hover{
+	background-color: #4d4d4d;
+}
+
+@media (width < 1920px) {
+	.cards__list{
+		column-gap: 50px;
+		grid-template-columns: repeat(4, calc((100% - 150px) / 4));
+	}
+}
+
+@media (width < 1660px) {
+	.cards__list{
+		grid-template-columns: repeat(3, calc((100% - 100px) / 3));
+	}
+}
+
+@media (width < 1280px) {
+	.cards__list{
+		grid-template-columns: repeat(2, calc((100% - 50px) / 2));
+	}
+}
+
+@media (width < 1024px) {
+	.cards__infoByCard{
+		grid-template-columns: repeat(1, 100%);
+	}
+}
+
+@media (width < 600px) {
+
+	.cards{
+		padding: 0 20px;
+	}
+
+	.cards__list{
+		background-color: var(--secondary-color);
+		border-radius: 12px;
+		padding: 15px;
+		grid-template-columns: repeat(3, calc((100% - 100px) / 3));
+	}
+
+	.cards__iconBox{
+		justify-content: center;
+		margin-bottom: 10px;
+	}
+	.cardIcon{
+		width: 45px;
+		height: 35px;
+	}
+
+	.cards__infoByCard{
+		grid-template-columns: repeat(1, 100%);
+	}
+
+	.cards__link{
+		pointer-events: auto;
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.cards__text, b{
+		display: none;
+	}
+	.cards__text:nth-child(-n+2){
+		display: block;
+		margin-bottom: 10px;
+		text-align: center;
+	}
+
+	.cards__details{
+		display: none;
+	}
 }

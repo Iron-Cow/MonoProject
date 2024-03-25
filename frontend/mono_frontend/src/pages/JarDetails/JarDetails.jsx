@@ -41,14 +41,16 @@ export const JarDetails = function () {
 		<>
 			<div className='jar'>
 				<div className='jar__box'>
-					<h2>
+					<h1 className='jar__title'>
 						Balance -{' '}
 						{convertToMoneyFormat(jar?.balance) + ' ' + jar?.currency.symbol}
-					</h2>
+					</h1>
 					<div className='jar__iconBox'>
 						<Jar percent={progressInPercent} />
 						<div className='jar__sticker'>
-							<span className='jar__text jar__title'>{jar?.title} </span>
+							<span className='jar__text jar__sticker-title'>
+								{jar?.title}{' '}
+							</span>
 						</div>
 
 						{jar?.goal && (

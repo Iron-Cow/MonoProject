@@ -1,9 +1,10 @@
-import { useRouteLoaderData } from 'react-router-dom'
+import { Link, useRouteLoaderData } from 'react-router-dom'
 import { checkAuthLoader } from '../../utils/auth'
 import { BACKEND_URL } from '../../config/envs'
 import './CardsList.css'
 import PopUpManager from '../../components/PopUpManager'
-import {convertToMoneyFormat} from "../../utils/convertToMoneyFormat";
+import { convertToMoneyFormat } from '../../utils/convertToMoneyFormat'
+import { CardIcon } from '../../components/CardIcon'
 
 export const getCards = async function () {
 	const endpoint = `${BACKEND_URL}/monobank/monocards`
@@ -29,39 +30,53 @@ export const getCards = async function () {
 	}
 }
 
+const cardType = {
+	platinum: 'platinum',
+	black: 'black',
+	eAid: 'e-dopomoga',
+	white: 'white'
+}
+
 export const CardsList = () => {
 	const cardData = useRouteLoaderData('cards')
 
 	return (
-		<div>
-			<table className='table'>
-				<thead className='table__head'>
-				<tr key={1} className='table__row'>
-					<th className='table__title'>№</th>
-					<th className='table__title'>Type</th>
-					<th className='table__title'>Balance</th>
-					<th className='table__title'>Currency</th>
-					<th className='table__title'>Credit limit</th>
-				</tr>
-				</thead>
-				<tbody className='table__body'>
-				{cardData && cardData.map(
-					({ id, type, currency, balance, credit_limit }, index) => (
-						<tr className='table__body_tr' key={index}>
-							<td className='table__description'>{index + 1}</td>
-							<td className='table__description'>{type}</td>
-							<td className='table__description'>
-								{convertToMoneyFormat(balance)}
-							</td>
-							<td className='table__description'>{currency.name}</td>
-							<td className='table__description'>
-								{convertToMoneyFormat(credit_limit)}
-							</td>
-						</tr>
-					)
-				)}
-				</tbody>
-			</table>
+		<div className='cards'>
+			<h1 className='cards__title'>Credit Card List</h1>
+			<ul className='cards__list'>
+				{cardData &&
+					cardData.map(({ type, currency, balance, credit_limit }, index) => (
+						<li key={index} className='cards__link'>
+							<Link className='cards__iconBox' to='#'>
+								<CardIcon type={cardType[type]} />
+							</Link>
+							<div className='cards__infoByCard'>
+								<p className='cards__text'>
+									<b>Type:</b> <span>{type}</span>
+								</p>
+								<p className='cards__text'>
+									<b>Balance:</b>{' '}
+									<span>
+										{convertToMoneyFormat(balance)} {currency.symbol}
+									</span>
+								</p>
+								<p className='cards__text'>
+									<b>Currency:</b> <span>{currency.name}</span>
+								</p>
+
+								<p className='cards__text'>
+									<b>Credit Limit:</b>{' '}
+									<span>
+										{convertToMoneyFormat(credit_limit)} {currency.symbol}
+									</span>
+								</p>
+							</div>
+							<Link className='cards__details' to='#'>
+								Card Details
+							</Link>
+						</li>
+					))}
+			</ul>
 		</div>
 	)
 }

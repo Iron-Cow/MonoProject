@@ -6,9 +6,6 @@
 
 .jars__title {
 	text-align: center;
-	font-size: 32px;
-	line-height: 36px;
-	font-weight: 700;
 	margin: 0 0 15px;
 	text-transform: uppercase;
 }
@@ -34,7 +31,7 @@
 .jars__item {
 	padding: 25px;
 	border-radius: 12px;
-	background-color: #333333;
+	background-color: var(--secondary-color);
 }
 
 .jars__link {
@@ -79,7 +76,7 @@
 }
 
 h3 {
-	color: #ffffff;
+	color: var(--accent-color);
 	text-align: center;
 }
 
@@ -93,7 +90,7 @@ h3 {
 
 .jars__text {
 	margin: 0;
-	color: #ffffff;
+	color: var(--accent-color);
 }
 
 .progress-bar {
@@ -103,7 +100,7 @@ h3 {
 	font-weight: 400;
 	font-size: 15px;
 	line-height: 18px;
-	color: #ffffff;
+	color: var(--accent-color);
 }
 
 .progress-bar span {

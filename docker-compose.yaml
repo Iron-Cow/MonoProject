@@ -10,6 +10,9 @@ services:
     depends_on:
       - database
       - redis
+    links:
+      - "redis:redis"
+      - "database:database"
     build:
       context: django_api
       dockerfile: Dockerfile

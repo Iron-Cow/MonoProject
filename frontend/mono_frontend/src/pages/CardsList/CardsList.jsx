@@ -52,19 +52,23 @@ export const CardsList = () => {
 							</Link>
 							<div className='cards__infoByCard'>
 								<p className='cards__text'>
-									<b>Type:</b> {type}
+									<b>Type:</b> <span>{type}</span>
 								</p>
 								<p className='cards__text'>
-									<b>Balance:</b> {convertToMoneyFormat(balance)}{' '}
-									{currency.symbol}
+									<b>Balance:</b>{' '}
+									<span>
+										{convertToMoneyFormat(balance)} {currency.symbol}
+									</span>
 								</p>
 								<p className='cards__text'>
-									<b>Currency:</b> {currency.name}
+									<b>Currency:</b> <span>{currency.name}</span>
 								</p>
 
 								<p className='cards__text'>
-									<b>Credit Limit:</b> {convertToMoneyFormat(credit_limit)}{' '}
-									{currency.symbol}
+									<b>Credit Limit:</b>{' '}
+									<span>
+										{convertToMoneyFormat(credit_limit)} {currency.symbol}
+									</span>
 								</p>
 							</div>
 							<Link className='cards__details' to='#'>

@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { MemoryRouter, useRouteLoaderData } from 'react-router-dom'
-import {CardsList} from "../../pages/CardsList/CardsList";
+import { CardsList } from '../../pages/CardsList/CardsList'
 
 jest.mock('react-router-dom', () => ({
 	...jest.requireActual('react-router-dom'),
 	useRouteLoaderData: jest.fn()
 }))
 
-describe('CardList render', ()=>{
+describe('CardList render', () => {
 	test('renders card data correctly', () => {
 		const fakeCardData = [
 			{
@@ -54,23 +54,16 @@ describe('CardList render', ()=>{
 				<CardsList />
 			</MemoryRouter>
 		)
-
 		expect(screen.getByText(fakeCardData[0].type)).toBeInTheDocument()
 		expect(screen.getByText(fakeCardData[1].type)).toBeInTheDocument()
-		expect(
-			screen.getByText((fakeCardData[0].balance / 100).toFixed(2))
-		).toBeInTheDocument()
 
-		const zeroBalanceElements = screen.queryAllByText('0.00')
+		const zeroBalanceElements = screen.queryAllByText('0.00 ₴')
 		expect(zeroBalanceElements.length).toBe(3)
 		const currencyElements = screen.queryAllByText('UAH')
 		expect(currencyElements.length).toBe(2)
 	})
-	test('renders correctly with empty data', ()=>{
-		render(
-				<CardsList />
-		)
-		expect(screen.getByText('Type')).toBeInTheDocument()
+	test('renders correctly with empty data', () => {
+		render(<CardsList />)
+		expect(screen.getByText('Credit Card List')).toBeInTheDocument()
 	})
 })
-

@@ -42,7 +42,7 @@ export const CardsList = () => {
 
 	return (
 		<div className='cards'>
-			<h2 className='cards__title'>Credit Card List</h2>
+			<h1 className='cards__title'>Credit Card List</h1>
 			<ul className='cards__list'>
 				{cardData &&
 					cardData.map(({ type, currency, balance, credit_limit }, index) => (

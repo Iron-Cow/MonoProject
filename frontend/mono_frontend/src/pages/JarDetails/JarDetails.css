@@ -10,9 +10,7 @@
 	transform: translate(2%);
 }
 
-h2{
-	font-size: 26px;
-	line-height: 30px;
+.jar__title{
 	margin: 0 0 20px;
 	text-align: center;
 }
@@ -36,7 +34,7 @@ h2{
 	background: linear-gradient(135deg, #033d6e, #00466f, #075890);
 }
 
-.jar__title{
+.jar__sticker-title{
 	font-size: 24px;
 	line-height: 30px;
 	font-weight: 700;

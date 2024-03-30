@@ -21,7 +21,8 @@ class RequestManager:
                 headers={"content-type": "application/json"},
             )
             if resp.status_code != 200:
-                raise PermissionError("Failed to get initial auth tokens")
+                data = f"code - {resp.status_code}, text - {resp.text}"
+                raise PermissionError(f"Failed to get initial auth tokens. {data}")
             try:
                 access_token, refresh_token = resp.json().get(
                     "access"

@@ -4,11 +4,11 @@ build-api:
 
 .PHONY: test-db-create
 test-db-create:
-	docker-compose -f docker-compose-test.yaml up -d databasetest
+	docker-compose -f docker-compose-test.yaml up --build -d databasetest
 
 .PHONY: test-api
 test-api:test-db-create
-	docker-compose -f docker-compose-test.yaml up --exit-code-from api-test
+	docker-compose -f docker-compose-test.yaml up --build --exit-code-from api-test
 
 # Typecheck api
 .PHONY: typecheck-api

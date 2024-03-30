@@ -10,6 +10,9 @@ services:
     depends_on:
       - database
       - redis
+    links:
+      - "redis:redis"
+      - "database:database"
     build:
       context: django_api
       dockerfile: Dockerfile
@@ -58,7 +61,7 @@ services:
 
 
   database:
-    image: postgres
+    image: postgres:16-alpine
     env_file:
       - ".env"
     environment:

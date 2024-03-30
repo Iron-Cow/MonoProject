@@ -57,6 +57,11 @@ body {
     color: var(--accent-color);
 }
 
+h1{
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 700;
+}
 
 
 .main-content {

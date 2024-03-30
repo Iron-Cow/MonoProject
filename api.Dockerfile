@@ -4,7 +4,7 @@ FROM python:3.10.6-slim-buster
 WORKDIR /home
 
 RUN pip3 install black==22.10.0
-RUN pip3 install pytest
+RUN pip3 install pytest==7.4.2
 RUN pip3 install pyright==1.1.247
 RUN pip3 install pytest-cov
 

@@ -9,7 +9,6 @@ export async function getAuthToken() {
 	} catch {
 		return null
 	}
-	console.log('if token -> ', token, 'aaa')
 	if (!token) {
 		return null
 	}
@@ -37,7 +36,6 @@ async function refreshAuthToken(refresh) {
 export async function checkAuthLoader() {
 	const token = await getAuthToken()
 
-	console.log('checkAuthLoader', token)
 	if (!token) {
 		return logoutAction()
 	}

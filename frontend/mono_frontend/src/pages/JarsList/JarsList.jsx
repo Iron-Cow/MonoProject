@@ -1,54 +1,56 @@
 import { useRouteLoaderData } from 'react-router-dom'
 import './JarsList.css'
-import { useEffect, useState } from 'react'
 import { BACKEND_URL } from '../../config/envs'
-import { JarsListView } from '../../components/JarsListView'
 import PopUpManager from '../../components/PopUpManager'
+import { checkAuthLoader } from '../../utils/auth'
+import { convertToMoneyFormat } from '../../utils/convertToMoneyFormat'
+import { JarsContent } from '../../components/JarsContent'
 
-export const getJars = async function (token) {
+export const getJars = async function () {
 	const endpoint = `${BACKEND_URL}/monobank/monojars`
+	const token = await checkAuthLoader()
+	try {
+		const response = await fetch(endpoint, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`
+			}
+		})
+		return await response.json()
+	} catch (error) {
+		setTimeout(() => {
+			PopUpManager.addPopUp(
+				`Error fetching jars data: ${error.message}`,
+				'error'
+			)
+		}, 100)
 
-	const response = await fetch(endpoint, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`
-		}
-	})
-	const data = await response.json()
-
-	if (!response.ok) {
 		return null
 	}
-	return data
 }
 
-export const JarsList = () => {
-	const token = useRouteLoaderData('token')
-	const [jarsData, setJarsData] = useState(null)
+export const JarsList = function () {
+	const jars = useRouteLoaderData('jars')
 
-	useEffect(() => {
-		let ignoreErrors = false
-		const fetchData = async function () {
-			try {
-				const jarsResult = await getJars(token)
-				setJarsData(jarsResult)
-			} catch (error) {
-				if (!ignoreErrors) {
-					ignoreErrors = true
-					PopUpManager.addPopUp(
-						`Error fetching card data: ${error.message}`,
-						'error'
-					)
-				}
-			}
-		}
+	const totalSum = jars ? jars.reduce((sum, jar) => sum + jar.balance, 0) : null
 
-		const ignore = fetchData()
-		return () => {
-			ignoreErrors = true
-		}
-	}, [token])
-
-	return <>{jarsData && <JarsListView jarsData={jarsData} />}</>
+	return (
+		<div className='jars'>
+			<div className='jars__box'>
+				<h1 className='jars__title'>Jars</h1>
+				<p className='jars__textMoney'>
+					Total balance in all your JARS: {convertToMoneyFormat(totalSum)} ₴
+				</p>
+				<ul className='jars__list'>
+					{jars &&
+						jars.map((jar, index) => (
+							<li key={index} className='jars__item'>
+								<JarsContent jar={jar} />
+							</li>
+						))}
+				</ul>
+			</div>
+		</div>
+	)
 }

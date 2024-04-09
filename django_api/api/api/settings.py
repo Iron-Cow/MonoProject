@@ -218,3 +218,8 @@ CORS_ALLOW_ALL_ORIGINS = True  # For development only, restrict in production
 
 ADMIN_TG_ID = os.getenv("API_ADMIN_USERNAME")
 ADMIN_PASSWORD = os.getenv("API_ADMIN_PASSWORD")
+
+AUTOMATIC_ACCOUNT_REFRESH_MINUTES = (
+    os.getenv("AUTOMATIC_ACCOUNT_REFRESH_MINUTES") or "45"
+)
+IS_CI_TEST = os.getenv("IS_CI_TEST")

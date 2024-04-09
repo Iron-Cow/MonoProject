@@ -15,6 +15,7 @@ services:
       DB_HOST: databasetest
       DB_NAME: postgres
       DB_USER: postgres
+      IS_CI_TEST: 1
     command: [ "pytest", "--cov", "-vv" ]
     ports:
       - 8000:8000
@@ -29,6 +30,3 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
-
-volumes:
-  pgdata:

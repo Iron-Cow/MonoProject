@@ -17,7 +17,7 @@ class MonobankConfig(AppConfig):
         )
 
         try:
-            schedule_accounts_refresh = CrontabSchedule.objects.get_or_create(
+            schedule_accounts_refresh, created = CrontabSchedule.objects.get_or_create(
                 minute=settings.AUTOMATIC_ACCOUNT_REFRESH_MINUTES,  # Run at the 45th minute
                 hour="*",  # Every hour
                 day_of_week="*",  # Every day of the week

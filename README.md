@@ -5,30 +5,32 @@ Set environment variables in `.env` file:
 
 ## Configuration Keys
 
-| Key                     | Description                                                                                          | Required | Example                                                            |
-|-------------------------|------------------------------------------------------------------------------------------------------|:--------:|--------------------------------------------------------------------|
-| `PORT_API_HOST`         | TEMPLATE                                                                                             |    ✅     | `8000`                                                             |
-| `PORT_API_CONTAINER`    | TEMPLATE                                                                                             |    ✅     | `8000`                                                             |
-| `DB_NAME`               | TEMPLATE                                                                                             |    ✅     | `someDBname`                                                       |
-| `DB_USER`               | TEMPLATE                                                                                             |    ✅     | `someDBuser`                                                       |
-| `DB_PASSWORD`           | TEMPLATE                                                                                             |    ✅     | `someDBpassword`                                                   |
-| `DB_HOST`               | for usage inside services. Corresponds with docker-compose names. Use localhost in case of local run |    ✅     | `database`                                                         |
-| `CHAT_BOT_API_KEY`      | TEMPLATE                                                                                             |    ✅     | `someAPIkeyForChatbot`                                             |
-| `BOT_TOKEN`             | TEMPLATE                                                                                             |    ✅     | `5421398104:1234123421341234123412342134` (put key from botfather) |
-| `DEBUG`                 | can be empty                                                                                         |    ✅     |                                                                    |
-| `API_HOST`              | for usage inside services. Corresponds with docker-compose names. Use localhost in case of local run |    ✅     | `http://api:8000`                                                  |
-| `DB_MODE`               | TEMPLATE                                                                                             |    ✅     | `prod`                                                             |
-| `CELERY_BROKER_URL`     | TEMPLATE                                                                                             |    ✅     | `redis://redis:6379/0` or `redis://localhost:6379/0` for local run |
-| `CELERY_RESULT_BACKEND` | TEMPLATE                                                                                             |    ✅     | `redis://redis:6379/0` or `redis://localhost:6379/0` for local run |
-| `REACT_APP_API_HOST`    | TEMPLATE                                                                                             |    ✅     | `http://localhost:8000`                                            |
-| `PORT_FRONTEND`         | TEMPLATE                                                                                             |    ✅     | `3001`                                                             |
-| `API_ADMIN_USERNAME`    | TEMPLATE                                                                                             |    ✅     | `admin`                                                            |
-| `API_ADMIN_PASSWORD`    | TEMPLATE                                                                                             |    ✅     | `someadminpassword`                                                |
-| `ALLOWED_HOSTS`         | comaseparated hosts                                                                                  |    ✅     | `localhost,api`                                                    |
-| `HOSTNAME_BACKEND`      | TEMPLATE                                                                                             |    ✅     | `your_domain_backend.com`                                          | |
-| `HOSTNAME_FRONTEND`     | TEMPLATE                                                                                             |    ✅     | `your_domain_frontend.com`                                         |
-| `PORT_ENTRY_NGINX`      | TEMPLATE                                                                                             |    ✅     | `8000`                                                             |
-| `PORT_INTERNAL_NGINX`   | TEMPLATE                                                                                             |    ✅     | `443`                                                              |
+| Key                                 | Description                                                                                            | Required | Example                                                            |
+|-------------------------------------|--------------------------------------------------------------------------------------------------------|:--------:|--------------------------------------------------------------------|
+| `PORT_API_HOST`                     | TEMPLATE                                                                                               |    ✅     | `8000`                                                             |
+| `PORT_API_CONTAINER`                | TEMPLATE                                                                                               |    ✅     | `8000`                                                             |
+| `DB_NAME`                           | TEMPLATE                                                                                               |    ✅     | `someDBname`                                                       |
+| `DB_USER`                           | TEMPLATE                                                                                               |    ✅     | `someDBuser`                                                       |
+| `DB_PASSWORD`                       | TEMPLATE                                                                                               |    ✅     | `someDBpassword`                                                   |
+| `DB_HOST`                           | for usage inside services. Corresponds with docker-compose names. Use `localhost` in case of local run |    ✅     | `database`                                                         |
+| `CHAT_BOT_API_KEY`                  | TEMPLATE                                                                                               |    ✅     | `someAPIkeyForChatbot`                                             |
+| `BOT_TOKEN`                         | TEMPLATE                                                                                               |    ✅     | `5421398104:1234123421341234123412342134` (put key from botfather) |
+| `DEBUG`                             | can be empty                                                                                           |    ✅     |                                                                    |
+| `API_HOST`                          | for usage inside services. Corresponds with docker-compose names. Use `localhost` in case of local run |    ✅     | `http://api:8000`                                                  |
+| `DB_MODE`                           | TEMPLATE                                                                                               |    ✅     | `prod`                                                             |
+| `CELERY_BROKER_URL`                 | TEMPLATE                                                                                               |    ✅     | `redis://redis:6379/0` or `redis://localhost:6379/0` for local run |
+| `CELERY_RESULT_BACKEND`             | TEMPLATE                                                                                               |    ✅     | `redis://redis:6379/0` or `redis://localhost:6379/0` for local run |
+| `REACT_APP_API_HOST`                | TEMPLATE                                                                                               |    ✅     | `http://localhost:8000`                                            |
+| `PORT_FRONTEND`                     | TEMPLATE                                                                                               |    ✅     | `3001`                                                             |
+| `API_ADMIN_USERNAME`                | TEMPLATE                                                                                               |    ✅     | `admin`                                                            |
+| `API_ADMIN_PASSWORD`                | TEMPLATE                                                                                               |    ✅     | `someadminpassword`                                                |
+| `ALLOWED_HOSTS`                     | comaseparated hosts                                                                                    |    ✅     | `localhost,api`                                                    |
+| `HOSTNAME_BACKEND`                  | TEMPLATE                                                                                               |    ✅     | `your_domain_backend.com`                                          | |
+| `HOSTNAME_FRONTEND`                 | TEMPLATE                                                                                               |    ✅     | `your_domain_frontend.com`                                         |
+| `PORT_ENTRY_NGINX`                  | TEMPLATE                                                                                               |    ✅     | `8000`                                                             |
+| `PORT_INTERNAL_NGINX`               | TEMPLATE                                                                                               |    ✅     | `443`                                                              |
+| `AUTOMATIC_ACCOUNT_REFRESH_MINUTES` | Run monoaccout refresh every <VALUE> minutes, default=`45`                                             |          | `45`                                                               |
+| `IS_CI_TEST`                        | Indicates if it is ci test. Skips some celery related jobs, default=`false`                            |          | ``                                                                 |
 
 ## Additional Information
 

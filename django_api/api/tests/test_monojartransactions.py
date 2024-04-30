@@ -11,7 +11,6 @@ User = get_user_model()
 
 
 @pytest.mark.django_db
-@pytest.mark.usefixtures("pre_created_mono_jar")
 def test_create_jar_transaction_from_webhook(pre_created_mono_jar):
     user = User.objects.create_user("test_user", "test_password")
 
@@ -249,15 +248,83 @@ monojartransactions_variants = [
             ],
         ),
     ),
+    (
+        "monojartransactions list owner with jar filter",
+        Variant(
+            view=MonoJarTransactionViewSet.as_view({"get": "list"}),
+            name="monojartransactions-list",
+            is_admin=False,
+            tg_id="precreated_user_tg_id",
+            request_data={"jars": "pre_created_id"},
+            expected=[
+                {
+                    "id": "pre_created_id",
+                    "amount": -5000,
+                    "account_id": "pre_created_id",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 10000,
+                    "category": "precreated_category_name1",
+                    "category_symbol": "smbl",
+                    "description": "pre_created_description",
+                    "owner_name": "User-precreated_user_tg_id",
+                },
+            ],
+        ),
+    ),
+    (
+        "monojartransactions list owner with jar filter multiple jars",
+        Variant(
+            view=MonoJarTransactionViewSet.as_view({"get": "list"}),
+            name="monojartransactions-list",
+            is_admin=False,
+            tg_id="precreated_user_tg_id",
+            request_data={"jars": "pre_created_id,pre_created_id2"},
+            expected=[
+                {
+                    "id": "pre_created_id",
+                    "amount": -5000,
+                    "account_id": "pre_created_id",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 10000,
+                    "category": "precreated_category_name1",
+                    "category_symbol": "smbl",
+                    "description": "pre_created_description",
+                    "owner_name": "User-precreated_user_tg_id",
+                },
+                {
+                    "id": "pre_created_id2",
+                    "amount": -15000,
+                    "account_id": "pre_created_id2",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 10000,
+                    "category": "precreated_category_name2",
+                    "category_symbol": "smbl",
+                    "description": "pre_created_description2",
+                    "owner_name": "User-precreated_user_tg_id",
+                },
+            ],
+        ),
+    ),
 ]
 
 
 @pytest.mark.django_db
-@pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", monojartransactions_variants)
-@pytest.mark.usefixtures("pre_created_mono_jar_transaction")
-@pytest.mark.usefixtures("pre_created_currency")
-@pytest.mark.usefixtures("pre_created_categories_mso")
 def test_monojartransactions(
     api_request,
     test_name,

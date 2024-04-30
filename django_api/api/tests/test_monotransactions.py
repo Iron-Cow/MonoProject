@@ -11,7 +11,6 @@ User = get_user_model()
 
 
 @pytest.mark.django_db
-@pytest.mark.usefixtures("pre_created_mono_card")
 def test_create_transaction_from_webhook(pre_created_mono_card):
     user = User.objects.create_user("test_user", "test_password")
 
@@ -259,15 +258,86 @@ monotransactions_variants = [
             ],
         ),
     ),
+    (
+        "monotransactions list owner with cards filter",
+        Variant(
+            view=MonoTransactionViewSet.as_view({"get": "list"}),
+            name="monotransactions-list",
+            request_data={"cards": "pre_created_id"},
+            is_admin=False,
+            tg_id="precreated_user_tg_id",
+            expected=[
+                {
+                    "id": "pre_created_id",
+                    "amount": -5000,
+                    "account_id": "pre_created_id",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "comment": "pre_created_comment",
+                    "balance": 10000,
+                    "category": "precreated_category_name1",
+                    "category_symbol": "smbl",
+                    "description": "pre_created_description",
+                    "owner_name": "User-precreated_user_tg_id",
+                },
+            ],
+        ),
+    ),
+    (
+        "monotransactions list owner with cards filter multiple cards",
+        Variant(
+            view=MonoTransactionViewSet.as_view({"get": "list"}),
+            name="monotransactions-list",
+            request_data={"cards": "pre_created_id,pre_created_id2"},
+            is_admin=False,
+            tg_id="precreated_user_tg_id",
+            expected=[
+                {
+                    "id": "pre_created_id",
+                    "amount": -5000,
+                    "account_id": "pre_created_id",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "comment": "pre_created_comment",
+                    "balance": 10000,
+                    "category": "precreated_category_name1",
+                    "category_symbol": "smbl",
+                    "description": "pre_created_description",
+                    "owner_name": "User-precreated_user_tg_id",
+                },
+                {
+                    "id": "pre_created_id2",
+                    "amount": -15000,
+                    "account_id": "pre_created_id2",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "comment": "pre_created_comment2",
+                    "balance": 10000,
+                    "category": "precreated_category_name2",
+                    "category_symbol": "smbl",
+                    "description": "pre_created_description2",
+                    "owner_name": "User-precreated_user_tg_id",
+                },
+            ],
+        ),
+    ),
 ]
 
 
 @pytest.mark.django_db
-@pytest.mark.usefixtures("api_request")
 @pytest.mark.parametrize("test_name, variant", monotransactions_variants)
-@pytest.mark.usefixtures("pre_created_mono_transaction")
-@pytest.mark.usefixtures("pre_created_currency")
-@pytest.mark.usefixtures("pre_created_categories_mso")
 def test_monotransactions(
     api_request,
     test_name,

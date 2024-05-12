@@ -1,96 +1,180 @@
 .jar {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .jar__box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 100%;
-	transform: translate(2%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transform: translate(2%);
 }
 
-.jar__title{
-	margin: 0 0 20px;
-	text-align: center;
+.jar__title {
+    margin: 0 0 20px;
+    text-align: center;
 }
 
 .jar__iconBox {
-	width: 420px;
-	position: relative;
+    width: 420px;
+    position: relative;
 }
 
-.jar__sticker{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -30%);
-	border-radius: 48%;
-	width: 280px;
-	height: 180px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background: linear-gradient(135deg, #033d6e, #00466f, #075890);
+.jar__sticker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    border-radius: 48%;
+    width: 280px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, #033d6e, #00466f, #075890);
 }
 
-.jar__sticker-title{
-	font-size: 24px;
-	line-height: 30px;
-	font-weight: 700;
-	font-style: italic;
-	color: var(--primary-color);
-	text-align: center;
-	z-index: 1;
+.jar__sticker-title {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--primary-color);
+    text-align: center;
+    z-index: 1;
 }
 
-.jar__indicate{
-	position: absolute;
-	width: 100%;
-	height: 77%;
-	top: 19%;
-	left: 0;
-	color: #ffffff;
-	--dynamic-position: initial;
-	font-size: 18px;
-	line-height: 22px;
-	font-weight: 500;
+.jar__indicate {
+    position: absolute;
+    width: 100%;
+    height: 77%;
+    top: 19%;
+    left: 0;
+    color: #ffffff;
+    --dynamic-position: initial;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
 }
 
-.jar__indicate::before{
-	content: attr(data-number)' ->';
-	position: absolute;
-	bottom: var(--dynamic-position);
-	left: -8px;
+.jar__indicate::before {
+    content: attr(data-number) ' ->';
+    position: absolute;
+    bottom: var(--dynamic-position);
+    left: -8px;
 }
 
-.jar__position{
-	position: absolute;
-	width: 100%;
-	height: 75%;
-	top: 19%;
-	left: 0;
-	color: var(--secondary-color);
-	font-size: 15px;
-	line-height: 17px;
-	font-weight: bold;
+.jar__position {
+    position: absolute;
+    width: 100%;
+    height: 75%;
+    top: 19%;
+    left: 0;
+    color: var(--secondary-color);
+    font-size: 15px;
+    line-height: 17px;
+    font-weight: bold;
 }
 
-.jar__position-top{
-	position: absolute;
-	top: 10px;
-	left: 100px;
+.jar__position-top {
+    position: absolute;
+    top: 10px;
+    left: 100px;
 }
 
-.jar__position-middle{
-	position: absolute;
-	top: 50%;
-	left: 57px;
-	transform: translate(0, -50% );
+.jar__position-middle {
+    position: absolute;
+    top: 50%;
+    left: 57px;
+    transform: translate(0, -50%);
 }
 
-.jar__position-bottom{
-	position: absolute;
-	bottom: -2px;
-	left: 85px;
+.jar__position-bottom {
+    position: absolute;
+    bottom: -2px;
+    left: 85px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.transaction-container {
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Close modal when clicking anywhere outside of it */
+.modal-close-outside {
+    pointer-events: auto;
+}
+
+/* Disable pointer events for the modal content to prevent closing when clicking inside */
+.modal-content {
+    pointer-events: auto;
+}
+
+/* Add padding to the summary to improve clickability */
+summary {
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Style the transaction box */
+.transaction-box {
+    margin-bottom: 10px;
+}
+
+/* Style the transaction details */
+.transaction-text {
+    margin-top: 10px;
+}
+
+.income {
+    background-color: #3a93ca;
+}
+
+.spend {
+    background-color: salmon;
+}
+
+.category-symbol,
+.category-name,
+.amount {
+    margin-right: 5px
+}
+
+.details-button {
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 5px;
+    color: #E6B800;
+    transition: ease 0.5s;
+    background: none;
+    margin: 0 5px;
 }

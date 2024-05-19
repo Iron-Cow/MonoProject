@@ -160,24 +160,26 @@ class MonoJarTransactionViewSet(ModelViewSet):
         return [permission]
 
     def get_queryset(self):
-        # return MonoTransaction.objects.select_related('currency', 'account').all()
+
         users = self.request.query_params.get("users")
+        jar_ids = self.request.query_params.get("jars")
+
+        # all jar transactions from all users
+        queryset = JarTransaction.objects.select_related("mcc", "account").order_by(
+            "time", "id"
+        )
+
+        # filter by jar_id
+        if jar_ids:
+            queryset = queryset.filter(account_id__in=jar_ids.split(","))
+
         if self.request.user.is_superuser:
             if users and self.action == "list":
-                return (
-                    JarTransaction.objects.select_related("mcc", "account")
-                    .order_by("time", "id")
-                    .filter(Q(account__monoaccount__user__tg_id__in=users.split(",")))
+                queryset = queryset.filter(
+                    account__monoaccount__user__tg_id__in=users.split(",")
                 )
-            return (
-                JarTransaction.objects.select_related("mcc", "account")
-                .all()
-                .order_by("time", "id")
-            )
-        return (
-            JarTransaction.objects.select_related("mcc", "account")
-            .order_by("time", "id")
-            .filter(
+        else:
+            queryset = queryset.filter(
                 Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
                 | Q(
                     account__monoaccount__user__tg_id__in=[
@@ -186,7 +188,8 @@ class MonoJarTransactionViewSet(ModelViewSet):
                     ]
                 )
             )
-        )
+
+        return queryset
 
 
 class MonoTransactionViewSet(ModelViewSet):
@@ -200,24 +203,23 @@ class MonoTransactionViewSet(ModelViewSet):
         return [permission]
 
     def get_queryset(self):
-        # return MonoTransaction.objects.select_related('currency', 'account').all()
         users = self.request.query_params.get("users")
+        card_ids = self.request.query_params.get("cards")
+        queryset = MonoTransaction.objects.select_related("mcc", "account").order_by(
+            "time", "id"
+        )
+
+        # filter by card_id
+        if card_ids:
+            queryset = queryset.filter(account_id__in=card_ids.split(","))
+
         if self.request.user.is_superuser:
             if users and self.action == "list":
-                return (
-                    MonoTransaction.objects.select_related("mcc", "account")
-                    .order_by("time", "id")
-                    .filter(Q(account__monoaccount__user__tg_id__in=users.split(",")))
+                queryset = queryset.filter(
+                    account__monoaccount__user__tg_id__in=users.split(",")
                 )
-            return (
-                MonoTransaction.objects.select_related("mcc", "account")
-                .all()
-                .order_by("time", "id")
-            )
-        return (
-            MonoTransaction.objects.select_related("mcc", "account")
-            .order_by("time", "id")
-            .filter(
+        else:
+            queryset = queryset.filter(
                 Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
                 | Q(
                     account__monoaccount__user__tg_id__in=[
@@ -226,7 +228,8 @@ class MonoTransactionViewSet(ModelViewSet):
                     ]
                 )
             )
-        )
+
+        return queryset
 
 
 class TestEndpoint(APIView):

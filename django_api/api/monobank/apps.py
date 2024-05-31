@@ -8,6 +8,10 @@ class MonobankConfig(AppConfig):
     name = "monobank"
 
     def ready(self):
+        if settings.APPLY_MONOBANK_WEBHOOKS and settings.IS_WORKER:
+            from monobank.models import MonoAccount
+
+            MonoAccount.set_monobank_webhook()
         if settings.IS_CI_TEST:  # Skip during tests
             return
         from django_celery_beat.models import (
@@ -39,7 +43,6 @@ class MonobankConfig(AppConfig):
             periodic_task, created = PeriodicTask.objects.get_or_create(
                 name=task_name, defaults={"task": task_path}
             )
-
             # Ensure only the crontab field is set
             periodic_task.interval = (
                 None  # Clear the interval field if it was previously set

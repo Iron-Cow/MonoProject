@@ -9,6 +9,7 @@ from .views import (
     MonoJarViewSet,
     MonoTransactionViewSet,
     TestEndpoint,
+    TransactionWebhookApiView,
 )
 
 router = routers.DefaultRouter()
@@ -21,4 +22,8 @@ router.register(
     "monojartransactions", MonoJarTransactionViewSet, basename="monojartransactions"
 )
 
-urlpatterns = [path("", include(router.urls)), path("test/", TestEndpoint.as_view())]
+urlpatterns = [
+    path("", include(router.urls)),
+    path("test/", TestEndpoint.as_view()),
+    path("webhook/", TransactionWebhookApiView.as_view(), name="webhook"),
+]

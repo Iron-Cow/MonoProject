@@ -1,13 +1,14 @@
 import time
 
 from api.celery import app
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError, models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from humps import decamelize
-from requests import get
+from requests import get, post
 
 # from polymorphic.models import PolymorphicModel
 from utils.errors import MonoBankError
@@ -24,6 +25,10 @@ User = get_user_model()
 MONO_API_URL = "https://api.monobank.ua"
 PERSONAL_INFO_PATH = "/personal/client-info"
 TRANSACTIONS_PATH = "/personal/statement"
+
+
+class MonoDataNotFound(Exception):
+    pass
 
 
 class Currency(models.Model):
@@ -86,6 +91,19 @@ class MonoAccount(models.Model):
             "-id",
         ]
 
+    @staticmethod
+    def set_monobank_webhook():
+        accounts = MonoAccount.objects.filter(active=True).values("mono_token")
+        for account in accounts:
+            print("single_account", account.get("mono_token"))
+            set_account_webhook_by_token.apply_async(
+                args=(account.get("mono_token", ""),),
+                retry=True,
+                retry_policy=DEFAULT_RETRY_POLICY,
+            )
+        print(accounts)
+        return accounts
+
     def get_cards_jars(self) -> dict:
         url = MONO_API_URL + PERSONAL_INFO_PATH
         headers = {"X-Token": self.mono_token}
@@ -126,6 +144,25 @@ class MonoAccount(models.Model):
         for user in users:
             print(f"updating {user}")
             user.create_cards_jars()
+
+
+@app.task(
+    bind=True,
+    autoretry_for=(Exception,),
+    retry_kwargs={"max_retries": 5, "countdown": 60},
+)
+def set_account_webhook_by_token(self, token: str):
+    print(
+        f"webhook account: {token} start request with data {settings.WEBHOOK_URL, token}"
+    )
+    data = '{"webHookUrl": "{}"}'.replace("{}", f"{settings.WEBHOOK_URL}?token={token}")
+    headers = {"X-Token": token, "Content-Type": "application/json"}
+    webhook_response = post(
+        url="https://api.monobank.ua/personal/webhook", data=data, headers=headers
+    )
+    print(
+        f"webhook account: {token}, status: {webhook_response.status_code}, text: {webhook_response.text}"
+    )
 
 
 class MonoCard(models.Model):

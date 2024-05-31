@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from datetime import timedelta
+from distutils.util import strtobool
 from pathlib import Path
 
 import environ
@@ -222,4 +223,12 @@ ADMIN_PASSWORD = os.getenv("API_ADMIN_PASSWORD")
 AUTOMATIC_ACCOUNT_REFRESH_MINUTES = (
     os.getenv("AUTOMATIC_ACCOUNT_REFRESH_MINUTES") or "45"
 )
-IS_CI_TEST = os.getenv("IS_CI_TEST")
+IS_CI_TEST = strtobool(os.getenv("IS_CI_TEST", "false"))
+APPLY_MONOBANK_WEBHOOKS = strtobool(os.getenv("APPLY_MONOBANK_WEBHOOKS", "false"))
+SHOULD_AUTO_FETCH_TRANSACTIONS = strtobool(
+    os.getenv("SHOULD_AUTO_FETCH_TRANSACTIONS", "false")
+)
+IS_WORKER = strtobool(
+    os.getenv("IS_WORKER", "false")
+)  # should be ON in celery workers. Turned on in docker-compose
+WEBHOOK_URL = os.getenv("WEBHOOK_URL", "")

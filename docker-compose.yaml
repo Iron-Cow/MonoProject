@@ -25,6 +25,8 @@ services:
       dockerfile: Dockerfile2
     command: celery --app=api worker -l INFO
     #celery --app=api worker -l INFO
+    environment:
+      IS_WORKER: true
     volumes:
       - ./django_api/api:/api
     env_file:

@@ -31,6 +31,10 @@ Set environment variables in `.env` file:
 | `PORT_INTERNAL_NGINX`               | TEMPLATE                                                                                               |    ✅     | `443`                                                              |
 | `AUTOMATIC_ACCOUNT_REFRESH_MINUTES` | Run monoaccout refresh every <VALUE> minutes, default=`45`                                             |          | `45`                                                               |
 | `IS_CI_TEST`                        | Indicates if it is ci test. Skips some celery related jobs, default=`false`                            |          | ``                                                                 |
+| `APPLY_MONOBANK_WEBHOOKS`           | Indicates if monobank webhook should be set for each card, default=`false`                             |          | ``                                                                 |
+| `SHOULD_AUTO_FETCH_TRANSACTIONS`    | Flag to fetch account data periodically, default=`false`                                               |          | ``                                                                 |
+| `IS_WORKER`                         | Flag to differentiate backend from celery worker, default=`false`                                      |          | ``                                                                 |
+| `WEBHOOK_URL`                       | Webhook URL for monobank to send new transactions                                                      |    ✅     | ``                                                                 |
 
 ## Additional Information
 

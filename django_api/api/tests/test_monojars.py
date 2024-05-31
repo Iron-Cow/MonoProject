@@ -16,9 +16,9 @@ monojars_variants = [
             name="monojars-detail",
             is_admin=True,
             tg_id="admin_name",
-            url_kwargs={"pk": "pre_created_id"},
+            url_kwargs={"pk": "pre_created_jar_id"},
             expected={
-                "id": "pre_created_id",
+                "id": "pre_created_jar_id",
                 "send_id": "pre_created_id",
                 "title": "pre_created_title",
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
@@ -35,9 +35,9 @@ monojars_variants = [
             name="monojars-detail",
             is_admin=False,
             tg_id="precreated_user_tg_id",
-            url_kwargs={"pk": "pre_created_id"},
+            url_kwargs={"pk": "pre_created_jar_id"},
             expected={
-                "id": "pre_created_id",
+                "id": "pre_created_jar_id",
                 "send_id": "pre_created_id",
                 "title": "pre_created_title",
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
@@ -96,7 +96,7 @@ monojars_list_variants = [
             tg_id="admin_name",
             expected=[
                 {
-                    "id": "pre_created_id",
+                    "id": "pre_created_jar_id",
                     "send_id": "pre_created_id",
                     "title": "pre_created_title",
                     "currency": {
@@ -110,7 +110,7 @@ monojars_list_variants = [
                     "owner_name": "User-precreated_user_tg_id",
                 },
                 {
-                    "id": "pre_created_id2",
+                    "id": "pre_created_jar_id2",
                     "send_id": "pre_created_id2",
                     "title": "pre_created_title2",
                     "currency": {
@@ -151,7 +151,7 @@ monojars_list_variants = [
             request_data={"users": "precreated_user_tg_id,111"},
             expected=[
                 {
-                    "id": "pre_created_id",
+                    "id": "pre_created_jar_id",
                     "send_id": "pre_created_id",
                     "title": "pre_created_title",
                     "currency": {
@@ -165,7 +165,7 @@ monojars_list_variants = [
                     "owner_name": "User-precreated_user_tg_id",
                 },
                 {
-                    "id": "pre_created_id2",
+                    "id": "pre_created_jar_id2",
                     "send_id": "pre_created_id2",
                     "title": "pre_created_title2",
                     "currency": {

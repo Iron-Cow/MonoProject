@@ -1,5 +1,6 @@
 import json
 from typing import Callable, List, NamedTuple
+from urllib.parse import urlencode
 
 import pytest
 from django.contrib.auth import get_user_model
@@ -42,6 +43,7 @@ class Variant(NamedTuple):
     url_kwargs: dict = dict()
     create_new_user: bool = True
     need_json_dumps: bool = False
+    query_params: dict | None = None
 
 
 @pytest.fixture
@@ -60,6 +62,7 @@ def api_request():
         create_new_user=True,
         content_type="application/json",
         need_json_dumps=False,
+        query_params: dict | None = None,
     ):
         if create_new_user:
             user = User.objects.create_user(
@@ -69,6 +72,11 @@ def api_request():
             user = User.objects.get(tg_id=tg_id)
         factory = APIRequestFactory()
         url = reverse(view_name, args=url_args, kwargs=url_kwargs)
+
+        if query_params:
+            query_string = urlencode(query_params)
+            url = f"{url}?{query_string}"
+
         factory_method = getattr(factory, method_name)
         if need_json_dumps:
             data = json.dumps(data) if json.dumps(data) != "null" else None
@@ -137,7 +145,7 @@ def pre_created_currency(db):
 def pre_created_mono_card(db, pre_created_mono_account, pre_created_currency):
     monocard = MonoCard.objects.create(
         monoaccount=pre_created_mono_account,
-        id="pre_created_id",
+        id="pre_created_card_id",
         send_id="pre_created_id",
         currency=pre_created_currency,
         cashback_type="pre_created_cashback_type",
@@ -149,7 +157,7 @@ def pre_created_mono_card(db, pre_created_mono_account, pre_created_currency):
     )
     monocard2 = MonoCard.objects.create(
         monoaccount=pre_created_mono_account,
-        id="pre_created_id2",
+        id="pre_created_card_id2",
         send_id="pre_created_id2",
         currency=pre_created_currency,
         cashback_type="pre_created_cashback_type",
@@ -166,7 +174,7 @@ def pre_created_mono_card(db, pre_created_mono_account, pre_created_currency):
 def pre_created_mono_jar(db, pre_created_mono_account, pre_created_currency):
     monojar = MonoJar.objects.create(
         monoaccount=pre_created_mono_account,
-        id="pre_created_id",
+        id="pre_created_jar_id",
         send_id="pre_created_id",
         title="pre_created_title",
         currency=pre_created_currency,
@@ -175,7 +183,7 @@ def pre_created_mono_jar(db, pre_created_mono_account, pre_created_currency):
     )
     monojar2 = MonoJar.objects.create(
         monoaccount=pre_created_mono_account,
-        id="pre_created_id2",
+        id="pre_created_jar_id2",
         send_id="pre_created_id2",
         title="pre_created_title2",
         currency=pre_created_currency,

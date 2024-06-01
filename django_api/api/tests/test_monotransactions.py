@@ -14,7 +14,7 @@ User = get_user_model()
 def test_create_transaction_from_webhook(pre_created_mono_card):
     user = User.objects.create_user("test_user", "test_password")
 
-    monocard = MonoCard.objects.get(id="pre_created_id2")
+    monocard = MonoCard.objects.get(id="pre_created_card_id2")
     transaction_data = {
         "id": "FUTockmzmwvnuCL0",
         "time": 1665250419,
@@ -60,7 +60,7 @@ monotransactions_variants = [
             expected={
                 "id": "pre_created_id",
                 "amount": -5000,
-                "account_id": "pre_created_id",
+                "account_id": "pre_created_card_id",
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "comment": "pre_created_comment",
                 "balance": 10000,
@@ -82,7 +82,7 @@ monotransactions_variants = [
             expected={
                 "id": "pre_created_id",
                 "amount": -5000,
-                "account_id": "pre_created_id",
+                "account_id": "pre_created_card_id",
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "comment": "pre_created_comment",
                 "balance": 10000,
@@ -116,7 +116,7 @@ monotransactions_variants = [
                 {
                     "id": "pre_created_id",
                     "amount": -5000,
-                    "account_id": "pre_created_id",
+                    "account_id": "pre_created_card_id",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -133,7 +133,7 @@ monotransactions_variants = [
                 {
                     "id": "pre_created_id2",
                     "amount": -15000,
-                    "account_id": "pre_created_id2",
+                    "account_id": "pre_created_card_id2",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -179,7 +179,7 @@ monotransactions_variants = [
                 {
                     "id": "pre_created_id",
                     "amount": -5000,
-                    "account_id": "pre_created_id",
+                    "account_id": "pre_created_card_id",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -196,7 +196,7 @@ monotransactions_variants = [
                 {
                     "id": "pre_created_id2",
                     "amount": -15000,
-                    "account_id": "pre_created_id2",
+                    "account_id": "pre_created_card_id2",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -224,7 +224,7 @@ monotransactions_variants = [
                 {
                     "id": "pre_created_id",
                     "amount": -5000,
-                    "account_id": "pre_created_id",
+                    "account_id": "pre_created_card_id",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -241,7 +241,7 @@ monotransactions_variants = [
                 {
                     "id": "pre_created_id2",
                     "amount": -15000,
-                    "account_id": "pre_created_id2",
+                    "account_id": "pre_created_card_id2",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -263,14 +263,14 @@ monotransactions_variants = [
         Variant(
             view=MonoTransactionViewSet.as_view({"get": "list"}),
             name="monotransactions-list",
-            request_data={"cards": "pre_created_id"},
+            request_data={"cards": "pre_created_card_id"},
             is_admin=False,
             tg_id="precreated_user_tg_id",
             expected=[
                 {
                     "id": "pre_created_id",
                     "amount": -5000,
-                    "account_id": "pre_created_id",
+                    "account_id": "pre_created_card_id",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -292,14 +292,14 @@ monotransactions_variants = [
         Variant(
             view=MonoTransactionViewSet.as_view({"get": "list"}),
             name="monotransactions-list",
-            request_data={"cards": "pre_created_id,pre_created_id2"},
+            request_data={"cards": "pre_created_card_id,pre_created_card_id2"},
             is_admin=False,
             tg_id="precreated_user_tg_id",
             expected=[
                 {
                     "id": "pre_created_id",
                     "amount": -5000,
-                    "account_id": "pre_created_id",
+                    "account_id": "pre_created_card_id",
                     "currency": {
                         "code": 980,
                         "name": "UAH",
@@ -316,7 +316,7 @@ monotransactions_variants = [
                 {
                     "id": "pre_created_id2",
                     "amount": -15000,
-                    "account_id": "pre_created_id2",
+                    "account_id": "pre_created_card_id2",
                     "currency": {
                         "code": 980,
                         "name": "UAH",

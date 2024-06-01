@@ -16,9 +16,9 @@ monocards_variants = [
             name="monocards-detail",
             is_admin=True,
             tg_id="admin_name",
-            url_kwargs={"pk": "pre_created_id"},
+            url_kwargs={"pk": "pre_created_card_id"},
             expected={
-                "id": "pre_created_id",
+                "id": "pre_created_card_id",
                 "send_id": "pre_created_id",
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "cashback_type": "pre_created_cashback_type",
@@ -38,9 +38,9 @@ monocards_variants = [
             name="monocards-detail",
             is_admin=False,
             tg_id="precreated_user_tg_id",
-            url_kwargs={"pk": "pre_created_id"},
+            url_kwargs={"pk": "pre_created_card_id"},
             expected={
-                "id": "pre_created_id",
+                "id": "pre_created_card_id",
                 "send_id": "pre_created_id",
                 "currency": {"code": 980, "name": "UAH", "flag": "🇺🇦", "symbol": "грн"},
                 "cashback_type": "pre_created_cashback_type",
@@ -61,7 +61,7 @@ monocards_variants = [
             name="monocards-detail",
             is_admin=False,
             tg_id="some_user",
-            url_kwargs={"pk": "pre_created_id"},
+            url_kwargs={"pk": "pre_created_card_id"},
             status_code=404,
             expected={"detail": ErrorDetail(string="Not found.", code="not_found")},
         ),
@@ -102,7 +102,7 @@ monocards_list_variants = [
             tg_id="admin_name",
             expected=[
                 {
-                    "id": "pre_created_id",
+                    "id": "pre_created_card_id",
                     "send_id": "pre_created_id",
                     "currency": {
                         "code": 980,
@@ -119,7 +119,7 @@ monocards_list_variants = [
                     "owner_name": "User-precreated_user_tg_id",
                 },
                 {
-                    "id": "pre_created_id2",
+                    "id": "pre_created_card_id2",
                     "send_id": "pre_created_id2",
                     "currency": {
                         "code": 980,
@@ -166,7 +166,7 @@ monocards_list_variants = [
             request_data={"users": "precreated_user_tg_id,111"},
             expected=[
                 {
-                    "id": "pre_created_id",
+                    "id": "pre_created_card_id",
                     "send_id": "pre_created_id",
                     "currency": {
                         "code": 980,
@@ -183,7 +183,7 @@ monocards_list_variants = [
                     "owner_name": "User-precreated_user_tg_id",
                 },
                 {
-                    "id": "pre_created_id2",
+                    "id": "pre_created_card_id2",
                     "send_id": "pre_created_id2",
                     "currency": {
                         "code": 980,

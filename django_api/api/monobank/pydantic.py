@@ -1,6 +1,6 @@
 from typing import Union
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, field_validator, model_validator
 
 from .models import CategoryMSO, Currency, MonoCard, MonoDataNotFound, MonoJar
 
@@ -58,7 +58,8 @@ class TransactionItem(BaseModel):
 class TransactionData(BaseModel):
     account: Union[MonoCard, MonoJar]
     statement_item: TransactionItem
-    statement_type: str = Field(..., alias="type")  # Use alias for `type`
+
+    # statement_type: Optional[str] = Field(..., alias="type", )  # Use alias for `type`
 
     @field_validator("account", mode="before")
     def transform_account(cls, value) -> Union[MonoCard, MonoJar]:

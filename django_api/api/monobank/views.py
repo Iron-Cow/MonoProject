@@ -308,7 +308,8 @@ class TransactionWebhookApiView(APIView):
                 self._process_jar_transaction(parsed_data)
 
             return Response(status=201)
-        except ValidationError:
+        except ValidationError as err:
+            print(err)
             return Response({"error": f"Wrong request structure"}, status=422)
 
         except MonoDataNotFound as err:

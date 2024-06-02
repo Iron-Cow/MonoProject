@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from loguru import logger
 from pydantic import ValidationError
 from rest_framework.permissions import (
     AllowAny,
@@ -285,11 +286,16 @@ class TransactionWebhookApiView(APIView):
     def post(self, request):
         user_key = request.query_params.get("token")
         if not user_key:
+            logger.warning("token query param is not specified")
             return Response({"error": "token query param is not specified"}, status=403)
 
         try:
             parsed_data = TransactionData.parse_obj(request.data)
             if parsed_data.account.monoaccount.mono_token != user_key:
+                logger.error(
+                    f"invalid token or account missmatch: {user_key} for account {parsed_data.account}"
+                )
+
                 return Response(
                     {"error": "invalid token or account missmatch"}, status=403
                 )
@@ -308,10 +314,12 @@ class TransactionWebhookApiView(APIView):
                 self._process_jar_transaction(parsed_data)
 
             return Response(status=201)
-        except ValidationError:
+        except ValidationError as err:
+            logger.critical(err)
             return Response({"error": f"Wrong request structure"}, status=422)
 
         except MonoDataNotFound as err:
+            logger.error(err)
             return Response({"error": f"Some data not found: {err}"}, status=404)
 
 

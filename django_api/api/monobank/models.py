@@ -8,6 +8,7 @@ from django.db import IntegrityError, models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from humps import decamelize
+from loguru import logger
 from requests import get, post
 
 # from polymorphic.models import PolymorphicModel
@@ -95,13 +96,13 @@ class MonoAccount(models.Model):
     def set_monobank_webhook():
         accounts = MonoAccount.objects.filter(active=True).values("mono_token")
         for account in accounts:
-            print("single_account", account.get("mono_token"))
+            logger.info("single_account", account.get("mono_token"))
             set_account_webhook_by_token.apply_async(
                 args=(account.get("mono_token", ""),),
                 retry=True,
                 retry_policy=DEFAULT_RETRY_POLICY,
             )
-        print(accounts)
+        logger.info(accounts)
         return accounts
 
     def get_cards_jars(self) -> dict:
@@ -142,7 +143,7 @@ class MonoAccount(models.Model):
     def update_users(self):
         users = MonoAccount.objects.all()
         for user in users:
-            print(f"updating {user}")
+            logger.info(f"updating {user}")
             user.create_cards_jars()
 
 
@@ -152,7 +153,7 @@ class MonoAccount(models.Model):
     retry_kwargs={"max_retries": 5, "countdown": 60},
 )
 def set_account_webhook_by_token(self, token: str):
-    print(
+    logger.debug(
         f"webhook account: {token} start request with data {settings.WEBHOOK_URL, token}"
     )
     data = '{"webHookUrl": "{}"}'.replace("{}", f"{settings.WEBHOOK_URL}?token={token}")
@@ -160,7 +161,7 @@ def set_account_webhook_by_token(self, token: str):
     webhook_response = post(
         url="https://api.monobank.ua/personal/webhook", data=data, headers=headers
     )
-    print(
+    logger.debug(
         f"webhook account: {token}, status: {webhook_response.status_code}, text: {webhook_response.text}"
     )
 

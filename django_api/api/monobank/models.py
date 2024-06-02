@@ -329,7 +329,7 @@ class MonoTransaction(models.Model):
     commission_rate = models.IntegerField(blank=True, null=True)
     balance = models.IntegerField()
     hold = models.BooleanField()
-    receipt_id = models.CharField(max_length=255)
+    receipt_id = models.CharField(max_length=255, blank=True, null=True)
     account = models.ForeignKey(MonoCard, on_delete=models.CASCADE)
     cashback_amount = models.IntegerField()
     comment = models.TextField(max_length=2048, blank=True, null=True)

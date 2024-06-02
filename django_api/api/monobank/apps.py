@@ -8,12 +8,13 @@ class MonobankConfig(AppConfig):
     name = "monobank"
 
     def ready(self):
-        if settings.APPLY_MONOBANK_WEBHOOKS and settings.IS_WORKER:
+        if settings.IS_CI_TEST or not settings.IS_WORKER:  # Skip during tests
+            return
+        if settings.APPLY_MONOBANK_WEBHOOKS:
             from monobank.models import MonoAccount
 
             MonoAccount.set_monobank_webhook()
-        if settings.IS_CI_TEST:  # Skip during tests
-            return
+
         from django_celery_beat.models import (
             CrontabSchedule,
             MultipleObjectsReturned,

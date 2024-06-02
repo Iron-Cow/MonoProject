@@ -1,12 +1,10 @@
-import logging
-
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from rest_framework.authentication import BaseAuthentication
 
-logger = logging.getLogger(__file__)
 UserModel = get_user_model()
+
 
 ## TODO
 class AuthBackend(BaseAuthentication):

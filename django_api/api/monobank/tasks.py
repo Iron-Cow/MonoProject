@@ -5,6 +5,7 @@ from time import sleep
 from api.celery import app
 from celery import shared_task
 from django.conf import settings
+from loguru import logger
 
 from .models import MonoAccount
 
@@ -17,16 +18,16 @@ def bar():
 @shared_task
 def update_every_mono_account():
     if not settings.SHOULD_AUTO_FETCH_TRANSACTIONS:
-        print(
+        logger.info(
             "skip update_every_mono_account as SHOULD_AUTO_FETCH_TRANSACTIONS turned off"
         )
         return
     accounts = MonoAccount.objects.all()
-    print("accounts -> ", accounts)
+    logger.info("accounts -> ", accounts)
     for account in accounts:
-        print(account)
+        logger.info(account)
         account.create_cards_jars()
-    print(f"REPORT -> loaded {len(accounts)} account(s)")
+    logger.info(f"REPORT -> loaded {len(accounts)} account(s)")
 
 
 #

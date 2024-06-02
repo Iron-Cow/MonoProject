@@ -9,13 +9,16 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import logging
 import os
+import sys
 from datetime import timedelta
 from distutils.util import strtobool
 from pathlib import Path
 
 import environ
 from dotenv import load_dotenv
+from loguru import logger
 
 load_dotenv()
 # Read .env file
@@ -212,6 +215,76 @@ DEBUG_TOOLBAR_PANELS = [
     "debug_toolbar.panels.redirects.RedirectsPanel",
     "debug_toolbar.panels.profiling.ProfilingPanel",
 ]
+
+# LOGGING_CONFIG = None
+#
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "console": {
+#             "class": "loguru._handler.StreamHandler",
+#             "level": "DEBUG",
+#         },
+#         "file": {
+#             "class": "loguru._handler._AsyncFileHandler",
+#             "filename": "/var/log/myapp.log",
+#             "level": "DEBUG",
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["console", "file"],
+#             "level": "INFO",
+#         },
+#         "django.server": {
+#             "handlers": ["console", "file"],
+#             "level": "INFO",
+#         },
+#     },
+# }
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+    },
+    "formatters": {
+        # "django.server": {
+        #     "()": "django.utils.log.ServerFormatter",
+        #     "format": "[{server_time}] {message}",
+        #     "style": "{",
+        # }
+        "standard": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "loguru": {"class": "api.logging.LoguruHandler"},
+    },
+    "loggers": {
+        logger_name: {
+            "handlers": ["loguru"],
+            "level": "INFO",
+            "propagate": False,
+        }
+        for logger_name in (
+            "django",
+            "django.request",
+            "django.db.backends",
+            "django.template",
+            "core",
+        )
+    },
+}
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True  # For development only, restrict in production

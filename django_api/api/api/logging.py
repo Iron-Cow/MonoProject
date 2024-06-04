@@ -12,11 +12,14 @@ logger.add(
     diagnose=True,
     level="INFO",
 )
-logger.add(
-    "logs/logs.log",
-    format="<level>{time:[DD/MMM/YYYY HH:mm:ss]} | {level} | {message}</level>",
-    rotation="100 MB",
-)
+
+
+# TODO: add later after docker no access fix
+# logger.add(
+#     "logs/logs.log",
+#     format="<level>{time:[DD/MMM/YYYY HH:mm:ss]} | {level} | {message}</level>",
+#     rotation="100 MB",
+# )
 
 
 class LoguruHandler(logging.Handler):

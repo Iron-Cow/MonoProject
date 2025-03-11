@@ -57,3 +57,4 @@ vine==5.0.0
 wcwidth==0.2.8
 django-extensions==3.2.3
 loguru==0.7.2
+pyTelegramBotAPI==4.20.0

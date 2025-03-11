@@ -35,6 +35,9 @@ Set environment variables in `.env` file:
 | `SHOULD_AUTO_FETCH_TRANSACTIONS`    | Flag to fetch account data periodically, default=`false`                                               |          | ``                                                                 |
 | `IS_WORKER`                         | Flag to differentiate backend from celery worker, default=`false`                                      |          | ``                                                                 |
 | `WEBHOOK_URL`                       | Webhook URL for monobank to send new transactions                                                      |    ✅     | ``                                                                 |
+| `LOGS_BOT_TOKEN`                    | Token for chat bot logs                                                                                |    ✅     | ``                                                                 |
+| `LOGS_CHAT_ID`                      | Admin who receive telegram logs                                                                        |    ✅     | ``                                                                 |
+| `ENV`                               | Stage of application (dev, prod, local...)                                                             |    ✅     | ``                                                                 |"
 
 ## Additional Information
 

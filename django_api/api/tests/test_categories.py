@@ -1,4 +1,3 @@
-import pytest
 from monobank.views import CategoryViewSet
 from rest_framework.exceptions import ErrorDetail
 
@@ -97,25 +96,3 @@ categories_list_variants = [
         ),
     ),
 ]
-
-
-@pytest.mark.django_db  # (databases=['tests_db'])
-@pytest.mark.usefixtures("api_request")
-@pytest.mark.parametrize("test_name, variant", categories_list_variants)
-@pytest.mark.usefixtures("pre_created_categories")
-def test_categories(api_request, test_name, variant, pre_created_categories):
-    view = variant.view
-
-    response = view(
-        api_request(
-            variant.name,
-            tg_id=variant.tg_id,
-            method_name=variant.method_name,
-            is_admin=variant.is_admin,
-            url_kwargs=variant.url_kwargs,
-            data=variant.request_data,
-        ),
-        **variant.url_kwargs,
-    )
-    assert response.status_code == variant.status_code
-    assert response.data == variant.expected

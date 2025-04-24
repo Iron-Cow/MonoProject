@@ -28,7 +28,7 @@ logger.add(
 class LoguruHandler(logging.Handler):
     def __init__(self):
         super().__init__()
-        self.telegram_bot = TelegramClient(os.environ.get("LOGS_BOT_TOKEN"))
+        self.telegram_bot = TelegramClient(os.environ.get("LOGS_BOT_TOKEN", "not set"))
         self.telegram_logs_chat_id = int(os.environ.get("ADMIN_TG_ID", -1))
         self.env = os.environ.get("ENV", "not set")
 
@@ -45,7 +45,7 @@ class LoguruHandler(logging.Handler):
                 logging.INFO: "INFO",
                 logging.DEBUG: "DEBUG",
                 logging.NOTSET: "NOTSET",
-            }.get(record.levelname, logging.INFO)
+            }.get(record.levelno, "INFO")
 
         frame, depth = logging.currentframe(), 2
         while frame.f_code.co_filename == logging.__file__:  # type: ignore

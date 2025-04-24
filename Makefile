@@ -9,7 +9,7 @@ test-db-create:
 .PHONY: test-api
 test-api:test-db-create
 	sleep 10
-	docker-compose -f docker-compose-test.yaml up --build --exit-code-from api-test
+	docker compose -f docker-compose-test.yaml up --build --exit-code-from api-test
 
 # Typecheck api
 .PHONY: typecheck-api

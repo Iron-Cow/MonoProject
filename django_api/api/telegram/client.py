@@ -18,7 +18,7 @@ class TelegramClient(metaclass=SingletonMeta):
         self.token = bot_token
         self.bot = TeleBot(token=bot_token)
 
-    def send_message(self, chat_id: int, text: str):
+    def send_message(self, chat_id: int | str, text: str):
         self.bot.send_message(chat_id, text)
 
     def close(self):
@@ -29,7 +29,7 @@ class TelegramClient(metaclass=SingletonMeta):
 
 
 if __name__ == "__main__":
-    client1 = TelegramClient(os.environ.get("LOGS_BOT_TOKEN"))
+    client1 = TelegramClient(os.environ.get("LOGS_BOT_TOKEN", "not set bot token"))
     client1.send_message(
-        os.environ.get("ADMIN_TG_ID"), "Hello, this is a test message."
+        os.environ.get("ADMIN_TG_ID", "not set tg_id"), "Hello, this is a test message."
     )

@@ -305,3 +305,5 @@ IS_WORKER = strtobool(
     os.getenv("IS_WORKER", "false")
 )  # should be ON in celery workers. Turned on in docker-compose
 WEBHOOK_URL = os.getenv("WEBHOOK_URL", "")
+CONSUMER_TG_BOT_TOKEN = os.getenv("BOT_TOKEN", "NOT_SET")
+LOGGING_TG_BOT_TOKEN = os.getenv("BOT_TOKEN", "LOGS_BOT_TOKEN")

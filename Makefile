@@ -1,15 +1,22 @@
+ifneq ($(shell docker compose version 2>/dev/null),)
+  DOCKER_COMPOSE=docker compose
+else
+  DOCKER_COMPOSE=docker-compose
+endif
+
+
 .PHONY: build-api
 build-api:
 	docker build . -f api.Dockerfile -t api-dev -q
 
 .PHONY: test-db-create
 test-db-create:
-	docker-compose -f docker-compose-test.yaml up --build -d databasetest
+	$(DOCKER_COMPOSE) -f docker-compose-test.yaml up --build -d databasetest
 
 .PHONY: test-api
 test-api:test-db-create
 	sleep 10
-	docker-compose -f docker-compose-test.yaml up --build --exit-code-from api-test
+	$(DOCKER_COMPOSE) -f docker-compose-test.yaml up --build --exit-code-from api-test
 
 # Typecheck api
 .PHONY: typecheck-api

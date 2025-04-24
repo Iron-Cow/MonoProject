@@ -1,6 +1,9 @@
+import logging
+
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-from loguru import logger
+
+# from loguru import logger
 from pydantic import ValidationError
 from rest_framework.permissions import (
     AllowAny,
@@ -30,6 +33,7 @@ from .serializers import (
     MonoTransactionSerializer,
 )
 
+logger = logging.getLogger(__name__)
 User = get_user_model()
 
 
@@ -327,16 +331,17 @@ class TestEndpoint(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
-        account = User.objects.get(tg_id=11111)
-        print(account)
-        account.create_cards_jars()
-        jar = MonoJar.objects.get(id="py6VpkfAYUx7w48jEU0F4EFqpkLw0to")
-        print(jar)
-        # jar.get_transactions()
-        query = JarTransaction.objects.all()
-        query = JarTransaction.objects.filter(
-            Q(account__id="py6VpkfAYUx7w48jEU0F4EFqpkLw0to")
-            # |
-            # Q(monojartransaction__account__monoaccount__user__tg_id=12345)
-        )
-        return Response(query.values())
+        logger.info("something went wrong")
+        # account = User.objects.get(tg_id=11111)
+        # print(account)
+        # account.create_cards_jars()
+        # jar = MonoJar.objects.get(id="py6VpkfAYUx7w48jEU0F4EFqpkLw0to")
+        # print(jar)
+        # # jar.get_transactions()
+        # query = JarTransaction.objects.all()
+        # query = JarTransaction.objects.filter(
+        #     Q(account__id="py6VpkfAYUx7w48jEU0F4EFqpkLw0to")
+        #     # |
+        #     # Q(monojartransaction__account__monoaccount__user__tg_id=12345)
+        # )
+        return Response("")

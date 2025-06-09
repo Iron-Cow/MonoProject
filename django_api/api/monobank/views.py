@@ -347,7 +347,7 @@ class TestEndpoint(APIView):
         return Response(
             {
                 "input": result.get("input"),
-                "output": json.loads(result.get("output")),
+                "output": json.loads(result.get("output", "{}")),
             }
         )
         # bar_result = bar.delay()

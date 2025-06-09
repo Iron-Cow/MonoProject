@@ -46,4 +46,8 @@ def get_jar_monthly_report(date: str) -> dict[str, str]:
         handle_parsing_errors=True,
     )
 
-    return agent.invoke(inputs)
+    return agent.invoke(
+        {
+            "input": inputs,
+        }
+    )

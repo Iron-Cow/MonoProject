@@ -43,7 +43,6 @@ pytest-django==4.5.2
 python-crontab==3.0.0
 python-dateutil==2.8.2
 python-dotenv==1.0.0
-pydantic==2.7.1
 pytz==2023.3.post1
 redis==5.0.1
 requests==2.31.0
@@ -58,3 +57,7 @@ wcwidth==0.2.8
 django-extensions==3.2.3
 loguru==0.7.2
 pyTelegramBotAPI==4.20.0
+langchain==0.3.24
+langchain-community==0.3.22
+langgraph==0.3.32
+langchain-google-genai==2.1.3

@@ -21,11 +21,20 @@ admin.site.register(CategoryMSO)
 admin.site.register(MonoAccount)
 admin.site.register(MonoCard)
 admin.site.register(MonoJar)
-admin.site.register(JarTransaction)
+
+
+# admin.site.register(JarTransaction)
 
 
 class MonoTransactionModelAdmin(admin.ModelAdmin):
-    list_display = ["id", "time", "amount", "description", "balance"]
+    list_display = [
+        "id",
+        "formatted_time",
+        "formatted_amount",
+        "description",
+        "formatted_balance",
+    ]
+    ordering = ["-time"]
 
     class Meta:
         model = MonoTransaction
@@ -33,5 +42,23 @@ class MonoTransactionModelAdmin(admin.ModelAdmin):
 
 admin.site.register(MonoTransaction, MonoTransactionModelAdmin)
 
+
+class JarTransactionModelAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "owner_name",
+        "jar_name",
+        "formatted_time",
+        "formatted_amount",
+        "description",
+        "formatted_balance",
+    ]
+    ordering = ["-time"]
+
+    class Meta:
+        model = JarTransaction
+
+
+admin.site.register(JarTransaction, JarTransactionModelAdmin)
 # admin.site.register(MonoCardTransaction)
 # admin.site.register(MonoJarTransaction)

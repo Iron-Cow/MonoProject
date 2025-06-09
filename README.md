@@ -38,7 +38,7 @@ Set environment variables in `.env` file:
 | `LOGS_BOT_TOKEN`                    | Token for chat bot logs                                                                                |    ✅     | ``                                                                 |
 | `LOGS_CHAT_ID`                      | Admin who receive telegram logs                                                                        |    ✅     | ``                                                                 |
 | `ENV`                               | Stage of application (dev, prod, local...)                                                             |    ✅     | ``                                                                 |"
-
+| `GOOGLE_API_KEY`                    | Google api key for LLM interractions (https://aistudio.google.com/apikey)                              |    ✅     | ``                                                                 |"
 ## Additional Information
 
 `pip install -r requirements.txt`

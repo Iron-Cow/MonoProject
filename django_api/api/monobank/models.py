@@ -316,6 +316,10 @@ class MonoJar(models.Model):
         return data
 
 
+def formatted_sum(sum: int, currency_name: str):
+    return f"{sum / 100:.2f} {currency_name}"
+
+
 class MonoTransaction(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     time = models.IntegerField()
@@ -338,6 +342,16 @@ class MonoTransaction(models.Model):
     @property
     def owner_name(self):
         return self.account.monoaccount.user.name
+
+    @property
+    def formatted_amount(self):
+        return formatted_sum(self.amount, self.currency.name)
+
+    def formatted_balance(self):
+        return formatted_sum(self.balance, self.currency.name)
+
+    def formatted_time(self):
+        return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(self.time))
 
     @app.task(
         bind=True,
@@ -388,10 +402,27 @@ class JarTransaction(models.Model):
     cashback_amount = models.IntegerField()
     balance = models.IntegerField()
     hold = models.BooleanField()
+    comment = models.TextField(max_length=2048, blank=True, null=True)
 
     @property
     def owner_name(self):
         return self.account.monoaccount.user.name
+
+    @property
+    def jar_name(self):
+        return self.account.title
+
+    @property
+    def formatted_amount(self):
+        return formatted_sum(self.amount, self.currency.name)
+
+    @property
+    def formatted_balance(self):
+        return formatted_sum(self.balance, self.currency.name)
+
+    @property
+    def formatted_time(self):
+        return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(self.time))
 
     @app.task(
         bind=True,
@@ -399,7 +430,7 @@ class JarTransaction(models.Model):
         retry_kwargs={"max_retries": 5, "countdown": 60},
     )
     def create_jar_transaction_from_webhook(self, card_id, transaction_data: dict):
-
+        print("transtaction_data -> ", transaction_data)
         account = MonoJar.objects.get(id=card_id)
         try:
             mso = transaction_data.pop("mcc")

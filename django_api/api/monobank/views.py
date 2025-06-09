@@ -1,5 +1,6 @@
 import logging
 
+from ai_agent.agent import get_jar_monthly_report
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 
@@ -332,6 +333,25 @@ class TestEndpoint(APIView):
 
     def get(self, request):
         logger.info("something went wrong")
+        # from ai_agent.agent import get_monthly_jar_transactions_tool
+        # get_monthly_jar_transactions_tool("2025-04-10")
+        # return
+        # result = agent.invoke(
+        #     "Check monotranactions spends around 2025-04-10 and monojars transactions for same period. "
+        #     "Transtactotions from card should be compensated from jar or by transfer from someone else. "
+        #     "Please locate card transactions which were not covered this month."
+        #     "Note, that jar name and transaction description may be different. As well as sum (it may wary by 5%).")
+        result = get_jar_monthly_report("2025-04-10")
+        import json
+
+        return Response(
+            {
+                "input": result.get("input"),
+                "output": json.loads(result.get("output")),
+            }
+        )
+        # bar_result = bar.delay()
+        # result = bar_result.get()
         # account = User.objects.get(tg_id=11111)
         # print(account)
         # account.create_cards_jars()

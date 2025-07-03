@@ -18,27 +18,13 @@ services:
     ports:
       - $PORT_API_HOST:$PORT_API_CONTAINER
 
-  worker:
+  worker_with_beat:
     build:
       context: django_api
       dockerfile: Dockerfile2
-    command: celery --app=api worker -l INFO
+    command: celery --app=api worker -l INFO --beat
     environment:
       IS_WORKER: true
-    volumes:
-      - ./django_api/api:/api
-    env_file:
-      - ".env"
-    depends_on:
-      - redis
-      - api
-
-
-  celery_beat:
-    build:
-      context: django_api
-      dockerfile: Dockerfile2
-    command: celery --app=api beat -l INFO
     volumes:
       - ./django_api/api:/api
     env_file:
@@ -58,7 +44,6 @@ services:
       - "database:database"
     build:
       context: chatbot
-
 
   database:
     image: postgres:16-alpine

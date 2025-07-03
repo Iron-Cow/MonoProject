@@ -4,8 +4,8 @@ from django.db.utils import OperationalError, ProgrammingError
 
 
 class MonobankConfig(AppConfig):
-    default_auto_field = "django.db.models.BigAutoField"
     name = "monobank"
+    default_auto_field = "django.db.models.BigAutoField"  # type: ignore
 
     def ready(self):
         if settings.IS_CI_TEST or not settings.IS_WORKER:  # Skip during tests
@@ -42,17 +42,17 @@ class MonobankConfig(AppConfig):
             task_name = "Update Every Mono Account Periodic Task"
             task_path = "monobank.tasks.update_every_mono_account"
             periodic_task, created = PeriodicTask.objects.get_or_create(
-                name=task_name, defaults={"task": task_path}
+                name=task_name,
+                defaults={
+                    "task": task_path,
+                    "crontab": schedule_accounts_refresh,
+                },
             )
-            # Ensure only the crontab field is set
-            periodic_task.interval = (
-                None  # Clear the interval field if it was previously set
-            )
-            periodic_task.crontab = (
-                schedule_accounts_refresh  # Assign the crontab schedule
-            )
-            periodic_task.task = task_path  # Ensure the task path is correctly set
-            periodic_task.save()
+            if not created:
+                periodic_task.interval = None
+                periodic_task.crontab = schedule_accounts_refresh
+                periodic_task.task = task_path
+                periodic_task.save()
 
         except (OperationalError, ProgrammingError) as err:
             # Exception handling if the database isn't ready yet

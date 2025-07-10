@@ -1,10 +1,15 @@
-FROM python:3.10.6-slim-buster
+FROM python:3.10-slim
 WORKDIR /api
 ARG APP_DIR
-RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev build-essential
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    libffi-dev \
+    libpq-dev && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY ./requirements.txt ./
 RUN pip install --upgrade pip
-RUN pip install redis
 RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
 
 COPY api ./

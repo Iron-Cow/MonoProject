@@ -1,6 +1,12 @@
-import logging
+# pyright: reportIncompatibleMethodOverride = false
+# pyright: reportAttributeAccessIssue = false
+# pyright: reportUnknownVariableType = false
 
-from ai_agent.agent import get_jar_monthly_report
+import logging
+import os
+
+from account.models import User as CustomUser
+from ai_agent.agent import get_jar_monthly_report_html
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 
@@ -35,7 +41,7 @@ from .serializers import (
 )
 
 logger = logging.getLogger(__name__)
-User = get_user_model()
+User: CustomUser = get_user_model()  # type: ignore
 
 
 class CategoryViewSet(ModelViewSet):
@@ -63,13 +69,17 @@ class MonoCardJarIsOwnerOrAdminPermission(BasePermission):
     Allows access only to admin users.
     """
 
-    def has_permission(self, request, view):
+    def has_permission(
+        self, request, view
+    ):  # pyright: ignore[reportIncompatibleMethodOverride]
         """
         Return `True` if permission is granted, `False` otherwise.
         """
         return bool(request.user)
 
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(
+        self, request, view, obj
+    ):  # pyright: ignore[reportIncompatibleMethodOverride]
         """
         Return `True` if permission is granted, `False` otherwise.
         """
@@ -91,7 +101,9 @@ class MonoCardViewSet(ModelViewSet):
         return [permission]
 
     def get_queryset(self):
-        users = self.request.query_params.get("users")
+        users = self.request.query_params.get(
+            "users"
+        )  # pyright: ignore[reportAttributeAccessIssue]
         if self.request.user.is_superuser:
             if users and self.action == "list":
                 return MonoCard.objects.filter(
@@ -99,10 +111,13 @@ class MonoCardViewSet(ModelViewSet):
                 )
             return MonoCard.objects.all()
         return MonoCard.objects.filter(
-            Q(monoaccount__user__tg_id=self.request.user.tg_id)
+            Q(
+                monoaccount__user__tg_id=self.request.user.tg_id
+            )  # pyright: ignore[reportAttributeAccessIssue]
             | Q(
                 monoaccount__user__tg_id__in=[
-                    member.tg_id for member in self.request.user.family_members.all()
+                    member.tg_id
+                    for member in self.request.user.family_members.all()  # pyright: ignore[reportAttributeAccessIssue]
                 ]
             )
         )
@@ -127,10 +142,13 @@ class MonoJarViewSet(ModelViewSet):
                 )
             return MonoJar.objects.all()
         return MonoJar.objects.filter(
-            Q(monoaccount__user__tg_id=self.request.user.tg_id)
+            Q(
+                monoaccount__user__tg_id=self.request.user.tg_id
+            )  # pyright: ignore[reportAttributeAccessIssue]
             | Q(
                 monoaccount__user__tg_id__in=[
-                    member.tg_id for member in self.request.user.family_members.all()
+                    member.tg_id
+                    for member in self.request.user.family_members.all()  # pyright: ignore[reportAttributeAccessIssue]
                 ]
             )
         )
@@ -341,13 +359,20 @@ class TestEndpoint(APIView):
         #     "Transtactotions from card should be compensated from jar or by transfer from someone else. "
         #     "Please locate card transactions which were not covered this month."
         #     "Note, that jar name and transaction description may be different. As well as sum (it may wary by 5%).")
-        result = get_jar_monthly_report("2025-04-10")
+        result = get_jar_monthly_report_html("2025-07-10")
         import json
+
+        from telegram.client import TelegramClient
+
+        tg = TelegramClient(os.environ.get("BOT_TOKEN", "not set bot token"))
+        tg.send_html_message(
+            os.environ.get("ADMIN_TG_ID", "not set tg_id"), result.get("output", "{}")
+        )
 
         return Response(
             {
                 "input": result.get("input"),
-                "output": json.loads(result.get("output", "{}")),
+                "output": result.get("output", "{}"),
             }
         )
         # bar_result = bar.delay()
@@ -363,5 +388,9 @@ class TestEndpoint(APIView):
         #     Q(account__id="py6VpkfAYUx7w48jEU0F4EFqpkLw0to")
         #     # |
         #     # Q(monojartransaction__account__monoaccount__user__tg_id=12345)
+        # )
+        return Response("")
+        # )
+        return Response("")
         # )
         return Response("")

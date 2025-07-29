@@ -19,16 +19,16 @@ class MonoAccountSerializer(serializers.ModelSerializer):
         model = MonoAccount
         fields = ["user", "mono_token", "active"]
 
-    def validate(self, data):
-        user = User.objects.get(tg_id=data.get("user"))
-        mono_token = data.get("mono_token")
+    def validate(self, attrs):
+        user = User.objects.get(tg_id=attrs.get("user"))
+        mono_token = attrs.get("mono_token")
 
         instance = MonoAccount(user=user, mono_token=mono_token)
         try:
             instance.get_cards_jars()
         except MonoBankError as error:
             raise serializers.ValidationError({"non_fields_errors": [error]})
-        return data
+        return attrs
 
     def save(self, **kwargs):
         user = User.objects.get(tg_id=self.data.get("user"))
@@ -130,4 +130,6 @@ class MonoJarTransactionSerializer(serializers.ModelSerializer):
         return obj.mcc.category.name
 
     def get_category_symbol(self, obj: MonoTransaction):
+        return obj.mcc.category.symbol
+        return obj.mcc.category.symbol
         return obj.mcc.category.symbol

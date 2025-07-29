@@ -6,7 +6,7 @@ from rest_framework.authentication import BaseAuthentication
 UserModel = get_user_model()
 
 
-## TODO
+## TODO implement
 class AuthBackend(BaseAuthentication):
     def authenticate(self, request):
         try:
@@ -29,7 +29,9 @@ class AuthBackend(BaseAuthentication):
     @staticmethod
     def configure_user(user):
         view_permissions = Permission.objects.get(codename="end_of_month_report_view")
-        view_permissions.user_set.add(user)
+        view_permissions.user_set.add(
+            user
+        )  # pyright: ignore[reportAttributeAccessIssue]
 
         if user.email in settings.ADMINS_EMAILS:
             user.is_staff = True

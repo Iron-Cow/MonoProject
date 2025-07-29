@@ -34,9 +34,9 @@ def generate_password(pass_lenght: int) -> str:
 
 
 def get_jar_data(jar_data: dict) -> MonoJar:
-    currency = CurrencyInfo(**jar_data.get("currency"))
+    currency = CurrencyInfo(**jar_data.get("currency", {}))
     jar_data.pop("currency")
-    jar_obj = MonoJar(**jar_data, currency=currency)
+    jar_obj = MonoJar(**jar_data, currency=currency)  # pyright: ignore[reportCallIssue]
     return jar_obj
 
 

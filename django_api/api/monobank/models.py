@@ -1,5 +1,9 @@
+# pyright: reportFunctionMemberAccess = false
+# pyright: reportArgumentType = false
+# pyright: reportMissingTypeArgument = false
 import time
 
+from account.models import User as CustomUser
 from api.celery import app
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -21,7 +25,7 @@ DEFAULT_RETRY_POLICY = {
     # 'interval_max': 0.2,
 }
 
-User = get_user_model()
+User: CustomUser = get_user_model()
 
 MONO_API_URL = "https://api.monobank.ua"
 PERSONAL_INFO_PATH = "/personal/client-info"
@@ -63,13 +67,15 @@ class Category(models.Model):
             raise ValueError("Category Exists")
         category = Category(name=name, symbol=symbol, user_defined=True)
         category.save()
-        mso = CategoryMSO(category=category, mso=999000 + category.id)
+        mso = CategoryMSO(category=category, mso=999000 + category.pk)
         mso.save()
         return category
 
 
 class CategoryMSO(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, default=1
+    )  # pyright: ignore[reportArgumentType]
     mso = models.IntegerField(unique=True)
 
     def __str__(self):
@@ -77,7 +83,9 @@ class CategoryMSO(models.Model):
 
 
 class MonoAccount(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE
+    )  # pyright: ignore[reportArgumentType]
     mono_token = models.CharField(max_length=255, unique=True)
     active = models.BooleanField(default=True)
 
@@ -345,10 +353,10 @@ class MonoTransaction(models.Model):
 
     @property
     def formatted_amount(self):
-        return formatted_sum(self.amount, self.currency.name)
+        return formatted_sum(self.amount, self.currency.name if self.currency else "?")
 
     def formatted_balance(self):
-        return formatted_sum(self.balance, self.currency.name)
+        return formatted_sum(self.balance, self.currency.name if self.currency else "?")
 
     def formatted_time(self):
         return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(self.time))
@@ -414,11 +422,11 @@ class JarTransaction(models.Model):
 
     @property
     def formatted_amount(self):
-        return formatted_sum(self.amount, self.currency.name)
+        return formatted_sum(self.amount, self.currency.name if self.currency else "?")
 
     @property
     def formatted_balance(self):
-        return formatted_sum(self.balance, self.currency.name)
+        return formatted_sum(self.balance, self.currency.name if self.currency else "?")
 
     @property
     def formatted_time(self):
@@ -448,7 +456,7 @@ class JarTransaction(models.Model):
             currency = Currency.objects.get(code=int(currency_code))
         except Currency.DoesNotExist:
             currency = Currency.create_unknown_currency(currency_code)
-        mono_transaction = JarTransaction.objects.get_or_create(
+        JarTransaction.objects.get_or_create(
             account=account,
             mcc=mcc,
             currency=currency,

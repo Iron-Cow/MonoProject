@@ -1,3 +1,5 @@
+# pyright: reportAssignmentType = false
+
 from django.apps import AppConfig
 
 

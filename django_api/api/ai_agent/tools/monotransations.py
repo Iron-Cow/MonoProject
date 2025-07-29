@@ -46,7 +46,7 @@ def get_monthly_jar_transactions(today: str) -> list:
     """
     Return all Jar transactions for the current month.
     Input: today as 'YYYY-MM-DD'
-    Output: List of dicts with amount, description, time, owner and jar name
+    Output: List of dicts with amount, description, time, owner, balance and jar name
 
 
     """
@@ -66,6 +66,7 @@ def get_monthly_jar_transactions(today: str) -> list:
             "time": tx.formatted_time,
             "jar_name": tx.jar_name,
             "owner": tx.owner_name,
+            "balance": tx.formatted_balance,
         }
         for tx in transactions
     ]

@@ -39,7 +39,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     #
     #     return data
 
-    def get_token(self, user):
+    def get_token(self, user):  # pyright: ignore[reportIncompatibleMethodOverride]
         token = super(CustomTokenObtainPairSerializer, self).get_token(user)
         token.payload["test_field"] = "test_value"
         return token

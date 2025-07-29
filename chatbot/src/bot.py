@@ -1,3 +1,6 @@
+# pyright: reportInvalidStringEscapeSequence = false
+# pyright: reportArgumentType = false
+
 import logging
 
 from aiogram import Bot, types
@@ -12,7 +15,8 @@ from keyboard_manager import KeyboardManager
 from loguru import logger
 from request_manager import RequestManager
 from states import MonotokenStates
-from utils import generate_password, get_jar_data
+
+from .utils import generate_password, get_jar_data
 
 PASSWORD_LENGTH = 16
 
@@ -132,7 +136,7 @@ async def register(message: types.Message):
 
 
 @dp.message_handler(state="*", commands=["token_add"])
-async def register(message: types.Message):
+async def token_add(message: types.Message):
     # TODO: check if exists
     resp = text(
         "Follow the link to get monobank token\. Please copy it and come back to insert it\. \n"
@@ -148,7 +152,7 @@ async def register(message: types.Message):
 
 
 @dp.message_handler(state="*", commands=["hello"])
-async def start(message: types.Message):
+async def hello(message: types.Message):
     text = "Test start"
     await bot.send_message(message.chat.id, text)
 
@@ -186,7 +190,7 @@ async def reply_on_button(
 
 
 @dp.callback_query_handler(lambda c: c.data == "register_monouser")
-async def register(callback_query: types.CallbackQuery):
+async def register_monouser(callback_query: types.CallbackQuery):
     await reply_on_button(callback_query, kbm.register_button, bot)
     password = generate_password(PASSWORD_LENGTH)
     username = (
@@ -264,13 +268,13 @@ async def token(message: types.Message):
 
 
 @dp.callback_query_handler(lambda c: c.data == "cancel")
-async def register(callback_query: types.CallbackQuery):
+async def cancel(callback_query: types.CallbackQuery):
     await reply_on_button(callback_query, kbm.cancel_button, bot)
     state = dp.current_state(user=callback_query.from_user.id)
     await state.reset_state()
 
 
-async def on_startup(dp: Dispatcher):
+async def on_startup(_: Dispatcher):
     # global driver
     pass
 

@@ -1,3 +1,5 @@
+# pyright: reportArgumentType = false
+
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 

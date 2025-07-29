@@ -3,6 +3,7 @@ from typing import Callable, List, NamedTuple
 from urllib.parse import urlencode
 
 import pytest
+from account.models import UserManager as cusrom_user
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from monobank.models import (
@@ -18,7 +19,7 @@ from monobank.models import (
 from rest_framework.exceptions import ErrorDetail
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-User = get_user_model()
+User: cusrom_user = get_user_model()  # type: ignore
 
 NO_PERMISSION_ERROR = {
     "detail": ErrorDetail(
@@ -65,11 +66,15 @@ def api_request():
         query_params: dict | None = None,
     ):
         if create_new_user:
-            user = User.objects.create_user(
-                tg_id, password, is_staff=is_admin, is_admin=is_admin
+            user = (
+                User.objects.create_user(  # pyright: ignore[reportAttributeAccessIssue]
+                    tg_id, password, is_staff=is_admin, is_admin=is_admin
+                )
             )
         else:
-            user = User.objects.get(tg_id=tg_id)
+            user = User.objects.get(
+                tg_id=tg_id
+            )  # pyright: ignore[reportAttributeAccessIssue]
         factory = APIRequestFactory()
         url = reverse(view_name, args=url_args, kwargs=url_kwargs)
 
@@ -91,10 +96,12 @@ def api_request():
 
 
 @pytest.fixture
-def pre_created_user(db) -> User:
-    precreated_user = User.objects.create_user(
-        tg_id="precreated_user_tg_id",
-        password="precreated_user_password",
+def pre_created_user(db) -> User:  # type: ignore
+    precreated_user = (
+        User.objects.create_user(  # pyright: ignore[reportAttributeAccessIssue]
+            tg_id="precreated_user_tg_id",
+            password="precreated_user_password",
+        )
     )
     return precreated_user
 

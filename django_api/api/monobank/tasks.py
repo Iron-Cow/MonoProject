@@ -70,4 +70,4 @@ def create_delayed_task(self):
             "interval_step": 0.2,
             "interval_max": 0.2,
         },
-    )
+    )  # pyright: ignore[reportCallIssue]

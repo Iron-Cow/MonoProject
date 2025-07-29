@@ -1,4 +1,7 @@
+# pyright: reportArgumentType = false
+
 # Create your models here.
+
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
@@ -6,7 +9,7 @@ from django.db import models
 class UserManager(BaseUserManager):
     def create_user(
         self,
-        tg_id: int or str,
+        tg_id: str | int,
         password=None,
         is_staff=False,
         is_admin=False,
@@ -33,12 +36,12 @@ class UserManager(BaseUserManager):
         return user
 
     def get_or_create_user(
-        self, tg_id: int or str, password=None, is_staff=False, is_admin=False
+        self, tg_id: str | int, password=None, is_staff=False, is_admin=False
     ):
         try:
             return self.create_user(tg_id, password, is_staff, is_admin)
         except:
-            self.get_by_natural_key(tg_id)
+            self.get_by_natural_key(str(tg_id))
             if self.objects.get(tg_id=tg_id).exists():
                 return self.objects.get(tg_id=tg_id)
 
@@ -59,7 +62,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     @property
-    def is_active(self):
+    def is_active(self):  # pyright: ignore[reportIncompatibleVariableOverride]
         return self.active
 
     @property
@@ -80,4 +83,4 @@ class User(AbstractBaseUser):
         return self.name
 
     def get_telegram_id(self):
-        return self.telegram_id
+        return self.tg_id

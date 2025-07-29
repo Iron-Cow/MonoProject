@@ -1,4 +1,5 @@
 # Create your views here.
+from account.models import User as custom_user
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import status
@@ -10,7 +11,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .serializers import CustomTokenObtainPairSerializer, UserSerializer
 
-User = get_user_model()
+User: custom_user = get_user_model()  # pyright: ignore[reportAssignmentType]
 
 
 class IsOwnerOrAdminUser(BasePermission):
@@ -18,7 +19,9 @@ class IsOwnerOrAdminUser(BasePermission):
     Allows access only to admin users.
     """
 
-    def has_object_permission(self, request, view, obj):
+    def has_object_permission(  # pyright: ignore[reportIncompatibleMethodOverride]
+        self, request, _, obj
+    ) -> bool:
         """
         Return `True` if permission is granted, `False` otherwise.
         """
@@ -80,19 +83,29 @@ class UserView(APIView):
 # TODO: add unit tests
 class FamilyMemberApiView(APIView):
     def delete(self, request, tg_id=None, member_tg_id=None):
-        user = get_object_or_404(User, tg_id=tg_id)
-        family_member = get_object_or_404(User, tg_id=member_tg_id)
+        user = get_object_or_404(
+            User, tg_id=tg_id
+        )  # pyright: ignore[reportArgumentType]
+        family_member = get_object_or_404(
+            User, tg_id=member_tg_id
+        )  # pyright: ignore[reportArgumentType]
         user.family_members.remove(family_member)
         return Response(status=status.HTTP_200_OK)
 
     def post(self, request, tg_id=None, member_tg_id=None):
-        user = get_object_or_404(User, tg_id=tg_id)
-        family_member = get_object_or_404(User, tg_id=member_tg_id)
+        user = get_object_or_404(
+            User, tg_id=tg_id
+        )  # pyright: ignore[reportArgumentType]
+        family_member = get_object_or_404(
+            User, tg_id=member_tg_id
+        )  # pyright: ignore[reportArgumentType]
         user.family_members.add(family_member)
         return Response(status=status.HTTP_201_CREATED)
 
     def get(self, request, tg_id=None):
-        user = get_object_or_404(User, tg_id=tg_id)
+        user = get_object_or_404(
+            User, tg_id=tg_id
+        )  # pyright: ignore[reportArgumentType]
         return Response(
             {"members": [i.name for i in user.family_members.all()]},
             status=status.HTTP_200_OK,
@@ -101,7 +114,9 @@ class FamilyMemberApiView(APIView):
 
 class FamilyMemberListApiView(APIView):
     def get(self, request, tg_id=None):
-        user = get_object_or_404(User, tg_id=tg_id)
+        user = get_object_or_404(
+            User, tg_id=tg_id
+        )  # pyright: ignore[reportArgumentType]
         return Response(
             {"members": [i.name for i in user.family_members.all()]},
             status=status.HTTP_200_OK,

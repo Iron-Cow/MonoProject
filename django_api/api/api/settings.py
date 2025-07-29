@@ -9,20 +9,16 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import logging
 import os
-import sys
 from datetime import timedelta
 from distutils.util import strtobool
 from pathlib import Path
 
-import environ
 from dotenv import load_dotenv
-from loguru import logger
 
-load_dotenv()
+load_dotenv()  # pyright: ignore[reportUnusedCallResult]
 # Read .env file
-# env = environ.Env()
+# env = environ.Env()s
 # environ.Env.read_env(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -75,7 +71,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "api.urls"
-
+#
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -178,6 +174,9 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_RESULT_BACKEND = "django-db"
 # CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+# Fix for macOS fork issue
+CELERY_WORKER_POOL = "solo"
 
 
 # django setting.

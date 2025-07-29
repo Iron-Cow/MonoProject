@@ -15,6 +15,6 @@ class Command(BaseCommand):
         User.objects.create_superuser(
             tg_id=settings.ADMIN_TG_ID,
             password=settings.ADMIN_PASSWORD,
-        )
+        )  # pyright: ignore[reportCallIssue]
 
     # except

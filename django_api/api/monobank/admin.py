@@ -20,7 +20,26 @@ admin.site.register(Currency)
 admin.site.register(CategoryMSO)
 admin.site.register(MonoAccount)
 admin.site.register(MonoCard)
-admin.site.register(MonoJar)
+
+
+class MonoJarModelAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "owner_name",
+        "title",
+        "currency",
+        "formatted_balance",
+        "formatted_goal",
+        "is_budget",
+    ]
+    search_fields = ["id", "title", "monoaccount__user__name"]
+    list_filter = ["currency", "is_budget"]
+
+    class Meta:
+        model = MonoJar
+
+
+admin.site.register(MonoJar, MonoJarModelAdmin)
 
 
 # admin.site.register(JarTransaction)

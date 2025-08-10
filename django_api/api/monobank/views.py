@@ -135,23 +135,35 @@ class MonoJarViewSet(ModelViewSet):
 
     def get_queryset(self):
         users = self.request.query_params.get("users")
+        is_budget = self.request.query_params.get("is_budget")
+        queryset = MonoJar.objects.all()
+
+        # Filter by users if provided
         if self.request.user.is_superuser:
             if users and self.action == "list":
-                return MonoJar.objects.filter(
+                queryset = queryset.filter(
                     monoaccount__user__tg_id__in=users.split(",")
                 )
-            return MonoJar.objects.all()
-        return MonoJar.objects.filter(
-            Q(
-                monoaccount__user__tg_id=self.request.user.tg_id
-            )  # pyright: ignore[reportAttributeAccessIssue]
-            | Q(
-                monoaccount__user__tg_id__in=[
-                    member.tg_id
-                    for member in self.request.user.family_members.all()  # pyright: ignore[reportAttributeAccessIssue]
-                ]
+        else:
+            queryset = queryset.filter(
+                Q(
+                    monoaccount__user__tg_id=self.request.user.tg_id
+                )  # pyright: ignore[reportAttributeAccessIssue]
+                | Q(
+                    monoaccount__user__tg_id__in=[
+                        member.tg_id
+                        for member in self.request.user.family_members.all()  # pyright: ignore[reportAttributeAccessIssue]
+                    ]
+                )
             )
-        )
+
+        # Filter by is_budget if provided
+        if is_budget is not None:
+            # Accept '1', 'true', 'True' as True, else False
+            is_budget_bool = str(is_budget).lower() in ("1", "true", "yes")
+            queryset = queryset.filter(is_budget=is_budget_bool)
+
+        return queryset
 
 
 class MonoTransactionIsOwnerOrAdminPermission(BasePermission):

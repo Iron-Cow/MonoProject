@@ -75,6 +75,7 @@ class MonoJarSerializer(serializers.ModelSerializer):
             "balance",
             "goal",
             "owner_name",
+            "is_budget",
         ]
 
     currency = CurrencySerializer()

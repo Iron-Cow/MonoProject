@@ -261,6 +261,7 @@ class MonoJar(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     balance = models.IntegerField()
     goal = models.IntegerField(null=True, blank=True)
+    is_budget = models.BooleanField(default=False)
 
     @property
     def owner_name(self):

@@ -12,6 +12,7 @@ from django.db.models import Q
 
 # from loguru import logger
 from pydantic import ValidationError
+from rest_framework.decorators import action
 from rest_framework.permissions import (
     AllowAny,
     BasePermission,
@@ -125,11 +126,11 @@ class MonoCardViewSet(ModelViewSet):
 
 class MonoJarViewSet(ModelViewSet):
     serializer_class = MonoJarSerializer
-    http_method_names = ["get"]
+    http_method_names = ["get", "patch"]  # Added patch to support the new action
 
     def get_permissions(self):
         permission = IsAdminUser()
-        if self.action in ("list", "retrieve"):
+        if self.action in ("list", "retrieve", "set_budget_status"):
             permission = MonoCardJarIsOwnerOrAdminPermission()
         return [permission]
 
@@ -164,6 +165,26 @@ class MonoJarViewSet(ModelViewSet):
             queryset = queryset.filter(is_budget=is_budget_bool)
 
         return queryset
+
+    @action(detail=True, methods=["patch"])
+    def set_budget_status(self, request, pk=None):
+        """Set the budget status of a jar.
+
+        Expects a boolean 'is_budget' in the request data.
+        """
+        jar = self.get_object()
+        is_budget = request.data.get("is_budget")
+
+        if is_budget is None:
+            return Response({"error": "is_budget parameter is required"}, status=400)
+
+        # Convert to boolean
+        is_budget_bool = str(is_budget).lower() in ("1", "true", "yes")
+        jar.is_budget = is_budget_bool
+        jar.save()
+
+        serializer = self.get_serializer(jar)
+        return Response(serializer.data)
 
 
 class MonoTransactionIsOwnerOrAdminPermission(BasePermission):

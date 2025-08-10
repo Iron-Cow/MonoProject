@@ -31,6 +31,9 @@ class KeyboardManager:
         self.get_mono_jars = InlineKeyboardButton(
             "Get my jars", callback_data="get_user_jars"
         )
+        self.get_mono_jars_budget = InlineKeyboardButton(
+            "Get my budget jars", callback_data="get_user_jars_budget"
+        )
 
     @staticmethod
     def get_inline_keyboard() -> InlineKeyboardMarkup:

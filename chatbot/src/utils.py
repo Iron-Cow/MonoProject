@@ -21,6 +21,7 @@ class MonoJar:
     balance: int
     goal: int
     owner_name: str
+    is_budget: bool
 
 
 SYMBOLS = ascii_letters + digits

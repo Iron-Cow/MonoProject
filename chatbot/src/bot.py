@@ -120,10 +120,56 @@ async def get_user_jars_combined(callback_query: types.CallbackQuery):
         value = (
             f"*{jar_obj.currency.flag} {jar_obj.balance / 100}{jar_obj.currency.name}*"
         )
+        # Toggle budget button reflects current state
+        current_flag = 1 if getattr(jar_obj, "is_budget", False) else 0
+        button_text = "Unset budget" if current_flag == 1 else "Set as budget"
+        toggle_button = InlineKeyboardButton(
+            button_text,
+            callback_data=f"toggle_budget_{jar_obj.id}*{current_flag}",
+        )
+        kb = kbm.get_inline_keyboard().add(toggle_button)
         await bot.send_message(
             callback_query.message.chat.id,
             f"{title}\n{value}".replace(".", "\."),
             parse_mode=ParseMode.MARKDOWN_V2,
+            reply_markup=kb,
+        )
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith("toggle_budget_"))
+async def toggle_budget_handler(callback_query: types.CallbackQuery):
+    jar_id = callback_query.data.replace("toggle_budget_", "").split("*")[0]
+    current_flag = int(callback_query.data.replace("toggle_budget_", "").split("*")[1])
+    new_flag = 1 - current_flag
+
+    # Call API to set this jar as budget for the user
+    resp = rm.patch(
+        f"/monobank/monojars/{jar_id}/set_budget_status/", {"is_budget": bool(new_flag)}
+    )
+
+    if resp.status_code == 200:
+        # Update the inline keyboard in place with the opposite action
+        next_text = "Unset budget" if new_flag == 1 else "Set as budget"
+        new_button = InlineKeyboardButton(
+            next_text,
+            callback_data=f"toggle_budget_{jar_id}*{new_flag}",
+        )
+        new_kb = kbm.get_inline_keyboard().add(new_button)
+        await bot.edit_message_reply_markup(
+            chat_id=callback_query.message.chat.id,
+            message_id=callback_query.message.message_id,
+            reply_markup=new_kb,
+        )
+        await bot.answer_callback_query(
+            callback_query.id,
+            text=("Set as budget ✅" if new_flag == 1 else "Unset budget ✅"),
+            show_alert=False,
+        )
+    else:
+        await bot.answer_callback_query(
+            callback_query.id,
+            text=f"Failed to toggle budget: {resp.status_code}",
+            show_alert=True,
         )
 
 

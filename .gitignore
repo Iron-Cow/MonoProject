@@ -13,4 +13,5 @@ secrets.code-workspace
 .vscode
 /node_modules/
 package-lock.json
-logs.log
+*/logs.log
+chatbot/src/logs.log

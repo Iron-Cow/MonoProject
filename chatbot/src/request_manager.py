@@ -73,3 +73,13 @@ class RequestManager:
         headers = self.create_default_headers()
         resp = requests.post(f"{self.api_host}{endpoint}", json=body, headers=headers)
         return resp
+
+    def patch(
+        self, endpoint: str, body: dict[str, Any] | None = None
+    ) -> requests.Response:
+        if endpoint[0] != "/":
+            endpoint = "/" + endpoint
+
+        headers = self.create_default_headers()
+        resp = requests.patch(f"{self.api_host}{endpoint}", json=body, headers=headers)
+        return resp

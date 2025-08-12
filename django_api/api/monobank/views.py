@@ -137,26 +137,46 @@ class MonoJarViewSet(ModelViewSet):
     def get_queryset(self):
         users = self.request.query_params.get("users")
         is_budget = self.request.query_params.get("is_budget")
+        with_family = self.request.query_params.get("with_family")
+        with_family_bool = (
+            str(with_family).lower() in ("1", "true", "yes")
+            if with_family is not None
+            else False
+        )
         queryset = MonoJar.objects.all()
 
         # Filter by users if provided
         if self.request.user.is_superuser:
             if users and self.action == "list":
-                queryset = queryset.filter(
-                    monoaccount__user__tg_id__in=users.split(",")
-                )
+                user_ids = users.split(",")
+                if with_family_bool:
+                    try:
+                        user_ids = User.expand_tg_ids_with_family(user_ids)
+                    except Exception:
+                        pass
+                queryset = queryset.filter(monoaccount__user__tg_id__in=user_ids)
         else:
-            queryset = queryset.filter(
-                Q(
-                    monoaccount__user__tg_id=self.request.user.tg_id
-                )  # pyright: ignore[reportAttributeAccessIssue]
-                | Q(
-                    monoaccount__user__tg_id__in=[
-                        member.tg_id
-                        for member in self.request.user.family_members.all()  # pyright: ignore[reportAttributeAccessIssue]
-                    ]
-                )
+            # Non-admin can see only their own and family members' jars
+            accessible_ids = set(
+                self.request.user.get_related_tg_ids(include_self=True, recursive=False)
             )
+
+            if users:
+                requested_ids = set(users.split(","))
+                if with_family_bool:
+                    try:
+                        requested_ids = set(
+                            User.expand_tg_ids_with_family(requested_ids)
+                        )
+                    except Exception:
+                        pass
+                filtered_ids = list(requested_ids.intersection(accessible_ids))
+                queryset = queryset.filter(monoaccount__user__tg_id__in=filtered_ids)
+            else:
+                # default non-admin scope
+                queryset = queryset.filter(
+                    monoaccount__user__tg_id__in=list(accessible_ids)
+                )
 
         # Filter by is_budget if provided
         if is_budget is not None:

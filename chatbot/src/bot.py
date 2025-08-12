@@ -101,7 +101,7 @@ async def get_user_jars_combined(callback_query: types.CallbackQuery):
     await reply_on_button(callback_query, button, bot)
     url = f"/monobank/monojars/?users={callback_query.from_user.id}"
     if is_budget:
-        url += "&is_budget=True"
+        url += "&is_budget=True&with_family=True"
     resp = rm.get(url)
     if resp.status_code != 200:
         txt = "Something went wrong. Try other commands or /help"
@@ -117,9 +117,7 @@ async def get_user_jars_combined(callback_query: types.CallbackQuery):
     for jar in data:
         jar_obj = get_jar_data(jar)
         title = f"**__{jar_obj.title}__**"
-        value = (
-            f"*{jar_obj.currency.flag} {jar_obj.balance / 100}{jar_obj.currency.name}*"
-        )
+        value = f"*{jar_obj.currency.flag} {jar_obj.balance / 100}{jar_obj.currency.name}*\n\[{jar_obj.owner_name}\]"
         # Toggle budget button reflects current state
         current_flag = 1 if getattr(jar_obj, "is_budget", False) else 0
         button_text = "Unset budget" if current_flag == 1 else "Set as budget"

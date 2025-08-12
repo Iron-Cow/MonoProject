@@ -66,8 +66,8 @@ def get_jar_monthly_report(date: str) -> Dict[str, Any]:
     # Extract the output content
     if hasattr(result, "output"):
         return (
-            result.output
-        )  # pyright: ignore[reportAttributeAccessIssue, reportGeneralTypeIssues]
+            result.output  # pyright: ignore[reportAttributeAccessIssue, reportGeneralTypeIssues]
+        )
     return result
 
 
@@ -141,8 +141,8 @@ Requirements:
     # Extract the output content
     if hasattr(result, "output"):
         return (
-            result.output
-        )  # pyright: ignore[reportAttributeAccessIssue, reportGeneralTypeIssues]
+            result.output  # pyright: ignore[reportAttributeAccessIssue, reportGeneralTypeIssues]
+        )
     return result  # pyright: ignore[reportReturnType]
 
 

@@ -201,6 +201,35 @@ def pre_created_mono_jar(db, pre_created_mono_account, pre_created_currency):
 
 
 @pytest.fixture
+def pre_created_family_for_precreated_user(db, pre_created_user, pre_created_currency):
+    """Create a family member for the precreated user and a jar for that member."""
+    # family member user
+    family_user = User.objects.create_user(
+        tg_id="family_member_tg_id",
+        password="PassW0rd",
+    )
+    # link as family (symmetrical m2m)
+    pre_created_user.family_members.add(family_user)  # type: ignore[attr-defined]
+
+    # account and jar for family member
+    fam_account = MonoAccount.objects.create(
+        user=family_user,
+        mono_token="family_token",
+        active=True,
+    )
+    MonoJar.objects.create(
+        monoaccount=fam_account,
+        id="family_jar_id",
+        send_id="family_jar_send_id",
+        title="family_jar_title",
+        currency=pre_created_currency,
+        balance=4000,
+        goal=4001,
+    )
+    return family_user
+
+
+@pytest.fixture
 def pre_created_mono_transaction(
     db, pre_created_mono_card, pre_created_currency, pre_created_categories_mso
 ):

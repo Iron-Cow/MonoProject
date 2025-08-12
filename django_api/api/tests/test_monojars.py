@@ -98,6 +98,21 @@ monojars_list_variants = [
             tg_id="admin_name",
             expected=[
                 {
+                    "id": "family_jar_id",
+                    "send_id": "family_jar_send_id",
+                    "title": "family_jar_title",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 4000,
+                    "goal": 4001,
+                    "owner_name": "User-family_member_tg_id",
+                    "is_budget": False,
+                },
+                {
                     "id": "pre_created_jar_id",
                     "send_id": "pre_created_id",
                     "title": "pre_created_title",
@@ -216,6 +231,122 @@ monojars_list_variants = [
             create_new_user=False,
         ),
     ),
+    (
+        "monojars list admin with with_family=1 expands users",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "list"}),
+            name="monojars-list",
+            is_admin=True,
+            tg_id="admin_name",
+            request_data={"users": "precreated_user_tg_id", "with_family": 1},
+            expected=[
+                {
+                    "id": "family_jar_id",
+                    "send_id": "family_jar_send_id",
+                    "title": "family_jar_title",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 4000,
+                    "goal": 4001,
+                    "owner_name": "User-family_member_tg_id",
+                    "is_budget": False,
+                },
+                {
+                    "id": "pre_created_jar_id",
+                    "send_id": "pre_created_id",
+                    "title": "pre_created_title",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 1000,
+                    "goal": 1001,
+                    "owner_name": "User-precreated_user_tg_id",
+                    "is_budget": False,
+                },
+                {
+                    "id": "pre_created_jar_id2",
+                    "send_id": "pre_created_id2",
+                    "title": "pre_created_title2",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 2000,
+                    "goal": 2001,
+                    "owner_name": "User-precreated_user_tg_id",
+                    "is_budget": False,
+                },
+            ],
+            create_new_user=False,
+        ),
+    ),
+    (
+        "monojars list non-admin with_family=1 filters to accessible",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "list"}),
+            name="monojars-list",
+            is_admin=False,
+            tg_id="precreated_user_tg_id",
+            request_data={"users": "precreated_user_tg_id", "with_family": 1},
+            expected=[
+                {
+                    "id": "family_jar_id",
+                    "send_id": "family_jar_send_id",
+                    "title": "family_jar_title",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 4000,
+                    "goal": 4001,
+                    "owner_name": "User-family_member_tg_id",
+                    "is_budget": False,
+                },
+                {
+                    "id": "pre_created_jar_id",
+                    "send_id": "pre_created_id",
+                    "title": "pre_created_title",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 1000,
+                    "goal": 1001,
+                    "owner_name": "User-precreated_user_tg_id",
+                    "is_budget": False,
+                },
+                {
+                    "id": "pre_created_jar_id2",
+                    "send_id": "pre_created_id2",
+                    "title": "pre_created_title2",
+                    "currency": {
+                        "code": 980,
+                        "name": "UAH",
+                        "flag": "🇺🇦",
+                        "symbol": "грн",
+                    },
+                    "balance": 2000,
+                    "goal": 2001,
+                    "owner_name": "User-precreated_user_tg_id",
+                    "is_budget": False,
+                },
+            ],
+            create_new_user=False,
+        ),
+    ),
 ]
 
 
@@ -224,33 +355,41 @@ monojars_list_variants = [
 @pytest.mark.parametrize("test_name, variant", monojars_list_variants)
 @pytest.mark.usefixtures("pre_created_mono_jar")
 @pytest.mark.usefixtures("pre_created_currency")
+@pytest.mark.usefixtures("pre_created_family_for_precreated_user")
 def test_monojars_list(
     api_request, test_name, variant, pre_created_mono_card, pre_created_currency
 ):
     view = variant.view
 
-    user = User.objects.create_user(
-        variant.tg_id,
-        variant.password,
-        is_staff=variant.is_admin,
-        is_admin=variant.is_admin,
-    )
+    # Create or reuse user based on test variant
+    user = None
+    if not variant.create_new_user:
+        user = User.objects.filter(tg_id=variant.tg_id).first()
+    if user is None:
+        user = User.objects.create_user(
+            variant.tg_id,
+            variant.password,
+            is_staff=variant.is_admin,
+            is_admin=variant.is_admin,
+        )
 
-    account = MonoAccount.objects.create(
-        user=user,
-        mono_token="unique_token",
-        active=True,
-    )
+    # Ensure account and a sample jar exist only if absent (avoid duplications for precreated users)
+    if not MonoAccount.objects.filter(user=user).exists():
+        account = MonoAccount.objects.create(
+            user=user,
+            mono_token="unique_token",
+            active=True,
+        )
 
-    MonoJar.objects.create(
-        monoaccount=account,
-        id="some_id",
-        send_id="some_id",
-        title="some_title",
-        currency=pre_created_currency,
-        balance=3000,
-        goal=3001,
-    )
+        MonoJar.objects.create(
+            monoaccount=account,
+            id="some_id",
+            send_id="some_id",
+            title="some_title",
+            currency=pre_created_currency,
+            balance=3000,
+            goal=3001,
+        )
 
     response = view(
         api_request(

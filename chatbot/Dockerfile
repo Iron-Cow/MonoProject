@@ -11,4 +11,3 @@ COPY src .
 
 
 CMD ["python", "-m", "bot"]
-

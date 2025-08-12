@@ -2,6 +2,8 @@
 
 # Create your models here.
 
+from typing import Iterable, Set
+
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
@@ -84,3 +86,74 @@ class User(AbstractBaseUser):
 
     def get_telegram_id(self):
         return self.tg_id
+
+    @classmethod
+    def expand_tg_ids_with_family(
+        cls, tg_ids: Iterable[str | int], recursive: bool = False
+    ) -> list[str]:
+        """
+        Expand a collection of tg_ids to include their family members.
+
+        - If recursive=True, includes the full connected family component.
+        - If recursive=False, includes only direct family members.
+        Returns unique tg_ids as strings.
+        """
+        initial_ids: Set[str] = {str(tid) for tid in tg_ids if tid is not None}
+        if not initial_ids:
+            return []
+
+        collected_ids: Set[str] = set()
+
+        if not recursive:
+            users = cls.objects.filter(tg_id__in=initial_ids).prefetch_related(
+                "family_members"
+            )
+            for user in users:
+                collected_ids.add(str(user.tg_id))
+                for member in user.family_members.all():
+                    collected_ids.add(str(member.tg_id))
+            return list(collected_ids)
+
+        # recursive traversal over the undirected family graph
+        to_visit: list[str] = list(initial_ids)
+        while to_visit:
+            batch = to_visit[:50]
+            to_visit = to_visit[50:]
+
+            users = cls.objects.filter(tg_id__in=batch).prefetch_related(
+                "family_members"
+            )
+            for user in users:
+                user_id = str(user.tg_id)
+                if user_id in collected_ids:
+                    continue
+                collected_ids.add(user_id)
+                for member in user.family_members.all():
+                    member_id = str(member.tg_id)
+                    if member_id not in collected_ids:
+                        to_visit.append(member_id)
+
+        return list(collected_ids)
+
+    def get_related_tg_ids(
+        self, include_self: bool = True, recursive: bool = False
+    ) -> list[str]:
+        """
+        Return this user's tg_id plus family members' tg_ids.
+        - recursive=False: direct family only
+        - recursive=True: full connected family component
+        """
+        base_ids: list[str] = [str(self.tg_id)] if include_self else []
+        if recursive:
+            return self.__class__.expand_tg_ids_with_family(base_ids, recursive=True)
+        # direct only
+        ids: Set[str] = set(base_ids)
+        user = (
+            self.__class__.objects.filter(tg_id=str(self.tg_id))
+            .prefetch_related("family_members")
+            .first()
+        )
+        if user:
+            for member in user.family_members.all():
+                ids.add(str(member.tg_id))
+        return list(ids)

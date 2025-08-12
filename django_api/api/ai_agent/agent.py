@@ -1,3 +1,6 @@
+# pyright: reportAttributeAccessIssue=false
+# pyright: reportReturnType=false
+
 import json
 from typing import Any, Dict
 
@@ -62,11 +65,13 @@ def get_jar_monthly_report(date: str) -> Dict[str, Any]:
 
     # Extract the output content
     if hasattr(result, "output"):
-        return result.output  # pyright: ignore[reportAttributeAccessIssue]
+        return (
+            result.output  # pyright: ignore[reportAttributeAccessIssue, reportGeneralTypeIssues]
+        )
     return result
 
 
-def generate_html_report(analysis_data: Dict[str, Any]) -> str:
+def generate_html_report(analysis_data: Dict[str, Any]) -> Dict[str, Any]:
     """
     Agent 2: Presentation Agent - Converts analysis to beautiful HTML
     :param analysis_data: Structured analysis from get_jar_monthly_report
@@ -135,11 +140,13 @@ Requirements:
 
     # Extract the output content
     if hasattr(result, "output"):
-        return result.output  # pyright: ignore[reportAttributeAccessIssue]
+        return (
+            result.output  # pyright: ignore[reportAttributeAccessIssue, reportGeneralTypeIssues]
+        )
     return result  # pyright: ignore[reportReturnType]
 
 
-def get_jar_monthly_report_html(date: str) -> str:
+def get_jar_monthly_report_html(date: str) -> Dict[str, Any]:
     """
     Complete workflow: Data → Analysis → HTML Report
     :param date: date in YYYY-MM-DD format

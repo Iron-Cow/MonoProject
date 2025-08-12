@@ -12,6 +12,7 @@ from django.db.models import Q
 
 # from loguru import logger
 from pydantic import ValidationError
+from rest_framework.decorators import action
 from rest_framework.permissions import (
     AllowAny,
     BasePermission,
@@ -125,33 +126,85 @@ class MonoCardViewSet(ModelViewSet):
 
 class MonoJarViewSet(ModelViewSet):
     serializer_class = MonoJarSerializer
-    http_method_names = ["get"]
+    http_method_names = ["get", "patch"]  # Added patch to support the new action
 
     def get_permissions(self):
         permission = IsAdminUser()
-        if self.action in ("list", "retrieve"):
+        if self.action in ("list", "retrieve", "set_budget_status"):
             permission = MonoCardJarIsOwnerOrAdminPermission()
         return [permission]
 
     def get_queryset(self):
         users = self.request.query_params.get("users")
+        is_budget = self.request.query_params.get("is_budget")
+        with_family = self.request.query_params.get("with_family")
+        with_family_bool = (
+            str(with_family).lower() in ("1", "true", "yes")
+            if with_family is not None
+            else False
+        )
+        queryset = MonoJar.objects.all()
+
+        # Filter by users if provided
         if self.request.user.is_superuser:
             if users and self.action == "list":
-                return MonoJar.objects.filter(
-                    monoaccount__user__tg_id__in=users.split(",")
-                )
-            return MonoJar.objects.all()
-        return MonoJar.objects.filter(
-            Q(
-                monoaccount__user__tg_id=self.request.user.tg_id
-            )  # pyright: ignore[reportAttributeAccessIssue]
-            | Q(
-                monoaccount__user__tg_id__in=[
-                    member.tg_id
-                    for member in self.request.user.family_members.all()  # pyright: ignore[reportAttributeAccessIssue]
-                ]
+                user_ids = users.split(",")
+                if with_family_bool:
+                    try:
+                        user_ids = User.expand_tg_ids_with_family(user_ids)
+                    except Exception:
+                        pass
+                queryset = queryset.filter(monoaccount__user__tg_id__in=user_ids)
+        else:
+            # Non-admin can see only their own and family members' jars
+            accessible_ids = set(
+                self.request.user.get_related_tg_ids(include_self=True, recursive=False)
             )
-        )
+
+            if users:
+                requested_ids = set(users.split(","))
+                if with_family_bool:
+                    try:
+                        requested_ids = set(
+                            User.expand_tg_ids_with_family(requested_ids)
+                        )
+                    except Exception:
+                        pass
+                filtered_ids = list(requested_ids.intersection(accessible_ids))
+                queryset = queryset.filter(monoaccount__user__tg_id__in=filtered_ids)
+            else:
+                # default non-admin scope
+                queryset = queryset.filter(
+                    monoaccount__user__tg_id__in=list(accessible_ids)
+                )
+
+        # Filter by is_budget if provided
+        if is_budget is not None:
+            # Accept '1', 'true', 'True' as True, else False
+            is_budget_bool = str(is_budget).lower() in ("1", "true", "yes")
+            queryset = queryset.filter(is_budget=is_budget_bool)
+
+        return queryset
+
+    @action(detail=True, methods=["patch"])
+    def set_budget_status(self, request, pk=None):
+        """Set the budget status of a jar.
+
+        Expects a boolean 'is_budget' in the request data.
+        """
+        jar = self.get_object()
+        is_budget = request.data.get("is_budget")
+
+        if is_budget is None:
+            return Response({"error": "is_budget parameter is required"}, status=400)
+
+        # Convert to boolean
+        is_budget_bool = str(is_budget).lower() in ("1", "true", "yes")
+        jar.is_budget = is_budget_bool
+        jar.save()
+
+        serializer = self.get_serializer(jar)
+        return Response(serializer.data)
 
 
 class MonoTransactionIsOwnerOrAdminPermission(BasePermission):

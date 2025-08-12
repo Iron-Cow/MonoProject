@@ -261,6 +261,19 @@ class MonoJar(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     balance = models.IntegerField()
     goal = models.IntegerField(null=True, blank=True)
+    is_budget = models.BooleanField(default=False)
+
+    @property
+    def formatted_balance(self):
+        return formatted_sum(self.balance, self.currency.name if self.currency else "?")
+
+    @property
+    def formatted_goal(self):
+        return (
+            formatted_sum(self.goal, self.currency.name if self.currency else "?")
+            if self.goal
+            else "-"
+        )
 
     @property
     def owner_name(self):

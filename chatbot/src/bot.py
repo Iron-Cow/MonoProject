@@ -15,8 +15,7 @@ from keyboard_manager import KeyboardManager
 from loguru import logger
 from request_manager import RequestManager
 from states import MonotokenStates
-
-from .utils import generate_password, get_jar_data
+from utils import generate_password, get_jar_data
 
 PASSWORD_LENGTH = 16
 
@@ -79,7 +78,12 @@ async def help(message: types.Message):
 
 @dp.message_handler(state="*", commands=["monojars"])
 async def monojars(message: types.Message):
-    kb = kbm.get_inline_keyboard().row(kbm.get_mono_jars).row(kbm.cancel_button)
+    kb = (
+        kbm.get_inline_keyboard()
+        .row(kbm.get_mono_jars)
+        .row(kbm.get_mono_jars_budget)
+        .row(kbm.cancel_button)
+    )
     await bot.send_message(
         message.chat.id,
         "pick your option",
@@ -88,10 +92,17 @@ async def monojars(message: types.Message):
     )
 
 
-@dp.callback_query_handler(lambda c: c.data == "get_user_jars")
-async def get_user_jars(callback_query: types.CallbackQuery):
-    await reply_on_button(callback_query, kbm.get_mono_jars, bot)
-    resp = rm.get(f"/monobank/monojars/?users={callback_query.from_user.id}")
+@dp.callback_query_handler(
+    lambda c: c.data in ["get_user_jars", "get_user_jars_budget"]
+)
+async def get_user_jars_combined(callback_query: types.CallbackQuery):
+    is_budget = callback_query.data == "get_user_jars_budget"
+    button = kbm.get_mono_jars_budget if is_budget else kbm.get_mono_jars
+    await reply_on_button(callback_query, button, bot)
+    url = f"/monobank/monojars/?users={callback_query.from_user.id}"
+    if is_budget:
+        url += "&is_budget=True&with_family=True"
+    resp = rm.get(url)
     if resp.status_code != 200:
         txt = "Something went wrong. Try other commands or /help"
         await bot.send_message(callback_query.message.chat.id, txt)
@@ -99,21 +110,64 @@ async def get_user_jars(callback_query: types.CallbackQuery):
 
     data = resp.json()
     if len(data) == 0:
-        txt = "No jars to display"
+        txt = "No budget jars to display" if is_budget else "No jars to display"
         await bot.send_message(callback_query.message.chat.id, txt)
         return
 
     for jar in data:
         jar_obj = get_jar_data(jar)
-
         title = f"**__{jar_obj.title}__**"
-        value = (
-            f"*{jar_obj.currency.flag} {jar_obj.balance / 100}{jar_obj.currency.name}*"
+        value = f"*{jar_obj.currency.flag} {jar_obj.balance / 100}{jar_obj.currency.name}*\n\[{jar_obj.owner_name}\]"
+        # Toggle budget button reflects current state
+        current_flag = 1 if getattr(jar_obj, "is_budget", False) else 0
+        button_text = "Unset budget" if current_flag == 1 else "Set as budget"
+        toggle_button = InlineKeyboardButton(
+            button_text,
+            callback_data=f"toggle_budget_{jar_obj.id}*{current_flag}",
         )
+        kb = kbm.get_inline_keyboard().add(toggle_button)
         await bot.send_message(
             callback_query.message.chat.id,
             f"{title}\n{value}".replace(".", "\."),
             parse_mode=ParseMode.MARKDOWN_V2,
+            reply_markup=kb,
+        )
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith("toggle_budget_"))
+async def toggle_budget_handler(callback_query: types.CallbackQuery):
+    jar_id = callback_query.data.replace("toggle_budget_", "").split("*")[0]
+    current_flag = int(callback_query.data.replace("toggle_budget_", "").split("*")[1])
+    new_flag = 1 - current_flag
+
+    # Call API to set this jar as budget for the user
+    resp = rm.patch(
+        f"/monobank/monojars/{jar_id}/set_budget_status/", {"is_budget": bool(new_flag)}
+    )
+
+    if resp.status_code == 200:
+        # Update the inline keyboard in place with the opposite action
+        next_text = "Unset budget" if new_flag == 1 else "Set as budget"
+        new_button = InlineKeyboardButton(
+            next_text,
+            callback_data=f"toggle_budget_{jar_id}*{new_flag}",
+        )
+        new_kb = kbm.get_inline_keyboard().add(new_button)
+        await bot.edit_message_reply_markup(
+            chat_id=callback_query.message.chat.id,
+            message_id=callback_query.message.message_id,
+            reply_markup=new_kb,
+        )
+        await bot.answer_callback_query(
+            callback_query.id,
+            text=("Set as budget ✅" if new_flag == 1 else "Unset budget ✅"),
+            show_alert=False,
+        )
+    else:
+        await bot.answer_callback_query(
+            callback_query.id,
+            text=f"Failed to toggle budget: {resp.status_code}",
+            show_alert=True,
         )
 
 

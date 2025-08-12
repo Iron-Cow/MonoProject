@@ -1,6 +1,8 @@
 # celery.py
 from __future__ import absolute_import
+
 import os
+
 from celery import Celery
 
 # this code copied from manage.py

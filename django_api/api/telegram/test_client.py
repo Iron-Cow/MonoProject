@@ -22,8 +22,10 @@ def test_send_message(mock_bot, telegram_client):
     text = "Hello, this is a test message."
 
     mock_bot.return_value.send_message = MagicMock()
-    telegram_client.send_message(chat_id, text)
-    mock_bot.return_value.send_message.assert_called_once_with(chat_id, text)
+    telegram_client.send_message(chat_id, text, parse_mode=None)
+    mock_bot.return_value.send_message.assert_called_once_with(
+        chat_id, text, parse_mode=None
+    )
 
 
 def test_close(mock_bot, telegram_client):

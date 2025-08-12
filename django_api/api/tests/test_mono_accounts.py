@@ -1,12 +1,11 @@
 from unittest.mock import patch
 
 import pytest
-
 from monobank.models import MonoAccount, MonoCard
 from monobank.views import MonoAccountViewSet
 from rest_framework.exceptions import ErrorDetail
 
-from .conftest import Variant, NO_PERMISSION_ERROR
+from .conftest import NO_PERMISSION_ERROR, Variant
 
 monoaccounts_list_variants = [
     (

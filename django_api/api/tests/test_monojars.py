@@ -533,3 +533,184 @@ def test_monojars_set_budget_status(
     )
     assert response.status_code == variant.status_code
     assert response.data == variant.expected
+
+
+monojars_available_months_variants = [
+    (
+        "monojars available months admin",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "available_months"}),
+            name="monojars-available-months",
+            is_admin=True,
+            tg_id="admin_name",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            expected=["1970-01-01"],
+        ),
+    ),
+    (
+        "monojars available months owner",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "available_months"}),
+            name="monojars-available-months",
+            is_admin=False,
+            tg_id="precreated_user_tg_id",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            expected=["1970-01-01"],
+            create_new_user=False,
+        ),
+    ),
+    (
+        "monojars available months not owner",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "available_months"}),
+            name="monojars-available-months",
+            is_admin=False,
+            tg_id="some_user",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            status_code=404,
+            expected={"detail": ErrorDetail(string="Not found.", code="not_found")},
+        ),
+    ),
+]
+
+
+@pytest.mark.django_db
+@pytest.mark.usefixtures("api_request")
+@pytest.mark.parametrize("test_name, variant", monojars_available_months_variants)
+@pytest.mark.usefixtures("pre_created_mono_jar")
+@pytest.mark.usefixtures("pre_created_mono_jar_transaction")
+def test_monojars_available_months(
+    api_request, test_name, variant, pre_created_mono_card
+):
+    view = variant.view
+
+    response = view(
+        api_request(
+            variant.name,
+            tg_id=variant.tg_id,
+            method_name=variant.method_name,
+            is_admin=variant.is_admin,
+            url_kwargs=variant.url_kwargs,
+            data=variant.request_data,
+            create_new_user=variant.create_new_user,
+        ),
+        **variant.url_kwargs,
+    )
+    assert response.status_code == variant.status_code
+    assert response.data == variant.expected
+
+
+monojars_month_summary_variants = [
+    (
+        "monojars month summary admin",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "month_summary"}),
+            name="monojars-month-summary",
+            is_admin=True,
+            tg_id="admin_name",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            query_params={"month": "1970-01-01"},
+            expected={
+                "start_balance": 10000,
+                "budget": 0,
+                "end_balance": 10000,
+                "spent": 0,
+            },
+        ),
+    ),
+    (
+        "monojars month summary owner",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "month_summary"}),
+            name="monojars-month-summary",
+            is_admin=False,
+            tg_id="precreated_user_tg_id",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            query_params={"month": "1970-01-01"},
+            expected={
+                "start_balance": 10000,
+                "budget": 0,
+                "end_balance": 10000,
+                "spent": 0,
+            },
+            create_new_user=False,
+        ),
+    ),
+    (
+        "monojars month summary not owner",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "month_summary"}),
+            name="monojars-month-summary",
+            is_admin=False,
+            tg_id="some_user",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            query_params={"month": "1970-01-01"},
+            status_code=404,
+            expected={"detail": ErrorDetail(string="Not found.", code="not_found")},
+        ),
+    ),
+    (
+        "monojars month summary missing month param",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "month_summary"}),
+            name="monojars-month-summary",
+            is_admin=True,
+            tg_id="admin_name",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            query_params={},
+            status_code=400,
+            expected={"error": "query param 'month' is required (e.g. 2025-07-01)"},
+        ),
+    ),
+    (
+        "monojars month summary invalid month format",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "month_summary"}),
+            name="monojars-month-summary",
+            is_admin=True,
+            tg_id="admin_name",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            query_params={"month": "invalid-date"},
+            status_code=400,
+            expected={"error": "invalid 'month' format, expected YYYY-MM-01"},
+        ),
+    ),
+    (
+        "monojars month summary wrong day",
+        Variant(
+            view=MonoJarViewSet.as_view({"get": "month_summary"}),
+            name="monojars-month-summary",
+            is_admin=True,
+            tg_id="admin_name",
+            url_kwargs={"pk": "pre_created_jar_id"},
+            query_params={"month": "2025-07-15"},
+            status_code=400,
+            expected={"error": "month must be the first day of month: YYYY-MM-01"},
+        ),
+    ),
+]
+
+
+@pytest.mark.django_db
+@pytest.mark.usefixtures("api_request")
+@pytest.mark.parametrize("test_name, variant", monojars_month_summary_variants)
+@pytest.mark.usefixtures("pre_created_mono_jar")
+@pytest.mark.usefixtures("pre_created_mono_jar_transaction")
+def test_monojars_month_summary(api_request, test_name, variant, pre_created_mono_card):
+    view = variant.view
+
+    response = view(
+        api_request(
+            variant.name,
+            tg_id=variant.tg_id,
+            method_name=variant.method_name,
+            is_admin=variant.is_admin,
+            url_kwargs=variant.url_kwargs,
+            data=variant.request_data,
+            create_new_user=variant.create_new_user,
+            query_params=variant.query_params,
+        ),
+        **variant.url_kwargs,
+    )
+    assert response.status_code == variant.status_code
+    assert response.data == variant.expected

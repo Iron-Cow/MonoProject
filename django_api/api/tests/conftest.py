@@ -32,7 +32,7 @@ NO_PERMISSION_ERROR = {
 class Variant(NamedTuple):
     view: Callable
     name: str
-    expected: dict | List[dict] | None = None
+    expected: dict | List[dict] | List[str] | None = None
     request_data: dict | List[dict] | None = None
     method_name: str = "get"
     format: str = "json"

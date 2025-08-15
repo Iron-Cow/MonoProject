@@ -2,6 +2,7 @@
 # pyright: reportArgumentType = false
 # pyright: reportMissingTypeArgument = false
 import time
+from datetime import date, datetime
 
 from account.models import User as CustomUser
 from api.celery import app
@@ -335,6 +336,81 @@ class MonoJar(models.Model):
             # JarTransaction.create_jar_transaction_from_webhook(self.id, transaction)
 
         return data
+
+    def get_available_months(self) -> list[date]:
+        """
+        Return a sorted list of date objects representing the first day of each
+        month for which this jar has at least one transaction. Consumers can use
+        returned items' .year and .month for further manipulations.
+        """
+        timestamps = JarTransaction.objects.filter(account=self).values_list(
+            "time", flat=True
+        )
+        unique_year_month: set[tuple[int, int]] = set()
+        for ts in timestamps:
+            dt = datetime.fromtimestamp(int(ts))
+            unique_year_month.add((dt.year, dt.month))
+        return sorted(date(y, m, 1) for y, m in unique_year_month)
+
+    def get_month_summary(self, month: str | date) -> dict:
+        """
+        Return summary for the month specified by a date string formatted as
+        "YYYY-MM-01" (or a date object on the first day of month).
+
+        Summary fields:
+        - start_balance: balance from the earliest transaction in the month
+        - budget: largest positive single transaction amount in the month
+        - end_balance: balance from the latest transaction in the month
+        - spent: calculated as start_balance - end_balance - budget
+        """
+        if isinstance(month, str):
+            month_date = datetime.strptime(month, "%Y-%m-%d").date()
+        else:
+            month_date = month
+
+        month_start = date(month_date.year, month_date.month, 1)
+        if month_start.month == 12:
+            next_month_start = date(month_start.year + 1, 1, 1)
+        else:
+            next_month_start = date(month_start.year, month_start.month + 1, 1)
+
+        start_ts = int(datetime.combine(month_start, datetime.min.time()).timestamp())
+        end_ts = int(
+            datetime.combine(next_month_start, datetime.min.time()).timestamp()
+        )
+
+        qs = JarTransaction.objects.filter(
+            account=self, time__gte=start_ts, time__lt=end_ts
+        ).order_by("time", "id")
+
+        if not qs.exists():
+            return {
+                "start_balance": 0,
+                "budget": 0,
+                "end_balance": 0,
+                "spent": 0,
+            }
+
+        first_tx = qs.first()
+        last_tx = qs.last()
+        positive_budget = (
+            qs.filter(amount__gt=0)
+            .order_by("-amount")
+            .values_list("amount", flat=True)
+            .first()
+        )
+        budget = int(positive_budget) if positive_budget is not None else 0
+
+        start_balance = int(first_tx.balance)
+        end_balance = int(last_tx.balance)
+        spent = start_balance - end_balance - budget
+
+        return {
+            "start_balance": start_balance,
+            "budget": budget,
+            "end_balance": end_balance,
+            "spent": spent,
+        }
 
 
 def formatted_sum(sum: int, currency_name: str):

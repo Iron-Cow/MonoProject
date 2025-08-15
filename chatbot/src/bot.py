@@ -125,13 +125,111 @@ async def get_user_jars_combined(callback_query: types.CallbackQuery):
             button_text,
             callback_data=f"toggle_budget_{jar_obj.id}*{current_flag}",
         )
-        kb = kbm.get_inline_keyboard().add(toggle_button)
+        months_button = InlineKeyboardButton(
+            "📅 Available months", callback_data=f"jar_months_{jar_obj.id}"
+        )
+        kb = kbm.get_inline_keyboard().row(toggle_button, months_button)
         await bot.send_message(
             callback_query.message.chat.id,
-            f"{title}\n{value}".replace(".", "\."),
+            f"{title}\n{value}".replace(".", "\\."),
             parse_mode=ParseMode.MARKDOWN_V2,
             reply_markup=kb,
         )
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith("jar_months_"))
+async def jar_available_months_handler(callback_query: types.CallbackQuery):
+    jar_id = callback_query.data.replace("jar_months_", "")
+    # Fetch jar details for title and currency
+    jar_resp = rm.get(f"/monobank/monojars/{jar_id}/")
+    months_resp = rm.get(f"/monobank/monojars/{jar_id}/available-months/")
+
+    if jar_resp.status_code != 200 or months_resp.status_code != 200:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            "Failed to fetch available months. Please try again later.",
+        )
+        return
+
+    jar = jar_resp.json()
+    jar_obj = get_jar_data(jar)
+    months = months_resp.json()  # ["YYYY-MM-01", ...]
+
+    if len(months) == 0:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            f"No transactions months for {jar_obj.title}".replace(".", "\\."),
+            parse_mode=ParseMode.MARKDOWN_V2,
+        )
+        return
+
+    kb = kbm.get_inline_keyboard()
+    # Add month buttons (show as YYYY-MM)
+    for month_str in months:
+        label = f"{month_str[:7]}"
+        kb = kb.add(
+            InlineKeyboardButton(
+                f"📆 {label}",
+                callback_data=f"jar_month_summary_{jar_obj.id}*{month_str}",
+            )
+        )
+
+    header = f"**__{jar_obj.title}__**\nPick month:".replace(".", "\\.")
+    await bot.send_message(
+        callback_query.message.chat.id,
+        header,
+        parse_mode=ParseMode.MARKDOWN_V2,
+        reply_markup=kb,
+    )
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith("jar_month_summary_"))
+async def jar_month_summary_handler(callback_query: types.CallbackQuery):
+    payload = callback_query.data.replace("jar_month_summary_", "")
+    jar_id, month_str = payload.split("*")
+
+    # Fetch summary and jar details for formatting
+    summary_resp = rm.get(
+        f"/monobank/monojars/{jar_id}/month-summary/?month={month_str}"
+    )
+    jar_resp = rm.get(f"/monobank/monojars/{jar_id}/")
+
+    if summary_resp.status_code != 200 or jar_resp.status_code != 200:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            "Failed to fetch month summary. Please try again later.",
+        )
+        return
+
+    summary = summary_resp.json()
+    jar = jar_resp.json()
+    jar_obj = get_jar_data(jar)
+
+    def fmt(amount: int) -> str:
+        try:
+            return f"{(amount or 0) / 100:.2f}"
+        except Exception:
+            return "0.00"
+
+    start_balance = fmt(summary.get("start_balance", 0))
+    budget = fmt(summary.get("budget", 0))
+    end_balance = fmt(summary.get("end_balance", 0))
+    spent = fmt(summary.get("spent", 0))
+
+    text_msg = (
+        f"📦 Jar: {jar_obj.title}\n"
+        f"📅 Month: {month_str[:7]}\n"
+        f"🔹 Start balance: 💰 {start_balance} {jar_obj.currency.name}\n"
+        f"📈 Budget (max deposit): ➕ {budget} {jar_obj.currency.name}\n"
+        f"🔻 End balance: 💰 {end_balance} {jar_obj.currency.name}\n"
+        f"🧮 Spent: {spent} {jar_obj.currency.name}"
+    )
+
+    await bot.send_message(
+        callback_query.message.chat.id,
+        text_msg,
+        parse_mode=ParseMode.MARKDOWN,
+    )
 
 
 @dp.callback_query_handler(lambda c: c.data.startswith("toggle_budget_"))

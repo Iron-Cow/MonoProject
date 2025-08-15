@@ -130,7 +130,13 @@ class MonoJarViewSet(ModelViewSet):
 
     def get_permissions(self):
         permission = IsAdminUser()
-        if self.action in ("list", "retrieve", "set_budget_status"):
+        if self.action in (
+            "list",
+            "retrieve",
+            "set_budget_status",
+            "available_months",
+            "month_summary",
+        ):
             permission = MonoCardJarIsOwnerOrAdminPermission()
         return [permission]
 
@@ -205,6 +211,44 @@ class MonoJarViewSet(ModelViewSet):
 
         serializer = self.get_serializer(jar)
         return Response(serializer.data)
+
+    @action(detail=True, methods=["get"], url_path="available-months")
+    def available_months(self, request, pk=None):
+        """Return list of available months for the specified jar as ISO dates 'YYYY-MM-01'."""
+        jar = self.get_object()
+        months = jar.get_available_months()
+        return Response([d.isoformat() for d in months])
+
+    @action(detail=True, methods=["get"], url_path="month-summary")
+    def month_summary(self, request, pk=None):
+        """Return monthly summary for the specified jar.
+
+        Query params:
+        - month: required string in format 'YYYY-MM-01'.
+        """
+        jar = self.get_object()
+        month_str = request.query_params.get("month")
+        if not month_str:
+            return Response(
+                {"error": "query param 'month' is required (e.g. 2025-07-01)"},
+                status=400,
+            )
+        try:
+            from datetime import datetime as _dt
+
+            parsed = _dt.strptime(month_str, "%Y-%m-%d").date()
+            if parsed.day != 1:
+                return Response(
+                    {"error": "month must be the first day of month: YYYY-MM-01"},
+                    status=400,
+                )
+        except Exception:
+            return Response(
+                {"error": "invalid 'month' format, expected YYYY-MM-01"}, status=400
+            )
+
+        summary = jar.get_month_summary(parsed)
+        return Response(summary)
 
 
 class MonoTransactionIsOwnerOrAdminPermission(BasePermission):
@@ -412,22 +456,22 @@ class TestEndpoint(APIView):
         #     "Transtactotions from card should be compensated from jar or by transfer from someone else. "
         #     "Please locate card transactions which were not covered this month."
         #     "Note, that jar name and transaction description may be different. As well as sum (it may wary by 5%).")
-        result = get_jar_monthly_report_html("2025-07-10")
-        import json
+        # result = get_jar_monthly_report_html("2025-07-10")
+        # import json
 
-        from telegram.client import TelegramClient
+        # from telegram.client import TelegramClient
 
-        tg = TelegramClient(os.environ.get("BOT_TOKEN", "not set bot token"))
-        tg.send_html_message(
-            os.environ.get("ADMIN_TG_ID", "not set tg_id"), result.get("output", "{}")
-        )
+        # tg = TelegramClient(os.environ.get("BOT_TOKEN", "not set bot token"))
+        # tg.send_html_message(
+        #     os.environ.get("ADMIN_TG_ID", "not set tg_id"), result.get("output", "{}")
+        # )
 
-        return Response(
-            {
-                "input": result.get("input"),
-                "output": result.get("output", "{}"),
-            }
-        )
+        # return Response(
+        #     {
+        #         "input": result.get("input"),
+        #         "output": result.get("output", "{}"),
+        #     }
+        # )
         # bar_result = bar.delay()
         # result = bar_result.get()
         # account = User.objects.get(tg_id=11111)
@@ -442,8 +486,15 @@ class TestEndpoint(APIView):
         #     # |
         #     # Q(monojartransaction__account__monoaccount__user__tg_id=12345)
         # )
-        return Response("")
-        # )
-        return Response("")
-        # )
+
+        jars = MonoJar.objects.all()
+        result = [
+            [
+                jar.title,
+                jar.get_available_months(),
+                [jar.get_month_summary(month) for month in jar.get_available_months()],
+            ]
+            for jar in jars
+        ]
+        return Response(result)
         return Response("")

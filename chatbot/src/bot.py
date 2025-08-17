@@ -23,6 +23,7 @@ from utils import generate_password, get_jar_data
 # Use a non-interactive backend suitable for servers/containers
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib import ticker as mticker
 
 PASSWORD_LENGTH = 16
 
@@ -204,7 +205,14 @@ async def jar_available_months_handler(callback_query: types.CallbackQuery):
 async def jar_chart_options_handler(callback_query: types.CallbackQuery):
     jar_id = callback_query.data.replace("jar_chart_", "")
     await reply_on_button(callback_query, InlineKeyboardButton("Chart"), bot)
-
+    jar_title = "Jar"
+    try:
+        jar_resp = rm.get(f"/monobank/monojars/{jar_id}/")
+        if jar_resp.status_code == 200:
+            jar_obj = get_jar_data(jar_resp.json())
+            jar_title = jar_obj.title or jar_title
+    except Exception:
+        pass
     kb = (
         kbm.get_inline_keyboard()
         .row(
@@ -224,7 +232,7 @@ async def jar_chart_options_handler(callback_query: types.CallbackQuery):
 
     await bot.send_message(
         callback_query.message.chat.id,
-        "Pick period for chart",
+        f"Pick period for chart [{jar_title}]",
         reply_markup=kb,
     )
 
@@ -252,6 +260,7 @@ async def jar_chart_fetch_handler(callback_query: types.CallbackQuery):
     if time_from:
         endpoint += f"&time_from={time_from}"
 
+    # Fetch transactions
     resp = rm.get(endpoint)
     if resp.status_code != 200:
         await bot.send_message(
@@ -267,9 +276,23 @@ async def jar_chart_fetch_handler(callback_query: types.CallbackQuery):
         )
         return
 
+    # Fetch jar details for title/currency
+    jar_title = "Jar"
+    currency_name = ""
+    currency_symbol = ""
+    try:
+        jar_resp = rm.get(f"/monobank/monojars/{jar_id}/")
+        if jar_resp.status_code == 200:
+            jar_obj = get_jar_data(jar_resp.json())
+            jar_title = jar_obj.title or jar_title
+            currency_name = getattr(jar_obj.currency, "name", "") or ""
+            currency_symbol = getattr(jar_obj.currency, "symbol", "") or ""
+    except Exception:
+        pass
+
     # Prepare data for plotting
     try:
-        x_labels = [item.get("formatted_time", "") for item in data]
+        time_strings = [item.get("formatted_time", "") for item in data]
         y_values = [int(item.get("balance", 0)) / 100 for item in data]
     except Exception:
         await bot.send_message(
@@ -277,13 +300,92 @@ async def jar_chart_fetch_handler(callback_query: types.CallbackQuery):
         )
         return
 
-    # Plot chart
-    fig, ax = plt.subplots(figsize=(10, 4))
-    ax.plot(x_labels, y_values, marker="o", linewidth=2)
-    ax.set_xlabel("Time")
-    ax.set_ylabel("Balance")
-    ax.set_title("Jar balance over time")
-    plt.xticks(rotation=45, ha="right")
+    # Parse times and compute month markers
+    try:
+        times = [datetime.strptime(ts, "%Y-%m-%d %H:%M:%S") for ts in time_strings]
+    except Exception:
+        times = []
+        for ts in time_strings:
+            try:
+                times.append(datetime.fromisoformat(ts))
+            except Exception:
+                times.append(datetime.now())
+
+    x_positions = list(range(len(times)))
+    month_indices: list[int] = []
+    month_labels: list[str] = []
+    last_key: tuple[int, int] | None = None
+    for idx, dt in enumerate(times):
+        key = (dt.year, dt.month)
+        if key != last_key:
+            month_indices.append(idx)
+            month_labels.append(dt.strftime("%b %Y"))
+            last_key = key
+
+    # Apply a modern style
+    try:
+        plt.style.use("seaborn-v0_8")
+    except Exception:
+        try:
+            plt.style.use("seaborn")
+        except Exception:
+            plt.style.use("ggplot")
+
+    # Plot chart with improved aesthetics
+    fig, ax = plt.subplots(figsize=(12, 5))
+    line_color = "#2E86DE"
+    ax.plot(
+        x_positions,
+        y_values,
+        color=line_color,
+        marker="o",
+        markersize=4,
+        linewidth=2.0,
+        markerfacecolor="#ffffff",
+        markeredgecolor=line_color,
+        markeredgewidth=1.25,
+        antialiased=True,
+    )
+    ax.fill_between(x_positions, y_values, color=line_color, alpha=0.08)
+
+    # X-axis: only month markers and vertical guide lines
+    if month_indices:
+        ax.set_xticks(month_indices)
+        ax.set_xticklabels(month_labels, rotation=0, ha="center")
+        for mi in month_indices:
+            ax.axvline(
+                x=mi,
+                color="#95A5A6",
+                linestyle=(0, (4, 6)),
+                linewidth=0.8,
+                alpha=0.3,
+                zorder=0,
+            )
+    else:
+        ax.set_xticks([])
+
+    # Horizontal grid lines
+    ax.grid(True, axis="y", linestyle=(0, (4, 6)), linewidth=0.8, alpha=0.35)
+
+    # Clean up spines and ticks
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_alpha(0.5)
+    ax.spines["bottom"].set_alpha(0.5)
+    ax.tick_params(axis="x", length=0, labelsize=9)
+    ax.tick_params(axis="y", labelsize=9)
+
+    # Labels and title with jar name and currency
+    y_label_suffix = f", {currency_name}" if currency_name else ""
+    ax.set_ylabel(f"Balance{y_label_suffix}")
+    ax.set_title(f"{jar_title} — Balance over time")
+
+    # Format Y-axis as currency if symbol known
+    if currency_symbol:
+        ax.yaxis.set_major_formatter(
+            mticker.StrMethodFormatter(f"{currency_symbol}{{x:,.2f}}")
+        )
+
     plt.tight_layout()
 
     buf = io.BytesIO()

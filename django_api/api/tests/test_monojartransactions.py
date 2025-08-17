@@ -1,3 +1,5 @@
+import time as _time
+
 import pytest
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
@@ -66,6 +68,7 @@ monojartransactions_variants = [
                 "category_symbol": "smbl",
                 "description": "pre_created_description",
                 "owner_name": "User-precreated_user_tg_id",
+                "formatted_time": "1970-01-01 03:25:45",
             },
         ),
     ),
@@ -87,6 +90,7 @@ monojartransactions_variants = [
                 "category_symbol": "smbl",
                 "description": "pre_created_description",
                 "owner_name": "User-precreated_user_tg_id",
+                "formatted_time": "1970-01-01 03:25:45",
             },
         ),
     ),
@@ -125,6 +129,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
                 {
                     "id": "pre_created_id2",
@@ -141,6 +146,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description2",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
                 {
                     "id": "some_tr_id",
@@ -157,6 +163,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "",
                     "owner_name": "User-any_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
             ],
         ),
@@ -185,6 +192,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
                 {
                     "id": "pre_created_id2",
@@ -201,6 +209,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description2",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
             ],
         ),
@@ -228,6 +237,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
                 {
                     "id": "pre_created_id2",
@@ -244,6 +254,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description2",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
             ],
         ),
@@ -272,6 +283,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
             ],
         ),
@@ -300,6 +312,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
                 {
                     "id": "pre_created_id2",
@@ -316,6 +329,7 @@ monojartransactions_variants = [
                     "category_symbol": "smbl",
                     "description": "pre_created_description2",
                     "owner_name": "User-precreated_user_tg_id",
+                    "formatted_time": "1970-01-01 03:25:45",
                 },
             ],
         ),
@@ -384,3 +398,141 @@ def test_monojartransactions(
     )
     # assert response.status_code == variant.status_code
     assert response.data == variant.expected
+
+
+@pytest.mark.django_db
+def test_monojartransactions_fields_selection(
+    api_request,
+    pre_created_mono_jar_transaction,
+    pre_created_currency,
+    pre_created_categories_mso,
+):
+    """Return only balance and formatted_time using fields query param."""
+    User = get_user_model()
+    user = User.objects.create_user("any_id_fs", "PassW0rd")
+    account = MonoAccount.objects.create(
+        user=user, mono_token="unique_token_fs", active=True
+    )
+    jar = MonoJar.objects.create(
+        monoaccount=account,
+        id="fields_test_jar_id",
+        send_id="fields_test_send_id",
+        title="fields_title",
+        currency=pre_created_currency,
+        balance=777,
+        goal=100,
+    )
+    jt = JarTransaction.objects.create(
+        id="fields_tr_id",
+        time=123450,
+        description="",
+        mcc=pre_created_categories_mso[0],
+        amount=-100,
+        commission_rate=0,
+        currency=pre_created_currency,
+        balance=5555,
+        hold=True,
+        account=jar,
+        cashback_amount=0,
+    )
+
+    view = MonoJarTransactionViewSet.as_view({"get": "list"})
+    response = view(
+        api_request(
+            "monojartransactions-list",
+            tg_id="any_id_fs",
+            method_name="get",
+            is_admin=False,
+            data=None,
+            create_new_user=False,
+            url_kwargs={},
+            query_params={
+                "jars": jar.id,
+                "fields": "balance,formatted_time",
+            },
+        )
+    )
+
+    expected_time = _time.strftime("%Y-%m-%d %H:%M:%S", _time.localtime(jt.time))
+    assert response.data == [{"balance": 5555, "formatted_time": expected_time}]
+
+
+@pytest.mark.django_db
+def test_monojartransactions_time_from_and_fields(
+    api_request,
+    pre_created_mono_jar_transaction,
+    pre_created_currency,
+    pre_created_categories_mso,
+):
+    """Filter by time_from and shrink fields to chart-ready set."""
+    User = get_user_model()
+    user = User.objects.create_user("any_id_tf", "PassW0rd")
+    account = MonoAccount.objects.create(
+        user=user, mono_token="unique_token_tf", active=True
+    )
+    jar = MonoJar.objects.create(
+        monoaccount=account,
+        id="timefrom_test_jar_id",
+        send_id="timefrom_test_send_id",
+        title="timefrom_title",
+        currency=pre_created_currency,
+        balance=100,
+        goal=100,
+    )
+
+    # Two transactions: one before and one after the cutoff
+    before_ts = int(
+        _time.mktime(_time.strptime("2025-07-31 23:59:59", "%Y-%m-%d %H:%M:%S"))
+    )
+    after_ts = int(
+        _time.mktime(_time.strptime("2025-08-01 12:00:00", "%Y-%m-%d %H:%M:%S"))
+    )
+
+    JarTransaction.objects.create(
+        id="old_tr_id",
+        time=before_ts,
+        description="",
+        mcc=pre_created_categories_mso[0],
+        amount=-100,
+        commission_rate=0,
+        currency=pre_created_currency,
+        balance=1111,
+        hold=True,
+        account=jar,
+        cashback_amount=0,
+    )
+
+    new_tr = JarTransaction.objects.create(
+        id="new_tr_id",
+        time=after_ts,
+        description="",
+        mcc=pre_created_categories_mso[0],
+        amount=-200,
+        commission_rate=0,
+        currency=pre_created_currency,
+        balance=2222,
+        hold=True,
+        account=jar,
+        cashback_amount=0,
+    )
+
+    view = MonoJarTransactionViewSet.as_view({"get": "list"})
+    response = view(
+        api_request(
+            "monojartransactions-list",
+            tg_id="any_id_tf",
+            method_name="get",
+            is_admin=False,
+            data=None,
+            create_new_user=False,
+            url_kwargs={},
+            query_params={
+                "jars": jar.id,
+                "time_from": "2025-08-01",
+                "fields": "balance,formatted_time",
+            },
+        )
+    )
+
+    expected_time = _time.strftime("%Y-%m-%d %H:%M:%S", _time.localtime(new_tr.time))
+    assert response.data == [{"balance": 2222, "formatted_time": expected_time}]

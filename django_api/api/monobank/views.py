@@ -4,6 +4,7 @@
 
 import logging
 import os
+from datetime import datetime
 
 from account.models import User as CustomUser
 from ai_agent.agent import get_jar_monthly_report_html
@@ -287,6 +288,7 @@ class MonoJarTransactionViewSet(ModelViewSet):
 
         users = self.request.query_params.get("users")
         jar_ids = self.request.query_params.get("jars")
+        time_from = self.request.query_params.get("time_from")
 
         # all jar transactions from all users
         queryset = JarTransaction.objects.select_related("mcc", "account").order_by(
@@ -296,6 +298,16 @@ class MonoJarTransactionViewSet(ModelViewSet):
         # filter by jar_id
         if jar_ids:
             queryset = queryset.filter(account_id__in=jar_ids.split(","))
+
+        # filter by time_from (inclusive), expects YYYY-MM-DD
+        if time_from and isinstance(time_from, str):
+            try:
+                dt = datetime.strptime(time_from, "%Y-%m-%d")
+                epoch_from = int(dt.timestamp())
+                queryset = queryset.filter(time__gte=epoch_from)
+            except Exception:
+                # if parsing fails, leave queryset unchanged (optionally could return 400)
+                pass
 
         if self.request.user.is_superuser:
             if users and self.action == "list":
@@ -314,6 +326,17 @@ class MonoJarTransactionViewSet(ModelViewSet):
             )
 
         return queryset
+
+    def get_serializer(self, *args, **kwargs):
+        # Allow shrinking the response fields via `fields` query parameter
+        fields = None
+        try:
+            fields = self.request.query_params.get("fields")
+        except Exception:
+            pass
+        if fields:
+            kwargs["fields"] = fields
+        return super().get_serializer(*args, **kwargs)
 
 
 class MonoTransactionViewSet(ModelViewSet):

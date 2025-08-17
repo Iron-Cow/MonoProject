@@ -2,7 +2,15 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from utils.errors import MonoBankError
 
-from .models import Category, Currency, MonoAccount, MonoCard, MonoJar, MonoTransaction
+from .models import (
+    Category,
+    Currency,
+    JarTransaction,
+    MonoAccount,
+    MonoCard,
+    MonoJar,
+    MonoTransaction,
+)
 
 User = get_user_model()
 
@@ -110,7 +118,7 @@ class MonoTransactionSerializer(serializers.ModelSerializer):
 
 class MonoJarTransactionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MonoTransaction
+        model = JarTransaction
         fields = [
             "id",
             "amount",
@@ -121,16 +129,29 @@ class MonoJarTransactionSerializer(serializers.ModelSerializer):
             "category_symbol",
             "description",
             "owner_name",
+            "formatted_time",
         ]
 
     currency = CurrencySerializer()
     category = serializers.SerializerMethodField()
     category_symbol = serializers.SerializerMethodField()
 
-    def get_category(self, obj: MonoTransaction):
+    def __init__(self, *args, **kwargs):
+        # Support dynamic field selection via serializer kwarg 'fields'
+        requested_fields = kwargs.pop("fields", None)
+        super().__init__(*args, **kwargs)
+        if requested_fields:
+            if isinstance(requested_fields, str):
+                requested_fields = [
+                    f.strip() for f in requested_fields.split(",") if f.strip()
+                ]
+            allowed = set(requested_fields)
+            existing = set(list(self.fields.keys()))
+            for field_name in existing - allowed:
+                self.fields.pop(field_name, None)
+
+    def get_category(self, obj: JarTransaction):
         return obj.mcc.category.name
 
-    def get_category_symbol(self, obj: MonoTransaction):
-        return obj.mcc.category.symbol
-        return obj.mcc.category.symbol
+    def get_category_symbol(self, obj: JarTransaction):
         return obj.mcc.category.symbol

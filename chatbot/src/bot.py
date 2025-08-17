@@ -1,8 +1,11 @@
 # pyright: reportInvalidStringEscapeSequence = false
 # pyright: reportArgumentType = false
 
+import io
 import logging
+from datetime import datetime, timedelta
 
+import matplotlib
 from aiogram import Bot, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
@@ -17,6 +20,10 @@ from request_manager import RequestManager
 from states import MonotokenStates
 from utils import generate_password, get_jar_data
 
+# Use a non-interactive backend suitable for servers/containers
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
 PASSWORD_LENGTH = 16
 
 kbm = KeyboardManager()
@@ -26,7 +33,7 @@ logger.add(
     "logs.log", rotation="1 week", format="{time} {level} {message}", level="INFO"
 )
 
-from aiogram.types import InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, InputFile
 
 # load_dotenv()
 config = get_config()
@@ -128,7 +135,14 @@ async def get_user_jars_combined(callback_query: types.CallbackQuery):
         months_button = InlineKeyboardButton(
             "📅 Available months", callback_data=f"jar_months_{jar_obj.id}"
         )
-        kb = kbm.get_inline_keyboard().row(toggle_button, months_button)
+        chart_button = InlineKeyboardButton(
+            "📊 Chart", callback_data=f"jar_chart_{jar_obj.id}"
+        )
+        kb = (
+            kbm.get_inline_keyboard()
+            .row(toggle_button, months_button)
+            .row(chart_button)
+        )
         await bot.send_message(
             callback_query.message.chat.id,
             f"{title}\n{value}".replace(".", "\\."),
@@ -180,6 +194,112 @@ async def jar_available_months_handler(callback_query: types.CallbackQuery):
         header,
         parse_mode=ParseMode.MARKDOWN_V2,
         reply_markup=kb,
+    )
+
+
+@dp.callback_query_handler(
+    lambda c: c.data.startswith("jar_chart_")
+    and not c.data.startswith("jar_chart_period_")
+)
+async def jar_chart_options_handler(callback_query: types.CallbackQuery):
+    jar_id = callback_query.data.replace("jar_chart_", "")
+    await reply_on_button(callback_query, InlineKeyboardButton("Chart"), bot)
+
+    kb = (
+        kbm.get_inline_keyboard()
+        .row(
+            InlineKeyboardButton(
+                "📈 1 month", callback_data=f"jar_chart_period_{jar_id}*1m"
+            ),
+            InlineKeyboardButton(
+                "📈 3 months", callback_data=f"jar_chart_period_{jar_id}*3m"
+            ),
+        )
+        .row(
+            InlineKeyboardButton(
+                "📈 All time", callback_data=f"jar_chart_period_{jar_id}*all"
+            )
+        )
+    )
+
+    await bot.send_message(
+        callback_query.message.chat.id,
+        "Pick period for chart",
+        reply_markup=kb,
+    )
+
+
+def _compute_time_from(period_code: str) -> str | None:
+    if period_code == "1m":
+        dt = datetime.now() - timedelta(days=30)
+    elif period_code == "3m":
+        dt = datetime.now() - timedelta(days=90)
+    else:
+        return None
+    return dt.strftime("%Y-%m-%d")
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith("jar_chart_period_"))
+async def jar_chart_fetch_handler(callback_query: types.CallbackQuery):
+    payload = callback_query.data.replace("jar_chart_period_", "")
+    jar_id, period_code = payload.split("*")
+    await bot.answer_callback_query(callback_query.id)
+
+    time_from = _compute_time_from(period_code)
+    endpoint = (
+        f"/monobank/monojartransactions/?jars={jar_id}&fields=balance,formatted_time"
+    )
+    if time_from:
+        endpoint += f"&time_from={time_from}"
+
+    resp = rm.get(endpoint)
+    if resp.status_code != 200:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            f"Failed to fetch transactions for chart: {resp.status_code}",
+        )
+        return
+
+    data = resp.json()  # list of {balance, formatted_time}
+    if not isinstance(data, list) or len(data) == 0:
+        await bot.send_message(
+            callback_query.message.chat.id, "No transactions to display"
+        )
+        return
+
+    # Prepare data for plotting
+    try:
+        x_labels = [item.get("formatted_time", "") for item in data]
+        y_values = [int(item.get("balance", 0)) / 100 for item in data]
+    except Exception:
+        await bot.send_message(
+            callback_query.message.chat.id, "Unexpected data format for chart"
+        )
+        return
+
+    # Plot chart
+    fig, ax = plt.subplots(figsize=(10, 4))
+    ax.plot(x_labels, y_values, marker="o", linewidth=2)
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Balance")
+    ax.set_title("Jar balance over time")
+    plt.xticks(rotation=45, ha="right")
+    plt.tight_layout()
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    plt.close(fig)
+    buf.seek(0)
+
+    caption = "Chart period: " + (
+        "1 month"
+        if period_code == "1m"
+        else ("3 months" if period_code == "3m" else "All time")
+    )
+    await bot.send_photo(
+        callback_query.message.chat.id,
+        photo=InputFile(buf, filename="jar_balance_chart.png"),
+        caption=caption,
     )
 
 

@@ -34,6 +34,7 @@ class KeyboardManager:
         self.get_mono_jars_budget = InlineKeyboardButton(
             "Get my budget jars", callback_data="get_user_jars_budget"
         )
+        # Dynamic buttons: created on the fly with callbacks
 
     @staticmethod
     def get_inline_keyboard() -> InlineKeyboardMarkup:

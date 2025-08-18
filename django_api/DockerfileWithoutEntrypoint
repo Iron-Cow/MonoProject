@@ -1,4 +1,4 @@
-FROM python:3.10.6-slim-buster
+FROM python:3.10.6-slim-bullseye
 WORKDIR /api
 ARG APP_DIR
 RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev build-essential
@@ -13,12 +13,12 @@ RUN useradd nonroot && chown nonroot: /api
 USER nonroot
 
 ENTRYPOINT python manage.py makemigrations && \
-            python manage.py migrate && \
-            python manage.py loaddata categories.json && \
-            python manage.py loaddata categories_mso.json && \
-            python manage.py loaddata currency.json && \
-            python manage.py create_api_superuser && \
-            python manage.py runserver 0.0.0.0:8000
+    python manage.py migrate && \
+    python manage.py loaddata categories.json && \
+    python manage.py loaddata categories_mso.json && \
+    python manage.py loaddata currency.json && \
+    python manage.py create_api_superuser && \
+    python manage.py runserver 0.0.0.0:8000
 
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 EXPOSE 5432

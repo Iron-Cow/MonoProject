@@ -1,4 +1,4 @@
-FROM python:3.10.6-slim-buster
+FROM python:3.10.6-slim-bullseye
 WORKDIR /api
 ARG APP_DIR
 

@@ -21,7 +21,7 @@ test-api:test-db-create
 # Typecheck api
 .PHONY: typecheck-api
 typecheck-api: build-api
-	docker run -t api-dev pyright
+	docker run -t api-dev pyright -p pyproject.toml
 
 ## Run lint api
 .PHONY: lint-api

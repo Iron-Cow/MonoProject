@@ -13,6 +13,8 @@ COPY django_api/requirements.txt django_api/
 RUN pip3 install -r django_api/requirements.txt
 
 COPY django_api/api/. api/
+COPY pyproject.toml api/
+
 WORKDIR /home/api
 
 ENTRYPOINT ["python", "-m"]

@@ -4,4 +4,4 @@ reportMissingImports = false
 reportGeneralTypeIssues = false
 reportAttributeAccessIssue = false
 
-ignore = ["django_api/api/*/migrations/*"]
+ignore = ["**/migrations/*.py"]

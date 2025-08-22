@@ -43,6 +43,42 @@ logger = logging.getLogger(__name__)
 User: CustomUser = get_user_model()  # type: ignore
 
 
+class MonoBankAccessMixin:
+    """Mixin to provide common access control logic for MonoBank entities."""
+
+    def get_accessible_user_tg_ids(self, users_param=None, with_family=False):
+        """
+        Get list of tg_ids that the current user can access.
+        Returns all tg_ids for superusers, filtered tg_ids for regular users.
+        """
+        if self.request.user.is_superuser:
+            if users_param and self.action == "list":
+                user_ids = users_param.split(",")
+                if with_family:
+                    try:
+                        user_ids = User.expand_tg_ids_with_family(user_ids)
+                    except Exception:
+                        pass
+                return user_ids
+            return None  # No filtering for superusers when no specific users requested
+
+        # For non-admin users
+        accessible_ids = set(
+            self.request.user.get_related_tg_ids(include_self=True, recursive=False)
+        )
+
+        if users_param:
+            requested_ids = set(users_param.split(","))
+            if with_family:
+                try:
+                    requested_ids = set(User.expand_tg_ids_with_family(requested_ids))
+                except Exception:
+                    pass
+            return list(requested_ids.intersection(accessible_ids))
+
+        return list(accessible_ids)
+
+
 class CategoryViewSet(ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
@@ -63,9 +99,9 @@ class MonoAccountViewSet(ModelViewSet):
         return [permission]
 
 
-class MonoCardJarIsOwnerOrAdminPermission(BasePermission):
+class IsOwnerOrFamilyOrAdminPermission(BasePermission):
     """
-    Allows access only to admin users.
+    Allows access to owners, family members, or admin users.
     """
 
     def has_permission(
@@ -82,11 +118,22 @@ class MonoCardJarIsOwnerOrAdminPermission(BasePermission):
         """
         Return `True` if permission is granted, `False` otherwise.
         """
-        return bool(
-            request.user
-            and obj.monoaccount.user.tg_id == request.user.tg_id
-            or request.user.is_superuser
+        if request.user.is_superuser:
+            return True
+
+        # Get the target user's tg_id based on object type
+        if hasattr(obj, "monoaccount"):
+            target_tg_id = obj.monoaccount.user.tg_id
+        elif hasattr(obj, "account") and hasattr(obj.account, "monoaccount"):
+            target_tg_id = obj.account.monoaccount.user.tg_id
+        else:
+            return False
+
+        # Check if user is owner or family member
+        user_accessible_ids = set(
+            request.user.get_related_tg_ids(include_self=True, recursive=False)
         )
+        return target_tg_id in user_accessible_ids
 
 
 class DailyReportSchedulerApiView(APIView):
@@ -181,40 +228,33 @@ class DailyReportSchedulerApiView(APIView):
             return Response({"message": "disabled", "task": task_name}, status=200)
 
 
-class MonoCardViewSet(ModelViewSet):
+class MonoCardViewSet(MonoBankAccessMixin, ModelViewSet):
     serializer_class = MonoCardSerializer
     http_method_names = ["get"]
 
     def get_permissions(self):
         permission = IsAdminUser()
         if self.action in ("list", "retrieve"):
-            permission = MonoCardJarIsOwnerOrAdminPermission()
+            permission = IsOwnerOrFamilyOrAdminPermission()
         return [permission]
 
     def get_queryset(self):
-        users = self.request.query_params.get(
-            "users"
-        )  # pyright: ignore[reportAttributeAccessIssue]
-        if self.request.user.is_superuser:
-            if users and self.action == "list":
-                return MonoCard.objects.filter(
-                    monoaccount__user__tg_id__in=users.split(",")
-                )
-            return MonoCard.objects.all()
-        return MonoCard.objects.filter(
-            Q(
-                monoaccount__user__tg_id=self.request.user.tg_id
-            )  # pyright: ignore[reportAttributeAccessIssue]
-            | Q(
-                monoaccount__user__tg_id__in=[
-                    member.tg_id
-                    for member in self.request.user.family_members.all()  # pyright: ignore[reportAttributeAccessIssue]
-                ]
-            )
-        )
+        users = self.request.query_params.get("users")
+
+        # Base queryset with optimized joins and consistent ordering
+        queryset = MonoCard.objects.select_related(
+            "monoaccount__user", "currency"
+        ).order_by("id")
+
+        # Use mixin method for access control
+        accessible_tg_ids = self.get_accessible_user_tg_ids(users)
+        if accessible_tg_ids is not None:
+            queryset = queryset.filter(monoaccount__user__tg_id__in=accessible_tg_ids)
+
+        return queryset
 
 
-class MonoJarViewSet(ModelViewSet):
+class MonoJarViewSet(MonoBankAccessMixin, ModelViewSet):
     serializer_class = MonoJarSerializer
     http_method_names = ["get", "patch"]  # Added patch to support the new action
 
@@ -227,7 +267,7 @@ class MonoJarViewSet(ModelViewSet):
             "available_months",
             "month_summary",
         ):
-            permission = MonoCardJarIsOwnerOrAdminPermission()
+            permission = IsOwnerOrFamilyOrAdminPermission()
         return [permission]
 
     def get_queryset(self):
@@ -239,40 +279,16 @@ class MonoJarViewSet(ModelViewSet):
             if with_family is not None
             else False
         )
-        queryset = MonoJar.objects.all()
 
-        # Filter by users if provided
-        if self.request.user.is_superuser:
-            if users and self.action == "list":
-                user_ids = users.split(",")
-                if with_family_bool:
-                    try:
-                        user_ids = User.expand_tg_ids_with_family(user_ids)
-                    except Exception:
-                        pass
-                queryset = queryset.filter(monoaccount__user__tg_id__in=user_ids)
-        else:
-            # Non-admin can see only their own and family members' jars
-            accessible_ids = set(
-                self.request.user.get_related_tg_ids(include_self=True, recursive=False)
-            )
+        # Base queryset with optimized joins and consistent ordering
+        queryset = MonoJar.objects.select_related(
+            "monoaccount__user", "currency"
+        ).order_by("id")
 
-            if users:
-                requested_ids = set(users.split(","))
-                if with_family_bool:
-                    try:
-                        requested_ids = set(
-                            User.expand_tg_ids_with_family(requested_ids)
-                        )
-                    except Exception:
-                        pass
-                filtered_ids = list(requested_ids.intersection(accessible_ids))
-                queryset = queryset.filter(monoaccount__user__tg_id__in=filtered_ids)
-            else:
-                # default non-admin scope
-                queryset = queryset.filter(
-                    monoaccount__user__tg_id__in=list(accessible_ids)
-                )
+        # Use mixin method for access control
+        accessible_tg_ids = self.get_accessible_user_tg_ids(users, with_family_bool)
+        if accessible_tg_ids is not None:
+            queryset = queryset.filter(monoaccount__user__tg_id__in=accessible_tg_ids)
 
         # Filter by is_budget if provided
         if is_budget is not None:
@@ -341,36 +357,17 @@ class MonoJarViewSet(ModelViewSet):
         return Response(summary)
 
 
-class MonoTransactionIsOwnerOrAdminPermission(BasePermission):
-    """
-    Allows access only to admin users.
-    """
-
-    def has_permission(self, request, view):
-        """
-        Return `True` if permission is granted, `False` otherwise.
-        """
-        return bool(request.user)
-
-    def has_object_permission(self, request, view, obj: MonoTransaction):
-        """
-        Return `True` if permission is granted, `False` otherwise.
-        """
-        return bool(
-            request.user
-            and obj.account.monoaccount.user.tg_id == request.user.tg_id
-            or request.user.is_superuser
-        )
+# Removed duplicate permission class - using IsOwnerOrFamilyOrAdminPermission instead
 
 
-class MonoJarTransactionViewSet(ModelViewSet):
+class MonoJarTransactionViewSet(MonoBankAccessMixin, ModelViewSet):
     serializer_class = MonoJarTransactionSerializer
     http_method_names = ["get"]
 
     def get_permissions(self):
         permission = IsAdminUser()
-        if self.action in ("list", "retrieve"):  # TODO: fix it
-            permission = MonoTransactionIsOwnerOrAdminPermission()
+        if self.action in ("list", "retrieve"):
+            permission = IsOwnerOrFamilyOrAdminPermission()
         return [permission]
 
     def get_queryset(self):
@@ -379,10 +376,10 @@ class MonoJarTransactionViewSet(ModelViewSet):
         jar_ids = self.request.query_params.get("jars")
         time_from = self.request.query_params.get("time_from")
 
-        # all jar transactions from all users
-        queryset = JarTransaction.objects.select_related("mcc", "account").order_by(
-            "time", "id"
-        )
+        # all jar transactions from all users with optimized joins
+        queryset = JarTransaction.objects.select_related(
+            "mcc__category", "account__monoaccount__user", "currency"
+        ).order_by("time", "id")
 
         # filter by jar_id
         if jar_ids:
@@ -398,20 +395,11 @@ class MonoJarTransactionViewSet(ModelViewSet):
                 # if parsing fails, leave queryset unchanged (optionally could return 400)
                 pass
 
-        if self.request.user.is_superuser:
-            if users and self.action == "list":
-                queryset = queryset.filter(
-                    account__monoaccount__user__tg_id__in=users.split(",")
-                )
-        else:
+        # Use mixin method for access control
+        accessible_tg_ids = self.get_accessible_user_tg_ids(users)
+        if accessible_tg_ids is not None:
             queryset = queryset.filter(
-                Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
-                | Q(
-                    account__monoaccount__user__tg_id__in=[
-                        member.tg_id
-                        for member in self.request.user.family_members.all()
-                    ]
-                )
+                account__monoaccount__user__tg_id__in=accessible_tg_ids
             )
 
         return queryset
@@ -428,41 +416,34 @@ class MonoJarTransactionViewSet(ModelViewSet):
         return super().get_serializer(*args, **kwargs)
 
 
-class MonoTransactionViewSet(ModelViewSet):
+class MonoTransactionViewSet(MonoBankAccessMixin, ModelViewSet):
     serializer_class = MonoTransactionSerializer
     http_method_names = ["get"]
 
     def get_permissions(self):
         permission = IsAdminUser()
-        if self.action in ("list", "retrieve"):  # TODO: fix it
-            permission = MonoTransactionIsOwnerOrAdminPermission()
+        if self.action in ("list", "retrieve"):
+            permission = IsOwnerOrFamilyOrAdminPermission()
         return [permission]
 
     def get_queryset(self):
         users = self.request.query_params.get("users")
         card_ids = self.request.query_params.get("cards")
-        queryset = MonoTransaction.objects.select_related("mcc", "account").order_by(
-            "time", "id"
-        )
+
+        # Optimized queryset with proper joins
+        queryset = MonoTransaction.objects.select_related(
+            "mcc__category", "account__monoaccount__user", "currency"
+        ).order_by("time", "id")
 
         # filter by card_id
         if card_ids:
             queryset = queryset.filter(account_id__in=card_ids.split(","))
 
-        if self.request.user.is_superuser:
-            if users and self.action == "list":
-                queryset = queryset.filter(
-                    account__monoaccount__user__tg_id__in=users.split(",")
-                )
-        else:
+        # Use mixin method for access control
+        accessible_tg_ids = self.get_accessible_user_tg_ids(users)
+        if accessible_tg_ids is not None:
             queryset = queryset.filter(
-                Q(account__monoaccount__user__tg_id=self.request.user.tg_id)
-                | Q(
-                    account__monoaccount__user__tg_id__in=[
-                        member.tg_id
-                        for member in self.request.user.family_members.all()
-                    ]
-                )
+                account__monoaccount__user__tg_id__in=accessible_tg_ids
             )
 
         return queryset

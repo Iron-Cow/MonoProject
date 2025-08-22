@@ -34,7 +34,7 @@ class IsOwnerOrAdminUser(BasePermission):
 
 class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related("family_members")
     lookup_field = "tg_id"
 
     def get_permissions(self):
@@ -68,7 +68,7 @@ class UserView(APIView):
                 {"status": "ok", "data": serializer.data},
                 status=status.HTTP_201_CREATED,
             )
-        elif User.objects.get(tg_id=request.data["tg_id"]):
+        elif User.objects.filter(tg_id=request.data["tg_id"]).exists():
             return Response(
                 {"status": "fail", "data": "user exists"},
                 status=status.HTTP_400_BAD_REQUEST,
@@ -104,7 +104,7 @@ class FamilyMemberApiView(APIView):
 
     def get(self, request, tg_id=None):
         user = get_object_or_404(
-            User, tg_id=tg_id
+            User.objects.prefetch_related("family_members"), tg_id=tg_id
         )  # pyright: ignore[reportArgumentType]
         return Response(
             {"members": [i.name for i in user.family_members.all()]},
@@ -115,7 +115,7 @@ class FamilyMemberApiView(APIView):
 class FamilyMemberListApiView(APIView):
     def get(self, request, tg_id=None):
         user = get_object_or_404(
-            User, tg_id=tg_id
+            User.objects.prefetch_related("family_members"), tg_id=tg_id
         )  # pyright: ignore[reportArgumentType]
         return Response(
             {"members": [i.name for i in user.family_members.all()]},

@@ -28,9 +28,12 @@ class MonoAccountSerializer(serializers.ModelSerializer):
         fields = ["user", "mono_token", "active"]
 
     def validate(self, attrs):
-        user = User.objects.get(tg_id=attrs.get("user"))
-        mono_token = attrs.get("mono_token")
+        try:
+            user = User.objects.get(tg_id=attrs.get("user"))
+        except User.DoesNotExist:
+            raise serializers.ValidationError({"user": ["User not found"]})
 
+        mono_token = attrs.get("mono_token")
         instance = MonoAccount(user=user, mono_token=mono_token)
         try:
             instance.get_cards_jars()
@@ -39,9 +42,12 @@ class MonoAccountSerializer(serializers.ModelSerializer):
         return attrs
 
     def save(self, **kwargs):
-        user = User.objects.get(tg_id=self.data.get("user"))
-        mono_token = self.data.get("mono_token")
+        try:
+            user = User.objects.get(tg_id=self.data.get("user"))
+        except User.DoesNotExist:
+            raise serializers.ValidationError({"user": ["User not found"]})
 
+        mono_token = self.data.get("mono_token")
         instance = MonoAccount.objects.create(user=user, mono_token=mono_token)
         instance.create_cards_jars()
         return instance

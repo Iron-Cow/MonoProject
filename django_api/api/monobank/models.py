@@ -461,7 +461,7 @@ class MonoTransaction(models.Model):
         try:
             mso = transaction_data.pop("mcc")
         except KeyError:
-            mso_number = len(CategoryMSO.objects.all())
+            mso_number = CategoryMSO.objects.count()
             mso = mso_number
         try:
             mcc = CategoryMSO.objects.get(mso=mso)
@@ -532,7 +532,7 @@ class JarTransaction(models.Model):
         try:
             mso = transaction_data.pop("mcc")
         except KeyError:
-            mso_number = len(CategoryMSO.objects.all())
+            mso_number = CategoryMSO.objects.count()
             mso = mso_number
         try:
             mcc = CategoryMSO.objects.get(mso=mso)

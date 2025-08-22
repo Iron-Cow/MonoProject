@@ -146,14 +146,9 @@ class User(AbstractBaseUser):
         base_ids: list[str] = [str(self.tg_id)] if include_self else []
         if recursive:
             return self.__class__.expand_tg_ids_with_family(base_ids, recursive=True)
-        # direct only
+
+        # Optimize direct family lookup with values_list
         ids: Set[str] = set(base_ids)
-        user = (
-            self.__class__.objects.filter(tg_id=str(self.tg_id))
-            .prefetch_related("family_members")
-            .first()
-        )
-        if user:
-            for member in user.family_members.all():
-                ids.add(str(member.tg_id))
+        family_tg_ids = self.family_members.values_list("tg_id", flat=True)
+        ids.update(str(tg_id) for tg_id in family_tg_ids)
         return list(ids)

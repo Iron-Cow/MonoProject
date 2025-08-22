@@ -4,7 +4,10 @@
 import json
 from typing import Any, Dict
 
-from ai_agent.tools.monotransations import get_monthly_jar_transactions_tool
+from ai_agent.tools.monotransations import (
+    get_daily_mono_transactions_tool,
+    get_monthly_jar_transactions_tool,
+)
 from langchain.agents import AgentType, initialize_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -159,3 +162,97 @@ def get_jar_monthly_report_html(date: str) -> Dict[str, Any]:
     html_report = generate_html_report(analysis_result)
 
     return html_report
+
+
+def get_daily_mono_transactions_report(date: str | None = None) -> str:
+    """
+    Generate a report of MONO transactions that were not covered by JAR transactions.
+    :param date: date in YYYY-MM-DD format (defaults to today)
+    :return: HTML formatted report of uncovered transactions
+    """
+    if date is None:
+        from datetime import datetime
+
+        date = datetime.now().strftime("%Y-%m-%d")
+
+    inputs = """Analyze daily MONO card transactions for {date} and create a comprehensive spending coverage report.
+
+Your task is to get MONO transactions and analyze which spending transactions are covered by positive (income) transactions.
+
+Always use tools to get mono transactions data.
+
+Analysis rules:
+* Get ALL MONO transactions for the day (both positive and negative)
+* Focus on negative amounts as spending transactions
+* Focus on positive amounts as income/compensation transactions
+* Try to match spending transactions with positive transactions to determine coverage
+* Transactions may not be exact matches - they can be:
+  - Broken down into multiple smaller transactions
+  - Different by a few percent (up to 5% variance)
+  - Have slightly different descriptions or timing
+  - One positive transaction can cover multiple smaller spending transactions
+* Use multiple iterations if needed to find the best matching combinations
+* Try to find the best matching combinations of spending transactions and positive transactions.
+* Mark each spending transaction as either "✅ COVERED" or "❌ NOT COVERED"
+* Show ALL spending transactions in the report, regardless of coverage status
+* Show leftover positive transactions that were not used for coverage of spending transactions
+
+Return HTML formatted report using ONLY these supported Telegram HTML tags:
+<b>Bold text</b>
+<i>Italic text</i>
+<u>Underlined text</u>
+<code>Monospace text</code>
+<a href="https://example.com">Link</a>
+
+IMPORTANT: Do NOT use any other HTML tags like <br>, <div>, <p>, etc. Use line breaks (newlines) instead.
+
+Report format:
+<b>Daily MONO Transactions Report for {date}</b>
+
+<b>💳 All MONO Spending Transactions:</b>
+[For each spending transaction, show:]
+• ✅ COVERED | <code>[amount] UAH</code> | <i>[description]</i> | [time] | [category]
+• ❌ NOT COVERED | <code>[amount] UAH</code> | <i>[description]</i> | [time] | [category]
+
+<b>💰 Leftover Income Transactions:</b>
+[For each unused positive transaction, show:]
+• <code>[amount] UAH</code> | <i>[description]</i> | [time] | [category]
+
+<b>📊 Summary:</b>
+• Total spending: <code>[total_spending] UAH</code>
+• Total positive: <code>[total_positive] UAH</code>
+• Covered spending: <code>[covered_count]</code> transactions (<code>[covered_amount] UAH</code>)
+• Not covered spending: <code>[not_covered_count]</code> transactions (<code>[not_covered_amount] UAH</code>)
+• Leftover positive: <code>[leftover_count]</code> transactions (<code>[leftover_amount] UAH</code>)
+
+<b>💡 Notes: This report for info only. Please take actions if needed.</b>
+
+Remember: Amounts in MONO transactions are in kopiykas (divide by 100 for UAH).
+    """.format(
+        date=date
+    )
+
+    llm = ChatGoogleGenerativeAI(
+        model="models/gemini-2.0-flash",
+        temperature=0,
+    )
+
+    agent = initialize_agent(
+        tools=[get_daily_mono_transactions_tool],
+        llm=llm,
+        agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+        verbose=True,
+        handle_parsing_errors=True,
+    )
+
+    result = agent.invoke({"input": inputs})
+
+    # Extract the output content
+    if result.get("output"):
+        output = result.get(
+            "output"
+        )  # pyright: ignore[reportAttributeAccessIssue, reportGeneralTypeIssues]
+    else:
+        output = str(result)
+
+    return output

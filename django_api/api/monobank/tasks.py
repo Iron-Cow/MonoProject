@@ -1,11 +1,14 @@
+import os
 from datetime import datetime
 from random import randint
 from time import sleep
 
+from ai_agent.agent import get_daily_mono_transactions_report
 from api.celery import app
 from celery import shared_task
 from django.conf import settings
 from loguru import logger
+from telegram.client import TelegramClient
 
 from .models import MonoAccount
 
@@ -61,7 +64,7 @@ def random_complete(self, id):
 @app.task(bind=True)
 def create_delayed_task(self):
     id = datetime.now().microsecond
-    random_complete.apply_async(
+    random_complete.apply_async(  # pyright: ignore[reportFunctionMemberAccess]
         args=(id,),
         retry=True,
         retry_policy={
@@ -71,3 +74,40 @@ def create_delayed_task(self):
             "interval_max": 0.2,
         },
     )  # pyright: ignore[reportCallIssue]
+
+
+@shared_task
+def send_daily_mono_transactions_report(tg_id: str | int, date: str | None = None):
+    """Generate and send daily mono transactions report with coverage status to the specified Telegram chat id."""
+
+    try:
+        logger.info(
+            f"Generating daily mono transactions report for tg_id: {tg_id}, date: {date}"
+        )
+
+        # Generate the report
+        report_content = get_daily_mono_transactions_report(date)
+
+        # Send via Telegram
+        token = os.environ.get("BOT_TOKEN", "not set bot token")
+        client = TelegramClient(token)
+
+        client.send_html_message(str(tg_id), report_content)
+
+        logger.info(
+            f"Successfully sent daily mono transactions report to tg_id: {tg_id}"
+        )
+
+    except Exception as err:
+        logger.error(f"Failed to generate or send daily report: {err}")
+        # Send error notification
+        try:
+            token = os.environ.get("BOT_TOKEN", "not set bot token")
+            client = TelegramClient(token)
+            client.send_html_message(
+                str(tg_id),
+                f"<b>❌ Daily Report Error</b>\n\nFailed to generate mono transactions report: {err}",
+            )
+        except Exception as send_err:
+            logger.error(f"Failed to send error notification: {send_err}")
+        raise err

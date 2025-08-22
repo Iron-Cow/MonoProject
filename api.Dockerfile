@@ -3,9 +3,9 @@
 FROM python:3.10.6-slim-bullseye
 WORKDIR /home
 
-RUN pip3 install black==22.10.0
+RUN pip3 install black==25.1.0
 RUN pip3 install pytest==7.4.2
-RUN pip3 install pyright==1.1.247
+RUN pip3 install pyright==1.1.403
 RUN pip3 install pytest-cov
 
 

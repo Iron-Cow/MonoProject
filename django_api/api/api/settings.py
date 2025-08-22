@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+
 import os
 from datetime import timedelta
 from distutils.util import strtobool
@@ -191,7 +192,7 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
-    "0.0.0.0"
+    "0.0.0.0",
     # ...
 ]
 

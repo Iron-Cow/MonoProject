@@ -83,3 +83,13 @@ class RequestManager:
         headers = self.create_default_headers()
         resp = requests.patch(f"{self.api_host}{endpoint}", json=body, headers=headers)
         return resp
+
+    def delete(
+        self, endpoint: str, body: dict[str, Any] | None = None
+    ) -> requests.Response:
+        if endpoint[0] != "/":
+            endpoint = "/" + endpoint
+
+        headers = self.create_default_headers()
+        resp = requests.delete(f"{self.api_host}{endpoint}", json=body, headers=headers)
+        return resp

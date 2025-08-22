@@ -2,16 +2,13 @@
 # pyright: reportAttributeAccessIssue = false
 # pyright: reportUnknownVariableType = false
 
+import json
 import logging
-import os
 from datetime import datetime
 
 from account.models import User as CustomUser
-from ai_agent.agent import get_jar_monthly_report_html
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-
-# from loguru import logger
 from pydantic import ValidationError
 from rest_framework.decorators import action
 from rest_framework.permissions import (
@@ -90,6 +87,98 @@ class MonoCardJarIsOwnerOrAdminPermission(BasePermission):
             and obj.monoaccount.user.tg_id == request.user.tg_id
             or request.user.is_superuser
         )
+
+
+class DailyReportSchedulerApiView(APIView):
+    permission_classes = [AllowAny]
+    http_method_names = ["post", "delete"]
+
+    def post(self, request):
+        """Create or enable a daily task at 21:00 that sends comprehensive mono transactions report to the provided tg_id.
+
+        Body:
+        - tg_id: required, Telegram chat/user id
+        """
+        try:
+
+            from django_celery_beat.models import CrontabSchedule, PeriodicTask
+        except Exception as err:
+            logger.error(f"Failed importing scheduler models: {err}")
+            return Response({"error": "scheduler is not available"}, status=500)
+
+        tg_id = request.data.get("tg_id")
+        if not tg_id:
+            return Response({"error": "tg_id is required"}, status=400)
+
+        # Create crontab schedule for daily at 21:00
+        schedule, _ = CrontabSchedule.objects.get_or_create(
+            minute=0,
+            hour=21,
+            day_of_week="*",
+            day_of_month="*",
+            month_of_year="*",
+        )
+
+        task_name = f"Daily mono transactions report for TG {tg_id}"
+        task_path = "monobank.tasks.send_daily_mono_transactions_report"
+
+        periodic_task, created = PeriodicTask.objects.get_or_create(
+            name=task_name,
+            defaults={
+                "task": task_path,
+                "crontab": schedule,
+                "args": json.dumps([str(tg_id)]),
+                "enabled": True,
+            },
+        )
+        if not created:
+            periodic_task.interval = None
+            periodic_task.crontab = schedule
+            periodic_task.task = task_path
+            periodic_task.args = json.dumps([str(tg_id)])
+            periodic_task.enabled = True
+            periodic_task.save()
+
+        return Response(
+            {
+                "message": "registered",
+                "task": periodic_task.name,
+                "schedule": "daily at 21:00",
+                "tg_id": str(tg_id),
+            },
+            status=201 if created else 200,
+        )
+
+    def delete(self, request):
+        """Disable or delete the daily mono transactions report task for the provided tg_id.
+
+        Body:
+        - tg_id: required
+        - delete: optional boolean (default False). If True, delete the task instead of disabling it.
+        """
+        try:
+            from django_celery_beat.models import PeriodicTask
+        except Exception as err:
+            logger.error(f"Failed importing scheduler models: {err}")
+            return Response({"error": "scheduler is not available"}, status=500)
+
+        tg_id = request.data.get("tg_id")
+        if not tg_id:
+            return Response({"error": "tg_id is required"}, status=400)
+
+        task_name = f"Daily mono transactions report for TG {tg_id}"
+        task = PeriodicTask.objects.filter(name=task_name).first()
+        if not task:
+            return Response({"error": "task not found"}, status=404)
+
+        should_delete = bool(request.data.get("delete"))
+        if should_delete:
+            task.delete()
+            return Response({"message": "deleted", "task": task_name}, status=200)
+        else:
+            task.enabled = False
+            task.save()
+            return Response({"message": "disabled", "task": task_name}, status=200)
 
 
 class MonoCardViewSet(ModelViewSet):
@@ -520,4 +609,58 @@ class TestEndpoint(APIView):
             for jar in jars
         ]
         return Response(result)
-        return Response("")
+
+    def post(self, request):
+        """Register a periodic task that sends 'hello' to a specific Telegram ID every minute.
+
+        Body or query params:
+        - tg_id: required, Telegram chat/user id
+        """
+        try:
+            import json
+
+            from django_celery_beat.models import IntervalSchedule, PeriodicTask
+        except Exception as err:
+            logger.error(f"Failed importing scheduler models: {err}")
+            return Response({"error": "scheduler is not available"}, status=500)
+
+        tg_id = request.data.get("tg_id") or request.query_params.get("tg_id")
+        if not tg_id:
+            return Response({"error": "tg_id is required"}, status=400)
+
+        # Ensure we have an every-1-minute interval
+        schedule, _ = IntervalSchedule.objects.get_or_create(
+            every=1, period=IntervalSchedule.MINUTES
+        )
+
+        task_name = f"Send hello to TG {tg_id}"
+        task_path = "monobank.tasks.send_hello_to_tg"
+
+        # Create or update the periodic task for this tg_id
+        periodic_task, created = PeriodicTask.objects.get_or_create(
+            name=task_name,
+            defaults={
+                "task": task_path,
+                "interval": schedule,
+                "args": json.dumps([str(tg_id)]),
+                "enabled": True,
+            },
+        )
+        if not created:
+            periodic_task.crontab = None
+            periodic_task.interval = schedule
+            periodic_task.task = task_path
+            periodic_task.args = json.dumps([str(tg_id)])
+            periodic_task.enabled = True
+            periodic_task.save()
+
+        return Response(
+            {
+                "message": "registered",
+                "task": periodic_task.name,
+                "every": 1,
+                "period": "minutes",
+                "tg_id": str(tg_id),
+            },
+            status=201 if created else 200,
+        )

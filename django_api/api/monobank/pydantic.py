@@ -1,3 +1,4 @@
+# pyright: reportCallIssue = false
 from typing import Union
 
 from pydantic import BaseModel, field_validator, model_validator
@@ -30,9 +31,9 @@ class TransactionItem(BaseModel):
             if Currency.objects.filter(code=currency_code).exists():
                 values["currency"] = Currency.objects.get(code=currency_code)
             else:
-                values[
-                    "currency"
-                ] = currency_code  # Note: trigger to generate or log not existed currency code
+                values["currency"] = (
+                    currency_code  # Note: trigger to generate or log not existed currency code
+                )
         return values
 
     @field_validator("currency", mode="before")

@@ -3,6 +3,7 @@ from rest_framework import routers
 
 from .views import (
     CategoryViewSet,
+    DailyReportSchedulerApiView,
     MonoAccountViewSet,
     MonoCardViewSet,
     MonoJarTransactionViewSet,
@@ -25,5 +26,10 @@ router.register(
 urlpatterns = [
     path("", include(router.urls)),
     path("test/", TestEndpoint.as_view()),
+    path(
+        "daily-report-scheduler/",
+        DailyReportSchedulerApiView.as_view(),
+        name="daily-report-scheduler",
+    ),
     path("webhook/", TransactionWebhookApiView.as_view(), name="webhook"),
 ]

@@ -80,6 +80,7 @@ async def help(message: types.Message):
 
     if has_account:
         available_commands += "\n /monojars - get you jars "
+        available_commands += "\n /daily_report - manage daily transaction reports"
 
     await bot.send_message(message.chat.id, available_commands)
 
@@ -98,6 +99,118 @@ async def monojars(message: types.Message):
         reply_markup=kb,
         parse_mode=ParseMode.MARKDOWN_V2,
     )
+
+
+@dp.message_handler(state="*", commands=["daily_report"])
+async def daily_report(message: types.Message):
+    """Daily report management - enable/disable automated daily transaction reports."""
+
+    # Check if user has daily report enabled
+    user_id = str(message.from_user.id)
+    is_enabled = False
+
+    # Try to check if task exists (we can check via API if needed)
+    # For now, we'll show both options
+
+    enable_button = InlineKeyboardButton(
+        "📊 Enable Daily Report", callback_data=f"enable_daily_report_{user_id}"
+    )
+    disable_button = InlineKeyboardButton(
+        "🚫 Disable Daily Report", callback_data=f"disable_daily_report_{user_id}"
+    )
+
+    kb = (
+        kbm.get_inline_keyboard()
+        .row(enable_button)
+        .row(disable_button)
+        .row(kbm.cancel_button)
+    )
+
+    instruction_text = """📈 **Daily Transaction Report**
+
+This automated report analyzes your daily MONO card transactions and helps you track your spending:
+
+🔍 **What it does:**
+• Shows ALL your spending transactions for the day
+• Marks which spends are covered by income/positive transactions
+• Lists leftover income not used for covering expenses
+• Provides daily spending summary with coverage analysis
+
+⏰ **When:** Every day at 21:00 (9 PM)
+
+💡 **Why useful:**
+• Track daily spending patterns
+• See which expenses lack income coverage
+• Monitor leftover funds
+• Get insights for better budget management
+
+Choose an option below:"""
+
+    await bot.send_message(
+        message.chat.id,
+        instruction_text,
+        reply_markup=kb,
+        parse_mode=ParseMode.MARKDOWN,
+    )
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith("enable_daily_report_"))
+async def enable_daily_report_handler(callback_query: types.CallbackQuery):
+    user_id = callback_query.data.replace("enable_daily_report_", "")
+    await bot.answer_callback_query(callback_query.id)
+
+    # Call API to enable daily report
+    resp = rm.post("/monobank/daily-report-scheduler/", {"tg_id": user_id})
+
+    if resp.status_code in [200, 201]:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            "✅ **Daily Report Enabled!**\n\n"
+            "You will receive automated daily transaction reports every day at 21:00 (9 PM).\n\n"
+            "The report will analyze your spending and show coverage by income transactions.",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+    else:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            f"❌ **Failed to enable daily report**\n\n"
+            f"Error: {resp.status_code}\n"
+            f"Please try again later or contact support.",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith("disable_daily_report_"))
+async def disable_daily_report_handler(callback_query: types.CallbackQuery):
+    user_id = callback_query.data.replace("disable_daily_report_", "")
+    await bot.answer_callback_query(callback_query.id)
+
+    # Call API to disable daily report
+    resp = rm.delete("/monobank/daily-report-scheduler/", {"tg_id": user_id})
+
+    if resp.status_code == 200:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            "🚫 **Daily Report Disabled**\n\n"
+            "You will no longer receive automated daily transaction reports.\n\n",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+    elif resp.status_code == 404:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            "ℹ️ **No Active Daily Report**\n\n"
+            "You don't have an active daily report scheduled.\n\n"
+            "Use the enable option if you want to start receiving daily reports.",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+    else:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            f"❌ **Failed to disable daily report**\n\n"
+            f"Error: {resp.status_code}\n"
+            f"Please try again later or contact support.",
+            parse_mode=ParseMode.MARKDOWN,
+        )
 
 
 @dp.callback_query_handler(

@@ -13,7 +13,7 @@ class SingletonMeta(type):
         return cls._instances[cls]
 
 
-class TelegramClient(metaclass=SingletonMeta):
+class TelegramCustomClient:
     def __init__(self, bot_token: str):
         self.token = bot_token
         self.bot = TeleBot(token=bot_token)
@@ -62,6 +62,9 @@ class TelegramClient(metaclass=SingletonMeta):
 
     def __del__(self):
         self.close()
+
+
+class TelegramClient(TelegramCustomClient, metaclass=SingletonMeta): ...
 
 
 if __name__ == "__main__":

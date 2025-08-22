@@ -191,11 +191,15 @@ Analysis rules:
   - Different by a few percent (up to 5% variance)
   - Have slightly different descriptions or timing
   - One positive transaction can cover multiple smaller spending transactions
+  - Compensation can be received before the spending transaction
+* It not should be a situation, when you have uncovered spending and leftover positive transaction with same amount.
 * Use multiple iterations if needed to find the best matching combinations
 * Try to find the best matching combinations of spending transactions and positive transactions.
 * Mark each spending transaction as either "✅ COVERED" or "❌ NOT COVERED"
 * Show ALL spending transactions in the report, regardless of coverage status
 * Show leftover positive transactions that were not used for coverage of spending transactions
+* Make additional round of comparion on uncovered spending transactions and positive leftover transactions
+to make sure that you have covered all spending transactions.
 
 Return HTML formatted report using ONLY these supported Telegram HTML tags:
 <b>Bold text</b>

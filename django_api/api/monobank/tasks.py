@@ -8,7 +8,7 @@ from api.celery import app
 from celery import shared_task
 from django.conf import settings
 from loguru import logger
-from telegram.client import TelegramClient
+from telegram.client import TelegramCustomClient
 
 from .models import MonoAccount
 
@@ -64,7 +64,7 @@ def random_complete(self, id):
 @app.task(bind=True)
 def create_delayed_task(self):
     id = datetime.now().microsecond
-    random_complete.apply_async(  # pyright: ignore[reportFunctionMemberAccess]
+    random_complete.apply_async(  # pyright: ignore[reportFunctionMemberAccess, reportCallIssue]
         args=(id,),
         retry=True,
         retry_policy={
@@ -90,7 +90,7 @@ def send_daily_mono_transactions_report(tg_id: str | int, date: str | None = Non
 
         # Send via Telegram
         token = os.environ.get("BOT_TOKEN", "not set bot token")
-        client = TelegramClient(token)
+        client = TelegramCustomClient(token)
 
         client.send_html_message(str(tg_id), report_content)
 
@@ -103,7 +103,7 @@ def send_daily_mono_transactions_report(tg_id: str | int, date: str | None = Non
         # Send error notification
         try:
             token = os.environ.get("BOT_TOKEN", "not set bot token")
-            client = TelegramClient(token)
+            client = TelegramCustomClient(token)
             client.send_html_message(
                 str(tg_id),
                 f"<b>❌ Daily Report Error</b>\n\nFailed to generate mono transactions report: {err}",

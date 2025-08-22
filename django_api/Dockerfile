@@ -9,7 +9,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY ./requirements.txt ./
-COPY ./pyproject.toml ./
 RUN pip install --upgrade pip
 RUN pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
 

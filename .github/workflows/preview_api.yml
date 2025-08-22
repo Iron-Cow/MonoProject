@@ -40,6 +40,34 @@ jobs:
         run: |
           make test-api
 
+  lint-chatbot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - uses: actions/checkout@v2
+      - name: Lint chatbot
+        run: |
+          set -e
+          make lint-chatbot
+
+  typecheck-chatbot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Typecheck chatbot
+        run: |
+          set -e
+          make typecheck-chatbot
+
+  test-chatbot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test chatbot
+        run: |
+          make test-chatbot
+
   test_frontend:
     runs-on: ubuntu-latest
     steps:

@@ -27,3 +27,20 @@ typecheck-api: build-api
 .PHONY: lint-api
 lint-api: build-api
 	docker run -t api-dev black --check . --extend-exclude "snapshots|schema"
+
+# Chatbot targets
+.PHONY: build-chatbot
+build-chatbot:
+	docker build chatbot -f chatbot/Dockerfile.dev -t chatbot-dev -q
+
+.PHONY: test-chatbot
+test-chatbot: build-chatbot
+	docker run -t chatbot-dev pytest -vv
+
+.PHONY: typecheck-chatbot
+typecheck-chatbot: build-chatbot
+	docker run -t chatbot-dev pyright
+
+.PHONY: lint-chatbot
+lint-chatbot: build-chatbot
+	docker run -t chatbot-dev black --check src tests

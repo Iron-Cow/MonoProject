@@ -31,9 +31,10 @@ class MonoJarModelAdmin(admin.ModelAdmin):
         "formatted_balance",
         "formatted_goal",
         "is_budget",
+        "is_active",
     ]
     search_fields = ["id", "title", "monoaccount__user__name"]
-    list_filter = ["currency", "is_budget"]
+    list_filter = ["currency", "is_budget", "is_active"]
 
     class Meta:
         model = MonoJar

@@ -242,9 +242,12 @@ class MonoCardViewSet(MonoBankAccessMixin, ModelViewSet):
         users = self.request.query_params.get("users")
 
         # Base queryset with optimized joins and consistent ordering
-        queryset = MonoCard.objects.select_related(
-            "monoaccount__user", "currency"
-        ).order_by("id")
+        # Filter only active cards by default
+        queryset = (
+            MonoCard.objects.select_related("monoaccount__user", "currency")
+            .filter(is_active=True)
+            .order_by("id")
+        )
 
         # Use mixin method for access control
         accessible_tg_ids = self.get_accessible_user_tg_ids(users)
@@ -281,9 +284,12 @@ class MonoJarViewSet(MonoBankAccessMixin, ModelViewSet):
         )
 
         # Base queryset with optimized joins and consistent ordering
-        queryset = MonoJar.objects.select_related(
-            "monoaccount__user", "currency"
-        ).order_by("id")
+        # Filter only active jars by default
+        queryset = (
+            MonoJar.objects.select_related("monoaccount__user", "currency")
+            .filter(is_active=True)
+            .order_by("id")
+        )
 
         # Use mixin method for access control
         accessible_tg_ids = self.get_accessible_user_tg_ids(users, with_family_bool)

@@ -129,14 +129,34 @@ class MonoAccount(models.Model):
     def create_cards_jars(self, data: dict | None = None):
         if not data:
             data = self.get_cards_jars()
+
+        # Get current cards and jars from API
         cards = data.get("accounts", [])
+        jars = data.get("jars", [])
+
+        # Extract IDs from API response
+        active_card_ids = [card.get("id") for card in cards if card.get("id")]
+        active_jar_ids = [jar.get("id") for jar in jars if jar.get("id")]
+
+        # Mark existing cards as inactive if they're not in the API response
+        MonoCard.objects.filter(monoaccount=self).exclude(
+            id__in=active_card_ids
+        ).update(is_active=False)
+
+        # Mark existing jars as inactive if they're not in the API response
+        MonoJar.objects.filter(monoaccount=self).exclude(id__in=active_jar_ids).update(
+            is_active=False
+        )
+
+        # Process cards from API (create/update and mark as active)
         for card in cards:
             MonoCard.create_card_from_webhook.apply_async(
                 args=(self.user.tg_id, card, True),
                 retry=True,
                 retry_policy=DEFAULT_RETRY_POLICY,
             )
-        jars = data.get("jars", [])
+
+        # Process jars from API (create/update and mark as active)
         for jar in jars:
             MonoJar.create_jar_from_webhook.apply_async(
                 args=(self.user.tg_id, jar, True),
@@ -188,6 +208,7 @@ class MonoCard(models.Model):
         max_length=255, choices=[("black", "black"), ("white", "white")]
     )
     iban = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=True)
 
     @property
     def owner_name(self):
@@ -244,8 +265,10 @@ class MonoCard(models.Model):
             mono_card = MonoCard.objects.get(id=card_data.get("id"))
             for key, value in card_data.items():
                 setattr(mono_card, key, value)
+            mono_card.is_active = True  # Ensure card is marked as active
             mono_card.save()
         except MonoCard.DoesNotExist:
+            card_data["is_active"] = True  # Ensure new card is marked as active
             mono_card, _ = MonoCard.objects.get_or_create(
                 monoaccount=mono_account, currency=currency, **card_data
             )
@@ -263,6 +286,7 @@ class MonoJar(models.Model):
     balance = models.IntegerField()
     goal = models.IntegerField(null=True, blank=True)
     is_budget = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     @property
     def formatted_balance(self):
@@ -301,8 +325,10 @@ class MonoJar(models.Model):
             mono_jar = MonoJar.objects.get(id=jar_data.get("id"))
             for key, value in jar_data.items():
                 setattr(mono_jar, key, value)
+            mono_jar.is_active = True  # Ensure jar is marked as active
             mono_jar.save()
         except MonoJar.DoesNotExist:
+            jar_data["is_active"] = True  # Ensure new jar is marked as active
             mono_jar, _ = MonoJar.objects.get_or_create(
                 monoaccount=mono_account, currency=currency, **jar_data
             )

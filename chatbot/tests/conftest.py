@@ -128,7 +128,10 @@ class BotStub:
         self.answered_callbacks.append((cb_id, text, show_alert))
 
     async def edit_message_reply_markup(self, chat_id, message_id, reply_markup=None):
-        self.edited_markups.append((chat_id, message_id, reply_markup))
+        edit_record = types.SimpleNamespace(
+            chat_id=chat_id, message_id=message_id, reply_markup=reply_markup
+        )
+        self.edited_markups.append(edit_record)
 
     async def send_photo(self, chat_id, photo, caption=None):
         self.sent.append(SentMessage(chat_id, photo=photo, caption=caption))

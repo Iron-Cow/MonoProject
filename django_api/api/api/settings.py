@@ -169,7 +169,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-CELERY_BROKER_URL = "redis://0.0.0.0:6379/0"
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://redis:6379/0")
 CELERY_TIMEZONE = "Europe/Kiev"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
@@ -184,7 +184,9 @@ CELERY_WORKER_POOL = "solo"
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": os.getenv("CELERY_BROKER_URL", "redis://redis:6379/0").replace(
+            "/0", "/1"
+        ),
     }
 }
 CELERY_CACHE_BACKEND = "default"

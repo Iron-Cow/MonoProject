@@ -23,7 +23,7 @@ async def test_family_menu_command(mock_config, bot_stub, dp_module):
     assert sent_msg.chat_id == 123
     assert "Family linking options" in sent_msg.text
     assert "Generate a code" in sent_msg.text
-    assert "Enter code to invite" in sent_msg.text
+    assert "The other person enters the code" in sent_msg.text
     assert sent_msg.reply_markup is not None
 
 
@@ -82,11 +82,16 @@ async def test_family_generate_code_failure(mock_config, api_mock, bot_stub, dp_
 @pytest.mark.asyncio
 async def test_family_enter_code_callback(mock_config, bot_stub, dp_module):
     """Test family enter code callback sets state"""
+    # Create a mock message with delete_reply_markup method
+    mock_message = types.SimpleNamespace(
+        chat=types.SimpleNamespace(id=123), delete_reply_markup=AsyncMock()
+    )
+
     callback_query = types.SimpleNamespace(
         id="callback_123",
         data="family_enter_code",
         from_user=types.SimpleNamespace(id=456),
-        message=types.SimpleNamespace(chat=types.SimpleNamespace(id=123)),
+        message=mock_message,
     )
 
     # Mock state management

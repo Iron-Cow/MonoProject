@@ -17,7 +17,7 @@ from config import get_config
 from keyboard_manager import KeyboardManager
 from loguru import logger
 from request_manager import RequestManager
-from states import MonotokenStates
+from states import FamilyStates, MonotokenStates
 from utils import generate_password, get_jar_data
 
 # Use a non-interactive backend suitable for servers/containers
@@ -81,6 +81,9 @@ async def help(message: types.Message):
     if has_account:
         available_commands += "\n /monojars - get you jars "
         available_commands += "\n /daily_report - manage daily transaction reports"
+        available_commands += (
+            "\n /family - manage family members to shared access to accounts"
+        )
 
     await bot.send_message(message.chat.id, available_commands)
 
@@ -152,6 +155,177 @@ Choose an option below:"""
         reply_markup=kb,
         parse_mode=ParseMode.MARKDOWN,
     )
+
+
+@dp.message_handler(state="*", commands=["family"])
+async def family_menu(message: types.Message):
+    """Family management: generate code, enter code, accept/decline invites."""
+    gen_btn = InlineKeyboardButton(
+        "👨‍👩‍👧 Generate my family code", callback_data="family_generate_code"
+    )
+    enter_btn = InlineKeyboardButton(
+        "🔗 Enter code to invite", callback_data="family_enter_code"
+    )
+    kb = kbm.get_inline_keyboard().row(gen_btn).row(enter_btn).row(kbm.cancel_button)
+    txt = (
+        "Family linking options:\n\n"
+        "- Generate a code and share it with your family member.\n"
+        "- The other person enters the code to send you an invite.\n"
+        "- You'll receive an Accept/Decline message."
+    )
+    await bot.send_message(message.chat.id, txt, reply_markup=kb)
+
+
+@dp.callback_query_handler(lambda c: c.data == "family_generate_code")
+async def family_generate_code(callback_query: types.CallbackQuery):
+    await bot.answer_callback_query(callback_query.id)
+    user_id = str(callback_query.from_user.id)
+    resp = rm.post(f"/account/users/{user_id}/family_code/", {})
+    if resp.status_code not in (200, 201):
+        await bot.send_message(
+            callback_query.message.chat.id, "Failed to generate code. Try again later."
+        )
+        return
+    data = resp.json()
+    code_val = data.get("code", "??????")
+    expires_in = int(data.get("expires_in", 600))
+    minutes = max(1, expires_in // 60)
+    msg = (
+        f"Your family code: {code_val}\n"
+        f"Share this with the person who wants to link with you.\n"
+        f"Expires in ~{minutes} min."
+    )
+    await bot.send_message(callback_query.message.chat.id, msg)
+
+
+@dp.callback_query_handler(lambda c: c.data == "family_enter_code")
+async def family_enter_code(callback_query: types.CallbackQuery):
+    await reply_on_button(callback_query, InlineKeyboardButton("Enter code"), bot)
+    state = dp.current_state(user=callback_query.from_user.id)
+    await state.set_state(state=FamilyStates.code_enter)
+    kb = kbm.get_inline_keyboard().row(kbm.cancel_button)
+    await bot.send_message(
+        callback_query.message.chat.id,
+        "Send the family code you received:",
+        reply_markup=kb,
+    )
+
+
+@dp.message_handler(state=FamilyStates.code_enter)
+async def family_code_entered(message: types.Message):
+    code = (message.text or "").strip().upper()
+    state = dp.current_state(user=message.from_user.id)
+    await state.reset_state()
+    if not code or len(code) < 4:
+        await bot.send_message(
+            message.chat.id, "Invalid code. Use /family and try again."
+        )
+        return
+    payload = {"inviter_tg_id": str(message.from_user.id), "code": code}
+    resp = rm.post("/account/users/family_invite/proposal/", payload)
+    if resp.status_code != 201:
+        if resp.status_code == 404:
+            await bot.send_message(
+                message.chat.id, "Invalid or expired code. Ask them to regenerate."
+            )
+        elif resp.status_code == 400:
+            await bot.send_message(
+                message.chat.id, "Bad request. Ensure you pasted the correct code."
+            )
+        else:
+            await bot.send_message(
+                message.chat.id, f"Failed to send invite: {resp.status_code}"
+            )
+        return
+
+    data = resp.json()
+    invite_id = data.get("invite_id")
+    member_tg_id = data.get("member_tg_id")
+    inviter_name = (
+        (message.from_user.full_name or "Someone")
+        if hasattr(message.from_user, "full_name")
+        else "Someone"
+    )
+
+    await bot.send_message(message.chat.id, "Invite sent. Waiting for confirmation.")
+
+    # Try to notify the member with accept/decline buttons
+    try:
+        accept_btn = InlineKeyboardButton(
+            "✅ Accept", callback_data=f"family_accept_{invite_id}"
+        )
+        decline_btn = InlineKeyboardButton(
+            "❌ Decline", callback_data=f"family_decline_{invite_id}"
+        )
+        kb = kbm.get_inline_keyboard().row(accept_btn, decline_btn)
+        member_msg = (
+            f"You received a family link request from {inviter_name} (tg_id: {message.from_user.id}).\n"
+            f"Do you want to link accounts as family members?"
+        )
+        await bot.send_message(int(member_tg_id), member_msg, reply_markup=kb)
+    except Exception:
+        # If we can't message the member, the inviter will still have to wait
+        pass
+
+
+@dp.callback_query_handler(
+    lambda c: c.data.startswith("family_accept_")
+    or c.data.startswith("family_decline_")
+)
+async def family_decision(callback_query: types.CallbackQuery):
+    await bot.answer_callback_query(callback_query.id)
+    is_accept = callback_query.data.startswith("family_accept_")
+    invite_id = callback_query.data.split("_")[-1]
+    decision = "accept" if is_accept else "decline"
+    payload = {
+        "invite_id": invite_id,
+        "decision": decision,
+        "actor_tg_id": str(callback_query.from_user.id),
+    }
+
+    # Remove buttons immediately to prevent multiple clicks
+    try:
+        await bot.edit_message_reply_markup(
+            chat_id=callback_query.message.chat.id,
+            message_id=callback_query.message.message_id,
+            reply_markup=None,
+        )
+    except Exception:
+        pass
+
+    resp = rm.post("/account/users/family_invite/decision/", payload)
+    if resp.status_code != 200:
+        await bot.send_message(
+            callback_query.message.chat.id,
+            f"Failed to process decision: {resp.status_code}",
+        )
+        return
+    data = resp.json()
+    inviter_tg_id = data.get("inviter_tg_id")
+    member_tg_id = data.get("member_tg_id")
+    status = data.get("status")
+
+    # Notify actor
+    if status == "accepted":
+        await bot.send_message(
+            callback_query.message.chat.id, "✅ Family link established."
+        )
+    else:
+        await bot.send_message(callback_query.message.chat.id, "❌ Invite declined.")
+
+    # Notify inviter
+    try:
+        if status == "accepted":
+            await bot.send_message(
+                int(inviter_tg_id),
+                "✅ Your family invite was accepted. You are now linked.",
+            )
+        else:
+            await bot.send_message(
+                int(inviter_tg_id), "❌ Your family invite was declined."
+            )
+    except Exception:
+        pass
 
 
 @dp.callback_query_handler(lambda c: c.data.startswith("enable_daily_report_"))

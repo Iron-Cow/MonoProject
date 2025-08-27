@@ -164,7 +164,9 @@ def get_jar_monthly_report_html(date: str) -> Dict[str, Any]:
     return html_report
 
 
-def get_daily_mono_transactions_report(date: str | None = None) -> str:
+def get_daily_mono_transactions_report(
+    date: str | None = None, tg_id: str | int | None = None
+) -> str:
     """
     Generate a report of MONO transactions that were not covered by JAR transactions.
     :param date: date in YYYY-MM-DD format (defaults to today)
@@ -180,6 +182,7 @@ def get_daily_mono_transactions_report(date: str | None = None) -> str:
 Your task is to get MONO transactions and analyze which spending transactions are covered by positive (income) transactions.
 
 Always use tools to get mono transactions data.
+You MUST call the tool with parameters day="{date}", tg_id="{tg_id}", include_family=False to ensure data is filtered by the specified user.
 
 Analysis rules:
 * Get ALL MONO transactions for the day (both positive and negative)
@@ -233,7 +236,8 @@ Report format:
 
 Remember: Amounts in MONO transactions are in kopiykas (divide by 100 for UAH).
     """.format(
-        date=date
+        date=date,
+        tg_id=str(tg_id) if tg_id is not None else "",
     )
 
     llm = ChatGoogleGenerativeAI(

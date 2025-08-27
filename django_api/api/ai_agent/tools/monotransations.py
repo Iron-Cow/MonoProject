@@ -1,9 +1,12 @@
 import calendar
 from datetime import datetime
 
+from django.contrib.auth import get_user_model
 from django.utils.timezone import make_aware
 from langchain.tools import StructuredTool
 from monobank.models import JarTransaction, MonoTransaction
+
+User = get_user_model()
 
 
 def get_monthly_mono_transactions(today: str) -> list:
@@ -77,10 +80,17 @@ get_monthly_jar_transactions_tool = StructuredTool.from_function(
 )
 
 
-def get_daily_mono_transactions(day: str | None = None) -> list:
+def get_daily_mono_transactions(
+    day: str | None = None,
+    tg_id: str | int | None = None,
+    include_family: bool = False,
+) -> list:
     """
-    Return all Mono transactions for a specific day.
-    Input: day as 'YYYY-MM-DD' (defaults to today if None)
+    Return Mono transactions for a specific day filtered by user.
+    Inputs:
+    - day: 'YYYY-MM-DD' (defaults to today if None)
+    - tg_id: user id to filter transactions by (required for filtering)
+    - include_family: include transactions of family members if False
     Output: List of dicts with amount, description, time, and category name
 
     Remember that sums written in kopiykas (cents), so you need to divide them by 100 to get the
@@ -93,9 +103,20 @@ def get_daily_mono_transactions(day: str | None = None) -> list:
     start = make_aware(date_obj.replace(hour=0, minute=0, second=0))
     end = make_aware(date_obj.replace(hour=23, minute=59, second=59))
 
-    transactions = MonoTransaction.objects.filter(
+    # Build user filter
+    user_ids: list[str] | None = None
+    if tg_id is not None:
+        if include_family:
+            user_ids = User.expand_tg_ids_with_family([str(tg_id)], recursive=True)
+        else:
+            user_ids = [str(tg_id)]
+
+    qs = MonoTransaction.objects.filter(
         time__gte=int(start.timestamp()), time__lte=int(end.timestamp())
-    ).select_related("mcc__category")
+    ).select_related("mcc__category", "account__monoaccount__user")
+
+    if user_ids is not None:
+        qs = qs.filter(account__monoaccount__user__tg_id__in=user_ids)
 
     return [
         {
@@ -105,7 +126,7 @@ def get_daily_mono_transactions(day: str | None = None) -> list:
             "category": tx.mcc.category.name,
             "owner": tx.owner_name,
         }
-        for tx in transactions
+        for tx in qs
     ]
 
 

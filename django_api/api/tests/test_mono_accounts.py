@@ -141,17 +141,24 @@ def test_monousers(
     monkeypatch.setattr(MonoAccount, "get_cards_jars", lambda x: {})
     view = variant.view
 
+    # Use the actual created MonoAccount primary key instead of assuming pk=1
+    url_kwargs = dict(variant.url_kwargs)
+    if url_kwargs and "pk" in url_kwargs:
+        first_account = MonoAccount.objects.first()
+        if first_account is not None:
+            url_kwargs["pk"] = first_account.pk
+
     response = view(
         api_request(
             variant.name,
             tg_id=variant.tg_id,
             method_name=variant.method_name,
             is_admin=variant.is_admin,
-            url_kwargs=variant.url_kwargs,
+            url_kwargs=url_kwargs,
             data=variant.request_data,
             need_json_dumps=variant.need_json_dumps,
         ),
-        **variant.url_kwargs,
+        **url_kwargs,
     )
     assert response.status_code == variant.status_code
     assert response.data == variant.expected

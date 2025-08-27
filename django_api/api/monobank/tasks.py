@@ -85,8 +85,8 @@ def send_daily_mono_transactions_report(tg_id: str | int, date: str | None = Non
             f"Generating daily mono transactions report for tg_id: {tg_id}, date: {date}"
         )
 
-        # Generate the report
-        report_content = get_daily_mono_transactions_report(date)
+        # Generate the report for this user and family
+        report_content = get_daily_mono_transactions_report(date, tg_id)
 
         # Send via Telegram
         token = os.environ.get("BOT_TOKEN", "not set bot token")
